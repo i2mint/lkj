@@ -119,7 +119,7 @@ def get_watermarked_dir(
     watermark: str = DFLT_WATERMARK,
     *,
     if_watermark_validation_fails: Callable[[str, str], Any] = _raise_watermark_error,
-    make_dir: bool = os.mkdir,
+    make_dir: Callable[[str], Any] = os.mkdir,
     rootdir: str = APP_DATA_ROOTDIR,
 ):
     """Get a watermarked directory.
