@@ -78,15 +78,9 @@ def get_app_data_dir(
     >>> app_data_dir = get_app_data_dir()
     >>> app_data_dir == APP_DATA_ROOTDIR
 
-    >>> from pathlib import Path
-    >>> from functools import partial
-    >>> watermark_dir = lambda dirpath, watermark: (Path(dirpath) / watermark).touch()
-    >>> has_watermark = lambda dirpath, watermark: (Path(dirpath) / watermark).exists()
+    For an example of how to use this function as a framework to make custom directory
+    factories, see :func:`get_watermarked_dir`.
 
-    >>> get_app_data_dir(
-    ...     '.config2py',
-    ...     if_exists=partial(watermark_dir, watermark='myapp')
-    ... )
     """
     dirpath = os.path.join(rootdir, dirname)
     if os.path.isdir(dirpath):
@@ -98,7 +92,7 @@ def get_app_data_dir(
     return dirpath
 
 
-DFLT_WATERMARK = ".config2py"
+DFLT_WATERMARK = ".lkj"
 
 
 def watermark_dir(dirpath: str, watermark: str = DFLT_WATERMARK):
@@ -143,7 +137,7 @@ def get_watermarked_dir(
     ['.my_watermark']
     >>> another_testdir = f('another_testdir')
     >>> os.listdir(another_testdir)
-    ['.config2py']
+    ['.lkj']
 
     """
 
