@@ -23,14 +23,14 @@ def _app_data_rootdir():
 
     See https://github.com/i2mint/i2mint/issues/1.
     """
-    if os.name == "nt":
+    if os.name == 'nt':
         # Windows
-        APP_DATA_ROOTDIR = os.getenv("APPDATA")
+        APP_DATA_ROOTDIR = os.getenv('APPDATA')
         if not APP_DATA_ROOTDIR:
-            raise RuntimeError("APPDATA environment variable is not set")
+            raise RuntimeError('APPDATA environment variable is not set')
     else:
         # macOS and Linux/Unix
-        APP_DATA_ROOTDIR = os.path.expanduser("~/.config")
+        APP_DATA_ROOTDIR = os.path.expanduser('~/.config')
 
     if not os.path.isdir(APP_DATA_ROOTDIR):
         os.mkdir(APP_DATA_ROOTDIR)
@@ -43,7 +43,7 @@ APP_DATA_ROOTDIR = _app_data_rootdir()
 
 
 def get_app_data_dir(
-    dirname="",
+    dirname='',
     *,
     if_exists: Callable[[str], Any] = do_nothing,
     if_does_not_exist: Callable[[str], Any] = os.mkdir,
@@ -112,7 +112,7 @@ def get_app_data_dir(
     return dirpath
 
 
-DFLT_WATERMARK = ".lkj"
+DFLT_WATERMARK = '.lkj'
 
 
 def watermark_dir(dirpath: str, watermark: str = DFLT_WATERMARK):
@@ -127,9 +127,9 @@ def has_watermark(dirpath: str, watermark: str = DFLT_WATERMARK):
 
 def _raise_watermark_error(dirpath, watermark):
     raise ValueError(
-        f"Directory {dirpath} is not watermarked with {watermark}. "
-        f"Perhaps you deleted the watermark file? If so, create the file and all will "
-        f"be good. For example, you could do:\n"
+        f'Directory {dirpath} is not watermarked with {watermark}. '
+        f'Perhaps you deleted the watermark file? If so, create the file and all will '
+        f'be good. For example, you could do:\n'
         f"    import pathlib; (pathlib.Path('{dirpath}') / '{watermark}').touch()"
     )
 
