@@ -35,7 +35,8 @@ def _app_data_rootdir():
     if not os.path.isdir(APP_DATA_ROOTDIR):
         os.mkdir(APP_DATA_ROOTDIR)
 
-    return APP_DATA_ROOTDIR
+    # Note: Joining to '' to be consistent with get_app_data_dir()
+    return os.path.join(APP_DATA_ROOTDIR, '')
 
 
 APP_DATA_ROOTDIR = _app_data_rootdir()
@@ -64,10 +65,14 @@ def get_app_data_dir(
 
     :param dirname: The name of the directory to create.
     :param if_exists: A function to call if the directory already exists.
-
+        By default, it does nothing. The main non-default use case is to validate the
+        contents of the directory, and/or populate it.
+        If you write a custome ``if_exists`` function, it is your responsibility to
+        return the full path of the directory (unless your use case doesn't actually
+        need that!)
     :param if_does_not_exist: A function to call if the directory does not exist.
         By default, it creates the directory with ``os.mkdir``. If you need to also
-        create subdirectories, you can use ``os.makedirs``. You can also chose to
+        create subdirectories, you can use ``os.makedirs``. You can also choose to
         raise an error, telling the user to create the directory manually.
     :param rootdir:
     :return:
@@ -77,6 +82,21 @@ def get_app_data_dir(
 
     >>> app_data_dir = get_app_data_dir()
     >>> app_data_dir == APP_DATA_ROOTDIR
+    True
+
+    You can control what happens if the directory already exists, or if it doesn't.
+    The callbacks take the full path of the directory as an argument, and usually return
+    the path after doing something with it.
+
+    >>> import os
+    >>> def notify_user_that_path_does_not_exist(path):
+    ...     print(f"The '{os.path.basename(path)}' subdirectory doesn't exist")
+    ...     return path
+    >>> dirpath = get_app_data_dir(
+    ...     'nonexistent_dir',
+    ...     if_does_not_exist=notify_user_that_path_does_not_exist
+    ... )
+    The 'nonexistent_dir' subdirectory doesn't exist
 
     For an example of how to use this function as a framework to make custom directory
     factories, see :func:`get_watermarked_dir`.
@@ -127,7 +147,7 @@ def get_watermarked_dir(
     >>> from functools import partial
     >>> import tempfile, os, shutil
     >>> testdir = os.path.join(tempfile.gettempdir(), 'watermark_testdir')
-    >>> shutil.rmtree(testdir)  # delete
+    >>> shutil.rmtree(testdir, ignore_errors=True)  # delete
     >>> os.makedirs(testdir, exist_ok=True)  # and recreate afresh
     >>> # Make a
     >>> f = partial(get_watermarked_dir, rootdir=testdir)
