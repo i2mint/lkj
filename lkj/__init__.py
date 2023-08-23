@@ -59,12 +59,14 @@ def add_as_attribute_of(obj, name=None):
     :param name: The name of the attribute to add the function to. If not given, the
 
     """
+
     def _decorator(f):
         attrname = name or f.__name__
         if not name and attrname.startswith('_'):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
+
     return _decorator
 
 
@@ -81,6 +83,3 @@ def get_caller_package_name(default=None):
         return inspect.getmodule(caller_frame).__name__.split('.')[0]
     except Exception as error:
         return default
-
-
-
