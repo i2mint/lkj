@@ -17,7 +17,7 @@ def add_as_attribute_of(obj, name=None):
     ...    pass
     >>>
     >>> @add_as_attribute_of(foo)
-    ... def _helper():
+    ... def helper():
     ...    pass
     >>> hasattr(foo, 'helper')
     True
@@ -27,10 +27,41 @@ def add_as_attribute_of(obj, name=None):
     In reality, any object that has a ``__name__`` can be added to the attribute of
     ``obj``, but the intention is to add helper functions to main "container" functions.
 
+    Note that if the name of the function starts with an underscore, it will be removed
+    before adding it as an attribute of ``obj``.
+
+    >>> @add_as_attribute_of(foo)
+    ... def _helper():
+    ...    pass
+    >>> hasattr(foo, 'helper')
+    True
+
+    This is useful for adding helper functions to main "container" functions without
+    polluting the namespace of the module, at least from the point of view of imports
+    and tab completion. But if you really want to add a function with a leading
+    underscore, you can do so by specifying the name explicitly:
+
+    >>> @add_as_attribute_of(foo, name='_helper')
+    ... def _helper():
+    ...    pass
+    >>> hasattr(foo, '_helper')
+    True
+
+    Of course, you can give any name you want to the attribute:
+
+    >>> @add_as_attribute_of(foo, name='bar')
+    ... def _helper():
+    ...    pass
+    >>> hasattr(foo, 'bar')
+    True
+
+    :param obj: The object to which the function will be added as an attribute
+    :param name: The name of the attribute to add the function to. If not given, the
+
     """
     def _decorator(f):
         attrname = name or f.__name__
-        if attrname.startswith('_'):
+        if not name and attrname.startswith('_'):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
