@@ -5,6 +5,37 @@ Lightweight Kit Jumpstart
 from lkj.filesys import get_app_data_dir, get_watermarked_dir
 
 
+def clog(condition, *args, log_func=print, **kwargs):
+    """Conditional log
+
+    >>> clog(False, "logging this")
+    >>> clog(True, "logging this")
+    logging this
+
+    One common usage is when there's a verbose flag that allows the user to specify
+    whether they want to log or not. Instead of having to litter your code with
+    `if verbose:` statements you can just do this:
+
+    >>> verbose = True  # say versbose is True
+    >>> _clog = clog(verbose)  # makes a clog with a fixed condition
+    >>> _clog("logging this")
+    logging this
+
+    You can also choose a different log function:
+
+    >>> _clog = clog(verbose, log_func=lambda x: f"hello {x}"})
+    >>> _clog("logging this")
+    hello logging this
+
+    """
+    if not args and not kwargs:
+        import functools
+
+        return functools.partial(clog, condition)
+    if condition:
+        print(*args, **kwargs)
+
+
 def add_as_attribute_of(obj, name=None):
     """Decorator that adds a function as an attribute of a container object ``obj``.
 
@@ -62,7 +93,7 @@ def add_as_attribute_of(obj, name=None):
 
     def _decorator(f):
         attrname = name or f.__name__
-        if not name and attrname.startswith('_'):
+        if not name and attrname.startswith("_"):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
@@ -80,6 +111,6 @@ def get_caller_package_name(default=None):
     try:
         stack = inspect.stack()
         caller_frame = stack[1][0]
-        return inspect.getmodule(caller_frame).__name__.split('.')[0]
+        return inspect.getmodule(caller_frame).__name__.split(".")[0]
     except Exception as error:
         return default
