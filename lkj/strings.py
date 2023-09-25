@@ -1,7 +1,7 @@
 """Utils for strings"""
 
-
-def regex_based_substitution(s: str = None, *, replacements: dict = (), regex=None):
+# TODO: Generalize so that it can be used with regex keys (not escaped)
+def regex_based_substitution(replacements: dict, regex=None, s: str = None):
     """
     Construct a substitution function based on an iterable of replacement pairs.
 
@@ -10,26 +10,36 @@ def regex_based_substitution(s: str = None, *, replacements: dict = (), regex=No
     :return: A function that, when called with a string, will perform all substitutions.
     :rtype: Callable[[str], str]
 
-    >>> replacements = [("apple", "orange"), ("banana", "grape")]
-    >>> sub_func = construct_substitution_function(replacements)
-    >>> input_str = "I like apple and banana."
-    >>> sub_func(input_str)
-    'I like orange and grape.'
+    The function is meant to be used with ``replacements`` as its single input,
+    returning a ``substitute`` function that will carry out the substitutions 
+    on an input string. 
+
+    >>> replacements = {'apple': 'orange', 'banana': 'grape'}
+    >>> substitute = regex_based_substitution(replacements)
+    >>> substitute("I like apple and bananas.")
+    'I like orange and grapes.'
+
+    You have access to the ``replacements`` and ``regex`` attributes of the
+    ``substitute`` function:
+
+    >>> substitute.replacements
+    {'apple': 'orange', 'banana': 'grape'}
+
     """
     import re
     from functools import partial
 
-    if s is None:
-        assert regex is not None, f"regex must be provided if s is None"
+    if regex is None and s is None:
         replacements = dict(replacements)
 
         if not replacements:  # if replacements iterable is empty.
             return lambda s: s  # return identity function
 
-        regex = re.compile("|".join(re.escape(src) for src in replacements))
+        regex = re.compile("|".join(re.escape(key) for key in replacements.keys()))
 
-        return partial(
-            regex_based_substitution, replacements=replacements, regex=regex
-        )
+        substitute = partial(regex_based_substitution, replacements, regex)
+        substitute.replacements = replacements
+        substitute.regex = regex
+        return substitute
     else:
         return regex.sub(lambda m: replacements[m.group(0)], s)

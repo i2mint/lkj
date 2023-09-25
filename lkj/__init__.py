@@ -5,6 +5,7 @@ Lightweight Kit Jumpstart
 from lkj.filesys import get_app_data_dir, get_watermarked_dir
 from lkj.strings import regex_based_substitution
 
+
 def clog(condition, *args, log_func=print, **kwargs):
     """Conditional log
 
@@ -21,9 +22,11 @@ def clog(condition, *args, log_func=print, **kwargs):
     >>> _clog("logging this")
     logging this
 
-    You can also choose a different log function:
+    You can also choose a different log function. 
+    Usually you'd want to use a logger object from the logging module,
+    but for this example we'll just use `print` with some modification:
 
-    >>> _clog = clog(verbose, log_func=lambda x: f"hello {x}"})
+    >>> _clog = clog(verbose, log_func=lambda x: print(f"hello {x}"))
     >>> _clog("logging this")
     hello logging this
 
@@ -31,9 +34,9 @@ def clog(condition, *args, log_func=print, **kwargs):
     if not args and not kwargs:
         import functools
 
-        return functools.partial(clog, condition)
+        return functools.partial(clog, condition, log_func=log_func)
     if condition:
-        print(*args, **kwargs)
+        log_func(*args, **kwargs)
 
 
 def add_as_attribute_of(obj, name=None):
