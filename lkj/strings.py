@@ -35,7 +35,7 @@ def regex_based_substitution(replacements: dict, regex=None, s: str = None):
         if not replacements:  # if replacements iterable is empty.
             return lambda s: s  # return identity function
 
-        regex = re.compile("|".join(re.escape(key) for key in replacements.keys()))
+        regex = re.compile('|'.join(re.escape(key) for key in replacements.keys()))
 
         substitute = partial(regex_based_substitution, replacements, regex)
         substitute.replacements = replacements
