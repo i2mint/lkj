@@ -3,7 +3,7 @@ Lightweight Kit Jumpstart
 """
 
 from lkj.filesys import get_app_data_dir, get_watermarked_dir
-
+from lkj.strings import regex_based_substitution
 
 def clog(condition, *args, log_func=print, **kwargs):
     """Conditional log
