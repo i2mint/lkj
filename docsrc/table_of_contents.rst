@@ -4,3 +4,4 @@
 
    module_docs/lkj
    module_docs/lkj/filesys
+   module_docs/lkj/strings

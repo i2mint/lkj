@@ -101,7 +101,7 @@ def add_as_attribute_of(obj, name=None):
 
     def _decorator(f):
         attrname = name or f.__name__
-        if not name and attrname.startswith("_"):
+        if not name and attrname.startswith('_'):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
@@ -119,6 +119,6 @@ def get_caller_package_name(default=None):
     try:
         stack = inspect.stack()
         caller_frame = stack[1][0]
-        return inspect.getmodule(caller_frame).__name__.split(".")[0]
+        return inspect.getmodule(caller_frame).__name__.split('.')[0]
     except Exception as error:
         return default
