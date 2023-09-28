@@ -6,6 +6,11 @@ from lkj.filesys import get_app_data_dir, get_watermarked_dir
 from lkj.strings import regex_based_substitution
 
 
+def user_machine_id():
+    """Get an ID for the current computer/user that calls this function."""
+    return __import__("platform").node()
+
+
 def clog(condition, *args, log_func=print, **kwargs):
     """Conditional log
 
@@ -22,7 +27,7 @@ def clog(condition, *args, log_func=print, **kwargs):
     >>> _clog("logging this")
     logging this
 
-    You can also choose a different log function. 
+    You can also choose a different log function.
     Usually you'd want to use a logger object from the logging module,
     but for this example we'll just use `print` with some modification:
 
