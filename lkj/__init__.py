@@ -8,7 +8,7 @@ from lkj.strings import regex_based_substitution
 
 def user_machine_id():
     """Get an ID for the current computer/user that calls this function."""
-    return __import__("platform").node()
+    return __import__('platform').node()
 
 
 def clog(condition, *args, log_func=print, **kwargs):
