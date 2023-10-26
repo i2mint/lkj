@@ -17,19 +17,19 @@ def import_object(dot_path: str):
     """
     from importlib import import_module
 
-    module_path, _, object_name = dot_path.rpartition(".")
+    module_path, _, object_name = dot_path.rpartition('.')
     if not module_path:
-        raise ImportError(f"{dot_path} does not contain a module path")
+        raise ImportError(f'{dot_path} does not contain a module path')
     module = import_module(module_path)
     try:
         return getattr(module, object_name)
     except AttributeError:
-        raise ImportError(f"{object_name} is not found in {module_path}")
+        raise ImportError(f'{object_name} is not found in {module_path}')
 
 
 def user_machine_id():
     """Get an ID for the current computer/user that calls this function."""
-    return __import__("platform").node()
+    return __import__('platform').node()
 
 
 def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
@@ -151,7 +151,7 @@ def add_as_attribute_of(obj, name=None):
 
     def _decorator(f):
         attrname = name or f.__name__
-        if not name and attrname.startswith("_"):
+        if not name and attrname.startswith('_'):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
@@ -169,6 +169,6 @@ def get_caller_package_name(default=None):
     try:
         stack = inspect.stack()
         caller_frame = stack[1][0]
-        return inspect.getmodule(caller_frame).__name__.split(".")[0]
+        return inspect.getmodule(caller_frame).__name__.split('.')[0]
     except Exception as error:
         return default
