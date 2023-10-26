@@ -32,6 +32,35 @@ def user_machine_id():
     return __import__("platform").node()
 
 
+def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
+    """Prints with a timestamp and optional refresh.
+
+    input: message, and possibly args (to be placed in the message string, sprintf-style
+
+    output: Displays the time (HH:MM:SS), and the message
+
+    use: To be able to track processes (and the time they take)
+
+    """
+    from datetime import datetime
+
+    def hms_message(msg=''):
+        t = datetime.now()
+        return '({:02.0f}){:02.0f}:{:02.0f}:{:02.0f} - {}'.format(
+            t.day, t.hour, t.minute, t.second, msg
+        )
+
+    if display_time:
+        msg = hms_message(msg)
+    if refresh:
+        print_func(msg, end='\r')
+    else:
+        print_func(msg)
+
+
+print_progress = print_with_timestamp  # alias often used
+
+
 def clog(condition, *args, log_func=print, **kwargs):
     """Conditional log
 
