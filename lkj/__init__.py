@@ -91,7 +91,7 @@ def clog(condition, *args, log_func=print, **kwargs):
 
         return functools.partial(clog, condition, log_func=log_func)
     if condition:
-        log_func(*args, **kwargs)
+        return log_func(*args, **kwargs)
 
 
 def add_as_attribute_of(obj, name=None):
