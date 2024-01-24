@@ -10,9 +10,9 @@ def chunker(a, chk_size, *, include_tail=True):
     """Chunks an iterable into non-overlapping chunks of size chk_size.
 
     >>> list(chunker(range(8), 3))
-    [[0, 1, 2], [3, 4, 5], [6, 7]]
+    [(0, 1, 2), (3, 4, 5), (6, 7)]
     >>> list(chunker(range(8), 3, include_tail=False))
-    [[0, 1, 2], [3, 4, 5]]
+    [(0, 1, 2), (3, 4, 5)]
     """
     from itertools import zip_longest
 
@@ -20,7 +20,7 @@ def chunker(a, chk_size, *, include_tail=True):
     if include_tail:
         sentinel = object()
         for chunk in zip_longest(*([it] * chk_size), fillvalue=sentinel):
-            yield [item for item in chunk if item is not sentinel]
+            yield tuple(item for item in chunk if item is not sentinel)
     else:
         yield from zip(*([it] * chk_size))
 
