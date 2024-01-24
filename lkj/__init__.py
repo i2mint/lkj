@@ -6,6 +6,25 @@ from lkj.filesys import get_app_data_dir, get_watermarked_dir
 from lkj.strings import regex_based_substitution
 
 
+def chunker(a, chk_size, *, return_tail=True):
+    """Chunks an iterable into non-overlapping chunks of size chk_size.
+
+    >>> list(chunks(range(8), 3))
+    [[0, 1, 2], [3, 4, 5], [6, 7]]
+    >>> list(chunks(range(8), 3, return_tail=False))
+    [[0, 1, 2], [3, 4, 5]]
+    """
+    from itertools import zip_longest
+
+    it = iter(a)
+    if return_tail:
+        sentinel = object()
+        for chunk in zip_longest(*([it] * chk_size), fillvalue=sentinel):
+            yield [item for item in chunk if item is not sentinel]
+    else:
+        yield from zip(*([it] * chk_size))
+
+
 def import_object(dot_path: str):
     """Imports and returns an object from a dot string path.
 
