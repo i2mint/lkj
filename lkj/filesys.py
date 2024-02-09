@@ -176,3 +176,28 @@ def get_watermarked_dir(
         if_does_not_exist=create_and_watermark,
         rootdir=rootdir,
     )
+
+
+Filepath = str
+
+
+def rename_file(
+    file: Filepath,
+    renamer_function: Callable[[str], str],
+    *,
+    dry_run: bool = True,
+    verbose: bool = True,
+):
+    """
+    This function takes a list of files and renames them using the provided renamer function.
+    """
+    if not isinstance(file, str):
+        files = file
+        for file in files:
+            rename_file(file, renamer_function, dry_run=dry_run, verbose=verbose)
+
+    new_name = renamer_function(file)
+    if verbose:
+        print(f"Renaming {file} to {new_name}")
+    if not dry_run:
+        os.rename(file, new_name)
