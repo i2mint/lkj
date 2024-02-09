@@ -198,6 +198,6 @@ def rename_file(
 
     new_name = renamer_function(file)
     if verbose:
-        print(f"Renaming {file} to {new_name}")
+        print(f'Renaming {file} to {new_name}')
     if not dry_run:
         os.rename(file, new_name)
