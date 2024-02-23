@@ -137,8 +137,7 @@ def add_attr(attr_name: str, attr_val: str = None, obj=None):
     >>> generic_func.__name__
     'generic_func'
     >>>
-    >>> add_attr('__name__', 'my_func', generic_func)
-    <function generic_func at 0x107352f80>
+    >>> _ = add_attr('__name__', 'my_func', generic_func);
     >>> generic_func.__name__
     'my_func'
     >>>
