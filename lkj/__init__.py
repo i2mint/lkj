@@ -113,6 +113,61 @@ def clog(condition, *args, log_func=print, **kwargs):
         return log_func(*args, **kwargs)
 
 
+def add_attr(attr_name: str, attr_val: str = None, obj=None):
+    """Add an attribute to an object.
+
+    If no object is provided, return a partial function that takes an object as its
+    argument.
+    If no attribute value is provided, return a partial function that takes an
+    attribute value as its argument.
+    If no object or attribute value is provided, return a partial function that takes
+    both an object and an attribute value as its arguments.
+    If all arguments are provided, add the attribute to the object and return the
+    object.
+
+    :param attr_name: The name of the attribute to add.
+    :param attr_val: The value of the attribute to add.
+    :param obj: The object to which to add the attribute.
+    :return: The object with the attribute added, or a partial function that takes an
+    object and/or an attribute value as its argument(s).
+
+    >>> def generic_func(*args, **kwargs):
+    ...     return args, kwargs
+    ...
+    >>> generic_func.__name__
+    'generic_func'
+    >>>
+    >>> add_attr('__name__', 'my_func', generic_func)
+    <function generic_func at 0x107352f80>
+    >>> generic_func.__name__
+    'my_func'
+    >>>
+    >>>
+    >>> add_name = add_attr('__name__')
+    >>> add_doc = add_attr('__doc__')
+    >>>
+    >>> @add_name('my_func')
+    ... @add_doc('This is my function.')
+    ... def f(*args, **kwargs):
+    ...     return args, kwargs
+    ...
+    >>> f.__name__
+    'my_func'
+    >>> f.__doc__
+    'This is my function.'
+
+    """
+    if obj is None:
+        from functools import partial
+
+        if attr_val is None:
+            return partial(add_attr, attr_name)
+        return partial(add_attr, attr_name, attr_val)
+    if attr_val is not None:
+        setattr(obj, attr_name, attr_val)
+    return obj
+
+
 def add_as_attribute_of(obj, name=None):
     """Decorator that adds a function as an attribute of a container object ``obj``.
 
