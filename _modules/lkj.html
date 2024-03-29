@@ -85,7 +85,13 @@
 
 <span class="kn">from</span> <span class="nn">lkj.filesys</span> <span class="kn">import</span> <span class="n">get_app_data_dir</span><span class="p">,</span> <span class="n">get_watermarked_dir</span>
 <span class="kn">from</span> <span class="nn">lkj.strings</span> <span class="kn">import</span> <span class="n">regex_based_substitution</span>
-<span class="kn">from</span> <span class="nn">lkj.loggers</span> <span class="kn">import</span> <span class="n">print_with_timestamp</span><span class="p">,</span> <span class="n">print_progress</span><span class="p">,</span> <span class="n">clog</span><span class="p">,</span> <span class="n">ErrorInfo</span>
+<span class="kn">from</span> <span class="nn">lkj.loggers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">print_with_timestamp</span><span class="p">,</span>
+    <span class="n">print_progress</span><span class="p">,</span>
+    <span class="n">clog</span><span class="p">,</span>
+    <span class="n">ErrorInfo</span><span class="p">,</span>
+    <span class="n">return_error_info_on_error</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="chunker">
