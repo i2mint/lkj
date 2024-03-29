@@ -4,7 +4,13 @@ Lightweight Kit Jumpstart
 
 from lkj.filesys import get_app_data_dir, get_watermarked_dir
 from lkj.strings import regex_based_substitution
-from lkj.loggers import print_with_timestamp, print_progress, clog, ErrorInfo
+from lkj.loggers import (
+    print_with_timestamp,
+    print_progress,
+    clog,
+    ErrorInfo,
+    return_error_info_on_error,
+)
 
 
 def chunker(a, chk_size, *, include_tail=True):
