@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj &mdash; lkj 0.1.9 documentation</title>
+  <title>lkj &mdash; lkj 0.1.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8618f531"></script>
+        <script src="../_static/documentation_options.js?v=bafade30"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -55,15 +55,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#lkj.add_as_attribute_of"><code class="docutils literal notranslate"><span class="pre">add_as_attribute_of()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.add_attr"><code class="docutils literal notranslate"><span class="pre">add_attr()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lkj.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.get_caller_package_name"><code class="docutils literal notranslate"><span class="pre">get_caller_package_name()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.import_object"><code class="docutils literal notranslate"><span class="pre">import_object()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lkj.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lkj.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.user_machine_id"><code class="docutils literal notranslate"><span class="pre">user_machine_id()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/strings.html">lkj.strings</a></li>
 </ul>
 
@@ -219,34 +217,6 @@ object.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="lkj.clog">
-<span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">clog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#clog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.clog" title="Link to this definition"></a></dt>
-<dd><p>Conditional log</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;logging this&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;logging this&quot;</span><span class="p">)</span>
-<span class="go">logging this</span>
-</pre></div>
-</div>
-<p>One common usage is when there’s a verbose flag that allows the user to specify
-whether they want to log or not. Instead of having to litter your code with
-<cite>if verbose:</cite> statements you can just do this:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># say versbose is True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span> <span class="o">=</span> <span class="n">clog</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># makes a clog with a fixed condition</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span><span class="p">(</span><span class="s2">&quot;logging this&quot;</span><span class="p">)</span>
-<span class="go">logging this</span>
-</pre></div>
-</div>
-<p>You can also choose a different log function.
-Usually you’d want to use a logger object from the logging module,
-but for this example we’ll just use <cite>print</cite> with some modification:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span> <span class="o">=</span> <span class="n">clog</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hello </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span><span class="p">(</span><span class="s2">&quot;logging this&quot;</span><span class="p">)</span>
-<span class="go">hello logging this</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="lkj.get_caller_package_name">
 <span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">get_caller_package_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#get_caller_package_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.get_caller_package_name" title="Link to this definition"></a></dt>
 <dd><p>Return package name of caller</p>
@@ -263,24 +233,6 @@ but for this example we’ll just use <cite>print</cite> with some modification:
 <span class="go">True</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="lkj.print_progress">
-<span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">print_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_time=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lkj.print_progress" title="Link to this definition"></a></dt>
-<dd><p>Prints with a timestamp and optional refresh.</p>
-<p>input: message, and possibly args (to be placed in the message string, sprintf-style</p>
-<p>output: Displays the time (HH:MM:SS), and the message</p>
-<p>use: To be able to track processes (and the time they take)</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="lkj.print_with_timestamp">
-<span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">print_with_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_time=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#print_with_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.print_with_timestamp" title="Link to this definition"></a></dt>
-<dd><p>Prints with a timestamp and optional refresh.</p>
-<p>input: message, and possibly args (to be placed in the message string, sprintf-style</p>
-<p>output: Displays the time (HH:MM:SS), and the message</p>
-<p>use: To be able to track processes (and the time they take)</p>
 </dd></dl>
 
 <dl class="py function">
