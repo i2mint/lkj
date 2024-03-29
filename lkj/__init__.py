@@ -4,6 +4,7 @@ Lightweight Kit Jumpstart
 
 from lkj.filesys import get_app_data_dir, get_watermarked_dir
 from lkj.strings import regex_based_substitution
+from lkj.loggers import print_with_timestamp, print_progress, clog, ErrorInfo
 
 
 def chunker(a, chk_size, *, include_tail=True):
@@ -49,68 +50,6 @@ def import_object(dot_path: str):
 def user_machine_id():
     """Get an ID for the current computer/user that calls this function."""
     return __import__('platform').node()
-
-
-def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
-    """Prints with a timestamp and optional refresh.
-
-    input: message, and possibly args (to be placed in the message string, sprintf-style
-
-    output: Displays the time (HH:MM:SS), and the message
-
-    use: To be able to track processes (and the time they take)
-
-    """
-    from datetime import datetime
-
-    def hms_message(msg=''):
-        t = datetime.now()
-        return '({:02.0f}){:02.0f}:{:02.0f}:{:02.0f} - {}'.format(
-            t.day, t.hour, t.minute, t.second, msg
-        )
-
-    if display_time:
-        msg = hms_message(msg)
-    if refresh:
-        print_func(msg, end='\r')
-    else:
-        print_func(msg)
-
-
-print_progress = print_with_timestamp  # alias often used
-
-
-def clog(condition, *args, log_func=print, **kwargs):
-    """Conditional log
-
-    >>> clog(False, "logging this")
-    >>> clog(True, "logging this")
-    logging this
-
-    One common usage is when there's a verbose flag that allows the user to specify
-    whether they want to log or not. Instead of having to litter your code with
-    `if verbose:` statements you can just do this:
-
-    >>> verbose = True  # say versbose is True
-    >>> _clog = clog(verbose)  # makes a clog with a fixed condition
-    >>> _clog("logging this")
-    logging this
-
-    You can also choose a different log function.
-    Usually you'd want to use a logger object from the logging module,
-    but for this example we'll just use `print` with some modification:
-
-    >>> _clog = clog(verbose, log_func=lambda x: print(f"hello {x}"))
-    >>> _clog("logging this")
-    hello logging this
-
-    """
-    if not args and not kwargs:
-        import functools
-
-        return functools.partial(clog, condition, log_func=log_func)
-    if condition:
-        return log_func(*args, **kwargs)
 
 
 def add_attr(attr_name: str, attr_val: str = None, obj=None):
