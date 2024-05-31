@@ -13,6 +13,9 @@ from lkj.loggers import (
 )
 
 
+ddir = lambda obj: list(filter(lambda x: not x.startswith('_'), dir(obj)))
+
+
 def chunker(a, chk_size, *, include_tail=True):
     """Chunks an iterable into non-overlapping chunks of size chk_size.
 
