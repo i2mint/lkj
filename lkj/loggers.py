@@ -1,5 +1,55 @@
 """Utils for logging."""
 
+def wrapped_print(items, sep, max_width=80, *, print_func=print):
+    r"""
+    Prints a list of items with a given separator, ensuring the total line width does not exceed max_width.
+    
+    If adding a new item would exceed this width, it starts a new line.
+    
+    Args:
+        items (list): The list of items to print.
+        sep (str): The separator to use between items.
+        max_width (int): The maximum width of each line. Default is 80.
+    
+    Example:
+
+    >>> items = [
+    ...     "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", 
+    ...     "item9", "item10"
+    ... ]
+    >>> sep = ", "
+    >>> wrapped_print(items, sep, max_width=30)
+    item1, item2, item3, item4,
+    item5, item6, item7, item8,
+    item9, item10
+    
+    >>> items = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+    >>> sep = " - "
+    >>> wrapped_print(items, sep, max_width=10)
+    a - b - c
+    - d - e -
+    f - g - h
+    - i - j
+
+    Note that you have control over the `print_func`. 
+    This, for example, allows you to just return the string instead of printing it.
+
+    >>> wrapped_print(items, sep, max_width=10, print_func=lambda x: x)
+    'a - b - c\n- d - e -\nf - g - h\n- i - j'
+
+    """
+    import textwrap
+
+    return print_func(
+        textwrap.fill(sep.join(items), width=max_width, subsequent_indent='')
+    )
+
+# Example usage
+if __name__ == "__main__":
+    items = ["item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9", "item10"]
+    sep = ", "
+    wrapped_print(items, sep, max_width=30)
+
 
 def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
     """Prints with a timestamp and optional refresh.
