@@ -1,6 +1,6 @@
 """Utils for logging."""
 
-def wrapped_print(items, sep, max_width=80, *, print_func=print):
+def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     r"""
     Prints a list of items with a given separator, ensuring the total line width does not exceed max_width.
     
