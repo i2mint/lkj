@@ -2,7 +2,7 @@
 
 def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     r"""
-    Prints a list of items with a given separator, ensuring the total line width does not exceed max_width.
+    Prints a list of items ensuring the total line width does not exceed `max_width`.
     
     If adding a new item would exceed this width, it starts a new line.
     
