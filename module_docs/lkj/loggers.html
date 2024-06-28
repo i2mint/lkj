@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="lkj.strings" href="strings.html" />
-    <link rel="prev" title="lkj.filesys" href="filesys.html" /> 
+    <link rel="prev" title="lkj.importing" href="importing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,12 +53,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">lkj.importing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.loggers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.return_error_info_on_error"><code class="docutils literal notranslate"><span class="pre">return_error_info_on_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.wrapped_print"><code class="docutils literal notranslate"><span class="pre">wrapped_print()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="strings.html">lkj.strings</a></li>
@@ -178,13 +180,56 @@ database, or send it to a logging service.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.loggers.wrapped_print">
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">wrapped_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width=80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#wrapped_print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.wrapped_print" title="Link to this definition"></a></dt>
+<dd><p>Prints a list of items ensuring the total line width does not exceed <cite>max_width</cite>.</p>
+<p>If adding a new item would exceed this width, it starts a new line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> (<em>list</em>) – The list of items to print.</p></li>
+<li><p><strong>sep</strong> (<em>str</em>) – The separator to use between items.</p></li>
+<li><p><strong>max_width</strong> (<em>int</em>) – The maximum width of each line. Default is 80.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item3&quot;</span><span class="p">,</span> <span class="s2">&quot;item4&quot;</span><span class="p">,</span> <span class="s2">&quot;item5&quot;</span><span class="p">,</span> <span class="s2">&quot;item6&quot;</span><span class="p">,</span> <span class="s2">&quot;item7&quot;</span><span class="p">,</span> <span class="s2">&quot;item8&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;item9&quot;</span><span class="p">,</span> <span class="s2">&quot;item10&quot;</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">item1, item2, item3, item4,</span>
+<span class="go">item5, item6, item7, item8,</span>
+<span class="go">item9, item10</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;j&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot; - &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">a - b - c</span>
+<span class="go">- d - e -</span>
+<span class="go">f - g - h</span>
+<span class="go">- i - j</span>
+</pre></div>
+</div>
+<p>Note that you have control over the <cite>print_func</cite>.
+This, for example, allows you to just return the string instead of printing it.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">&#39;a - b - c\n- d - e -\nf - g - h\n- i - j&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="filesys.html" class="btn btn-neutral float-left" title="lkj.filesys" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="importing.html" class="btn btn-neutral float-left" title="lkj.importing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="strings.html" class="btn btn-neutral float-right" title="lkj.strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -50,6 +50,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/importing.html">lkj.importing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/strings.html">lkj.strings</a></li>
 </ul>
@@ -85,13 +86,17 @@
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -136,6 +141,18 @@
   </ul></td>
 </tr></table>
 
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder.find_spec">find_spec() (lkj.importing.NamespaceForwardingFinder method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader.fullname">fullname (lkj.importing.NamespaceForwardingLoader attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -161,7 +178,7 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/lkj.html#lkj.import_object">import_object() (in module lkj)</a>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.import_object">import_object() (in module lkj.importing)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -183,6 +200,13 @@
         <li><a href="module_docs/lkj/filesys.html#module-lkj.filesys">module</a>
 </li>
       </ul></li>
+      <li>
+    lkj.importing
+
+      <ul>
+        <li><a href="module_docs/lkj/importing.html#module-lkj.importing">module</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
@@ -199,6 +223,8 @@
         <li><a href="module_docs/lkj/strings.html#module-lkj.strings">module</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/lkj/importing.html#id0">load_module() (lkj.importing.NamespaceForwardingLoader method)</a>, <a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader.load_module">[1]</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -213,11 +239,25 @@
 </li>
         <li><a href="module_docs/lkj/filesys.html#module-lkj.filesys">lkj.filesys</a>
 </li>
+        <li><a href="module_docs/lkj/importing.html#module-lkj.importing">lkj.importing</a>
+</li>
         <li><a href="module_docs/lkj/loggers.html#module-lkj.loggers">lkj.loggers</a>
 </li>
         <li><a href="module_docs/lkj/strings.html#module-lkj.strings">lkj.strings</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder">NamespaceForwardingFinder (class in lkj.importing)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader">NamespaceForwardingLoader (class in lkj.importing)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -238,12 +278,34 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/lkj/strings.html#lkj.strings.regex_based_substitution">regex_based_substitution() (in module lkj.strings)</a>
 </li>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.register_namespace_forwarding">register_namespace_forwarding() (in module lkj.importing)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/lkj/filesys.html#lkj.filesys.rename_file">rename_file() (in module lkj.filesys)</a>
 </li>
       <li><a href="module_docs/lkj/loggers.html#lkj.loggers.return_error_info_on_error">return_error_info_on_error() (in module lkj.loggers)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder.source_base">source_base (lkj.importing.NamespaceForwardingFinder attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder.target_base">target_base (lkj.importing.NamespaceForwardingFinder attribute)</a>
+
+      <ul>
+        <li><a href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader.target_base">(lkj.importing.NamespaceForwardingLoader attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -259,6 +321,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/lkj/filesys.html#lkj.filesys.watermark_dir">watermark_dir() (in module lkj.filesys)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/lkj/loggers.html#lkj.loggers.wrapped_print">wrapped_print() (in module lkj.loggers)</a>
 </li>
   </ul></td>
 </tr></table>

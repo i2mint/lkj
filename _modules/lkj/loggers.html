@@ -50,6 +50,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
 </ul>
@@ -81,6 +82,59 @@
              
   <h1>Source code for lkj.loggers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for logging.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="wrapped_print">
+<a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.wrapped_print">[docs]</a>
+<span class="k">def</span> <span class="nf">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints a list of items ensuring the total line width does not exceed `max_width`.</span>
+<span class="sd">    </span>
+<span class="sd">    If adding a new item would exceed this width, it starts a new line.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        items (list): The list of items to print.</span>
+<span class="sd">        sep (str): The separator to use between items.</span>
+<span class="sd">        max_width (int): The maximum width of each line. Default is 80.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; items = [</span>
+<span class="sd">    ...     &quot;item1&quot;, &quot;item2&quot;, &quot;item3&quot;, &quot;item4&quot;, &quot;item5&quot;, &quot;item6&quot;, &quot;item7&quot;, &quot;item8&quot;, </span>
+<span class="sd">    ...     &quot;item9&quot;, &quot;item10&quot;</span>
+<span class="sd">    ... ]</span>
+<span class="sd">    &gt;&gt;&gt; sep = &quot;, &quot;</span>
+<span class="sd">    &gt;&gt;&gt; wrapped_print(items, sep, max_width=30)</span>
+<span class="sd">    item1, item2, item3, item4,</span>
+<span class="sd">    item5, item6, item7, item8,</span>
+<span class="sd">    item9, item10</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; items = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;]</span>
+<span class="sd">    &gt;&gt;&gt; sep = &quot; - &quot;</span>
+<span class="sd">    &gt;&gt;&gt; wrapped_print(items, sep, max_width=10)</span>
+<span class="sd">    a - b - c</span>
+<span class="sd">    - d - e -</span>
+<span class="sd">    f - g - h</span>
+<span class="sd">    - i - j</span>
+
+<span class="sd">    Note that you have control over the `print_func`. </span>
+<span class="sd">    This, for example, allows you to just return the string instead of printing it.</span>
+
+<span class="sd">    &gt;&gt;&gt; wrapped_print(items, sep, max_width=10, print_func=lambda x: x)</span>
+<span class="sd">    &#39;a - b - c\n- d - e -\nf - g - h\n- i - j&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">textwrap</span>
+
+    <span class="k">return</span> <span class="n">print_func</span><span class="p">(</span>
+        <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<span class="c1"># Example usage</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item3&quot;</span><span class="p">,</span> <span class="s2">&quot;item4&quot;</span><span class="p">,</span> <span class="s2">&quot;item5&quot;</span><span class="p">,</span> <span class="s2">&quot;item6&quot;</span><span class="p">,</span> <span class="s2">&quot;item7&quot;</span><span class="p">,</span> <span class="s2">&quot;item8&quot;</span><span class="p">,</span> <span class="s2">&quot;item9&quot;</span><span class="p">,</span> <span class="s2">&quot;item10&quot;</span><span class="p">]</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span>
+    <span class="n">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="print_with_timestamp">

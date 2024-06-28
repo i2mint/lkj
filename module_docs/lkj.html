@@ -56,11 +56,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#lkj.add_attr"><code class="docutils literal notranslate"><span class="pre">add_attr()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.get_caller_package_name"><code class="docutils literal notranslate"><span class="pre">get_caller_package_name()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lkj.import_object"><code class="docutils literal notranslate"><span class="pre">import_object()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.user_machine_id"><code class="docutils literal notranslate"><span class="pre">user_machine_id()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lkj/importing.html">lkj.importing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/strings.html">lkj.strings</a></li>
 </ul>
@@ -221,18 +221,6 @@ object.</p>
 <span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">get_caller_package_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#get_caller_package_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.get_caller_package_name" title="Link to this definition"></a></dt>
 <dd><p>Return package name of caller</p>
 <p>See: <a class="reference external" href="https://github.com/i2mint/i2mint/issues/1#issuecomment-1479416085">https://github.com/i2mint/i2mint/issues/1#issuecomment-1479416085</a></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="lkj.import_object">
-<span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">import_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dot_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#import_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.import_object" title="Link to this definition"></a></dt>
-<dd><p>Imports and returns an object from a dot string path.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">import_object</span><span class="p">(</span><span class="s1">&#39;os.path.join&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="ow">is</span> <span class="n">join</span>
-<span class="go">True</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py function">
