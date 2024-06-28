@@ -121,6 +121,7 @@
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        fullname (str): The full name of the module being imported.</span>
+<span class="sd">        source_base (str): The base namespace to detect and forward from.</span>
 <span class="sd">        target_base (str): The base namespace to forward the import to.</span>
 
 <span class="sd">    Methods:</span>
@@ -128,14 +129,15 @@
 <span class="sd">            Loads and returns the target module corresponding to the source module name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="n">fullname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_base</span> <span class="o">=</span> <span class="n">source_base</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span> <span class="o">=</span> <span class="n">target_base</span>
 
 <div class="viewcode-block" id="NamespaceForwardingLoader.load_module">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader.load_module">[docs]</a>
     <span class="k">def</span> <span class="nf">load_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">):</span>
-        <span class="n">target_name</span> <span class="o">=</span> <span class="n">fullname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;imbed.mdat&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span><span class="p">)</span>
+        <span class="n">target_name</span> <span class="o">=</span> <span class="n">fullname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_base</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span><span class="p">)</span>
 
         <span class="c1"># If the target module is already loaded, return it</span>
         <span class="k">if</span> <span class="n">target_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
@@ -180,7 +182,8 @@
     <span class="k">def</span> <span class="nf">find_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fullname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_base</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_loader</span><span class="p">(</span>
-                <span class="n">fullname</span><span class="p">,</span> <span class="n">NamespaceForwardingLoader</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span><span class="p">)</span>
+                <span class="n">fullname</span><span class="p">,</span>
+                <span class="n">NamespaceForwardingLoader</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_base</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 </div>
@@ -198,14 +201,18 @@
 <span class="sd">        target_base (str): The target namespace to forward to.</span>
 
 <span class="sd">    Usage:</span>
-<span class="sd">        import custom_import_hook</span>
-<span class="sd">        custom_import_hook.register_namespace_forwarding(&#39;imbed.mdat&#39;, &#39;imbed_data_prep&#39;)</span>
 
-<span class="sd">        import imbed.mdat.hcp</span>
+<span class="sd">        # if you put this code in the imbed.mdat package (say, containing a hcp module),</span>
+<span class="sd">        &gt;&gt;&gt; register_namespace_forwarding(&#39;imbed.mdat&#39;, &#39;imbed_data_prep&#39;)  # doctest: +SKIP</span>
 
-<span class="sd">        print(&quot;imbed.mdat.hcp imported successfully!&quot;)</span>
+<span class="sd">        # Then when you do</span>
 
-<span class="sd">    This function inserts the custom finder into sys.meta_path, enabling the dynamic import forwarding.</span>
+<span class="sd">        &gt;&gt;&gt; import imbed.mdat.hcp  # doctest: +SKIP</span>
+
+<span class="sd">        You&#39;ll get the imbed_data_prep.hcp module.</span>
+
+<span class="sd">    This function inserts the custom finder into sys.meta_path, enabling the</span>
+<span class="sd">    dynamic import forwarding.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">meta_path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NamespaceForwardingFinder</span><span class="p">(</span><span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">))</span></div>
 
