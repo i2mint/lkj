@@ -33,6 +33,7 @@ class NamespaceForwardingLoader(importlib.abc.Loader):
 
     Attributes:
         fullname (str): The full name of the module being imported.
+        source_base (str): The base namespace to detect and forward from.
         target_base (str): The base namespace to forward the import to.
 
     Methods:
@@ -40,12 +41,13 @@ class NamespaceForwardingLoader(importlib.abc.Loader):
             Loads and returns the target module corresponding to the source module name.
     """
 
-    def __init__(self, fullname, target_base):
+    def __init__(self, fullname, source_base, target_base):
         self.fullname = fullname
+        self.source_base = source_base
         self.target_base = target_base
 
     def load_module(self, fullname):
-        target_name = fullname.replace("imbed.mdat", self.target_base)
+        target_name = fullname.replace(self.source_base, self.target_base)
 
         # If the target module is already loaded, return it
         if target_name in sys.modules:
@@ -84,7 +86,8 @@ class NamespaceForwardingFinder(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path, target=None):
         if fullname.startswith(self.source_base):
             return importlib.util.spec_from_loader(
-                fullname, NamespaceForwardingLoader(fullname, self.target_base)
+                fullname,
+                NamespaceForwardingLoader(fullname, self.source_base, self.target_base),
             )
         return None
 
@@ -98,13 +101,17 @@ def register_namespace_forwarding(source_base, target_base):
         target_base (str): The target namespace to forward to.
 
     Usage:
-        import custom_import_hook
-        custom_import_hook.register_namespace_forwarding('imbed.mdat', 'imbed_data_prep')
 
-        import imbed.mdat.hcp
+        # if you put this code in the imbed.mdat package (say, containing a hcp module),
+        >>> register_namespace_forwarding('imbed.mdat', 'imbed_data_prep')  # doctest: +SKIP
 
-        print("imbed.mdat.hcp imported successfully!")
+        # Then when you do
 
-    This function inserts the custom finder into sys.meta_path, enabling the dynamic import forwarding.
+        >>> import imbed.mdat.hcp  # doctest: +SKIP
+
+        You'll get the imbed_data_prep.hcp module.
+
+    This function inserts the custom finder into sys.meta_path, enabling the
+    dynamic import forwarding.
     """
     sys.meta_path.insert(0, NamespaceForwardingFinder(source_base, target_base))
