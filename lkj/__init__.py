@@ -12,7 +12,7 @@ from lkj.loggers import (
     return_error_info_on_error,
     wrapped_print,
 )
-
+from lkj.importing import import_object, register_namespace_forwarding
 
 ddir = lambda obj: list(filter(lambda x: not x.startswith('_'), dir(obj)))
 
@@ -34,27 +34,6 @@ def chunker(a, chk_size, *, include_tail=True):
             yield tuple(item for item in chunk if item is not sentinel)
     else:
         yield from zip(*([it] * chk_size))
-
-
-def import_object(dot_path: str):
-    """Imports and returns an object from a dot string path.
-
-    >>> f = import_object('os.path.join')
-    >>> from os.path import join
-    >>> f is join
-    True
-
-    """
-    from importlib import import_module
-
-    module_path, _, object_name = dot_path.rpartition('.')
-    if not module_path:
-        raise ImportError(f'{dot_path} does not contain a module path')
-    module = import_module(module_path)
-    try:
-        return getattr(module, object_name)
-    except AttributeError:
-        raise ImportError(f'{object_name} is not found in {module_path}')
 
 
 def user_machine_id():
