@@ -83,7 +83,7 @@
   <h1>Source code for lkj.loggers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for logging.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
 
@@ -212,6 +212,11 @@
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;.... Done calling </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
+<span class="k">def</span> <span class="nf">_always_log</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True no matter what&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
 <div class="viewcode-block" id="log_calls">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.log_calls">[docs]</a>
 <span class="k">def</span> <span class="nf">log_calls</span><span class="p">(</span>
@@ -221,6 +226,7 @@
     <span class="n">ingress_msg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_calling_name</span><span class="p">,</span>
     <span class="n">egress_msg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_done_calling_name</span><span class="p">,</span>
     <span class="n">func_name</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s1">&#39;__name__&#39;</span><span class="p">),</span>
+    <span class="n">log_condition</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">_always_log</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorator that adds logging before and after the function&#39;s call.</span>
@@ -234,6 +240,10 @@
 <span class="sd">            If it returns None, no message is logged.</span>
 <span class="sd">            Default is &quot;.... Done&quot;.</span>
 <span class="sd">        func_name (callable): The function to use to get the function&#39;s name.</span>
+<span class="sd">        log_condition (callable): The condition for logging.</span>
+<span class="sd">            Should be a callable that takes a function, args, and kwargs,</span>
+<span class="sd">            and return a bool. If log_condition returns False, no logging is done.</span>
+<span class="sd">            Default is _always_log.</span>
 
 <span class="sd">    Tips:</span>
 <span class="sd">        Use `logger=print_with_timestamp` to get timestamps in your logs.</span>
@@ -255,8 +265,8 @@
 <span class="sd">    5</span>
 
 <span class="sd">    &gt;&gt;&gt; @log_calls(</span>
-<span class="sd">    ...     logger=lambda x: print(f&quot;LOG: {x}&quot;), </span>
-<span class="sd">    ...     ingress_msg=lambda name, *args: f&quot;Start {name}!&quot;, </span>
+<span class="sd">    ...     logger=lambda x: print(f&quot;LOG: {x}&quot;),</span>
+<span class="sd">    ...     ingress_msg=lambda name, *args: f&quot;Start {name}!&quot;,</span>
 <span class="sd">    ...     egress_msg=lambda *args: &quot;End&quot;</span>
 <span class="sd">    ... )</span>
 <span class="sd">    ... def multiply(a, b):</span>
@@ -267,6 +277,40 @@
 <span class="sd">    LOG: End</span>
 <span class="sd">    6</span>
 
+<span class="sd">    Sometimes, you want to dynamically control whether to log or not.</span>
+<span class="sd">    This is what the `log_condition` parameter is for.</span>
+<span class="sd">    One common use case is to log only if a flag is set in an instance.</span>
+<span class="sd">    Since this is a common use case, we provide the `log_calls.instance_flag_is_set`</span>
+<span class="sd">    helper function for this. You can use partial to set the flag attribute:</span>
+
+<span class="sd">    &gt;&gt;&gt; import functools</span>
+<span class="sd">    &gt;&gt;&gt; log_if_verbose_set_to_true = functools.partial(</span>
+<span class="sd">    ...     log_calls.instance_flag_is_set, flag_attr=&#39;verbose&#39;</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    Now if you have a class with a `verbose` attribute, you can use this helper function</span>
+<span class="sd">    to log only if `verbose` is set:</span>
+
+<span class="sd">    &gt;&gt;&gt; class MyClass:</span>
+<span class="sd">    ...     def __init__(self, verbose=False):</span>
+<span class="sd">    ...         self.verbose = verbose</span>
+<span class="sd">    ...</span>
+<span class="sd">    ...     @log_calls(log_condition=log_if_verbose_set_to_true)</span>
+<span class="sd">    ...     def foo(self):</span>
+<span class="sd">    ...         print(&quot;Executing foo&quot;)</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; # Example usage</span>
+<span class="sd">    &gt;&gt;&gt; obj = MyClass(verbose=True)</span>
+<span class="sd">    &gt;&gt;&gt; obj.foo()  # This will log</span>
+<span class="sd">    Calling foo...</span>
+<span class="sd">    Executing foo</span>
+<span class="sd">    .... Done calling foo</span>
+
+<span class="sd">    But if verbose is set to `False`, no logging will be done:</span>
+<span class="sd">    &gt;&gt;&gt; obj = MyClass(verbose=False)</span>
+<span class="sd">    &gt;&gt;&gt; obj.foo()  # This will not log</span>
+<span class="sd">    Executing foo</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
@@ -275,21 +319,62 @@
             <span class="n">ingress_msg</span><span class="o">=</span><span class="n">ingress_msg</span><span class="p">,</span>
             <span class="n">egress_msg</span><span class="o">=</span><span class="n">egress_msg</span><span class="p">,</span>
             <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="n">log_condition</span><span class="o">=</span><span class="n">log_condition</span><span class="p">,</span>
         <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
 
-        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="n">_func_name</span> <span class="o">=</span> <span class="n">func_name</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_in_msg</span> <span class="o">:=</span> <span class="n">ingress_msg</span><span class="p">(</span><span class="n">_func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">logger</span><span class="p">(</span><span class="n">_in_msg</span><span class="p">)</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">log_condition</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ingress_msg</span><span class="p">:</span>
+                <span class="n">logger</span><span class="p">(</span><span class="n">ingress_msg</span><span class="p">(</span><span class="n">func_name</span><span class="p">(</span><span class="n">func</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_out_msg</span> <span class="o">:=</span> <span class="n">egress_msg</span><span class="p">(</span><span class="n">_func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">logger</span><span class="p">(</span><span class="n">_out_msg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">egress_msg</span><span class="p">:</span>
+                <span class="n">logger</span><span class="p">(</span><span class="n">egress_msg</span><span class="p">(</span><span class="n">func_name</span><span class="p">(</span><span class="n">func</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">wrapper</span></div>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
 
+
+
+<div class="viewcode-block" id="instance_flag_is_set">
+<a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.instance_flag_is_set">[docs]</a>
+<span class="k">def</span> <span class="nf">instance_flag_is_set</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">flag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;verbose&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the log flag is set to True in the instance.&quot;&quot;&quot;</span>
+    <span class="c1"># get the first argument if any, assuming it&#39;s the instance</span>
+    <span class="k">if</span> <span class="n">flag_attr</span><span class="p">:</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">instance</span><span class="p">:</span>  <span class="c1"># assume it&#39;s the instance</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">flag_attr</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<span class="n">log_calls</span><span class="o">.</span><span class="n">instance_flag_is_set</span> <span class="o">=</span> <span class="n">instance_flag_is_set</span>
+
+<span class="c1"># if func is None:</span>
+<span class="c1">#     return partial(</span>
+<span class="c1">#         log_calls,</span>
+<span class="c1">#         logger=logger,</span>
+<span class="c1">#         ingress_msg=ingress_msg,</span>
+<span class="c1">#         egress_msg=egress_msg,</span>
+<span class="c1">#         func_name=func_name,</span>
+<span class="c1">#     )</span>
+<span class="c1"># else:</span>
+
+<span class="c1">#     @wraps(func)</span>
+<span class="c1">#     def wrapper(*args, **kwargs):</span>
+<span class="c1">#         _func_name = func_name(func)</span>
+<span class="c1">#         if (_in_msg := ingress_msg(_func_name, args, kwargs)) is not None:</span>
+<span class="c1">#             logger(_in_msg)</span>
+<span class="c1">#         result = func(*args, **kwargs)</span>
+<span class="c1">#         if (_out_msg := egress_msg(_func_name, args, kwargs, result)) is not None:</span>
+<span class="c1">#             logger(_out_msg)</span>
+<span class="c1">#         return result</span>
+
+<span class="c1">#     return wrapper</span>
 
 
 <span class="c1"># --------------------------------------------------------------------------------------</span>
@@ -297,7 +382,6 @@
 
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>

@@ -57,6 +57,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.loggers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.instance_flag_is_set"><code class="docutils literal notranslate"><span class="pre">instance_flag_is_set()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.log_calls"><code class="docutils literal notranslate"><span class="pre">log_calls()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
@@ -128,8 +129,14 @@ but for this example we’ll just use <cite>print</cite> with some modification:
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.loggers.instance_flag_is_set">
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">instance_flag_is_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'verbose'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#instance_flag_is_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.instance_flag_is_set" title="Link to this definition"></a></dt>
+<dd><p>Check if the log flag is set to True in the instance.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.loggers.log_calls">
-<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">log_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">func:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">*,</span> <span class="pre">logger:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">None]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;,</span> <span class="pre">ingress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_calling_name&gt;,</span> <span class="pre">egress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict,</span> <span class="pre">~typing.Any],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_done_calling_name&gt;,</span> <span class="pre">func_name:</span> <span class="pre">~typing.Callable[[~typing.Callable],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">operator.attrgetter('__name__')</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/lkj/loggers.html#log_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.log_calls" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">log_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">func:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">*,</span> <span class="pre">logger:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">None]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;,</span> <span class="pre">ingress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_calling_name&gt;,</span> <span class="pre">egress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict,</span> <span class="pre">~typing.Any],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_done_calling_name&gt;,</span> <span class="pre">func_name:</span> <span class="pre">~typing.Callable[[~typing.Callable],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">operator.attrgetter('__name__'),</span> <span class="pre">log_condition:</span> <span class="pre">~typing.Callable[[~typing.Callable,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_always_log&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/lkj/loggers.html#log_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.log_calls" title="Link to this definition"></a></dt>
 <dd><p>Decorator that adds logging before and after the function’s call.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -142,6 +149,10 @@ Default is “Calling {name}…” where name is the name of the function.</p></
 If it returns None, no message is logged.
 Default is “…. Done”.</p></li>
 <li><p><strong>func_name</strong> (<em>callable</em>) – The function to use to get the function’s name.</p></li>
+<li><p><strong>log_condition</strong> (<em>callable</em>) – The condition for logging.
+Should be a callable that takes a function, args, and kwargs,
+and return a bool. If log_condition returns False, no logging is done.
+Default is _always_log.</p></li>
 </ul>
 </dd>
 </dl>
@@ -181,6 +192,39 @@ Use <cite>logger=lambda x: None</cite> to suppress all logging.</p>
 <span class="go">6</span>
 </pre></div>
 </div>
+<p>Sometimes, you want to dynamically control whether to log or not.
+This is what the <cite>log_condition</cite> parameter is for.
+One common use case is to log only if a flag is set in an instance.
+Since this is a common use case, we provide the <cite>log_calls.instance_flag_is_set</cite>
+helper function for this. You can use partial to set the flag attribute:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_if_verbose_set_to_true</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">log_calls</span><span class="o">.</span><span class="n">instance_flag_is_set</span><span class="p">,</span> <span class="n">flag_attr</span><span class="o">=</span><span class="s1">&#39;verbose&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now if you have a class with a <cite>verbose</cite> attribute, you can use this helper function
+to log only if <cite>verbose</cite> is set:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="nd">@log_calls</span><span class="p">(</span><span class="n">log_condition</span><span class="o">=</span><span class="n">log_if_verbose_set_to_true</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing foo&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Example usage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>  <span class="c1"># This will log</span>
+<span class="go">Calling foo...</span>
+<span class="go">Executing foo</span>
+<span class="go">.... Done calling foo</span>
+</pre></div>
+</div>
+<p>But if verbose is set to <cite>False</cite>, no logging will be done:
+&gt;&gt;&gt; obj = MyClass(verbose=False)
+&gt;&gt;&gt; obj.foo()  # This will not log
+Executing foo</p>
 </dd></dl>
 
 <dl class="py function">
