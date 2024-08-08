@@ -1,20 +1,25 @@
 """Utils for logging."""
 
+from typing import Callable, Tuple, Any
+from functools import partial, wraps
+from operator import attrgetter
+
+
 def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     r"""
     Prints a list of items ensuring the total line width does not exceed `max_width`.
-    
+
     If adding a new item would exceed this width, it starts a new line.
-    
+
     Args:
         items (list): The list of items to print.
         sep (str): The separator to use between items.
         max_width (int): The maximum width of each line. Default is 80.
-    
+
     Example:
 
     >>> items = [
-    ...     "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", 
+    ...     "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8",
     ...     "item9", "item10"
     ... ]
     >>> sep = ", "
@@ -22,7 +27,7 @@ def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     item1, item2, item3, item4,
     item5, item6, item7, item8,
     item9, item10
-    
+
     >>> items = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
     >>> sep = " - "
     >>> wrapped_print(items, sep, max_width=10)
@@ -31,7 +36,7 @@ def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     f - g - h
     - i - j
 
-    Note that you have control over the `print_func`. 
+    Note that you have control over the `print_func`.
     This, for example, allows you to just return the string instead of printing it.
 
     >>> wrapped_print(items, sep, max_width=10, print_func=lambda x: x)
@@ -43,12 +48,6 @@ def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     return print_func(
         textwrap.fill(sep.join(items), width=max_width, subsequent_indent='')
     )
-
-# Example usage
-if __name__ == "__main__":
-    items = ["item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9", "item10"]
-    sep = ", "
-    wrapped_print(items, sep, max_width=30)
 
 
 def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
@@ -113,6 +112,91 @@ def clog(condition, *args, log_func=print, **kwargs):
         return log_func(*args, **kwargs)
 
 
+def _calling_name(func_name: str, args: Tuple, kwargs: dict) -> str:
+    return f"Calling {func_name}..."
+
+
+def _done_calling_name(func_name: str, args: Tuple, kwargs: dict, result: Any) -> str:
+    return f".... Done calling {func_name}"
+
+
+def log_calls(
+    func: Callable = None,
+    *,
+    logger: Callable[[str], None] = print,
+    ingress_msg: Callable[[str, Tuple, dict], str] = _calling_name,
+    egress_msg: Callable[[str, Tuple, dict, Any], str] = _done_calling_name,
+    func_name: Callable[[Callable], str] = attrgetter('__name__'),
+) -> Callable:
+    """
+    Decorator that adds logging before and after the function's call.
+
+    Args:
+        logger (callable): The logger function to use. Default is print.
+        ingress_msg (callable): The message to log before calling the function.
+            If it returns None, no message is logged.
+            Default is "Calling {name}..." where name is the name of the function.
+        egress_msg (callable): The message to log after the function call.
+            If it returns None, no message is logged.
+            Default is ".... Done".
+        func_name (callable): The function to use to get the function's name.
+
+    Tips:
+        Use `logger=print_with_timestamp` to get timestamps in your logs.
+        Use `lambda *args: None` as the ingress_msg or egress_msg to suppress logging.
+        Use `logger=lambda x: None` to suppress all logging.
+
+    Returns:
+        The decorated function.
+
+    Example:
+
+    >>> @log_calls
+    ... def add(a, b):
+    ...     return a + b
+    ...
+    >>> add(2, 3)
+    Calling add...
+    .... Done calling add
+    5
+
+    >>> @log_calls(
+    ...     logger=lambda x: print(f"LOG: {x}"), 
+    ...     ingress_msg=lambda name, *args: f"Start {name}!", 
+    ...     egress_msg=lambda *args: "End"
+    ... )
+    ... def multiply(a, b):
+    ...     return a * b
+    ...
+    >>> multiply(2, 3)
+    LOG: Start multiply!
+    LOG: End
+    6
+
+    """
+    if func is None:
+        return partial(
+            log_calls,
+            logger=logger,
+            ingress_msg=ingress_msg,
+            egress_msg=egress_msg,
+            func_name=func_name,
+        )
+    else:
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            _func_name = func_name(func)
+            if (_in_msg := ingress_msg(_func_name, args, kwargs)) is not None:
+                logger(_in_msg)
+            result = func(*args, **kwargs)
+            if (_out_msg := egress_msg(_func_name, args, kwargs, result)) is not None:
+                logger(_out_msg)
+            return result
+
+        return wrapper
+
+
 # --------------------------------------------------------------------------------------
 # Error handling
 
@@ -121,6 +205,9 @@ from typing import Callable, Tuple, Any
 from functools import wraps
 from dataclasses import dataclass
 import traceback
+from typing import Callable, Any, Tuple
+from functools import partial, wraps
+from operator import attrgetter
 
 
 @dataclass
@@ -192,4 +279,3 @@ def return_error_info_on_error(
             return error_info_processor(error_info)
 
     return wrapper
-

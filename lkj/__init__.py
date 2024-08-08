@@ -7,6 +7,7 @@ from lkj.strings import regex_based_substitution
 from lkj.loggers import (
     print_with_timestamp,
     print_progress,
+    log_calls,
     clog,
     ErrorInfo,
     return_error_info_on_error,
