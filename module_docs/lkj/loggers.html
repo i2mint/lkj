@@ -57,6 +57,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.loggers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.log_calls"><code class="docutils literal notranslate"><span class="pre">log_calls()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.return_error_info_on_error"><code class="docutils literal notranslate"><span class="pre">return_error_info_on_error()</span></code></a></li>
@@ -122,6 +123,62 @@ but for this example we’ll just use <cite>print</cite> with some modification:
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span> <span class="o">=</span> <span class="n">clog</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hello </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span><span class="p">(</span><span class="s2">&quot;logging this&quot;</span><span class="p">)</span>
 <span class="go">hello logging this</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.loggers.log_calls">
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">log_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">func:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">*,</span> <span class="pre">logger:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">None]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;,</span> <span class="pre">ingress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_calling_name&gt;,</span> <span class="pre">egress_msg:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">~typing.Tuple,</span> <span class="pre">dict,</span> <span class="pre">~typing.Any],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_done_calling_name&gt;,</span> <span class="pre">func_name:</span> <span class="pre">~typing.Callable[[~typing.Callable],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">operator.attrgetter('__name__')</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/lkj/loggers.html#log_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.log_calls" title="Link to this definition"></a></dt>
+<dd><p>Decorator that adds logging before and after the function’s call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger</strong> (<em>callable</em>) – The logger function to use. Default is print.</p></li>
+<li><p><strong>ingress_msg</strong> (<em>callable</em>) – The message to log before calling the function.
+If it returns None, no message is logged.
+Default is “Calling {name}…” where name is the name of the function.</p></li>
+<li><p><strong>egress_msg</strong> (<em>callable</em>) – The message to log after the function call.
+If it returns None, no message is logged.
+Default is “…. Done”.</p></li>
+<li><p><strong>func_name</strong> (<em>callable</em>) – The function to use to get the function’s name.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Tips:</dt><dd><p>Use <cite>logger=print_with_timestamp</cite> to get timestamps in your logs.
+Use <cite>lambda *args: None</cite> as the ingress_msg or egress_msg to suppress logging.
+Use <cite>logger=lambda x: None</cite> to suppress all logging.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The decorated function.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@log_calls</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">Calling add...</span>
+<span class="go">.... Done calling add</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@log_calls</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">logger</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOG: </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">ingress_msg</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Start </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">egress_msg</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s2">&quot;End&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">LOG: Start multiply!</span>
+<span class="go">LOG: End</span>
+<span class="go">6</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -83,23 +83,28 @@
   <h1>Source code for lkj.loggers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for logging.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
+
+
 <div class="viewcode-block" id="wrapped_print">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.wrapped_print">[docs]</a>
 <span class="k">def</span> <span class="nf">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Prints a list of items ensuring the total line width does not exceed `max_width`.</span>
-<span class="sd">    </span>
+
 <span class="sd">    If adding a new item would exceed this width, it starts a new line.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        items (list): The list of items to print.</span>
 <span class="sd">        sep (str): The separator to use between items.</span>
 <span class="sd">        max_width (int): The maximum width of each line. Default is 80.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Example:</span>
 
 <span class="sd">    &gt;&gt;&gt; items = [</span>
-<span class="sd">    ...     &quot;item1&quot;, &quot;item2&quot;, &quot;item3&quot;, &quot;item4&quot;, &quot;item5&quot;, &quot;item6&quot;, &quot;item7&quot;, &quot;item8&quot;, </span>
+<span class="sd">    ...     &quot;item1&quot;, &quot;item2&quot;, &quot;item3&quot;, &quot;item4&quot;, &quot;item5&quot;, &quot;item6&quot;, &quot;item7&quot;, &quot;item8&quot;,</span>
 <span class="sd">    ...     &quot;item9&quot;, &quot;item10&quot;</span>
 <span class="sd">    ... ]</span>
 <span class="sd">    &gt;&gt;&gt; sep = &quot;, &quot;</span>
@@ -107,7 +112,7 @@
 <span class="sd">    item1, item2, item3, item4,</span>
 <span class="sd">    item5, item6, item7, item8,</span>
 <span class="sd">    item9, item10</span>
-<span class="sd">    </span>
+
 <span class="sd">    &gt;&gt;&gt; items = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; sep = &quot; - &quot;</span>
 <span class="sd">    &gt;&gt;&gt; wrapped_print(items, sep, max_width=10)</span>
@@ -116,7 +121,7 @@
 <span class="sd">    f - g - h</span>
 <span class="sd">    - i - j</span>
 
-<span class="sd">    Note that you have control over the `print_func`. </span>
+<span class="sd">    Note that you have control over the `print_func`.</span>
 <span class="sd">    This, for example, allows you to just return the string instead of printing it.</span>
 
 <span class="sd">    &gt;&gt;&gt; wrapped_print(items, sep, max_width=10, print_func=lambda x: x)</span>
@@ -129,12 +134,6 @@
         <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="p">)</span></div>
 
-
-<span class="c1"># Example usage</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item3&quot;</span><span class="p">,</span> <span class="s2">&quot;item4&quot;</span><span class="p">,</span> <span class="s2">&quot;item5&quot;</span><span class="p">,</span> <span class="s2">&quot;item6&quot;</span><span class="p">,</span> <span class="s2">&quot;item7&quot;</span><span class="p">,</span> <span class="s2">&quot;item8&quot;</span><span class="p">,</span> <span class="s2">&quot;item9&quot;</span><span class="p">,</span> <span class="s2">&quot;item10&quot;</span><span class="p">]</span>
-    <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span>
-    <span class="n">wrapped_print</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="print_with_timestamp">
@@ -205,6 +204,94 @@
 
 
 
+<span class="k">def</span> <span class="nf">_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">...&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_done_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;.... Done calling </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<div class="viewcode-block" id="log_calls">
+<a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.log_calls">[docs]</a>
+<span class="k">def</span> <span class="nf">log_calls</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">logger</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="nb">print</span><span class="p">,</span>
+    <span class="n">ingress_msg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_calling_name</span><span class="p">,</span>
+    <span class="n">egress_msg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_done_calling_name</span><span class="p">,</span>
+    <span class="n">func_name</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s1">&#39;__name__&#39;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator that adds logging before and after the function&#39;s call.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        logger (callable): The logger function to use. Default is print.</span>
+<span class="sd">        ingress_msg (callable): The message to log before calling the function.</span>
+<span class="sd">            If it returns None, no message is logged.</span>
+<span class="sd">            Default is &quot;Calling {name}...&quot; where name is the name of the function.</span>
+<span class="sd">        egress_msg (callable): The message to log after the function call.</span>
+<span class="sd">            If it returns None, no message is logged.</span>
+<span class="sd">            Default is &quot;.... Done&quot;.</span>
+<span class="sd">        func_name (callable): The function to use to get the function&#39;s name.</span>
+
+<span class="sd">    Tips:</span>
+<span class="sd">        Use `logger=print_with_timestamp` to get timestamps in your logs.</span>
+<span class="sd">        Use `lambda *args: None` as the ingress_msg or egress_msg to suppress logging.</span>
+<span class="sd">        Use `logger=lambda x: None` to suppress all logging.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The decorated function.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; @log_calls</span>
+<span class="sd">    ... def add(a, b):</span>
+<span class="sd">    ...     return a + b</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; add(2, 3)</span>
+<span class="sd">    Calling add...</span>
+<span class="sd">    .... Done calling add</span>
+<span class="sd">    5</span>
+
+<span class="sd">    &gt;&gt;&gt; @log_calls(</span>
+<span class="sd">    ...     logger=lambda x: print(f&quot;LOG: {x}&quot;), </span>
+<span class="sd">    ...     ingress_msg=lambda name, *args: f&quot;Start {name}!&quot;, </span>
+<span class="sd">    ...     egress_msg=lambda *args: &quot;End&quot;</span>
+<span class="sd">    ... )</span>
+<span class="sd">    ... def multiply(a, b):</span>
+<span class="sd">    ...     return a * b</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; multiply(2, 3)</span>
+<span class="sd">    LOG: Start multiply!</span>
+<span class="sd">    LOG: End</span>
+<span class="sd">    6</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+            <span class="n">log_calls</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+            <span class="n">ingress_msg</span><span class="o">=</span><span class="n">ingress_msg</span><span class="p">,</span>
+            <span class="n">egress_msg</span><span class="o">=</span><span class="n">egress_msg</span><span class="p">,</span>
+            <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">_func_name</span> <span class="o">=</span> <span class="n">func_name</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_in_msg</span> <span class="o">:=</span> <span class="n">ingress_msg</span><span class="p">(</span><span class="n">_func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="p">(</span><span class="n">_in_msg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_out_msg</span> <span class="o">:=</span> <span class="n">egress_msg</span><span class="p">(</span><span class="n">_func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="p">(</span><span class="n">_out_msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
 <span class="c1"># --------------------------------------------------------------------------------------</span>
 <span class="c1"># Error handling</span>
 
@@ -213,6 +300,9 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
 
 
 <div class="viewcode-block" id="ErrorInfo">
@@ -289,7 +379,6 @@
             <span class="k">return</span> <span class="n">error_info_processor</span><span class="p">(</span><span class="n">error_info</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wrapper</span></div>
-
 
 </pre></div>
 
