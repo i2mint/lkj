@@ -1,6 +1,6 @@
 """Utils for logging."""
 
-from typing import Callable, Tuple, Any
+from typing import Callable, Tuple, Any, Optional
 from functools import partial, wraps
 from operator import attrgetter
 
@@ -120,6 +120,11 @@ def _done_calling_name(func_name: str, args: Tuple, kwargs: dict, result: Any) -
     return f".... Done calling {func_name}"
 
 
+def _always_log(func: Callable, args: Tuple, kwargs: dict) -> bool:
+    """Return True no matter what"""
+    return True
+
+
 def log_calls(
     func: Callable = None,
     *,
@@ -127,6 +132,7 @@ def log_calls(
     ingress_msg: Callable[[str, Tuple, dict], str] = _calling_name,
     egress_msg: Callable[[str, Tuple, dict, Any], str] = _done_calling_name,
     func_name: Callable[[Callable], str] = attrgetter('__name__'),
+    log_condition: Callable[[Callable, Tuple, dict], bool] = _always_log,
 ) -> Callable:
     """
     Decorator that adds logging before and after the function's call.
@@ -140,6 +146,10 @@ def log_calls(
             If it returns None, no message is logged.
             Default is ".... Done".
         func_name (callable): The function to use to get the function's name.
+        log_condition (callable): The condition for logging.
+            Should be a callable that takes a function, args, and kwargs,
+            and return a bool. If log_condition returns False, no logging is done.
+            Default is _always_log.
 
     Tips:
         Use `logger=print_with_timestamp` to get timestamps in your logs.
@@ -161,8 +171,8 @@ def log_calls(
     5
 
     >>> @log_calls(
-    ...     logger=lambda x: print(f"LOG: {x}"), 
-    ...     ingress_msg=lambda name, *args: f"Start {name}!", 
+    ...     logger=lambda x: print(f"LOG: {x}"),
+    ...     ingress_msg=lambda name, *args: f"Start {name}!",
     ...     egress_msg=lambda *args: "End"
     ... )
     ... def multiply(a, b):
@@ -173,6 +183,40 @@ def log_calls(
     LOG: End
     6
 
+    Sometimes, you want to dynamically control whether to log or not.
+    This is what the `log_condition` parameter is for.
+    One common use case is to log only if a flag is set in an instance.
+    Since this is a common use case, we provide the `log_calls.instance_flag_is_set`
+    helper function for this. You can use partial to set the flag attribute:
+
+    >>> import functools
+    >>> log_if_verbose_set_to_true = functools.partial(
+    ...     log_calls.instance_flag_is_set, flag_attr='verbose'
+    ... )
+
+    Now if you have a class with a `verbose` attribute, you can use this helper function
+    to log only if `verbose` is set:
+
+    >>> class MyClass:
+    ...     def __init__(self, verbose=False):
+    ...         self.verbose = verbose
+    ...
+    ...     @log_calls(log_condition=log_if_verbose_set_to_true)
+    ...     def foo(self):
+    ...         print("Executing foo")
+    ...
+    >>> # Example usage
+    >>> obj = MyClass(verbose=True)
+    >>> obj.foo()  # This will log
+    Calling foo...
+    Executing foo
+    .... Done calling foo
+
+    But if verbose is set to `False`, no logging will be done:
+    >>> obj = MyClass(verbose=False)
+    >>> obj.foo()  # This will not log
+    Executing foo
+
     """
     if func is None:
         return partial(
@@ -181,20 +225,58 @@ def log_calls(
             ingress_msg=ingress_msg,
             egress_msg=egress_msg,
             func_name=func_name,
+            log_condition=log_condition,
         )
-    else:
 
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            _func_name = func_name(func)
-            if (_in_msg := ingress_msg(_func_name, args, kwargs)) is not None:
-                logger(_in_msg)
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if log_condition(func, args, kwargs):
+            if ingress_msg:
+                logger(ingress_msg(func_name(func), args, kwargs))
             result = func(*args, **kwargs)
-            if (_out_msg := egress_msg(_func_name, args, kwargs, result)) is not None:
-                logger(_out_msg)
+            if egress_msg:
+                logger(egress_msg(func_name(func), args, kwargs, result))
             return result
+        else:
+            return func(*args, **kwargs)
 
-        return wrapper
+    return wrapper
+
+
+def instance_flag_is_set(func, args, kwargs, flag_attr: str = 'verbose'):
+    """Check if the log flag is set to True in the instance."""
+    # get the first argument if any, assuming it's the instance
+    if flag_attr:
+        instance = next(iter(args), None)
+        if instance:  # assume it's the instance
+            if getattr(instance, flag_attr, False):
+                return True
+    return False
+
+
+log_calls.instance_flag_is_set = instance_flag_is_set
+
+# if func is None:
+#     return partial(
+#         log_calls,
+#         logger=logger,
+#         ingress_msg=ingress_msg,
+#         egress_msg=egress_msg,
+#         func_name=func_name,
+#     )
+# else:
+
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         _func_name = func_name(func)
+#         if (_in_msg := ingress_msg(_func_name, args, kwargs)) is not None:
+#             logger(_in_msg)
+#         result = func(*args, **kwargs)
+#         if (_out_msg := egress_msg(_func_name, args, kwargs, result)) is not None:
+#             logger(_out_msg)
+#         return result
+
+#     return wrapper
 
 
 # --------------------------------------------------------------------------------------
@@ -202,7 +284,6 @@ def log_calls(
 
 
 from typing import Callable, Tuple, Any
-from functools import wraps
 from dataclasses import dataclass
 import traceback
 from typing import Callable, Any, Tuple
