@@ -83,6 +83,56 @@
   <h1>Source code for lkj.strings</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for strings&quot;&quot;&quot;</span>
 
+
+<div class="viewcode-block" id="truncate_string_with_marker">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_string_with_marker">[docs]</a>
+<span class="k">def</span> <span class="nf">truncate_string_with_marker</span><span class="p">(</span>
+    <span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;...&#39;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a string with a limited length.</span>
+
+<span class="sd">    If the string is longer than the sum of the left_limit and right_limit,</span>
+<span class="sd">    the string is truncated and the middle_marker is inserted in the middle.</span>
+
+<span class="sd">    If the string is shorter than the sum of the left_limit and right_limit,</span>
+<span class="sd">    the string is returned as is.</span>
+
+<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;)</span>
+<span class="sd">    &#39;1234567890&#39;</span>
+
+<span class="sd">    But if the string is longer than the sum of the limits, it is truncated:</span>
+
+<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=3, right_limit=3)</span>
+<span class="sd">    &#39;123...890&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=3, right_limit=0)</span>
+<span class="sd">    &#39;123...&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=0, right_limit=3)</span>
+<span class="sd">    &#39;...890&#39;</span>
+
+<span class="sd">    If you&#39;re using a specific parametrization of the function often, you can</span>
+<span class="sd">    create a partial function with the desired parameters:</span>
+
+<span class="sd">    &gt;&gt;&gt; from functools import partial</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string = partial(truncate_string_with_marker, left_limit=2, right_limit=2, middle_marker=&#39;---&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;)</span>
+<span class="sd">    &#39;12---90&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;supercalifragilisticexpialidocious&#39;)</span>
+<span class="sd">    &#39;su---us&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">middle_marker_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">middle_marker</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">left_limit</span> <span class="o">+</span> <span class="n">right_limit</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">elif</span> <span class="n">right_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="n">left_limit</span><span class="p">]</span> <span class="o">+</span> <span class="n">middle_marker</span>
+    <span class="k">elif</span> <span class="n">left_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">middle_marker</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="n">right_limit</span><span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="n">left_limit</span><span class="p">]</span> <span class="o">+</span> <span class="n">middle_marker</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="n">right_limit</span><span class="p">:]</span></div>
+
+
+
 <span class="c1"># TODO: Generalize so that it can be used with regex keys (not escaped)</span>
 <div class="viewcode-block" id="regex_based_substitution">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.regex_based_substitution">[docs]</a>
@@ -96,8 +146,8 @@
 <span class="sd">    :rtype: Callable[[str], str]</span>
 
 <span class="sd">    The function is meant to be used with ``replacements`` as its single input,</span>
-<span class="sd">    returning a ``substitute`` function that will carry out the substitutions </span>
-<span class="sd">    on an input string. </span>
+<span class="sd">    returning a ``substitute`` function that will carry out the substitutions</span>
+<span class="sd">    on an input string.</span>
 
 <span class="sd">    &gt;&gt;&gt; replacements = {&#39;apple&#39;: &#39;orange&#39;, &#39;banana&#39;: &#39;grape&#39;}</span>
 <span class="sd">    &gt;&gt;&gt; substitute = regex_based_substitution(replacements)</span>
