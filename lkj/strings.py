@@ -1,6 +1,7 @@
 """Utils for strings"""
 
 
+# Note: Vendored in i2.multi_objects and dol.util
 def truncate_string_with_marker(
     s, *, left_limit=15, right_limit=15, middle_marker='...'
 ):
