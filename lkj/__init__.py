@@ -14,6 +14,7 @@ from lkj.loggers import (
     wrapped_print,
 )
 from lkj.importing import import_object, register_namespace_forwarding
+from lkj.misc import identity, value_in_interval
 
 ddir = lambda obj: list(filter(lambda x: not x.startswith('_'), dir(obj)))
 
