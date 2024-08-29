@@ -3,6 +3,7 @@
 from typing import Optional
 
 
+# Note: There is a copy of truncate_dict_values in the ju package.
 def truncate_dict_values(
     d: dict,
     *,
