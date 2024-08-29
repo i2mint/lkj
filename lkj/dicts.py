@@ -7,7 +7,7 @@ def truncate_dict_values(
     d: dict,
     *,
     max_list_size: Optional[int] = 2,
-    max_string_size: Optional[int] = None,
+    max_string_size: Optional[int] = 66,
     middle_marker: str = "..."
 ) -> dict:
     """
