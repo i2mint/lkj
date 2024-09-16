@@ -182,6 +182,135 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">replacements</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">s</span><span class="p">)</span></div>
 
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
+
+
+<span class="k">class</span> <span class="nc">TrieNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Number of times this node is visited during insertion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicates whether this node represents the end of an item</span>
+
+
+<span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<div class="viewcode-block" id="unique_affixes">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.unique_affixes">[docs]</a>
+<span class="k">def</span> <span class="nf">unique_affixes</span><span class="p">(</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Sequence</span><span class="p">],</span>
+    <span class="n">suffix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">egress</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ingress</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">identity</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a list of unique prefixes (or suffixes) for the given iterable of sequences.</span>
+<span class="sd">    Raises a ValueError if duplicates are found.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - items: Iterable of sequences (e.g., list of strings).</span>
+<span class="sd">    - suffix: If True, finds unique suffixes instead of prefixes.</span>
+<span class="sd">    - ingress: Callable to preprocess each item. Default is identity function.</span>
+<span class="sd">    - egress: Callable to postprocess each affix. Default is appropriate function based on item type.</span>
+<span class="sd">      Usually, ingress and egress are inverses of each other.</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;apple&#39;, &#39;ape&#39;, &#39;apricot&#39;, &#39;banana&#39;, &#39;band&#39;, &#39;bandana&#39;])</span>
+<span class="sd">    [&#39;app&#39;, &#39;ape&#39;, &#39;apr&#39;, &#39;bana&#39;, &#39;band&#39;, &#39;banda&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;test&#39;, &#39;testing&#39;, &#39;tester&#39;])</span>
+<span class="sd">    [&#39;test&#39;, &#39;testi&#39;, &#39;teste&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;test&#39;, &#39;test&#39;])</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    ValueError: Duplicate item detected: test</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;])</span>
+<span class="sd">    [&#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span>
+<span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;x&#39;, &#39;xy&#39;, &#39;xyz&#39;])</span>
+<span class="sd">    [&#39;x&#39;, &#39;xy&#39;, &#39;xyz&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;can&#39;, &#39;candy&#39;, &#39;candle&#39;])</span>
+<span class="sd">    [&#39;can&#39;, &#39;candy&#39;, &#39;candl&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;flow&#39;, &#39;flower&#39;, &#39;flight&#39;])</span>
+<span class="sd">    [&#39;flow&#39;, &#39;flowe&#39;, &#39;fli&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;ation&#39;, &#39;termination&#39;, &#39;examination&#39;], suffix=True)</span>
+<span class="sd">    [&#39;ation&#39;, &#39;rmination&#39;, &#39;amination&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; import functools</span>
+<span class="sd">    &gt;&gt;&gt; ingress = functools.partial(str.split, sep=&#39;.&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; egress = &#39;.&#39;.join</span>
+<span class="sd">    &gt;&gt;&gt; items = [&#39;here.and.there&#39;, &#39;here.or.there&#39;, &#39;here&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(items, ingress=ingress, egress=egress)</span>
+<span class="sd">    [&#39;here.and&#39;, &#39;here.or&#39;, &#39;here&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">ingress</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
+
+    <span class="c1"># Determine the default egress function based on item type</span>
+    <span class="k">if</span> <span class="n">egress</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">):</span>
+            <span class="c1"># Items are strings; affixes are lists of characters</span>
+            <span class="k">def</span> <span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Items are sequences (e.g., lists); affixes are lists</span>
+            <span class="k">def</span> <span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">affix</span>
+
+    <span class="c1"># If suffix is True, reverse the items</span>
+    <span class="k">if</span> <span class="n">suffix</span><span class="p">:</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+
+    <span class="c1"># Build the trie and detect duplicates</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">TrieNode</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="n">TrieNode</span><span class="p">()</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">element</span><span class="p">]</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># At the end of the item</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">is_end</span><span class="p">:</span>
+            <span class="c1"># Duplicate detected</span>
+            <span class="k">if</span> <span class="n">suffix</span><span class="p">:</span>
+                <span class="n">original_item</span> <span class="o">=</span> <span class="n">item</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">original_item</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="n">original_item</span> <span class="o">=</span> <span class="n">egress</span><span class="p">(</span><span class="n">original_item</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate item detected: </span><span class="si">{</span><span class="n">original_item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Find the minimal unique prefixes/suffixes</span>
+    <span class="n">affixes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="n">affix</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">element</span><span class="p">]</span>
+            <span class="n">affix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">suffix</span><span class="p">:</span>
+            <span class="n">affix</span> <span class="o">=</span> <span class="n">affix</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">affixes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
+
+    <span class="c1"># Postprocess affixes using egress</span>
+    <span class="n">affixes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">egress</span><span class="p">,</span> <span class="n">affixes</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">affixes</span></div>
+
 </pre></div>
 
            </div>

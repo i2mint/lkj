@@ -59,6 +59,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.strings</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.regex_based_substitution"><code class="docutils literal notranslate"><span class="pre">regex_based_substitution()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_string_with_marker"><code class="docutils literal notranslate"><span class="pre">truncate_string_with_marker()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.unique_affixes"><code class="docutils literal notranslate"><span class="pre">unique_affixes()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -151,6 +152,67 @@ create a partial function with the desired parameters:</p>
 <span class="go">&#39;12---90&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;supercalifragilisticexpialidocious&#39;</span><span class="p">)</span>
 <span class="go">&#39;su---us&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.unique_affixes">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">unique_affixes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">items:</span> <span class="pre">~typing.Iterable[~typing.Sequence],</span> <span class="pre">suffix:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">*,</span> <span class="pre">egress:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">ingress:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">identity&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#unique_affixes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.unique_affixes" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of unique prefixes (or suffixes) for the given iterable of sequences.
+Raises a ValueError if duplicates are found.</p>
+<p>Parameters:
+- items: Iterable of sequences (e.g., list of strings).
+- suffix: If True, finds unique suffixes instead of prefixes.
+- ingress: Callable to preprocess each item. Default is identity function.
+- egress: Callable to postprocess each affix. Default is appropriate function based on item type.</p>
+<blockquote>
+<div><p>Usually, ingress and egress are inverses of each other.</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;ape&#39;</span><span class="p">,</span> <span class="s1">&#39;apricot&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;band&#39;</span><span class="p">,</span> <span class="s1">&#39;bandana&#39;</span><span class="p">])</span>
+<span class="go">[&#39;app&#39;, &#39;ape&#39;, &#39;apr&#39;, &#39;bana&#39;, &#39;band&#39;, &#39;banda&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;testing&#39;</span><span class="p">,</span> <span class="s1">&#39;tester&#39;</span><span class="p">])</span>
+<span class="go">[&#39;test&#39;, &#39;testi&#39;, &#39;teste&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Duplicate item detected: test</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;abcd&#39;</span><span class="p">,</span> <span class="s1">&#39;abcde&#39;</span><span class="p">])</span>
+<span class="go">[&#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">])</span>
+<span class="go">[&#39;x&#39;, &#39;xy&#39;, &#39;xyz&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;can&#39;</span><span class="p">,</span> <span class="s1">&#39;candy&#39;</span><span class="p">,</span> <span class="s1">&#39;candle&#39;</span><span class="p">])</span>
+<span class="go">[&#39;can&#39;, &#39;candy&#39;, &#39;candl&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span> <span class="s1">&#39;flower&#39;</span><span class="p">,</span> <span class="s1">&#39;flight&#39;</span><span class="p">])</span>
+<span class="go">[&#39;flow&#39;, &#39;flowe&#39;, &#39;fli&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">([</span><span class="s1">&#39;ation&#39;</span><span class="p">,</span> <span class="s1">&#39;termination&#39;</span><span class="p">,</span> <span class="s1">&#39;examination&#39;</span><span class="p">],</span> <span class="n">suffix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[&#39;ation&#39;, &#39;rmination&#39;, &#39;amination&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ingress</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">egress</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;here.and.there&#39;</span><span class="p">,</span> <span class="s1">&#39;here.or.there&#39;</span><span class="p">,</span> <span class="s1">&#39;here&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unique_affixes</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">ingress</span><span class="o">=</span><span class="n">ingress</span><span class="p">,</span> <span class="n">egress</span><span class="o">=</span><span class="n">egress</span><span class="p">)</span>
+<span class="go">[&#39;here.and&#39;, &#39;here.or&#39;, &#39;here&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
