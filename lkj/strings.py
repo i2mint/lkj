@@ -91,3 +91,129 @@ def regex_based_substitution(replacements: dict, regex=None, s: str = None):
         return substitute
     else:
         return regex.sub(lambda m: replacements[m.group(0)], s)
+
+
+from typing import Callable, Iterable, Sequence
+
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.count = 0  # Number of times this node is visited during insertion
+        self.is_end = False  # Indicates whether this node represents the end of an item
+
+
+def identity(x):
+    return x
+
+
+def unique_affixes(
+    items: Iterable[Sequence],
+    suffix: bool = False,
+    *,
+    egress: Callable = None,
+    ingress: Callable = identity,
+) -> Iterable[Sequence]:
+    """
+    Returns a list of unique prefixes (or suffixes) for the given iterable of sequences.
+    Raises a ValueError if duplicates are found.
+
+    Parameters:
+    - items: Iterable of sequences (e.g., list of strings).
+    - suffix: If True, finds unique suffixes instead of prefixes.
+    - ingress: Callable to preprocess each item. Default is identity function.
+    - egress: Callable to postprocess each affix. Default is appropriate function based on item type.
+      Usually, ingress and egress are inverses of each other.
+
+    >>> unique_affixes(['apple', 'ape', 'apricot', 'banana', 'band', 'bandana'])
+    ['app', 'ape', 'apr', 'bana', 'band', 'banda']
+
+    >>> unique_affixes(['test', 'testing', 'tester'])
+    ['test', 'testi', 'teste']
+
+    >>> unique_affixes(['test', 'test'])
+    Traceback (most recent call last):
+    ...
+    ValueError: Duplicate item detected: test
+
+    >>> unique_affixes(['abc', 'abcd', 'abcde'])
+    ['abc', 'abcd', 'abcde']
+
+    >>> unique_affixes(['a', 'b', 'c'])
+    ['a', 'b', 'c']
+
+    >>> unique_affixes(['x', 'xy', 'xyz'])
+    ['x', 'xy', 'xyz']
+
+    >>> unique_affixes(['can', 'candy', 'candle'])
+    ['can', 'candy', 'candl']
+
+    >>> unique_affixes(['flow', 'flower', 'flight'])
+    ['flow', 'flowe', 'fli']
+
+    >>> unique_affixes(['ation', 'termination', 'examination'], suffix=True)
+    ['ation', 'rmination', 'amination']
+
+    >>> import functools
+    >>> ingress = functools.partial(str.split, sep='.')
+    >>> egress = '.'.join
+    >>> items = ['here.and.there', 'here.or.there', 'here']
+    >>> unique_affixes(items, ingress=ingress, egress=egress)
+    ['here.and', 'here.or', 'here']
+
+    """
+    items = list(map(ingress, items))
+
+    # Determine the default egress function based on item type
+    if egress is None:
+        if all(isinstance(item, str) for item in items):
+            # Items are strings; affixes are lists of characters
+            def egress(affix):
+                return ''.join(affix)
+
+        else:
+            # Items are sequences (e.g., lists); affixes are lists
+            def egress(affix):
+                return affix
+
+    # If suffix is True, reverse the items
+    if suffix:
+        items = [item[::-1] for item in items]
+
+    # Build the trie and detect duplicates
+    root = TrieNode()
+    for item in items:
+        node = root
+        for element in item:
+            if element not in node.children:
+                node.children[element] = TrieNode()
+            node = node.children[element]
+            node.count += 1
+        # At the end of the item
+        if node.is_end:
+            # Duplicate detected
+            if suffix:
+                original_item = item[::-1]
+            else:
+                original_item = item
+            original_item = egress(original_item)
+            raise ValueError(f"Duplicate item detected: {original_item}")
+        node.is_end = True
+
+    # Find the minimal unique prefixes/suffixes
+    affixes = []
+    for item in items:
+        node = root
+        affix = []
+        for element in item:
+            node = node.children[element]
+            affix.append(element)
+            if node.count == 1:
+                break
+        if suffix:
+            affix = affix[::-1]
+        affixes.append(affix)
+
+    # Postprocess affixes using egress
+    affixes = list(map(egress, affixes))
+    return affixes
