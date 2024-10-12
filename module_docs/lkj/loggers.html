@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.loggers &mdash; lkj 0.1.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=bafade30"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=bafade30"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -63,6 +61,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.return_error_info_on_error"><code class="docutils literal notranslate"><span class="pre">return_error_info_on_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.wrap_text_with_exact_spacing"><code class="docutils literal notranslate"><span class="pre">wrap_text_with_exact_spacing()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.wrapped_print"><code class="docutils literal notranslate"><span class="pre">wrapped_print()</span></code></a></li>
 </ul>
 </li>
@@ -284,14 +283,24 @@ database, or send it to a logging service.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.loggers.wrap_text_with_exact_spacing">
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">wrap_text_with_exact_spacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width=80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#wrap_text_with_exact_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.wrap_text_with_exact_spacing" title="Link to this definition"></a></dt>
+<dd><p>Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines
+exactly as they appear.</p>
+<p>Args:
+- text (str): The text to wrap and print.
+- max_width (int): The maximum width of each line (default is 88).</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.loggers.wrapped_print">
-<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">wrapped_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width=80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#wrapped_print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.wrapped_print" title="Link to this definition"></a></dt>
-<dd><p>Prints a list of items ensuring the total line width does not exceed <cite>max_width</cite>.</p>
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">wrapped_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">~typing.Iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width=80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#wrapped_print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.wrapped_print" title="Link to this definition"></a></dt>
+<dd><p>Prints a string or list ensuring the total line width does not exceed <cite>max_width</cite>.</p>
 <p>If adding a new item would exceed this width, it starts a new line.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>items</strong> (<em>list</em>) – The list of items to print.</p></li>
+<li><p><strong>items</strong> (<em>str</em><em> or </em><em>list</em>) – String or list of items to print.</p></li>
 <li><p><strong>sep</strong> (<em>str</em>) – The separator to use between items.</p></li>
 <li><p><strong>max_width</strong> (<em>int</em>) – The maximum width of each line. Default is 80.</p></li>
 </ul>
