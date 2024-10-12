@@ -1,18 +1,22 @@
 """Utils for logging."""
 
-from typing import Callable, Tuple, Any, Optional
+from typing import Callable, Tuple, Any, Optional, Union, Iterable
 from functools import partial, wraps
 from operator import attrgetter
 
 
-def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
+# TODO: Merge with wrap_text_with_exact_spacing
+# TODO: Add doctests for string
+def wrapped_print(
+    items: Union[str, Iterable], sep=', ', max_width=80, *, print_func=print
+):
     r"""
-    Prints a list of items ensuring the total line width does not exceed `max_width`.
+    Prints a string or list ensuring the total line width does not exceed `max_width`.
 
     If adding a new item would exceed this width, it starts a new line.
 
     Args:
-        items (list): The list of items to print.
+        items (str or list): String or list of items to print.
         sep (str): The separator to use between items.
         max_width (int): The maximum width of each line. Default is 80.
 
@@ -43,11 +47,50 @@ def wrapped_print(items, sep=', ', max_width=80, *, print_func=print):
     'a - b - c\n- d - e -\nf - g - h\n- i - j'
 
     """
+
+    if isinstance(items, str):
+        return wrap_text_with_exact_spacing(
+            items, max_width=max_width, print_func=print_func
+        )
+    else:
+        import textwrap
+
+        return print_func(
+            textwrap.fill(sep.join(items), width=max_width, subsequent_indent='')
+        )
+
+
+# TODO: Merge with wrapped_print
+def wrap_text_with_exact_spacing(text, *, max_width=80, print_func=print):
+    """
+    Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines
+    exactly as they appear.
+
+    Args:
+    - text (str): The text to wrap and print.
+    - max_width (int): The maximum width of each line (default is 88).
+    """
     import textwrap
 
-    return print_func(
-        textwrap.fill(sep.join(items), width=max_width, subsequent_indent='')
-    )
+    # Split the text into lines, preserving the existing newlines
+    lines = text.splitlines(keepends=True)
+
+    # Wrap each line individually, preserving existing newlines and only adding new ones for wrapping
+    wrapped_lines = [
+        (
+            textwrap.fill(
+                line, width=max_width, replace_whitespace=False, drop_whitespace=False
+            )
+            if line.strip()
+            else line
+        )
+        for line in lines
+    ]
+
+    # Join the wrapped lines back into a single text
+    wrapped_text = "".join(wrapped_lines)
+
+    return print_func(wrapped_text)
 
 
 def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=print):
