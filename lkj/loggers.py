@@ -4,11 +4,16 @@ from typing import Callable, Tuple, Any, Optional, Union, Iterable
 from functools import partial, wraps
 from operator import attrgetter
 
-
+# TODO: Verify and add test for line_prefix
 # TODO: Merge with wrap_text_with_exact_spacing
 # TODO: Add doctests for string
 def wrapped_print(
-    items: Union[str, Iterable], sep=', ', max_width=80, *, print_func=print
+    items: Union[str, Iterable],
+    sep=', ',
+    max_width=80,
+    *,
+    print_func=print,
+    line_prefix: str = "",
 ):
     r"""
     Prints a string or list ensuring the total line width does not exceed `max_width`.
@@ -50,18 +55,23 @@ def wrapped_print(
 
     if isinstance(items, str):
         return wrap_text_with_exact_spacing(
-            items, max_width=max_width, print_func=print_func
+            items, max_width=max_width, print_func=print_func, line_prefix=line_prefix
         )
     else:
         import textwrap
 
         return print_func(
-            textwrap.fill(sep.join(items), width=max_width, subsequent_indent='')
+            line_prefix
+            + textwrap.fill(
+                sep.join(items), width=max_width, subsequent_indent=line_prefix
+            )
         )
 
 
 # TODO: Merge with wrapped_print
-def wrap_text_with_exact_spacing(text, *, max_width=80, print_func=print):
+def wrap_text_with_exact_spacing(
+    text, *, max_width=80, print_func=print, line_prefix: str = ""
+):
     """
     Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines
     exactly as they appear.
@@ -82,7 +92,7 @@ def wrap_text_with_exact_spacing(text, *, max_width=80, print_func=print):
                 line, width=max_width, replace_whitespace=False, drop_whitespace=False
             )
             if line.strip()
-            else line
+            else line_prefix + line
         )
         for line in lines
     ]
