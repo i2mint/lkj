@@ -3,6 +3,55 @@
 import os
 from typing import Callable, Any
 from pathlib import Path
+from functools import wraps, partial
+
+
+# TODO: General pattern Consider generalizing to different conditions and actions
+def enable_sourcing_from_file(func=None, *, write_output=False):
+    """
+    Decorator for functions enables the decorated function to source from a file. 
+
+    Is is to be applied to functions that take a string or bytes as their first 
+    argument. Decorating the function will enable it to detect if the first argument
+    is a file path, read the file content, call the function with the file content
+    as the first argument. Optionally, the decorated function can write the result
+    back to the file, or another file if specified.
+
+    Args:
+        write_output (bool or str): If True, write the output back to the file. If a
+            string, write the output to the specified file path. Default is False.
+
+
+    """
+    if func is None:
+        return partial(process_file_if_path, write_output=write_output)
+    
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # Check if the first argument is a string and a valid file path
+        if args and isinstance(args[0], str) and os.path.isfile(args[0]):
+            file_path = args[0]
+            # Read the file content
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+            # Call the function with the file content and other arguments
+            new_args = (file_content,) + args[1:]
+            result = func(*new_args, **kwargs)
+
+            if write_output:
+                if write_output is True:
+                    write_output = file_path
+                else:
+                    assert isinstance(write_output, str), 'write_output must be a string'
+                # Write the result back to the file
+                with open(write_output, 'w') as file:
+                    file.write(result)
+            return result
+        else:
+            # If the first argument is not a file path, call the function as usual
+            return func(*args, **kwargs)
+
+    return wrapper
 
 
 def do_nothing(*args, **kwargs) -> None:

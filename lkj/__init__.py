@@ -3,7 +3,7 @@ Lightweight Kit Jumpstart
 """
 
 from lkj.dicts import truncate_dict_values
-from lkj.filesys import get_app_data_dir, get_watermarked_dir
+from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
     regex_based_substitution,
     truncate_string_with_marker,
