@@ -96,7 +96,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorator for functions enables the decorated function to source from a file. </span>
 
-<span class="sd">    Is is to be applied to functions that take a string or bytes as their first </span>
+<span class="sd">    It is to be applied to functions that take a string or bytes as their first </span>
 <span class="sd">    argument. Decorating the function will enable it to detect if the first argument</span>
 <span class="sd">    is a file path, read the file content, call the function with the file content</span>
 <span class="sd">    as the first argument. Optionally, the decorated function can write the result</span>
@@ -109,10 +109,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">process_file_if_path</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">enable_sourcing_from_file</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">)</span>
     
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Check if the first argument is a string and a valid file path</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
