@@ -11,7 +11,7 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
     """
     Decorator for functions enables the decorated function to source from a file. 
 
-    Is is to be applied to functions that take a string or bytes as their first 
+    It is to be applied to functions that take a string or bytes as their first 
     argument. Decorating the function will enable it to detect if the first argument
     is a file path, read the file content, call the function with the file content
     as the first argument. Optionally, the decorated function can write the result
@@ -24,10 +24,10 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
 
     """
     if func is None:
-        return partial(process_file_if_path, write_output=write_output)
+        return partial(enable_sourcing_from_file, write_output=write_output)
     
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, write_output=write_output, **kwargs):
         # Check if the first argument is a string and a valid file path
         if args and isinstance(args[0], str) and os.path.isfile(args[0]):
             file_path = args[0]
