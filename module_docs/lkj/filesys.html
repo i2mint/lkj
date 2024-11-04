@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.filesys</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.do_nothing"><code class="docutils literal notranslate"><span class="pre">do_nothing()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.enable_sourcing_from_file"><code class="docutils literal notranslate"><span class="pre">enable_sourcing_from_file()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.get_app_data_dir"><code class="docutils literal notranslate"><span class="pre">get_app_data_dir()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.get_watermarked_dir"><code class="docutils literal notranslate"><span class="pre">get_watermarked_dir()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.has_watermark"><code class="docutils literal notranslate"><span class="pre">has_watermark()</span></code></a></li>
@@ -97,6 +98,23 @@
 <dt class="sig sig-object py" id="lkj.filesys.do_nothing">
 <span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">do_nothing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/filesys.html#do_nothing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.do_nothing" title="Link to this definition"></a></dt>
 <dd><p>Function that does nothing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.filesys.enable_sourcing_from_file">
+<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">enable_sourcing_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#enable_sourcing_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.enable_sourcing_from_file" title="Link to this definition"></a></dt>
+<dd><p>Decorator for functions enables the decorated function to source from a file.</p>
+<p>Is is to be applied to functions that take a string or bytes as their first
+argument. Decorating the function will enable it to detect if the first argument
+is a file path, read the file content, call the function with the file content
+as the first argument. Optionally, the decorated function can write the result
+back to the file, or another file if specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>write_output</strong> (<em>bool</em><em> or </em><em>str</em>) – If True, write the output back to the file. If a
+string, write the output to the specified file path. Default is False.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
