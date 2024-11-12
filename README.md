@@ -4,7 +4,9 @@ Lightweight Kit Jumpstart. A place for useful python utils built only with pure 
 
 To install:	```pip install lkj```
 
-None of the tools here require anything else but pure python.
+[Documentation](https://i2mint.github.io/lkj)
+
+Note: None of the tools here require anything else but pure python.
 Additionally, things are organized in such a way that these can be 
 easily copy-pasted into other projects. 
 That is, modules are all self contained (so can easily be copy-paste-vendored 
