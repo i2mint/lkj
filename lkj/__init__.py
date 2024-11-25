@@ -8,6 +8,8 @@ from lkj.strings import (
     regex_based_substitution,
     truncate_string_with_marker,
     unique_affixes,
+    camel_to_snake,
+    snake_to_camel,
 )
 from lkj.loggers import (
     print_with_timestamp,
