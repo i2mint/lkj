@@ -1,5 +1,56 @@
 """Utils for strings"""
 
+import re
+
+# Compiled regex to handle camel case to snake case conversions, including acronyms
+_camel_to_snake_re = re.compile(r'((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
+
+
+def camel_to_snake(camel_string):
+    """
+    Convert a CamelCase string to snake_case. Useful for converting class
+    names to variable names.
+
+    Args:
+        camel_string (str): The CamelCase string to convert.
+
+    Returns:
+        str: The converted snake_case string.
+
+    Examples:
+        >>> camel_to_snake('BasicParseTest')
+        'basic_parse_test'
+        >>> camel_to_snake('HTMLParser')
+        'html_parser'
+        >>> camel_to_snake('CamelCaseExample')
+        'camel_case_example'
+        >>> camel_to_snake('XMLHttpRequestTest')
+        'xml_http_request_test'  # Handles acronyms correctly
+    """
+    return _camel_to_snake_re.sub(r'_\1', camel_string).lower()
+
+
+def snake_to_camel(snake_string):
+    """
+    Convert a snake_case string to CamelCase. Useful for converting variable
+    names to class names.
+
+    Args:
+        snake_string (str): The snake_case string to convert.
+
+    Returns:
+        str: The converted CamelCase string.
+
+    Examples:
+        >>> snake_to_camel('complex_tokenizer')
+        'ComplexTokenizer'
+        >>> snake_to_camel('simple_example_test')
+        'SimpleExampleTest'
+        >>> snake_to_camel('xml_http_request_test')
+        'XmlHttpRequestTest'  # Acronyms are capitalized correctly
+    """
+    return ''.join(word.capitalize() or '_' for word in snake_string.split('_'))
+
 
 # Note: Vendored in i2.multi_objects and dol.util
 def truncate_string_with_marker(
@@ -37,7 +88,6 @@ def truncate_string_with_marker(
     'su---us'
 
     """
-    middle_marker_len = len(middle_marker)
     if len(s) <= left_limit + right_limit:
         return s
     elif right_limit == 0:
