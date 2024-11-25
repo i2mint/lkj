@@ -2,6 +2,7 @@
 Lightweight Kit Jumpstart
 """
 
+from lkj.funcs import mk_factory
 from lkj.dicts import truncate_dict_values
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
