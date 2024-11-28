@@ -2,6 +2,10 @@
 Lightweight Kit Jumpstart
 """
 
+from lkj.iterables import (
+    index_of,  # Get the index of an element in an iterable
+    get_by_value,  # Get a dictionary from a list of dictionaries by a field value
+)
 from lkj.funcs import mk_factory
 from lkj.dicts import truncate_dict_values
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
