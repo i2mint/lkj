@@ -29,7 +29,7 @@ def fields_of_string_formats(templates, *, aggregator=set):
 
     def field_names():
         for template in templates:
-            yield from extract_fields_from_string_format(template)
+            yield from fields_of_string_format(template)
 
     return aggregator(field_names())
 
