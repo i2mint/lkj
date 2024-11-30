@@ -1,5 +1,39 @@
 """Utils for strings"""
 
+from string import Formatter
+
+formatter = Formatter()
+
+
+def fields_of_string_format(template):
+    return [
+        field_name for _, field_name, _, _ in formatter.parse(template) if field_name
+    ]
+
+
+def fields_of_string_formats(templates, *, aggregator=set):
+    """
+    Extract all unique field names from the templates in _github_url_templates using string.Formatter.
+
+    Args:
+        templates (list): A list of dictionaries containing 'template' keys.
+
+    Returns:
+        list: A sorted list of unique field names found in the templates.
+
+    Example:
+        >>> templates = ['{this}/and/{that}', 'and/{that}/is/an/{other}']
+        >>> fields = sorted(extract_template_fields_with_formatter(templates))
+        ['that', 'this', 'other']
+    """
+
+    def field_names():
+        for template in templates:
+            yield from extract_fields_from_string_format(template)
+
+    return aggregator(field_names())
+
+
 import re
 
 # Compiled regex to handle camel case to snake case conversions, including acronyms
@@ -57,7 +91,7 @@ def truncate_string_with_marker(
     s, *, left_limit=15, right_limit=15, middle_marker='...'
 ):
     """
-    Return a string with a limited length.
+    Truncate a string to a maximum length, inserting a marker in the middle.
 
     If the string is longer than the sum of the left_limit and right_limit,
     the string is truncated and the middle_marker is inserted in the middle.

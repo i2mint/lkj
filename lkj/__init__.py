@@ -11,10 +11,12 @@ from lkj.dicts import truncate_dict_values
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
     regex_based_substitution,
-    truncate_string_with_marker,
-    unique_affixes,
-    camel_to_snake,
-    snake_to_camel,
+    truncate_string_with_marker,  # Truncate a string to a maximum length, inserting a marker in the middle.
+    unique_affixes,  # Get unique prefixes or suffixes of a list of strings
+    camel_to_snake,  # Convert CamelCase to snake_case
+    snake_to_camel,  # Convert snake_case to CamelCase
+    fields_of_string_format,  # Extract field names from a string format
+    fields_of_string_formats,  # Extract field names from an iterable of string formats
 )
 from lkj.loggers import (
     print_with_timestamp,
