@@ -3,6 +3,7 @@ Lightweight Kit Jumpstart
 """
 
 from lkj.iterables import (
+    compare_sets,  # Compare two iterables and return common, left-only, and right-only elements
     index_of,  # Get the index of an element in an iterable
     get_by_value,  # Get a dictionary from a list of dictionaries by a field value
 )
