@@ -1,4 +1,10 @@
-"""Tools for working with dictionaries (and other Mappings)."""
+"""
+Tools for working with dictionaries (and other Mappings).
+
+If you are looking for more, check out the `lkj.iterables` module too 
+(after all, dicts are iterables).
+
+"""
 
 from typing import Optional
 

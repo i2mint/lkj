@@ -1,6 +1,50 @@
 """Tools with iterables (dicts, lists, tuples, sets, etc.)."""
 
-from typing import Sequence, Mapping, KT, VT, Iterable
+from typing import Sequence, Mapping, KT, VT, Iterable, Iterable, NamedTuple
+
+
+class SetsComparisonResult(NamedTuple):
+    common: set
+    left_only: set
+    right_only: set
+
+
+def compare_sets(left: Iterable, right: Iterable) -> SetsComparisonResult:
+    """
+    Compares two iterables and returns a named tuple with:
+    - Elements in both iterables.
+    - Elements only in the left iterable.
+    - Elements only in the right iterable.
+
+    Note: When applied to dicts, the comparison is done on the keys.
+    If you want a comparison on the values, use `compare_iterables(left.values(), right.values())`.
+
+    Args:
+        left (Iterable): The first iterable.
+        right (Iterable): The second iterable.
+
+    Returns:
+        SetsComparisonResult: A namedtuple with fields `common`,
+        `left_only`, and `right_only`.
+
+    Examples:
+        >>> left = ['a', 'b', 'c']
+        >>> right = ['b', 'c', 'd']
+        >>> result = compare_sets(left, right)
+        >>> assert result.common == {'b', 'c'}  # asserting because order is not guaranteed
+        >>> result.left_only
+        {'a'}
+        >>> result.right_only
+        {'d'}
+    """
+    left_set = set(left)
+    right_set = set(right)
+
+    return SetsComparisonResult(
+        common=left_set & right_set,
+        left_only=left_set - right_set,
+        right_only=right_set - left_set,
+    )
 
 
 def index_of(iterable: Iterable[VT], value: VT) -> int:
