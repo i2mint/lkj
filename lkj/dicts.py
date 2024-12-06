@@ -9,6 +9,38 @@ If you are looking for more, check out the `lkj.iterables` module too
 from typing import Optional
 
 
+def inclusive_subdict(d, include):
+    """
+    Returns a new dictionary with only the keys in `include`.
+
+    Parameters:
+    d (dict): The input dictionary.
+    include (set): The set of keys to include in the new dictionary.
+
+    Example:
+    >>> inclusive_subdict({'a': 1, 'b': 2, 'c': 3}, {'a', 'c'})
+    {'a': 1, 'c': 3}
+
+    """
+    return {k: d[k] for k in d.keys() & include}
+
+
+def exclusive_subdict(d, exclude):
+    """
+    Returns a new dictionary with only the keys not in `exclude`.
+
+    Parameters:
+    d (dict): The input dictionary.
+    exclude (set): The set of keys to exclude from the new dictionary.
+
+    Example:
+    >>> exclusive_subdict({'a': 1, 'b': 2, 'c': 3}, {'a', 'c'})
+    {'b': 2}
+    
+    """
+    return {k: d[k] for k in d.keys() - exclude}
+
+
 # Note: There is a copy of truncate_dict_values in the ju package.
 def truncate_dict_values(
     d: dict,
