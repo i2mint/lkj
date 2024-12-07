@@ -108,17 +108,27 @@
 
 <div class="viewcode-block" id="most_common_indent">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.most_common_indent">[docs]</a>
-<span class="k">def</span> <span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_first_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the most common indentation in a string.</span>
 
 <span class="sd">    :param string: The string to analyze.</span>
+<span class="sd">    :param ignore_first_line: Whether to ignore the first line when determining the</span>
+<span class="sd">        indentation. Default is False. One case where you want True is when using python</span>
+<span class="sd">        triple quotes (as in docstrings, for example), since the first line often has</span>
+<span class="sd">        no indentation (from the point of view of the string, in this case.</span>
 <span class="sd">    :return: The most common indentation string.</span>
+
+<span class="sd">    Examples:</span>
 
 <span class="sd">    &gt;&gt;&gt; most_common_indent(&#39;    This is a test.\n    Another line.&#39;)</span>
 <span class="sd">    &#39;    &#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^( *)\S&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="n">n_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indents</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ignore_first_line</span> <span class="ow">and</span> <span class="n">n_lines</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># if there&#39;s more than one line, ignore the indent of the first</span>
+        <span class="n">indents</span> <span class="o">=</span> <span class="n">indents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">indents</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">indents</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div>
 
 

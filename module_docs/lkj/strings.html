@@ -175,16 +175,23 @@ names to variable names.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.most_common_indent">
-<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">most_common_indent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#most_common_indent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.most_common_indent" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">most_common_indent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_first_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#most_common_indent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.most_common_indent" title="Link to this definition"></a></dt>
 <dd><p>Find the most common indentation in a string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>string</strong> – The string to analyze.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> – The string to analyze.</p></li>
+<li><p><strong>ignore_first_line</strong> – Whether to ignore the first line when determining the
+indentation. Default is False. One case where you want True is when using python
+triple quotes (as in docstrings, for example), since the first line often has
+no indentation (from the point of view of the string, in this case.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The most common indentation string.</p>
 </dd>
 </dl>
+<p>Examples:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">most_common_indent</span><span class="p">(</span><span class="s1">&#39;    This is a test.</span><span class="se">\n</span><span class="s1">    Another line.&#39;</span><span class="p">)</span>
 <span class="go">&#39;    &#39;</span>
 </pre></div>
