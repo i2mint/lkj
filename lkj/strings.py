@@ -18,17 +18,27 @@ def indent_lines(string: str, indent: str, *, line_sep='\n') -> str:
     return line_sep.join(indent + line for line in string.split(line_sep))
 
 
-def most_common_indent(string: str) -> str:
+def most_common_indent(string: str, ignore_first_line=False) -> str:
     r"""
     Find the most common indentation in a string.
 
     :param string: The string to analyze.
+    :param ignore_first_line: Whether to ignore the first line when determining the
+        indentation. Default is False. One case where you want True is when using python
+        triple quotes (as in docstrings, for example), since the first line often has
+        no indentation (from the point of view of the string, in this case.
     :return: The most common indentation string.
+
+    Examples:
 
     >>> most_common_indent('    This is a test.\n    Another line.')
     '    '
     """
     indents = re.findall(r"^( *)\S", string, re.MULTILINE)
+    n_lines = len(indents)
+    if ignore_first_line and n_lines > 1:
+        # if there's more than one line, ignore the indent of the first
+        indents = indents[1:]
     return max(indents, key=indents.count)
 
 
