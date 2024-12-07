@@ -11,6 +11,8 @@ from lkj.funcs import mk_factory
 from lkj.dicts import truncate_dict_values, inclusive_subdict, exclusive_subdict
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
+    indent_lines,  # Indent all lines of a string
+    most_common_indent,  # Get the most common indent of a multiline string
     regex_based_substitution,
     truncate_string_with_marker,  # Truncate a string to a maximum length, inserting a marker in the middle.
     unique_affixes,  # Get unique prefixes or suffixes of a list of strings

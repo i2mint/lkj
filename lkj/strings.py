@@ -1,5 +1,39 @@
 """Utils for strings"""
 
+import re
+
+
+def indent_lines(string: str, indent: str, *, line_sep='\n') -> str:
+    r"""
+    Indent each line of a string.
+
+    :param string: The string to indent.
+    :param indent: The string to use for indentation.
+    :return: The indented string.
+
+    Examples:
+    >>> print(indent_lines('This is a test.\nAnother line.', ' ' * 8))
+            This is a test.
+            Another line.
+    """
+    return line_sep.join(indent + line for line in string.split(line_sep))
+
+
+def most_common_indent(string: str) -> str:
+    r"""
+    Find the most common indentation in a string.
+
+    :param string: The string to analyze.
+    :return: The most common indentation string.
+
+    Examples:
+    >>> most_common_indent('    This is a test.\n    Another line.')
+    '    '
+    """
+    indents = re.findall(r"^( *)\S", string, re.MULTILINE)
+    return max(indents, key=indents.count)
+
+
 from string import Formatter
 
 formatter = Formatter()
@@ -23,8 +57,8 @@ def fields_of_string_formats(templates, *, aggregator=set):
 
     Example:
         >>> templates = ['{this}/and/{that}', 'and/{that}/is/an/{other}']
-        >>> fields = sorted(extract_template_fields_with_formatter(templates))
-        ['that', 'this', 'other']
+        >>> sorted(fields_of_string_formats(templates))
+        ['other', 'that', 'this']
     """
 
     def field_names():
@@ -58,8 +92,11 @@ def camel_to_snake(camel_string):
         'html_parser'
         >>> camel_to_snake('CamelCaseExample')
         'camel_case_example'
+
+        Note that acronyms are handled correctly:
+
         >>> camel_to_snake('XMLHttpRequestTest')
-        'xml_http_request_test'  # Handles acronyms correctly
+        'xml_http_request_test'
     """
     return _camel_to_snake_re.sub(r'_\1', camel_string).lower()
 
@@ -76,12 +113,16 @@ def snake_to_camel(snake_string):
         str: The converted CamelCase string.
 
     Examples:
+
         >>> snake_to_camel('complex_tokenizer')
         'ComplexTokenizer'
         >>> snake_to_camel('simple_example_test')
         'SimpleExampleTest'
+
+        Note that acronyms are capitalized correctly:
+
         >>> snake_to_camel('xml_http_request_test')
-        'XmlHttpRequestTest'  # Acronyms are capitalized correctly
+        'XmlHttpRequestTest'
     """
     return ''.join(word.capitalize() or '_' for word in snake_string.split('_'))
 
