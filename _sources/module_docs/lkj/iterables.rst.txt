@@ -1,0 +1,4 @@
+lkj.iterables
+=============
+.. automodule:: lkj.iterables
+   :members:

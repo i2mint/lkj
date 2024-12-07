@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lkj.funcs &mdash; lkj 0.1.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=bafade30"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            lkj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/dicts.html">lkj.dicts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/funcs.html">lkj.funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/iterables.html">lkj.iterables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">lkj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../lkj.html">lkj</a></li>
+      <li class="breadcrumb-item active">lkj.funcs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for lkj.funcs</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Tools for working with functions.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">mk_factory</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">partial</span><span class="p">,</span> <span class="n">partial</span><span class="p">)</span>
+<span class="n">mk_factory</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for functions by partially applying the first argument.</span>
+
+<span class="s2">This higher-order function allows you to fix the first argument of a given function, creating a new</span>
+<span class="s2">function that requires fewer arguments. It&#39;s particularly useful for creating customized functions</span>
+<span class="s2">on the fly without using lambdas.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; from operator import mul</span>
+<span class="s2">&gt;&gt;&gt; double = mk_factory(mul)(2)</span>
+<span class="s2">&gt;&gt;&gt; double(5)</span>
+<span class="s2">10</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># operator: Fixing an operand</span>
+<span class="c1">#</span>
+<span class="c1"># You can use our trick to fix the (first) operand of an operation. This is useful,</span>
+<span class="c1"># when, for example, you want to avoid using a `lambda` function in some situation</span>
+<span class="c1"># (say, because [lambda functions are not pickle-serializable](https://realpython.com/python-pickle-module/)).</span>
+
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="n">greater_than</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">)</span>
+<span class="n">greater_than</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for a function that returns True if the argument is greater than the fixed value.</span>
+
+<span class="s2">So, for instance, instead of using a lambda x: 10 &lt; x you can do:</span>
+
+<span class="s2">&gt;&gt;&gt; greater_than_10 = greater_than(10)</span>
+<span class="s2">&gt;&gt;&gt; greater_than_10(11)</span>
+<span class="s2">True</span>
+<span class="s2">&gt;&gt;&gt; greater_than_10(9)</span>
+<span class="s2">False</span>
+
+<span class="s2">This is even more useful when you need to define a bunch of greater_than functions, or do so dynamically!</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Other examples:</span>
+<span class="n">less_than</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">gt</span><span class="p">)</span>
+<span class="n">less_than</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for a function that returns True if the argument is less than the fixed value.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; less_than_10 = less_than(10)</span>
+<span class="s2">&gt;&gt;&gt; less_than_10(9)</span>
+<span class="s2">True</span>
+<span class="s2">&gt;&gt;&gt; less_than_10(11)</span>
+<span class="s2">False</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">greater_or_equal_to</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">)</span>
+<span class="n">greater_or_equal_to</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for a function that returns True if the argument is greater than or equal to the fixed value.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; ge_10 = greater_or_equal_to(10)</span>
+<span class="s2">&gt;&gt;&gt; ge_10(10)</span>
+<span class="s2">True</span>
+<span class="s2">&gt;&gt;&gt; ge_10(9)</span>
+<span class="s2">False</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">less_or_equal_to</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">ge</span><span class="p">)</span>
+<span class="n">less_or_equal_to</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for a function that returns True if the argument is less than or equal to the fixed value.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; le_10 = less_or_equal_to(10)</span>
+<span class="s2">&gt;&gt;&gt; le_10(10)</span>
+<span class="s2">True</span>
+<span class="s2">&gt;&gt;&gt; le_10(11)</span>
+<span class="s2">False</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># os.path.join: A Path Generator for Files</span>
+<span class="c1">#</span>
+<span class="c1"># Imagine working with a large project where you frequently need to generate file paths.</span>
+<span class="c1"># With mk_factory, creating a path generator becomes effortless.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">mk_abs_path_maker</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
+<span class="n">mk_abs_path_maker</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory for functions that join paths with a fixed root.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; abs_path = mk_abs_path_maker(&#39;/my/root&#39;)</span>
+<span class="s2">&gt;&gt;&gt; abs_path(&#39;a&#39;, &#39;b&#39;)</span>
+<span class="s2">&#39;/my/root/a/b&#39;</span>
+
+<span class="s2">Now abs_path behaves like os.path.join but with the root path &#39;/my/root&#39; fixed.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># map: Transforming Functions for Iterables: The &quot;Iterizer&quot;</span>
+<span class="c1">#</span>
+<span class="c1"># The &quot;iterizer&quot; pattern allows us to take any function and apply it across each element of an iterable.</span>
+
+<span class="n">iterizer</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+<span class="n">iterizer</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function applying a given function to each element of an iterable.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; times_two = iterizer(lambda x: x * 2)</span>
+<span class="s2">&gt;&gt;&gt; list(times_two([1, 2, 3]))</span>
+<span class="s2">[2, 4, 6]</span>
+
+<span class="s2">This is useful when processing collections of data where each item must undergo the same transformation.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># filter: Filtering Collections: The &quot;Filterizer&quot;</span>
+<span class="c1">#</span>
+<span class="c1"># Create a factory to transform any function into a filter for iterables.</span>
+
+<span class="n">filterizer</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
+<span class="n">filterizer</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function filtering elements of an iterable based on a predicate function.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; only_evens = filterizer(lambda x: x % 2 == 0)</span>
+<span class="s2">&gt;&gt;&gt; list(only_evens(range(10)))</span>
+<span class="s2">[0, 2, 4, 6, 8]</span>
+
+<span class="s2">Such &quot;filterized&quot; functions are powerful for handling datasets where specific criteria need to be applied.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># zip: Custom Zippers for Pairing Data</span>
+<span class="c1">#</span>
+<span class="c1"># With zipper, we can create functions that zip multiple iterables with predefined keys or labels.</span>
+
+<span class="n">zipper</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="nb">zip</span><span class="p">)</span>
+<span class="n">zipper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function zipping iterables with a fixed first iterable.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; my_zipper = zipper([&#39;the&#39;, &#39;first&#39;, &#39;three&#39;])</span>
+<span class="s2">&gt;&gt;&gt; dict(my_zipper([1, 2]))</span>
+<span class="s2">{&#39;the&#39;: 1, &#39;first&#39;: 2}</span>
+<span class="s2">&gt;&gt;&gt; dict(my_zipper([10, 20, 30]))</span>
+<span class="s2">{&#39;the&#39;: 10, &#39;first&#39;: 20, &#39;three&#39;: 30}</span>
+
+<span class="s2">This approach is particularly useful for converting data into dictionaries with meaningful keys for easier access and readability.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># zip: Zipping with an Infinite Iterator for Unique Key Generation</span>
+<span class="c1">#</span>
+<span class="c1"># Use zipper with an infinite iterator to provide a continuous stream of unique keys to pair with values dynamically.</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+
+
+<div class="viewcode-block" id="zip_with_filenames">
+<a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.zip_with_filenames">[docs]</a>
+<span class="k">def</span> <span class="nf">zip_with_filenames</span><span class="p">(</span><span class="n">start_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a function that zips an iterable with file names like &#39;file_001&#39;, &#39;file_002&#39;, etc.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; zip_files = zip_with_filenames()</span>
+<span class="sd">    &gt;&gt;&gt; dict(zip_files([1, 2]))</span>
+<span class="sd">    {&#39;file_001&#39;: 1, &#39;file_002&#39;: 2}</span>
+<span class="sd">    &gt;&gt;&gt; dict(zip_files([&#39;never&#39;, &#39;say&#39;, &#39;never&#39;]))</span>
+<span class="sd">    {&#39;file_004&#39;: &#39;never&#39;, &#39;file_005&#39;: &#39;say&#39;, &#39;file_006&#39;: &#39;never&#39;}</span>
+
+<span class="sd">    Using count ensures that each label is unique and ordered sequentially.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="s2">&quot;file_</span><span class="si">{:03.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="n">start_idx</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">zipper</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># regex: Regex Matchers and Extractors</span>
+<span class="c1">#</span>
+<span class="c1"># For tasks involving regular expressions, mk_factory can simplify creating matchers and extractors.</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">matcher</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">)</span>
+<span class="n">matcher</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function to match a pattern at the beginning of a string.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; is_email = matcher(r&#39;^[</span><span class="se">\\</span><span class="s2">w</span><span class="se">\\</span><span class="s2">.-]+@[</span><span class="se">\\</span><span class="s2">w</span><span class="se">\\</span><span class="s2">.-]+</span><span class="se">\\</span><span class="s2">.</span><span class="se">\\</span><span class="s2">w+$&#39;)</span>
+<span class="s2">&gt;&gt;&gt; bool(is_email(&#39;example@example.com&#39;))</span>
+<span class="s2">True</span>
+<span class="s2">&gt;&gt;&gt; is_email(&#39;not an email&#39;) is None</span>
+<span class="s2">True</span>
+
+<span class="s2">With is_email, you have a quick function for checking email format.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">)</span>
+<span class="n">extractor</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function to find all non-overlapping matches of a pattern in a string.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; extract_numbers = extractor(r&#39;[</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">.]+&#39;)</span>
+<span class="s2">&gt;&gt;&gt; extract_numbers(&#39;7 times 6 is 42.0&#39;)</span>
+<span class="s2">[&#39;7&#39;, &#39;6&#39;, &#39;42.0&#39;]</span>
+
+<span class="s2">These functions streamline text processing workflows, making pattern matching and extraction highly reusable and easy to set up.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># reduce: Reduction Functions for Aggregation</span>
+<span class="c1">#</span>
+<span class="c1"># Reduction functions allow aggregation of elements, useful for calculating products, sums, or even concatenating strings.</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span><span class="p">,</span> <span class="n">add</span>
+
+<span class="n">reducer</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">reduce</span><span class="p">)</span>
+<span class="n">reducer</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a factory that returns a function to reduce an iterable using a given binary function.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; product = reducer(mul)</span>
+<span class="s2">&gt;&gt;&gt; product([2, 3, 4])</span>
+<span class="s2">24</span>
+
+<span class="s2">&gt;&gt;&gt; concatinator = reducer(add)</span>
+<span class="s2">&gt;&gt;&gt; concatinator([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span>
+<span class="s2">&#39;abc&#39;</span>
+
+<span class="s2">This approach lets you create highly readable, purpose-specific aggregation functions with minimal code.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># Creating a Function Composer for Pipelines</span>
+<span class="c1">#</span>
+<span class="c1"># Build a function composer that lets you apply a sequence of transformations or operations on data.</span>
+
+<span class="n">composer</span> <span class="o">=</span> <span class="n">reducer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+<span class="n">composer</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Create a function composer that composes a sequence of functions into a single function.</span>
+
+<span class="s2">Example:</span>
+
+<span class="s2">&gt;&gt;&gt; exclaimed_title = composer([lambda x: x + &#39;!&#39;, str.title])</span>
+<span class="s2">&gt;&gt;&gt; exclaimed_title(&#39;hello world&#39;)</span>
+<span class="s2">&#39;Hello World!&#39;</span>
+
+<span class="s2">This is especially useful in data pipelines, where data needs to pass through a series of transformations.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------</span>
+<span class="c1"># Additional Examples</span>
+
+
+<span class="c1"># Example using map with os.path.join to create full file paths</span>
+<div class="viewcode-block" id="full_path_maker">
+<a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.full_path_maker">[docs]</a>
+<span class="k">def</span> <span class="nf">full_path_maker</span><span class="p">(</span><span class="n">base_directory</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a function that generates full file paths given filenames.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; full_path = full_path_maker(&#39;/base/directory&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; list(full_path([&#39;file1&#39;, &#39;file2&#39;]))</span>
+<span class="sd">    [&#39;/base/directory/file1&#39;, &#39;/base/directory/file2&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abs_path</span> <span class="o">=</span> <span class="n">mk_abs_path_maker</span><span class="p">(</span><span class="n">base_directory</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">iterizer</span><span class="p">(</span><span class="n">abs_path</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Example of using greater_than in a filter</span>
+<div class="viewcode-block" id="filter_greater_than">
+<a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.filter_greater_than">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_greater_than</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter elements in data that are greater than the threshold.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; filter_greater_than_5 = filter_greater_than(5, range(10))</span>
+<span class="sd">    &gt;&gt;&gt; list(filter_greater_than_5)</span>
+<span class="sd">    [6, 7, 8, 9]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gt</span> <span class="o">=</span> <span class="n">greater_than</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

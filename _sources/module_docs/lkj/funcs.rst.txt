@@ -1,0 +1,4 @@
+lkj.funcs
+=========
+.. automodule:: lkj.funcs
+   :members:

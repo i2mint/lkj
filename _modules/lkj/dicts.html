@@ -49,7 +49,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/funcs.html">lkj.funcs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/iterables.html">lkj.iterables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
@@ -81,9 +83,53 @@
            <div itemprop="articleBody">
              
   <h1>Source code for lkj.dicts</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Tools for working with dictionaries (and other Mappings).&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tools for working with dictionaries (and other Mappings).</span>
+
+<span class="sd">If you are looking for more, check out the `lkj.iterables` module too </span>
+<span class="sd">(after all, dicts are iterables).</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="inclusive_subdict">
+<a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.inclusive_subdict">[docs]</a>
+<span class="k">def</span> <span class="nf">inclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">include</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a new dictionary with only the keys in `include`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    d (dict): The input dictionary.</span>
+<span class="sd">    include (set): The set of keys to include in the new dictionary.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    &gt;&gt;&gt; inclusive_subdict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}, {&#39;a&#39;, &#39;c&#39;})</span>
+<span class="sd">    {&#39;a&#39;: 1, &#39;c&#39;: 3}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">include</span><span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="exclusive_subdict">
+<a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.exclusive_subdict">[docs]</a>
+<span class="k">def</span> <span class="nf">exclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exclude</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a new dictionary with only the keys not in `exclude`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    d (dict): The input dictionary.</span>
+<span class="sd">    exclude (set): The set of keys to exclude from the new dictionary.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    &gt;&gt;&gt; exclusive_subdict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}, {&#39;a&#39;, &#39;c&#39;})</span>
+<span class="sd">    {&#39;b&#39;: 2}</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="n">exclude</span><span class="p">}</span></div>
+
 
 
 <span class="c1"># Note: There is a copy of truncate_dict_values in the ju package.</span>

@@ -51,11 +51,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funcs.html">lkj.funcs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing.html">lkj.importing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterables.html">lkj.iterables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">lkj.misc</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.strings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.camel_to_snake"><code class="docutils literal notranslate"><span class="pre">camel_to_snake()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.fields_of_string_formats"><code class="docutils literal notranslate"><span class="pre">fields_of_string_formats()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.indent_lines"><code class="docutils literal notranslate"><span class="pre">indent_lines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.most_common_indent"><code class="docutils literal notranslate"><span class="pre">most_common_indent()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.regex_based_substitution"><code class="docutils literal notranslate"><span class="pre">regex_based_substitution()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.snake_to_camel"><code class="docutils literal notranslate"><span class="pre">snake_to_camel()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_string_with_marker"><code class="docutils literal notranslate"><span class="pre">truncate_string_with_marker()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.unique_affixes"><code class="docutils literal notranslate"><span class="pre">unique_affixes()</span></code></a></li>
 </ul>
@@ -90,6 +97,101 @@
 <span id="lkj-strings"></span><h1>lkj.strings<a class="headerlink" href="#module-lkj.strings" title="Link to this heading"></a></h1>
 <p>Utils for strings</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.camel_to_snake">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">camel_to_snake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camel_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#camel_to_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.camel_to_snake" title="Link to this definition"></a></dt>
+<dd><p>Convert a CamelCase string to snake_case. Useful for converting class
+names to variable names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>camel_string</strong> (<em>str</em>) – The CamelCase string to convert.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The converted snake_case string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">camel_to_snake</span><span class="p">(</span><span class="s1">&#39;BasicParseTest&#39;</span><span class="p">)</span>
+<span class="go">&#39;basic_parse_test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">camel_to_snake</span><span class="p">(</span><span class="s1">&#39;HTMLParser&#39;</span><span class="p">)</span>
+<span class="go">&#39;html_parser&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">camel_to_snake</span><span class="p">(</span><span class="s1">&#39;CamelCaseExample&#39;</span><span class="p">)</span>
+<span class="go">&#39;camel_case_example&#39;</span>
+</pre></div>
+</div>
+<p>Note that acronyms are handled correctly:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">camel_to_snake</span><span class="p">(</span><span class="s1">&#39;XMLHttpRequestTest&#39;</span><span class="p">)</span>
+<span class="go">&#39;xml_http_request_test&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.fields_of_string_formats">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">fields_of_string_formats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">templates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggregator=&lt;class</span> <span class="pre">'set'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#fields_of_string_formats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.fields_of_string_formats" title="Link to this definition"></a></dt>
+<dd><p>Extract all unique field names from the templates in _github_url_templates using string.Formatter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>templates</strong> (<em>list</em>) – A list of dictionaries containing ‘template’ keys.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A sorted list of unique field names found in the templates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">templates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{this}</span><span class="s1">/and/</span><span class="si">{that}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;and/</span><span class="si">{that}</span><span class="s1">/is/an/</span><span class="si">{other}</span><span class="s1">&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fields_of_string_formats</span><span class="p">(</span><span class="n">templates</span><span class="p">))</span>
+<span class="go">[&#39;other&#39;, &#39;that&#39;, &#39;this&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.indent_lines">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">indent_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#indent_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.indent_lines" title="Link to this definition"></a></dt>
+<dd><p>Indent each line of a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> – The string to indent.</p></li>
+<li><p><strong>indent</strong> – The string to use for indentation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The indented string.</p>
+</dd>
+</dl>
+<p>Examples:
+&gt;&gt;&gt; print(indent_lines(‘This is a test.nAnother line.’, ‘ ‘ * 8))</p>
+<blockquote>
+<div><p>This is a test.
+Another line.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.most_common_indent">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">most_common_indent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#most_common_indent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.most_common_indent" title="Link to this definition"></a></dt>
+<dd><p>Find the most common indentation in a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> – The string to analyze.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The most common indentation string.</p>
+</dd>
+</dl>
+<p>Examples:
+&gt;&gt;&gt; most_common_indent(’    This is a test.n    Another line.’)
+‘    ‘</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.regex_based_substitution">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">regex_based_substitution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replacements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#regex_based_substitution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.regex_based_substitution" title="Link to this definition"></a></dt>
 <dd><p>Construct a substitution function based on an iterable of replacement pairs.</p>
@@ -122,9 +224,39 @@ on an input string.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.snake_to_camel">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">snake_to_camel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#snake_to_camel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.snake_to_camel" title="Link to this definition"></a></dt>
+<dd><p>Convert a snake_case string to CamelCase. Useful for converting variable
+names to class names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>snake_string</strong> (<em>str</em>) – The snake_case string to convert.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The converted CamelCase string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">snake_to_camel</span><span class="p">(</span><span class="s1">&#39;complex_tokenizer&#39;</span><span class="p">)</span>
+<span class="go">&#39;ComplexTokenizer&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">snake_to_camel</span><span class="p">(</span><span class="s1">&#39;simple_example_test&#39;</span><span class="p">)</span>
+<span class="go">&#39;SimpleExampleTest&#39;</span>
+</pre></div>
+</div>
+<p>Note that acronyms are capitalized correctly:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">snake_to_camel</span><span class="p">(</span><span class="s1">&#39;xml_http_request_test&#39;</span><span class="p">)</span>
+<span class="go">&#39;XmlHttpRequestTest&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.truncate_string_with_marker">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">truncate_string_with_marker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#truncate_string_with_marker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.truncate_string_with_marker" title="Link to this definition"></a></dt>
-<dd><p>Return a string with a limited length.</p>
+<dd><p>Truncate a string to a maximum length, inserting a marker in the middle.</p>
 <p>If the string is longer than the sum of the left_limit and right_limit,
 the string is truncated and the middle_marker is inserted in the middle.</p>
 <p>If the string is shorter than the sum of the left_limit and right_limit,

@@ -5,7 +5,9 @@
    module_docs/lkj
    module_docs/lkj/dicts
    module_docs/lkj/filesys
+   module_docs/lkj/funcs
    module_docs/lkj/importing
+   module_docs/lkj/iterables
    module_docs/lkj/loggers
    module_docs/lkj/misc
    module_docs/lkj/strings

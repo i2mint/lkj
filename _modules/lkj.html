@@ -49,7 +49,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/funcs.html">lkj.funcs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/importing.html">lkj.importing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/iterables.html">lkj.iterables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/misc.html">lkj.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/strings.html">lkj.strings</a></li>
@@ -84,12 +86,24 @@
 <span class="sd">Lightweight Kit Jumpstart</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">lkj.dicts</span> <span class="kn">import</span> <span class="n">truncate_dict_values</span>
+<span class="kn">from</span> <span class="nn">lkj.iterables</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compare_sets</span><span class="p">,</span>  <span class="c1"># Compare two iterables and return common, left-only, and right-only elements</span>
+    <span class="n">index_of</span><span class="p">,</span>  <span class="c1"># Get the index of an element in an iterable</span>
+    <span class="n">get_by_value</span><span class="p">,</span>  <span class="c1"># Get a dictionary from a list of dictionaries by a field value</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">lkj.funcs</span> <span class="kn">import</span> <span class="n">mk_factory</span>
+<span class="kn">from</span> <span class="nn">lkj.dicts</span> <span class="kn">import</span> <span class="n">truncate_dict_values</span><span class="p">,</span> <span class="n">inclusive_subdict</span><span class="p">,</span> <span class="n">exclusive_subdict</span>
 <span class="kn">from</span> <span class="nn">lkj.filesys</span> <span class="kn">import</span> <span class="n">get_app_data_dir</span><span class="p">,</span> <span class="n">get_watermarked_dir</span><span class="p">,</span> <span class="n">enable_sourcing_from_file</span>
 <span class="kn">from</span> <span class="nn">lkj.strings</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">indent_lines</span><span class="p">,</span>  <span class="c1"># Indent all lines of a string</span>
+    <span class="n">most_common_indent</span><span class="p">,</span>  <span class="c1"># Get the most common indent of a multiline string</span>
     <span class="n">regex_based_substitution</span><span class="p">,</span>
-    <span class="n">truncate_string_with_marker</span><span class="p">,</span>
-    <span class="n">unique_affixes</span><span class="p">,</span>
+    <span class="n">truncate_string_with_marker</span><span class="p">,</span>  <span class="c1"># Truncate a string to a maximum length, inserting a marker in the middle.</span>
+    <span class="n">unique_affixes</span><span class="p">,</span>  <span class="c1"># Get unique prefixes or suffixes of a list of strings</span>
+    <span class="n">camel_to_snake</span><span class="p">,</span>  <span class="c1"># Convert CamelCase to snake_case</span>
+    <span class="n">snake_to_camel</span><span class="p">,</span>  <span class="c1"># Convert snake_case to CamelCase</span>
+    <span class="n">fields_of_string_format</span><span class="p">,</span>  <span class="c1"># Extract field names from a string format</span>
+    <span class="n">fields_of_string_formats</span><span class="p">,</span>  <span class="c1"># Extract field names from an iterable of string formats</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">lkj.loggers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">print_with_timestamp</span><span class="p">,</span>

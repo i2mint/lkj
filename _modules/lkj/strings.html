@@ -49,7 +49,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/funcs.html">lkj.funcs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/iterables.html">lkj.iterables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
@@ -83,6 +85,147 @@
   <h1>Source code for lkj.strings</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for strings&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<div class="viewcode-block" id="indent_lines">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.indent_lines">[docs]</a>
+<span class="k">def</span> <span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indent each line of a string.</span>
+
+<span class="sd">    :param string: The string to indent.</span>
+<span class="sd">    :param indent: The string to use for indentation.</span>
+<span class="sd">    :return: The indented string.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    &gt;&gt;&gt; print(indent_lines(&#39;This is a test.\nAnother line.&#39;, &#39; &#39; * 8))</span>
+<span class="sd">            This is a test.</span>
+<span class="sd">            Another line.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">line_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">line_sep</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="most_common_indent">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.most_common_indent">[docs]</a>
+<span class="k">def</span> <span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the most common indentation in a string.</span>
+
+<span class="sd">    :param string: The string to analyze.</span>
+<span class="sd">    :return: The most common indentation string.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">    &gt;&gt;&gt; most_common_indent(&#39;    This is a test.\n    Another line.&#39;)</span>
+<span class="sd">    &#39;    &#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">indents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^( *)\S&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">indents</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">indents</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div>
+
+
+
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">Formatter</span>
+
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">field_name</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">formatter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="k">if</span> <span class="n">field_name</span>
+    <span class="p">]</span>
+
+
+<div class="viewcode-block" id="fields_of_string_formats">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.fields_of_string_formats">[docs]</a>
+<span class="k">def</span> <span class="nf">fields_of_string_formats</span><span class="p">(</span><span class="n">templates</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">aggregator</span><span class="o">=</span><span class="nb">set</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract all unique field names from the templates in _github_url_templates using string.Formatter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        templates (list): A list of dictionaries containing &#39;template&#39; keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A sorted list of unique field names found in the templates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; templates = [&#39;{this}/and/{that}&#39;, &#39;and/{that}/is/an/{other}&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; sorted(fields_of_string_formats(templates))</span>
+<span class="sd">        [&#39;other&#39;, &#39;that&#39;, &#39;this&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="n">templates</span><span class="p">:</span>
+            <span class="k">yield from</span> <span class="n">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">aggregator</span><span class="p">(</span><span class="n">field_names</span><span class="p">())</span></div>
+
+
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># Compiled regex to handle camel case to snake case conversions, including acronyms</span>
+<span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="camel_to_snake">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.camel_to_snake">[docs]</a>
+<span class="k">def</span> <span class="nf">camel_to_snake</span><span class="p">(</span><span class="n">camel_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a CamelCase string to snake_case. Useful for converting class</span>
+<span class="sd">    names to variable names.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        camel_string (str): The CamelCase string to convert.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The converted snake_case string.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;BasicParseTest&#39;)</span>
+<span class="sd">        &#39;basic_parse_test&#39;</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;HTMLParser&#39;)</span>
+<span class="sd">        &#39;html_parser&#39;</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;CamelCaseExample&#39;)</span>
+<span class="sd">        &#39;camel_case_example&#39;</span>
+
+<span class="sd">        Note that acronyms are handled correctly:</span>
+
+<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;XMLHttpRequestTest&#39;)</span>
+<span class="sd">        &#39;xml_http_request_test&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_camel_to_snake_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_\1&#39;</span><span class="p">,</span> <span class="n">camel_string</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="snake_to_camel">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.snake_to_camel">[docs]</a>
+<span class="k">def</span> <span class="nf">snake_to_camel</span><span class="p">(</span><span class="n">snake_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a snake_case string to CamelCase. Useful for converting variable</span>
+<span class="sd">    names to class names.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        snake_string (str): The snake_case string to convert.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The converted CamelCase string.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;complex_tokenizer&#39;)</span>
+<span class="sd">        &#39;ComplexTokenizer&#39;</span>
+<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;simple_example_test&#39;)</span>
+<span class="sd">        &#39;SimpleExampleTest&#39;</span>
+
+<span class="sd">        Note that acronyms are capitalized correctly:</span>
+
+<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;xml_http_request_test&#39;)</span>
+<span class="sd">        &#39;XmlHttpRequestTest&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;_&#39;</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">snake_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span></div>
+
+
 
 <span class="c1"># Note: Vendored in i2.multi_objects and dol.util</span>
 <div class="viewcode-block" id="truncate_string_with_marker">
@@ -91,7 +234,7 @@
     <span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;...&#39;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a string with a limited length.</span>
+<span class="sd">    Truncate a string to a maximum length, inserting a marker in the middle.</span>
 
 <span class="sd">    If the string is longer than the sum of the left_limit and right_limit,</span>
 <span class="sd">    the string is truncated and the middle_marker is inserted in the middle.</span>
@@ -122,7 +265,6 @@
 <span class="sd">    &#39;su---us&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">middle_marker_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">middle_marker</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">left_limit</span> <span class="o">+</span> <span class="n">right_limit</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">s</span>
     <span class="k">elif</span> <span class="n">right_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
