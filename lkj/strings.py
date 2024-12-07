@@ -11,7 +11,6 @@ def indent_lines(string: str, indent: str, *, line_sep='\n') -> str:
     :param indent: The string to use for indentation.
     :return: The indented string.
 
-    Examples:
     >>> print(indent_lines('This is a test.\nAnother line.', ' ' * 8))
             This is a test.
             Another line.
@@ -26,7 +25,6 @@ def most_common_indent(string: str) -> str:
     :param string: The string to analyze.
     :return: The most common indentation string.
 
-    Examples:
     >>> most_common_indent('    This is a test.\n    Another line.')
     '    '
     """
