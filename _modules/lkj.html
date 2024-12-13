@@ -47,6 +47,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj.html">lkj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/chunking.html">lkj.chunking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/filesys.html">lkj.filesys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/lkj/funcs.html">lkj.funcs</a></li>
@@ -115,31 +116,10 @@
     <span class="n">wrapped_print</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">lkj.importing</span> <span class="kn">import</span> <span class="n">import_object</span><span class="p">,</span> <span class="n">register_namespace_forwarding</span>
+<span class="kn">from</span> <span class="nn">lkj.chunking</span> <span class="kn">import</span> <span class="n">chunk_iterable</span><span class="p">,</span> <span class="n">chunker</span>
 <span class="kn">from</span> <span class="nn">lkj.misc</span> <span class="kn">import</span> <span class="n">identity</span><span class="p">,</span> <span class="n">value_in_interval</span>
 
 <span class="n">ddir</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span>
-
-
-<div class="viewcode-block" id="chunker">
-<a class="viewcode-back" href="../module_docs/lkj.html#lkj.chunker">[docs]</a>
-<span class="k">def</span> <span class="nf">chunker</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">chk_size</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include_tail</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Chunks an iterable into non-overlapping chunks of size chk_size.</span>
-
-<span class="sd">    &gt;&gt;&gt; list(chunker(range(8), 3))</span>
-<span class="sd">    [(0, 1, 2), (3, 4, 5), (6, 7)]</span>
-<span class="sd">    &gt;&gt;&gt; list(chunker(range(8), 3, include_tail=False))</span>
-<span class="sd">    [(0, 1, 2), (3, 4, 5)]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
-
-    <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">include_tail</span><span class="p">:</span>
-        <span class="n">sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="n">it</span><span class="p">]</span> <span class="o">*</span> <span class="n">chk_size</span><span class="p">),</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">sentinel</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">chunk</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">sentinel</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">yield from</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="n">it</span><span class="p">]</span> <span class="o">*</span> <span class="n">chk_size</span><span class="p">))</span></div>
-
 
 
 <div class="viewcode-block" id="user_machine_id">

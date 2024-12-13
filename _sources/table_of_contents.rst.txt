@@ -3,6 +3,7 @@
    :caption: Contents:
 
    module_docs/lkj
+   module_docs/lkj/chunking
    module_docs/lkj/dicts
    module_docs/lkj/filesys
    module_docs/lkj/funcs

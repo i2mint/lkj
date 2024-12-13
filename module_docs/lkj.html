@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="lkj.dicts" href="lkj/dicts.html" />
+    <link rel="next" title="lkj.chunking" href="lkj/chunking.html" />
     <link rel="prev" title="Welcome to lkj’s documentation!" href="../index.html" /> 
 </head>
 
@@ -52,11 +52,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.add_as_attribute_of"><code class="docutils literal notranslate"><span class="pre">add_as_attribute_of()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.add_attr"><code class="docutils literal notranslate"><span class="pre">add_attr()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lkj.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.get_caller_package_name"><code class="docutils literal notranslate"><span class="pre">get_caller_package_name()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.user_machine_id"><code class="docutils literal notranslate"><span class="pre">user_machine_id()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="lkj/chunking.html">lkj.chunking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/dicts.html">lkj.dicts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/filesys.html">lkj.filesys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lkj/funcs.html">lkj.funcs</a></li>
@@ -207,18 +207,6 @@ object.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="lkj.chunker">
-<span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">chunker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chk_size</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#chunker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.chunker" title="Link to this definition"></a></dt>
-<dd><p>Chunks an iterable into non-overlapping chunks of size chk_size.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">chunker</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
-<span class="go">[(0, 1, 2), (3, 4, 5), (6, 7)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">chunker</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">include_tail</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="go">[(0, 1, 2), (3, 4, 5)]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="lkj.get_caller_package_name">
 <span class="sig-prename descclassname"><span class="pre">lkj.</span></span><span class="sig-name descname"><span class="pre">get_caller_package_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj.html#get_caller_package_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.get_caller_package_name" title="Link to this definition"></a></dt>
 <dd><p>Return package name of caller</p>
@@ -238,7 +226,7 @@ object.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to lkj’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="lkj/dicts.html" class="btn btn-neutral float-right" title="lkj.dicts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="lkj/chunking.html" class="btn btn-neutral float-right" title="lkj.chunking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
