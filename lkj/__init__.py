@@ -31,28 +31,10 @@ from lkj.loggers import (
     wrapped_print,
 )
 from lkj.importing import import_object, register_namespace_forwarding
+from lkj.chunking import chunk_iterable, chunker
 from lkj.misc import identity, value_in_interval
 
 ddir = lambda obj: list(filter(lambda x: not x.startswith('_'), dir(obj)))
-
-
-def chunker(a, chk_size, *, include_tail=True):
-    """Chunks an iterable into non-overlapping chunks of size chk_size.
-
-    >>> list(chunker(range(8), 3))
-    [(0, 1, 2), (3, 4, 5), (6, 7)]
-    >>> list(chunker(range(8), 3, include_tail=False))
-    [(0, 1, 2), (3, 4, 5)]
-    """
-    from itertools import zip_longest
-
-    it = iter(a)
-    if include_tail:
-        sentinel = object()
-        for chunk in zip_longest(*([it] * chk_size), fillvalue=sentinel):
-            yield tuple(item for item in chunk if item is not sentinel)
-    else:
-        yield from zip(*([it] * chk_size))
 
 
 def user_machine_id():
