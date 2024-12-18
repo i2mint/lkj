@@ -201,29 +201,41 @@ def regex_based_substitution(replacements: dict, regex=None, s: str = None):
     'I like orange and grapes.'
 
     You have access to the ``replacements`` and ``regex`` attributes of the
-    ``substitute`` function:
+    ``substitute`` function. See how the replacements dict has been ordered by
+    descending length of keys. This is to ensure that longer keys are replaced
+    before shorter keys, avoiding partial replacements.
 
     >>> substitute.replacements
-    {'apple': 'orange', 'banana': 'grape'}
+    {'banana': 'grape', 'apple': 'orange'}
 
     """
     import re
     from functools import partial
 
     if regex is None and s is None:
-        replacements = dict(replacements)
+        # Sort keys by length while maintaining value alignment
+        sorted_replacements = sorted(
+            replacements.items(), key=lambda x: len(x[0]), reverse=True
+        )
 
-        if not replacements:  # if replacements iterable is empty.
-            return lambda s: s  # return identity function
+        # Create regex pattern from sorted keys (without escaping to allow regex)
+        sorted_keys = [pair[0] for pair in sorted_replacements]
+        sorted_values = [pair[1] for pair in sorted_replacements]
+        regex = re.compile('|'.join(sorted_keys))
 
-        regex = re.compile('|'.join(re.escape(key) for key in replacements.keys()))
-
-        substitute = partial(regex_based_substitution, replacements, regex)
-        substitute.replacements = replacements
+        # Prepare the substitution function with aligned replacements
+        aligned_replacements = dict(zip(sorted_keys, sorted_values))
+        substitute = partial(regex_based_substitution, aligned_replacements, regex)
+        substitute.replacements = aligned_replacements
         substitute.regex = regex
         return substitute
-    else:
+    elif s is not None:
+        # Perform substitution using the compiled regex and aligned replacements
         return regex.sub(lambda m: replacements[m.group(0)], s)
+    else:
+        raise ValueError(
+            "Invalid usage: provide either `s` or let the function construct itself."
+        )
 
 
 from typing import Callable, Iterable, Sequence
