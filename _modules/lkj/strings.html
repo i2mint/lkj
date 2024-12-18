@@ -307,29 +307,41 @@
 <span class="sd">    &#39;I like orange and grapes.&#39;</span>
 
 <span class="sd">    You have access to the ``replacements`` and ``regex`` attributes of the</span>
-<span class="sd">    ``substitute`` function:</span>
+<span class="sd">    ``substitute`` function. See how the replacements dict has been ordered by</span>
+<span class="sd">    descending length of keys. This is to ensure that longer keys are replaced</span>
+<span class="sd">    before shorter keys, avoiding partial replacements.</span>
 
 <span class="sd">    &gt;&gt;&gt; substitute.replacements</span>
-<span class="sd">    {&#39;apple&#39;: &#39;orange&#39;, &#39;banana&#39;: &#39;grape&#39;}</span>
+<span class="sd">    {&#39;banana&#39;: &#39;grape&#39;, &#39;apple&#39;: &#39;orange&#39;}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">re</span>
     <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
     <span class="k">if</span> <span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">s</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">replacements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">replacements</span><span class="p">)</span>
+        <span class="c1"># Sort keys by length while maintaining value alignment</span>
+        <span class="n">sorted_replacements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">replacements</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">replacements</span><span class="p">:</span>  <span class="c1"># if replacements iterable is empty.</span>
-            <span class="k">return</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span>  <span class="c1"># return identity function</span>
+        <span class="c1"># Create regex pattern from sorted keys (without escaping to allow regex)</span>
+        <span class="n">sorted_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
+        <span class="n">sorted_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">))</span>
 
-        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">replacements</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-
-        <span class="n">substitute</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">regex_based_substitution</span><span class="p">,</span> <span class="n">replacements</span><span class="p">,</span> <span class="n">regex</span><span class="p">)</span>
-        <span class="n">substitute</span><span class="o">.</span><span class="n">replacements</span> <span class="o">=</span> <span class="n">replacements</span>
+        <span class="c1"># Prepare the substitution function with aligned replacements</span>
+        <span class="n">aligned_replacements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">,</span> <span class="n">sorted_values</span><span class="p">))</span>
+        <span class="n">substitute</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">regex_based_substitution</span><span class="p">,</span> <span class="n">aligned_replacements</span><span class="p">,</span> <span class="n">regex</span><span class="p">)</span>
+        <span class="n">substitute</span><span class="o">.</span><span class="n">replacements</span> <span class="o">=</span> <span class="n">aligned_replacements</span>
         <span class="n">substitute</span><span class="o">.</span><span class="n">regex</span> <span class="o">=</span> <span class="n">regex</span>
         <span class="k">return</span> <span class="n">substitute</span>
+    <span class="k">elif</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Perform substitution using the compiled regex and aligned replacements</span>
+        <span class="k">return</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">replacements</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">s</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">replacements</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">s</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid usage: provide either `s` or let the function construct itself.&quot;</span>
+        <span class="p">)</span></div>
 
 
 
