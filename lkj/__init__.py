@@ -8,7 +8,12 @@ from lkj.iterables import (
     get_by_value,  # Get a dictionary from a list of dictionaries by a field value
 )
 from lkj.funcs import mk_factory
-from lkj.dicts import truncate_dict_values, inclusive_subdict, exclusive_subdict
+from lkj.dicts import (
+    truncate_dict_values,  # Truncate list and string values in a dictionary
+    inclusive_subdict,  # new dictionary with only the keys in `include`
+    exclusive_subdict,  # new dictionary with only the keys not in `exclude`.
+    merge_dicts,  # Merge multiple dictionaries recursively
+)
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
     indent_lines,  # Indent all lines of a string

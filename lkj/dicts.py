@@ -111,7 +111,7 @@ from typing import Mapping, Callable, TypeVar, Iterable, Tuple
 KT = TypeVar("KT")  # Key type
 VT = TypeVar("VT")  # Value type
 
-# Note: Could have all function parameters (recursive_condition, etc.) also take the 
+# Note: Could have all function parameters (recursive_condition, etc.) also take the
 #       enumerated index of the mapping as an argument. That would give us even more
 #       flexibility, but it might be overkill and make the interface more complex.
 from typing import Mapping, Callable, TypeVar, Iterable, Tuple
@@ -119,6 +119,7 @@ from collections import defaultdict
 
 KT = TypeVar("KT")  # Key type
 VT = TypeVar("VT")  # Value type
+
 
 def merge_dicts(
     *mappings: Mapping[KT, VT],
@@ -206,7 +207,8 @@ def merge_dicts(
             ):
                 # Recursively merge nested mappings
                 merged[key] = merge_dicts(
-                    merged[key], value,
+                    merged[key],
+                    value,
                     recursive_condition=recursive_condition,
                     conflict_resolver=conflict_resolver,
                     mapping_constructor=mapping_constructor,
