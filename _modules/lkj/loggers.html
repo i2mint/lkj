@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.loggers &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -86,16 +86,16 @@
   <h1>Source code for lkj.loggers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for logging.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">attrgetter</span>
 
 <span class="c1"># TODO: Verify and add test for line_prefix</span>
 <span class="c1"># TODO: Merge with wrap_text_with_exact_spacing</span>
 <span class="c1"># TODO: Add doctests for string</span>
 <div class="viewcode-block" id="wrapped_print">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.wrapped_print">[docs]</a>
-<span class="k">def</span> <span class="nf">wrapped_print</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wrapped_print</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">],</span>
     <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span>
     <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
@@ -146,7 +146,7 @@
             <span class="n">items</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="n">print_func</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="n">line_prefix</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">textwrap</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
 
         <span class="k">return</span> <span class="n">print_func</span><span class="p">(</span>
             <span class="n">line_prefix</span>
@@ -160,7 +160,7 @@
 <span class="c1"># TODO: Merge with wrapped_print</span>
 <div class="viewcode-block" id="wrap_text_with_exact_spacing">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.wrap_text_with_exact_spacing">[docs]</a>
-<span class="k">def</span> <span class="nf">wrap_text_with_exact_spacing</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wrap_text_with_exact_spacing</span><span class="p">(</span>
     <span class="n">text</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">line_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -171,7 +171,7 @@
 <span class="sd">    - text (str): The text to wrap and print.</span>
 <span class="sd">    - max_width (int): The maximum width of each line (default is 88).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">textwrap</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
 
     <span class="c1"># Split the text into lines, preserving the existing newlines</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="n">keepends</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -197,7 +197,7 @@
 
 <div class="viewcode-block" id="print_with_timestamp">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.print_with_timestamp">[docs]</a>
-<span class="k">def</span> <span class="nf">print_with_timestamp</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">display_time</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_with_timestamp</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">display_time</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints with a timestamp and optional refresh.</span>
 
 <span class="sd">    input: message, and possibly args (to be placed in the message string, sprintf-style</span>
@@ -207,9 +207,9 @@
 <span class="sd">    use: To be able to track processes (and the time they take)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-    <span class="k">def</span> <span class="nf">hms_message</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hms_message</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="k">return</span> <span class="s1">&#39;(</span><span class="si">{:02.0f}</span><span class="s1">)</span><span class="si">{:02.0f}</span><span class="s1">:</span><span class="si">{:02.0f}</span><span class="s1">:</span><span class="si">{:02.0f}</span><span class="s1"> - </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">t</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">msg</span>
@@ -229,7 +229,7 @@
 
 <div class="viewcode-block" id="clog">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.clog">[docs]</a>
-<span class="k">def</span> <span class="nf">clog</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clog</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Conditional log</span>
 
 <span class="sd">    &gt;&gt;&gt; clog(False, &quot;logging this&quot;)</span>
@@ -255,7 +255,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">functools</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 
         <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">clog</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="n">log_func</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
@@ -263,22 +263,22 @@
 
 
 
-<span class="k">def</span> <span class="nf">_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">...&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">_done_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_done_calling_name</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;.... Done calling </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">_always_log</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_always_log</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True no matter what&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="kc">True</span>
 
 
 <div class="viewcode-block" id="log_calls">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.log_calls">[docs]</a>
-<span class="k">def</span> <span class="nf">log_calls</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_calls</span><span class="p">(</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">logger</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="nb">print</span><span class="p">,</span>
@@ -382,7 +382,7 @@
         <span class="p">)</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">log_condition</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">ingress_msg</span><span class="p">:</span>
                 <span class="n">logger</span><span class="p">(</span><span class="n">ingress_msg</span><span class="p">(</span><span class="n">func_name</span><span class="p">(</span><span class="n">func</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
@@ -399,7 +399,7 @@
 
 <div class="viewcode-block" id="instance_flag_is_set">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.instance_flag_is_set">[docs]</a>
-<span class="k">def</span> <span class="nf">instance_flag_is_set</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">flag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;verbose&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">instance_flag_is_set</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">flag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;verbose&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the log flag is set to True in the instance.&quot;&quot;&quot;</span>
     <span class="c1"># get the first argument if any, assuming it&#39;s the instance</span>
     <span class="k">if</span> <span class="n">flag_attr</span><span class="p">:</span>
@@ -440,18 +440,18 @@
 <span class="c1"># Error handling</span>
 
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">attrgetter</span>
 
 
 <div class="viewcode-block" id="ErrorInfo">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.ErrorInfo">[docs]</a>
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">ErrorInfo</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorInfo</span><span class="p">:</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span>
     <span class="n">traceback</span><span class="p">:</span> <span class="nb">str</span>
@@ -459,13 +459,13 @@
 
 
 
-<span class="k">def</span> <span class="nf">_dflt_msg_func</span><span class="p">(</span><span class="n">error_info</span><span class="p">:</span> <span class="n">ErrorInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_dflt_msg_func</span><span class="p">(</span><span class="n">error_info</span><span class="p">:</span> <span class="n">ErrorInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">func_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">error_info</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
     <span class="n">error_obj</span> <span class="o">=</span> <span class="n">error_info</span><span class="o">.</span><span class="n">error</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Exiting from </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2"> with error: </span><span class="si">{</span><span class="n">error_obj</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">dflt_error_info_processor</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dflt_error_info_processor</span><span class="p">(</span>
     <span class="n">error_info</span><span class="p">:</span> <span class="n">ErrorInfo</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
@@ -476,7 +476,7 @@
 
 <div class="viewcode-block" id="return_error_info_on_error">
 <a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.return_error_info_on_error">[docs]</a>
-<span class="k">def</span> <span class="nf">return_error_info_on_error</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">return_error_info_on_error</span><span class="p">(</span>
     <span class="n">func</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">caught_error_types</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="ne">Exception</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,),</span>
@@ -514,7 +514,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">caught_error_types</span> <span class="k">as</span> <span class="n">error_obj</span><span class="p">:</span>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -87,26 +87,33 @@
 <span class="sd">Lightweight Kit Jumpstart</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">lkj.iterables</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.iterables</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">compare_sets</span><span class="p">,</span>  <span class="c1"># Compare two iterables and return common, left-only, and right-only elements</span>
     <span class="n">index_of</span><span class="p">,</span>  <span class="c1"># Get the index of an element in an iterable</span>
     <span class="n">get_by_value</span><span class="p">,</span>  <span class="c1"># Get a dictionary from a list of dictionaries by a field value</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">lkj.funcs</span> <span class="kn">import</span> <span class="n">mk_factory</span>
-<span class="kn">from</span> <span class="nn">lkj.dicts</span> <span class="kn">import</span> <span class="n">truncate_dict_values</span><span class="p">,</span> <span class="n">inclusive_subdict</span><span class="p">,</span> <span class="n">exclusive_subdict</span>
-<span class="kn">from</span> <span class="nn">lkj.filesys</span> <span class="kn">import</span> <span class="n">get_app_data_dir</span><span class="p">,</span> <span class="n">get_watermarked_dir</span><span class="p">,</span> <span class="n">enable_sourcing_from_file</span>
-<span class="kn">from</span> <span class="nn">lkj.strings</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.funcs</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_factory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.dicts</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">truncate_dict_values</span><span class="p">,</span>  <span class="c1"># Truncate list and string values in a dictionary</span>
+    <span class="n">inclusive_subdict</span><span class="p">,</span>  <span class="c1"># new dictionary with only the keys in `include`</span>
+    <span class="n">exclusive_subdict</span><span class="p">,</span>  <span class="c1"># new dictionary with only the keys not in `exclude`.</span>
+    <span class="n">merge_dicts</span><span class="p">,</span>  <span class="c1"># Merge multiple dictionaries recursively</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.filesys</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_app_data_dir</span><span class="p">,</span> <span class="n">get_watermarked_dir</span><span class="p">,</span> <span class="n">enable_sourcing_from_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.strings</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">indent_lines</span><span class="p">,</span>  <span class="c1"># Indent all lines of a string</span>
     <span class="n">most_common_indent</span><span class="p">,</span>  <span class="c1"># Get the most common indent of a multiline string</span>
     <span class="n">regex_based_substitution</span><span class="p">,</span>
-    <span class="n">truncate_string_with_marker</span><span class="p">,</span>  <span class="c1"># Truncate a string to a maximum length, inserting a marker in the middle.</span>
+    <span class="n">truncate_string</span><span class="p">,</span>  <span class="c1"># Truncate a string to a maximum length, inserting a marker in the middle.</span>
+    <span class="n">truncate_lines</span><span class="p">,</span>  <span class="c1"># Truncate a multiline string to a maximum number of lines</span>
     <span class="n">unique_affixes</span><span class="p">,</span>  <span class="c1"># Get unique prefixes or suffixes of a list of strings</span>
     <span class="n">camel_to_snake</span><span class="p">,</span>  <span class="c1"># Convert CamelCase to snake_case</span>
     <span class="n">snake_to_camel</span><span class="p">,</span>  <span class="c1"># Convert snake_case to CamelCase</span>
     <span class="n">fields_of_string_format</span><span class="p">,</span>  <span class="c1"># Extract field names from a string format</span>
-    <span class="n">fields_of_string_formats</span><span class="p">,</span>  <span class="c1"># Extract field names from an iterable of string formats</span>
+    <span class="n">fields_of_string_formats</span><span class="p">,</span>  <span class="c1"># Extract field names from an iterable of string formats,</span>
+    <span class="n">truncate_string_with_marker</span><span class="p">,</span>  <span class="c1"># Deprecated: Backcompatibility alias</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">lkj.loggers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">print_with_timestamp</span><span class="p">,</span>
     <span class="n">print_progress</span><span class="p">,</span>
     <span class="n">log_calls</span><span class="p">,</span>
@@ -115,16 +122,16 @@
     <span class="n">return_error_info_on_error</span><span class="p">,</span>
     <span class="n">wrapped_print</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">lkj.importing</span> <span class="kn">import</span> <span class="n">import_object</span><span class="p">,</span> <span class="n">register_namespace_forwarding</span>
-<span class="kn">from</span> <span class="nn">lkj.chunking</span> <span class="kn">import</span> <span class="n">chunk_iterable</span><span class="p">,</span> <span class="n">chunker</span>
-<span class="kn">from</span> <span class="nn">lkj.misc</span> <span class="kn">import</span> <span class="n">identity</span><span class="p">,</span> <span class="n">value_in_interval</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.importing</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_object</span><span class="p">,</span> <span class="n">register_namespace_forwarding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">chunk_iterable</span><span class="p">,</span> <span class="n">chunker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lkj.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">identity</span><span class="p">,</span> <span class="n">value_in_interval</span>
 
 <span class="n">ddir</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span>
 
 
 <div class="viewcode-block" id="user_machine_id">
 <a class="viewcode-back" href="../module_docs/lkj.html#lkj.user_machine_id">[docs]</a>
-<span class="k">def</span> <span class="nf">user_machine_id</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">user_machine_id</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get an ID for the current computer/user that calls this function.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;platform&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">node</span><span class="p">()</span></div>
 
@@ -132,7 +139,7 @@
 
 <div class="viewcode-block" id="add_attr">
 <a class="viewcode-back" href="../module_docs/lkj.html#lkj.add_attr">[docs]</a>
-<span class="k">def</span> <span class="nf">add_attr</span><span class="p">(</span><span class="n">attr_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attr_val</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_attr</span><span class="p">(</span><span class="n">attr_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attr_val</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add an attribute to an object.</span>
 
 <span class="sd">    If no object is provided, return a partial function that takes an object as its</span>
@@ -176,7 +183,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
         <span class="k">if</span> <span class="n">attr_val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">add_attr</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
@@ -189,7 +196,7 @@
 
 <div class="viewcode-block" id="add_as_attribute_of">
 <a class="viewcode-back" href="../module_docs/lkj.html#lkj.add_as_attribute_of">[docs]</a>
-<span class="k">def</span> <span class="nf">add_as_attribute_of</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_as_attribute_of</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator that adds a function as an attribute of a container object ``obj``.</span>
 
 <span class="sd">    If no ``name`` is given, the ``__name__`` of the function will be used, with a</span>
@@ -244,7 +251,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="n">attrname</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">attrname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
             <span class="n">attrname</span> <span class="o">=</span> <span class="n">attrname</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># remove leading underscore</span>
@@ -257,12 +264,12 @@
 
 <div class="viewcode-block" id="get_caller_package_name">
 <a class="viewcode-back" href="../module_docs/lkj.html#lkj.get_caller_package_name">[docs]</a>
-<span class="k">def</span> <span class="nf">get_caller_package_name</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_caller_package_name</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return package name of caller</span>
 
 <span class="sd">    See: https://github.com/i2mint/i2mint/issues/1#issuecomment-1479416085</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">inspect</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">stack</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>

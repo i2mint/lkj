@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.filesys &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -86,16 +86,16 @@
   <h1>Source code for lkj.filesys</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;File system utils&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span><span class="p">,</span> <span class="n">partial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span><span class="p">,</span> <span class="n">partial</span>
 
 
 <span class="c1"># TODO: General pattern Consider generalizing to different conditions and actions</span>
 <div class="viewcode-block" id="enable_sourcing_from_file">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.enable_sourcing_from_file">[docs]</a>
-<span class="k">def</span> <span class="nf">enable_sourcing_from_file</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">enable_sourcing_from_file</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorator for functions enables the decorated function to source from a file. </span>
 
@@ -115,7 +115,7 @@
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">enable_sourcing_from_file</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">)</span>
     
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Check if the first argument is a string and a valid file path</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -145,13 +145,13 @@
 
 <div class="viewcode-block" id="do_nothing">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.do_nothing">[docs]</a>
-<span class="k">def</span> <span class="nf">do_nothing</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">do_nothing</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that does nothing.&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">_app_data_rootdir</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_app_data_rootdir</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the full path of a directory suitable for storing application-specific data.</span>
 
@@ -185,7 +185,7 @@
 
 <div class="viewcode-block" id="get_app_data_dir">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.get_app_data_dir">[docs]</a>
-<span class="k">def</span> <span class="nf">get_app_data_dir</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_app_data_dir</span><span class="p">(</span>
     <span class="n">dirname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">if_exists</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_nothing</span><span class="p">,</span>
@@ -261,7 +261,7 @@
 
 <div class="viewcode-block" id="watermark_dir">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.watermark_dir">[docs]</a>
-<span class="k">def</span> <span class="nf">watermark_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">watermark_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Watermark.&quot;&quot;&quot;</span>
     <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">watermark</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span></div>
 
@@ -269,13 +269,13 @@
 
 <div class="viewcode-block" id="has_watermark">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.has_watermark">[docs]</a>
-<span class="k">def</span> <span class="nf">has_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a directory has a watermark.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">watermark</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">_raise_watermark_error</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_raise_watermark_error</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
         <span class="sa">f</span><span class="s1">&#39;Directory </span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s1"> is not watermarked with </span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s1">. &#39;</span>
         <span class="sa">f</span><span class="s1">&#39;Perhaps you deleted the watermark file? If so, create the file and all will &#39;</span>
@@ -286,7 +286,7 @@
 
 <div class="viewcode-block" id="get_watermarked_dir">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.get_watermarked_dir">[docs]</a>
-<span class="k">def</span> <span class="nf">get_watermarked_dir</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_watermarked_dir</span><span class="p">(</span>
     <span class="n">dirname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -314,11 +314,11 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">create_and_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_and_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
         <span class="n">make_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
         <span class="n">watermark_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="o">=</span><span class="n">watermark</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">validate_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">if_watermark_validation_fails</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
 
@@ -336,7 +336,7 @@
 
 <div class="viewcode-block" id="rename_file">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.rename_file">[docs]</a>
-<span class="k">def</span> <span class="nf">rename_file</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rename_file</span><span class="p">(</span>
     <span class="n">file</span><span class="p">:</span> <span class="n">Filepath</span><span class="p">,</span>
     <span class="n">renamer_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
     <span class="o">*</span><span class="p">,</span>

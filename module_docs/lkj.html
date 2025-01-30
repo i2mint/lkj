@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -102,11 +102,11 @@
 leading underscore removed. This is useful for adding helper functions to main
 “container” functions without polluting the namespace of the module, at least
 from the point of view of imports and tab completion.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">():</span>
 <span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_as_attribute_of</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">helper</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">helper</span><span class="p">():</span>
 <span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s1">&#39;helper&#39;</span><span class="p">)</span>
 <span class="go">True</span>
@@ -119,7 +119,7 @@ from the point of view of imports and tab completion.</p>
 <p>Note that if the name of the function starts with an underscore, it will be removed
 before adding it as an attribute of <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_as_attribute_of</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">_helper</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">_helper</span><span class="p">():</span>
 <span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s1">&#39;helper&#39;</span><span class="p">)</span>
 <span class="go">True</span>
@@ -130,7 +130,7 @@ polluting the namespace of the module, at least from the point of view of import
 and tab completion. But if you really want to add a function with a leading
 underscore, you can do so by specifying the name explicitly:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_as_attribute_of</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;_helper&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">_helper</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">_helper</span><span class="p">():</span>
 <span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s1">&#39;_helper&#39;</span><span class="p">)</span>
 <span class="go">True</span>
@@ -138,7 +138,7 @@ underscore, you can do so by specifying the name explicitly:</p>
 </div>
 <p>Of course, you can give any name you want to the attribute:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_as_attribute_of</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">_helper</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">_helper</span><span class="p">():</span>
 <span class="gp">... </span>   <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">hasattr</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 <span class="go">True</span>
@@ -179,7 +179,7 @@ object.</p>
 </dd>
 </dl>
 <p>object and/or an attribute value as its argument(s).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">generic_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generic_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">generic_func</span><span class="o">.</span><span class="vm">__name__</span>
@@ -195,7 +195,7 @@ object.</p>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@add_name</span><span class="p">(</span><span class="s1">&#39;my_func&#39;</span><span class="p">)</span>
 <span class="gp">... </span><span class="nd">@add_doc</span><span class="p">(</span><span class="s1">&#39;This is my function.&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span>

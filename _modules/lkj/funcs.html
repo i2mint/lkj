@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.funcs &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -86,7 +86,7 @@
   <h1>Source code for lkj.funcs</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Tools for working with functions.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
 <span class="n">mk_factory</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">partial</span><span class="p">,</span> <span class="n">partial</span><span class="p">)</span>
 <span class="n">mk_factory</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -111,7 +111,7 @@
 <span class="c1"># when, for example, you want to avoid using a `lambda` function in some situation</span>
 <span class="c1"># (say, because [lambda functions are not pickle-serializable](https://realpython.com/python-pickle-module/)).</span>
 
-<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
 
 <span class="n">greater_than</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">)</span>
 <span class="n">greater_than</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -174,7 +174,7 @@
 <span class="c1"># Imagine working with a large project where you frequently need to generate file paths.</span>
 <span class="c1"># With mk_factory, creating a path generator becomes effortless.</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="n">mk_abs_path_maker</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
 <span class="n">mk_abs_path_maker</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -250,12 +250,12 @@
 <span class="c1">#</span>
 <span class="c1"># Use zipper with an infinite iterator to provide a continuous stream of unique keys to pair with values dynamically.</span>
 
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">count</span>
 
 
 <div class="viewcode-block" id="zip_with_filenames">
 <a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.zip_with_filenames">[docs]</a>
-<span class="k">def</span> <span class="nf">zip_with_filenames</span><span class="p">(</span><span class="n">start_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">zip_with_filenames</span><span class="p">(</span><span class="n">start_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a function that zips an iterable with file names like &#39;file_001&#39;, &#39;file_002&#39;, etc.</span>
 
@@ -279,7 +279,7 @@
 <span class="c1">#</span>
 <span class="c1"># For tasks involving regular expressions, mk_factory can simplify creating matchers and extractors.</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="n">matcher</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">)</span>
 <span class="n">matcher</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -314,8 +314,8 @@
 <span class="c1">#</span>
 <span class="c1"># Reduction functions allow aggregation of elements, useful for calculating products, sums, or even concatenating strings.</span>
 
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span><span class="p">,</span> <span class="n">add</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">mul</span><span class="p">,</span> <span class="n">add</span>
 
 <span class="n">reducer</span> <span class="o">=</span> <span class="n">mk_factory</span><span class="p">(</span><span class="n">reduce</span><span class="p">)</span>
 <span class="n">reducer</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -359,7 +359,7 @@
 <span class="c1"># Example using map with os.path.join to create full file paths</span>
 <div class="viewcode-block" id="full_path_maker">
 <a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.full_path_maker">[docs]</a>
-<span class="k">def</span> <span class="nf">full_path_maker</span><span class="p">(</span><span class="n">base_directory</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">full_path_maker</span><span class="p">(</span><span class="n">base_directory</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a function that generates full file paths given filenames.</span>
 
@@ -377,7 +377,7 @@
 <span class="c1"># Example of using greater_than in a filter</span>
 <div class="viewcode-block" id="filter_greater_than">
 <a class="viewcode-back" href="../../module_docs/lkj/funcs.html#lkj.funcs.filter_greater_than">[docs]</a>
-<span class="k">def</span> <span class="nf">filter_greater_than</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_greater_than</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filter elements in data that are greater than the threshold.</span>
 

@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.strings &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -86,12 +86,12 @@
   <h1>Source code for lkj.strings</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utils for strings&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 
 <div class="viewcode-block" id="indent_lines">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.indent_lines">[docs]</a>
-<span class="k">def</span> <span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Indent each line of a string.</span>
 
@@ -109,7 +109,7 @@
 
 <div class="viewcode-block" id="most_common_indent">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.most_common_indent">[docs]</a>
-<span class="k">def</span> <span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_first_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_first_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the most common indentation in a string.</span>
 
@@ -134,12 +134,12 @@
 
 
 
-<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">Formatter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">string</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formatter</span>
 
 <span class="n">formatter</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span>
         <span class="n">field_name</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">formatter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="k">if</span> <span class="n">field_name</span>
     <span class="p">]</span>
@@ -147,7 +147,7 @@
 
 <div class="viewcode-block" id="fields_of_string_formats">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.fields_of_string_formats">[docs]</a>
-<span class="k">def</span> <span class="nf">fields_of_string_formats</span><span class="p">(</span><span class="n">templates</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">aggregator</span><span class="o">=</span><span class="nb">set</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fields_of_string_formats</span><span class="p">(</span><span class="n">templates</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">aggregator</span><span class="o">=</span><span class="nb">set</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract all unique field names from the templates in _github_url_templates using string.Formatter.</span>
 
@@ -163,7 +163,7 @@
 <span class="sd">        [&#39;other&#39;, &#39;that&#39;, &#39;this&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">field_names</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field_names</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="n">templates</span><span class="p">:</span>
             <span class="k">yield from</span> <span class="n">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
@@ -171,7 +171,7 @@
 
 
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># Compiled regex to handle camel case to snake case conversions, including acronyms</span>
 <span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))&#39;</span><span class="p">)</span>
@@ -179,7 +179,7 @@
 
 <div class="viewcode-block" id="camel_to_snake">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.camel_to_snake">[docs]</a>
-<span class="k">def</span> <span class="nf">camel_to_snake</span><span class="p">(</span><span class="n">camel_string</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">camel_to_snake</span><span class="p">(</span><span class="n">camel_string</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a CamelCase string to snake_case. Useful for converting class</span>
 <span class="sd">    names to variable names.</span>
@@ -209,7 +209,7 @@
 
 <div class="viewcode-block" id="snake_to_camel">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.snake_to_camel">[docs]</a>
-<span class="k">def</span> <span class="nf">snake_to_camel</span><span class="p">(</span><span class="n">snake_string</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">snake_to_camel</span><span class="p">(</span><span class="n">snake_string</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a snake_case string to CamelCase. Useful for converting variable</span>
 <span class="sd">    names to class names.</span>
@@ -237,11 +237,9 @@
 
 
 <span class="c1"># Note: Vendored in i2.multi_objects and dol.util</span>
-<div class="viewcode-block" id="truncate_string_with_marker">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_string_with_marker">[docs]</a>
-<span class="k">def</span> <span class="nf">truncate_string_with_marker</span><span class="p">(</span>
-    <span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;...&#39;</span>
-<span class="p">):</span>
+<div class="viewcode-block" id="truncate_string">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_string">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Truncate a string to a maximum length, inserting a marker in the middle.</span>
 
@@ -251,23 +249,23 @@
 <span class="sd">    If the string is shorter than the sum of the left_limit and right_limit,</span>
 <span class="sd">    the string is returned as is.</span>
 
-<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;)</span>
 <span class="sd">    &#39;1234567890&#39;</span>
 
 <span class="sd">    But if the string is longer than the sum of the limits, it is truncated:</span>
 
-<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=3, right_limit=3)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=3, right_limit=3)</span>
 <span class="sd">    &#39;123...890&#39;</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=3, right_limit=0)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=3, right_limit=0)</span>
 <span class="sd">    &#39;123...&#39;</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string_with_marker(&#39;1234567890&#39;, left_limit=0, right_limit=3)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=0, right_limit=3)</span>
 <span class="sd">    &#39;...890&#39;</span>
 
 <span class="sd">    If you&#39;re using a specific parametrization of the function often, you can</span>
 <span class="sd">    create a partial function with the desired parameters:</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string = partial(truncate_string_with_marker, left_limit=2, right_limit=2, middle_marker=&#39;---&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string = partial(truncate_string, left_limit=2, right_limit=2, middle_marker=&#39;---&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;)</span>
 <span class="sd">    &#39;12---90&#39;</span>
 <span class="sd">    &gt;&gt;&gt; truncate_string(&#39;supercalifragilisticexpialidocious&#39;)</span>
@@ -285,10 +283,61 @@
 
 
 
+<span class="n">truncate_string_with_marker</span> <span class="o">=</span> <span class="n">truncate_string</span>  <span class="c1"># backwards compatibility alias</span>
+
+
+<div class="viewcode-block" id="truncate_lines">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_lines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncate_lines</span><span class="p">(</span>
+    <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Truncates a string by limiting the number of lines from the top and bottom.</span>
+<span class="sd">    If the total number of lines is greater than top_limit + bottom_limit,</span>
+<span class="sd">    it keeps the first `top_limit` lines, keeps the last `bottom_limit` lines,</span>
+<span class="sd">    and replaces the omitted middle portion with a single line containing</span>
+<span class="sd">    `middle_marker`.</span>
+
+<span class="sd">    If top_limit or bottom_limit is None, it is treated as 0.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;Line1</span>
+<span class="sd">        ... Line2</span>
+<span class="sd">        ... Line3</span>
+<span class="sd">        ... Line4</span>
+<span class="sd">        ... Line5</span>
+<span class="sd">        ... Line6&#39;&#39;&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; print(truncate_lines(text, top_limit=2, bottom_limit=2))</span>
+<span class="sd">        Line1</span>
+<span class="sd">        Line2</span>
+<span class="sd">        ...</span>
+<span class="sd">        Line5</span>
+<span class="sd">        Line6</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Interpret None as zero for convenience</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">top_limit</span> <span class="k">if</span> <span class="n">top_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">bottom</span> <span class="o">=</span> <span class="n">bottom_limit</span> <span class="k">if</span> <span class="n">bottom_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Split on line boundaries (retaining any trailing newlines in each piece)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">total_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="c1"># If no need to truncate, return as is</span>
+    <span class="k">if</span> <span class="n">total_lines</span> <span class="o">&lt;=</span> <span class="n">top</span> <span class="o">+</span> <span class="n">bottom</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="c1"># Otherwise, keep the top lines, keep the bottom lines,</span>
+    <span class="c1"># and insert a single marker line in the middle</span>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">middle_marker</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span></div>
+
+
+
 <span class="c1"># TODO: Generalize so that it can be used with regex keys (not escaped)</span>
 <div class="viewcode-block" id="regex_based_substitution">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.regex_based_substitution">[docs]</a>
-<span class="k">def</span> <span class="nf">regex_based_substitution</span><span class="p">(</span><span class="n">replacements</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">regex_based_substitution</span><span class="p">(</span><span class="n">replacements</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Construct a substitution function based on an iterable of replacement pairs.</span>
 
@@ -315,8 +364,8 @@
 <span class="sd">    {&#39;banana&#39;: &#39;grape&#39;, &#39;apple&#39;: &#39;orange&#39;}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">re</span>
-    <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
     <span class="k">if</span> <span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">s</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Sort keys by length while maintaining value alignment</span>
@@ -345,23 +394,23 @@
 
 
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
 
 
-<span class="k">class</span> <span class="nc">TrieNode</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TrieNode</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Number of times this node is visited during insertion</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicates whether this node represents the end of an item</span>
 
 
-<span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span>
 
 
 <div class="viewcode-block" id="unique_affixes">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.unique_affixes">[docs]</a>
-<span class="k">def</span> <span class="nf">unique_affixes</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">unique_affixes</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Sequence</span><span class="p">],</span>
     <span class="n">suffix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -422,12 +471,12 @@
     <span class="k">if</span> <span class="n">egress</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">):</span>
             <span class="c1"># Items are strings; affixes are lists of characters</span>
-            <span class="k">def</span> <span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
                 <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Items are sequences (e.g., lists); affixes are lists</span>
-            <span class="k">def</span> <span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">affix</span>
 
     <span class="c1"># If suffix is True, reverse the items</span>

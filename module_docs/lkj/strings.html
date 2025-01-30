@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.strings &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -64,6 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.most_common_indent"><code class="docutils literal notranslate"><span class="pre">most_common_indent()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.regex_based_substitution"><code class="docutils literal notranslate"><span class="pre">regex_based_substitution()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.snake_to_camel"><code class="docutils literal notranslate"><span class="pre">snake_to_camel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_lines"><code class="docutils literal notranslate"><span class="pre">truncate_lines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_string"><code class="docutils literal notranslate"><span class="pre">truncate_string()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_string_with_marker"><code class="docutils literal notranslate"><span class="pre">truncate_string_with_marker()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.unique_affixes"><code class="docutils literal notranslate"><span class="pre">unique_affixes()</span></code></a></li>
 </ul>
@@ -264,30 +266,91 @@ names to class names.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="lkj.strings.truncate_string_with_marker">
-<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">truncate_string_with_marker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#truncate_string_with_marker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.truncate_string_with_marker" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="lkj.strings.truncate_lines">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">truncate_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_marker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#truncate_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.truncate_lines" title="Link to this definition"></a></dt>
+<dd><p>Truncates a string by limiting the number of lines from the top and bottom.
+If the total number of lines is greater than top_limit + bottom_limit,
+it keeps the first <cite>top_limit</cite> lines, keeps the last <cite>bottom_limit</cite> lines,
+and replaces the omitted middle portion with a single line containing
+<cite>middle_marker</cite>.</p>
+<p>If top_limit or bottom_limit is None, it is treated as 0.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Line1</span>
+<span class="gp">... </span><span class="s1">Line2</span>
+<span class="gp">... </span><span class="s1">Line3</span>
+<span class="gp">... </span><span class="s1">Line4</span>
+<span class="gp">... </span><span class="s1">Line5</span>
+<span class="gp">... </span><span class="s1">Line6&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">truncate_lines</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">Line1</span>
+<span class="go">Line2</span>
+<span class="go">...</span>
+<span class="go">Line5</span>
+<span class="go">Line6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.truncate_string">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">truncate_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#truncate_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.truncate_string" title="Link to this definition"></a></dt>
 <dd><p>Truncate a string to a maximum length, inserting a marker in the middle.</p>
 <p>If the string is longer than the sum of the left_limit and right_limit,
 the string is truncated and the middle_marker is inserted in the middle.</p>
 <p>If the string is shorter than the sum of the left_limit and right_limit,
 the string is returned as is.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string_with_marker</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
 <span class="go">&#39;1234567890&#39;</span>
 </pre></div>
 </div>
 <p>But if the string is longer than the sum of the limits, it is truncated:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string_with_marker</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">&#39;123...890&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string_with_marker</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">&#39;123...&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string_with_marker</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">&#39;...890&#39;</span>
 </pre></div>
 </div>
 <p>If you’re using a specific parametrization of the function often, you can
 create a partial function with the desired parameters:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">truncate_string_with_marker</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;---&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">truncate_string</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;---&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
+<span class="go">&#39;12---90&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;supercalifragilisticexpialidocious&#39;</span><span class="p">)</span>
+<span class="go">&#39;su---us&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.truncate_string_with_marker">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">truncate_string_with_marker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lkj.strings.truncate_string_with_marker" title="Link to this definition"></a></dt>
+<dd><p>Truncate a string to a maximum length, inserting a marker in the middle.</p>
+<p>If the string is longer than the sum of the left_limit and right_limit,
+the string is truncated and the middle_marker is inserted in the middle.</p>
+<p>If the string is shorter than the sum of the left_limit and right_limit,
+the string is returned as is.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
+<span class="go">&#39;1234567890&#39;</span>
+</pre></div>
+</div>
+<p>But if the string is longer than the sum of the limits, it is truncated:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;123...890&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">&#39;123...&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;...890&#39;</span>
+</pre></div>
+</div>
+<p>If you’re using a specific parametrization of the function often, you can
+create a partial function with the desired parameters:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">truncate_string</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;---&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
 <span class="go">&#39;12---90&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_string</span><span class="p">(</span><span class="s1">&#39;supercalifragilisticexpialidocious&#39;</span><span class="p">)</span>
@@ -347,7 +410,7 @@ Raises a ValueError if duplicates are found.</p>
 <span class="go">[&#39;ation&#39;, &#39;rmination&#39;, &#39;amination&#39;]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">functools</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ingress</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">egress</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;here.and.there&#39;</span><span class="p">,</span> <span class="s1">&#39;here.or.there&#39;</span><span class="p">,</span> <span class="s1">&#39;here&#39;</span><span class="p">]</span>

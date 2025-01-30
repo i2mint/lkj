@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.iterables &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -86,12 +86,12 @@
   <h1>Source code for lkj.iterables</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Tools with iterables (dicts, lists, tuples, sets, etc.).&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">NamedTuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">NamedTuple</span>
 
 
 <div class="viewcode-block" id="SetsComparisonResult">
 <a class="viewcode-back" href="../../module_docs/lkj/iterables.html#lkj.iterables.SetsComparisonResult">[docs]</a>
-<span class="k">class</span> <span class="nc">SetsComparisonResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SetsComparisonResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">common</span><span class="p">:</span> <span class="nb">set</span>
     <span class="n">left_only</span><span class="p">:</span> <span class="nb">set</span>
     <span class="n">right_only</span><span class="p">:</span> <span class="nb">set</span></div>
@@ -100,7 +100,7 @@
 
 <div class="viewcode-block" id="compare_sets">
 <a class="viewcode-back" href="../../module_docs/lkj/iterables.html#lkj.iterables.compare_sets">[docs]</a>
-<span class="k">def</span> <span class="nf">compare_sets</span><span class="p">(</span><span class="n">left</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SetsComparisonResult</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_sets</span><span class="p">(</span><span class="n">left</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SetsComparisonResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compares two iterables and returns a named tuple with:</span>
 <span class="sd">    - Elements in both iterables.</span>
@@ -141,7 +141,7 @@
 
 <div class="viewcode-block" id="index_of">
 <a class="viewcode-back" href="../../module_docs/lkj/iterables.html#lkj.iterables.index_of">[docs]</a>
-<span class="k">def</span> <span class="nf">index_of</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">VT</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="n">VT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index_of</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">VT</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="n">VT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    List list.index but for any iterable.</span>
 
@@ -165,7 +165,7 @@
 
 <div class="viewcode-block" id="get_by_value">
 <a class="viewcode-back" href="../../module_docs/lkj/iterables.html#lkj.iterables.get_by_value">[docs]</a>
-<span class="k">def</span> <span class="nf">get_by_value</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_by_value</span><span class="p">(</span>
     <span class="n">list_of_dicts</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">]],</span> <span class="n">value</span><span class="p">:</span> <span class="n">VT</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="n">KT</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>

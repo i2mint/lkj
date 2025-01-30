@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.dicts &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -92,12 +92,12 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 
 <div class="viewcode-block" id="inclusive_subdict">
 <a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.inclusive_subdict">[docs]</a>
-<span class="k">def</span> <span class="nf">inclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">include</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">include</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a new dictionary with only the keys in `include`.</span>
 
@@ -116,7 +116,7 @@
 
 <div class="viewcode-block" id="exclusive_subdict">
 <a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.exclusive_subdict">[docs]</a>
-<span class="k">def</span> <span class="nf">exclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exclude</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">exclusive_subdict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exclude</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a new dictionary with only the keys not in `exclude`.</span>
 
@@ -127,7 +127,7 @@
 <span class="sd">    Example:</span>
 <span class="sd">    &gt;&gt;&gt; exclusive_subdict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}, {&#39;a&#39;, &#39;c&#39;})</span>
 <span class="sd">    {&#39;b&#39;: 2}</span>
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="n">exclude</span><span class="p">}</span></div>
 
@@ -136,12 +136,12 @@
 <span class="c1"># Note: There is a copy of truncate_dict_values in the ju package.</span>
 <div class="viewcode-block" id="truncate_dict_values">
 <a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.truncate_dict_values">[docs]</a>
-<span class="k">def</span> <span class="nf">truncate_dict_values</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncate_dict_values</span><span class="p">(</span>
     <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">max_list_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="n">max_string_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span>
-    <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
+    <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a new dictionary with the same nested keys structure, where:</span>
@@ -175,7 +175,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">truncate_string</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">marker</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">marker</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">max_len</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_len</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
         <span class="n">half_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">marker</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span>
@@ -198,6 +198,126 @@
         <span class="k">return</span> <span class="n">truncate_string</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">max_string_size</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">d</span></div>
+
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="n">KT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;KT&quot;</span><span class="p">)</span>  <span class="c1"># Key type</span>
+<span class="n">VT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;VT&quot;</span><span class="p">)</span>  <span class="c1"># Value type</span>
+
+<span class="c1"># Note: Could have all function parameters (recursive_condition, etc.) also take the</span>
+<span class="c1">#       enumerated index of the mapping as an argument. That would give us even more</span>
+<span class="c1">#       flexibility, but it might be overkill and make the interface more complex.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="n">KT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;KT&quot;</span><span class="p">)</span>  <span class="c1"># Key type</span>
+<span class="n">VT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;VT&quot;</span><span class="p">)</span>  <span class="c1"># Value type</span>
+
+
+<div class="viewcode-block" id="merge_dicts">
+<a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.merge_dicts">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_dicts</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">mappings</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">],</span>
+    <span class="n">recursive_condition</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VT</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">),</span>
+    <span class="n">conflict_resolver</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VT</span><span class="p">,</span> <span class="n">VT</span><span class="p">],</span> <span class="n">VT</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+    <span class="n">mapping_constructor</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">]]],</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">VT</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merge multiple mappings into a single mapping, recursively if needed,</span>
+<span class="sd">    with customizable conflict resolution for non-mapping values.</span>
+
+<span class="sd">    This function generalizes the normal `dict.update()` method, which takes the union</span>
+<span class="sd">    of the keys and resolves conflicting values by overriding them with the last value.</span>
+<span class="sd">    While `dict.update()` performs a single-level merge, `merge_dicts` provides additional</span>
+<span class="sd">    flexibility to handle nested mappings. With `merge_dicts`, you can:</span>
+<span class="sd">    - Control when to recurse (e.g., based on whether a value is a `Mapping`).</span>
+<span class="sd">    - Specify how to resolve value conflicts (e.g., override, add, or accumulate in a list).</span>
+<span class="sd">    - Choose the type of mapping (e.g., `dict`, `defaultdict`) to use as the container.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mappings: The mappings to merge.</span>
+<span class="sd">        recursive_condition: A callable to determine if values should be merged recursively.</span>
+<span class="sd">                             By default, checks if the value is a `Mapping`.</span>
+<span class="sd">        conflict_resolver: A callable that resolves conflicts between two values.</span>
+<span class="sd">                           By default, overrides with the last seen value (`lambda x, y: y`).</span>
+<span class="sd">        mapping_constructor: A callable to construct the resulting mapping.</span>
+<span class="sd">                             Defaults to the standard `dict` constructor.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A merged mapping that combines all the input mappings.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Basic usage with single-level merge (override behavior):</span>
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: 1}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;a&quot;: 2, &quot;b&quot;: 3}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2)</span>
+<span class="sd">        {&#39;a&#39;: 2, &#39;b&#39;: 3}</span>
+
+<span class="sd">        Handling nested mappings with default behavior (override conflicts):</span>
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: 1, &quot;b&quot;: {&quot;x&quot;: 10, &quot;y&quot;: 20}}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;b&quot;: {&quot;y&quot;: 30, &quot;z&quot;: 40}, &quot;c&quot;: 3}</span>
+<span class="sd">        &gt;&gt;&gt; dict3 = {&quot;b&quot;: {&quot;x&quot;: 50}, &quot;d&quot;: 4}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2, dict3)</span>
+<span class="sd">        {&#39;a&#39;: 1, &#39;b&#39;: {&#39;x&#39;: 50, &#39;y&#39;: 30, &#39;z&#39;: 40}, &#39;c&#39;: 3, &#39;d&#39;: 4}</span>
+
+<span class="sd">        Resolving conflicts by summing values:</span>
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: 1}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;a&quot;: 2}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2, conflict_resolver=lambda x, y: x + y)</span>
+<span class="sd">        {&#39;a&#39;: 3}</span>
+
+<span class="sd">        Accumulating conflicting values into a list:</span>
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: 1, &quot;b&quot;: [1, 2]}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;b&quot;: [3, 4]}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2, conflict_resolver=lambda x, y: x + y if isinstance(x, list) else [x, y])</span>
+<span class="sd">        {&#39;a&#39;: 1, &#39;b&#39;: [1, 2, 3, 4]}</span>
+
+<span class="sd">        Recursing only on specific conditions:</span>
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: {&quot;nested&quot;: 1}}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;a&quot;: {&quot;nested&quot;: 2, &quot;new&quot;: 3}}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2)</span>
+<span class="sd">        {&#39;a&#39;: {&#39;nested&#39;: 2, &#39;new&#39;: 3}}</span>
+
+<span class="sd">        &gt;&gt;&gt; dict1 = {&quot;a&quot;: {&quot;nested&quot;: [1, 2]}}</span>
+<span class="sd">        &gt;&gt;&gt; dict2 = {&quot;a&quot;: {&quot;nested&quot;: [3, 4]}}</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(dict1, dict2, recursive_condition=lambda v: isinstance(v, dict))</span>
+<span class="sd">        {&#39;a&#39;: {&#39;nested&#39;: [3, 4]}}</span>
+
+<span class="sd">        Using a custom mapping type (`defaultdict`):</span>
+<span class="sd">        &gt;&gt;&gt; from collections import defaultdict</span>
+<span class="sd">        &gt;&gt;&gt; merge_dicts(</span>
+<span class="sd">        ...     dict1, dict2, mapping_constructor=lambda items: defaultdict(int, items)</span>
+<span class="sd">        ... )</span>
+<span class="sd">        defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;a&#39;: defaultdict(&lt;class &#39;int&#39;&gt;, {&#39;nested&#39;: [3, 4]})})</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialize merged mapping with an empty iterable for constructors requiring input</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="n">mapping_constructor</span><span class="p">([])</span>
+
+    <span class="k">for</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">mappings</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">key</span> <span class="ow">in</span> <span class="n">merged</span>
+                <span class="ow">and</span> <span class="n">recursive_condition</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">recursive_condition</span><span class="p">(</span><span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="p">):</span>
+                <span class="c1"># Recursively merge nested mappings</span>
+                <span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge_dicts</span><span class="p">(</span>
+                    <span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
+                    <span class="n">value</span><span class="p">,</span>
+                    <span class="n">recursive_condition</span><span class="o">=</span><span class="n">recursive_condition</span><span class="p">,</span>
+                    <span class="n">conflict_resolver</span><span class="o">=</span><span class="n">conflict_resolver</span><span class="p">,</span>
+                    <span class="n">mapping_constructor</span><span class="o">=</span><span class="n">mapping_constructor</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">merged</span><span class="p">:</span>
+                <span class="c1"># Resolve conflict using the provided resolver</span>
+                <span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">conflict_resolver</span><span class="p">(</span><span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Otherwise, add the value</span>
+                <span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">merged</span></div>
 
 </pre></div>
 

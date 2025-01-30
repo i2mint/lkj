@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.importing &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -89,7 +89,7 @@
 
 <div class="viewcode-block" id="import_object">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.import_object">[docs]</a>
-<span class="k">def</span> <span class="nf">import_object</span><span class="p">(</span><span class="n">dot_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_object</span><span class="p">(</span><span class="n">dot_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Imports and returns an object from a dot string path.</span>
 
 <span class="sd">    &gt;&gt;&gt; f = import_object(&#39;os.path.join&#39;)</span>
@@ -98,7 +98,7 @@
 <span class="sd">    True</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
 
     <span class="n">module_path</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">object_name</span> <span class="o">=</span> <span class="n">dot_path</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">module_path</span><span class="p">:</span>
@@ -111,14 +111,14 @@
 
 
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">importlib.util</span>
-<span class="kn">import</span> <span class="nn">importlib.abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.abc</span>
 
 
 <div class="viewcode-block" id="NamespaceForwardingLoader">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader">[docs]</a>
-<span class="k">class</span> <span class="nc">NamespaceForwardingLoader</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NamespaceForwardingLoader</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Loader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A custom loader that forwards the import from a source namespace to a target namespace.</span>
 
@@ -132,14 +132,14 @@
 <span class="sd">            Loads and returns the target module corresponding to the source module name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="n">fullname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_base</span> <span class="o">=</span> <span class="n">source_base</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span> <span class="o">=</span> <span class="n">target_base</span>
 
 <div class="viewcode-block" id="NamespaceForwardingLoader.load_module">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader.load_module">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">):</span>
         <span class="n">target_name</span> <span class="o">=</span> <span class="n">fullname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_base</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span><span class="p">)</span>
 
         <span class="c1"># If the target module is already loaded, return it</span>
@@ -162,7 +162,7 @@
 
 <div class="viewcode-block" id="NamespaceForwardingFinder">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder">[docs]</a>
-<span class="k">class</span> <span class="nc">NamespaceForwardingFinder</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">MetaPathFinder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NamespaceForwardingFinder</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">MetaPathFinder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A custom finder that detects when a module in the source namespace is being imported</span>
 <span class="sd">    and forwards it to the target namespace.</span>
@@ -176,13 +176,13 @@
 <span class="sd">            Finds and returns the spec for the target module corresponding to the source module name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_base</span> <span class="o">=</span> <span class="n">source_base</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_base</span> <span class="o">=</span> <span class="n">target_base</span>
 
 <div class="viewcode-block" id="NamespaceForwardingFinder.find_spec">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder.find_spec">[docs]</a>
-    <span class="k">def</span> <span class="nf">find_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fullname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_base</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_loader</span><span class="p">(</span>
                 <span class="n">fullname</span><span class="p">,</span>
@@ -195,7 +195,7 @@
 
 <div class="viewcode-block" id="register_namespace_forwarding">
 <a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.register_namespace_forwarding">[docs]</a>
-<span class="k">def</span> <span class="nf">register_namespace_forwarding</span><span class="p">(</span><span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_namespace_forwarding</span><span class="p">(</span><span class="n">source_base</span><span class="p">,</span> <span class="n">target_base</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Register the namespace forwarding from source_base to target_base.</span>
 

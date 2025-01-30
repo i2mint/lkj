@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lkj.dicts &mdash; lkj 0.1.10 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -54,6 +54,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.dicts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.exclusive_subdict"><code class="docutils literal notranslate"><span class="pre">exclusive_subdict()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.inclusive_subdict"><code class="docutils literal notranslate"><span class="pre">inclusive_subdict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.merge_dicts"><code class="docutils literal notranslate"><span class="pre">merge_dicts()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.truncate_dict_values"><code class="docutils literal notranslate"><span class="pre">truncate_dict_values()</span></code></a></li>
 </ul>
 </li>
@@ -117,6 +118,75 @@ include (set): The set of keys to include in the new dictionary.</p>
 <p>Example:
 &gt;&gt;&gt; inclusive_subdict({‘a’: 1, ‘b’: 2, ‘c’: 3}, {‘a’, ‘c’})
 {‘a’: 1, ‘c’: 3}</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.dicts.merge_dicts">
+<span class="sig-prename descclassname"><span class="pre">lkj.dicts.</span></span><span class="sig-name descname"><span class="pre">merge_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*mappings:</span> <span class="pre">~typing.Mapping[~lkj.dicts.KT,</span> <span class="pre">~lkj.dicts.VT],</span> <span class="pre">recursive_condition:</span> <span class="pre">~typing.Callable[[~lkj.dicts.VT],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">conflict_resolver:</span> <span class="pre">~typing.Callable[[~lkj.dicts.VT,</span> <span class="pre">~lkj.dicts.VT],</span> <span class="pre">~lkj.dicts.VT]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">mapping_constructor:</span> <span class="pre">~typing.Callable[[~typing.Iterable[~typing.Tuple[~lkj.dicts.KT,</span> <span class="pre">~lkj.dicts.VT]]],</span> <span class="pre">~typing.Mapping[~lkj.dicts.KT,</span> <span class="pre">~lkj.dicts.VT]]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'dict'&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">KT</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">VT</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/lkj/dicts.html#merge_dicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.dicts.merge_dicts" title="Link to this definition"></a></dt>
+<dd><p>Merge multiple mappings into a single mapping, recursively if needed,
+with customizable conflict resolution for non-mapping values.</p>
+<p>This function generalizes the normal <cite>dict.update()</cite> method, which takes the union
+of the keys and resolves conflicting values by overriding them with the last value.
+While <cite>dict.update()</cite> performs a single-level merge, <cite>merge_dicts</cite> provides additional
+flexibility to handle nested mappings. With <cite>merge_dicts</cite>, you can:
+- Control when to recurse (e.g., based on whether a value is a <cite>Mapping</cite>).
+- Specify how to resolve value conflicts (e.g., override, add, or accumulate in a list).
+- Choose the type of mapping (e.g., <cite>dict</cite>, <cite>defaultdict</cite>) to use as the container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mappings</strong> – The mappings to merge.</p></li>
+<li><p><strong>recursive_condition</strong> – A callable to determine if values should be merged recursively.
+By default, checks if the value is a <cite>Mapping</cite>.</p></li>
+<li><p><strong>conflict_resolver</strong> – A callable that resolves conflicts between two values.
+By default, overrides with the last seen value (<cite>lambda x, y: y</cite>).</p></li>
+<li><p><strong>mapping_constructor</strong> – A callable to construct the resulting mapping.
+Defaults to the standard <cite>dict</cite> constructor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A merged mapping that combines all the input mappings.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Basic usage with single-level merge (override behavior):
+&gt;&gt;&gt; dict1 = {“a”: 1}
+&gt;&gt;&gt; dict2 = {“a”: 2, “b”: 3}
+&gt;&gt;&gt; merge_dicts(dict1, dict2)
+{‘a’: 2, ‘b’: 3}</p>
+<p>Handling nested mappings with default behavior (override conflicts):
+&gt;&gt;&gt; dict1 = {“a”: 1, “b”: {“x”: 10, “y”: 20}}
+&gt;&gt;&gt; dict2 = {“b”: {“y”: 30, “z”: 40}, “c”: 3}
+&gt;&gt;&gt; dict3 = {“b”: {“x”: 50}, “d”: 4}
+&gt;&gt;&gt; merge_dicts(dict1, dict2, dict3)
+{‘a’: 1, ‘b’: {‘x’: 50, ‘y’: 30, ‘z’: 40}, ‘c’: 3, ‘d’: 4}</p>
+<p>Resolving conflicts by summing values:
+&gt;&gt;&gt; dict1 = {“a”: 1}
+&gt;&gt;&gt; dict2 = {“a”: 2}
+&gt;&gt;&gt; merge_dicts(dict1, dict2, conflict_resolver=lambda x, y: x + y)
+{‘a’: 3}</p>
+<p>Accumulating conflicting values into a list:
+&gt;&gt;&gt; dict1 = {“a”: 1, “b”: [1, 2]}
+&gt;&gt;&gt; dict2 = {“b”: [3, 4]}
+&gt;&gt;&gt; merge_dicts(dict1, dict2, conflict_resolver=lambda x, y: x + y if isinstance(x, list) else [x, y])
+{‘a’: 1, ‘b’: [1, 2, 3, 4]}</p>
+<p>Recursing only on specific conditions:
+&gt;&gt;&gt; dict1 = {“a”: {“nested”: 1}}
+&gt;&gt;&gt; dict2 = {“a”: {“nested”: 2, “new”: 3}}
+&gt;&gt;&gt; merge_dicts(dict1, dict2)
+{‘a’: {‘nested’: 2, ‘new’: 3}}</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">,</span> <span class="n">recursive_condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">))</span>
+<span class="go">{&#39;a&#39;: {&#39;nested&#39;: [3, 4]}}</span>
+</pre></div>
+</div>
+<p>Using a custom mapping type (<cite>defaultdict</cite>):
+&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; merge_dicts(
+…     dict1, dict2, mapping_constructor=lambda items: defaultdict(int, items)
+… )
+defaultdict(&lt;class ‘int’&gt;, {‘a’: defaultdict(&lt;class ‘int’&gt;, {‘nested’: [3, 4]})})</p>
 </dd></dl>
 
 <dl class="py function">
