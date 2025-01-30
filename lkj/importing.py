@@ -12,14 +12,14 @@ def import_object(dot_path: str):
     """
     from importlib import import_module
 
-    module_path, _, object_name = dot_path.rpartition('.')
+    module_path, _, object_name = dot_path.rpartition(".")
     if not module_path:
-        raise ImportError(f'{dot_path} does not contain a module path')
+        raise ImportError(f"{dot_path} does not contain a module path")
     module = import_module(module_path)
     try:
         return getattr(module, object_name)
     except AttributeError:
-        raise ImportError(f'{object_name} is not found in {module_path}')
+        raise ImportError(f"{object_name} is not found in {module_path}")
 
 
 import sys

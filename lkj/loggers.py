@@ -4,12 +4,13 @@ from typing import Callable, Tuple, Any, Optional, Union, Iterable
 from functools import partial, wraps
 from operator import attrgetter
 
+
 # TODO: Verify and add test for line_prefix
 # TODO: Merge with wrap_text_with_exact_spacing
 # TODO: Add doctests for string
 def wrapped_print(
     items: Union[str, Iterable],
-    sep=', ',
+    sep=", ",
     max_width=80,
     *,
     print_func=print,
@@ -115,16 +116,16 @@ def print_with_timestamp(msg, *, refresh=None, display_time=True, print_func=pri
     """
     from datetime import datetime
 
-    def hms_message(msg=''):
+    def hms_message(msg=""):
         t = datetime.now()
-        return '({:02.0f}){:02.0f}:{:02.0f}:{:02.0f} - {}'.format(
+        return "({:02.0f}){:02.0f}:{:02.0f}:{:02.0f} - {}".format(
             t.day, t.hour, t.minute, t.second, msg
         )
 
     if display_time:
         msg = hms_message(msg)
     if refresh:
-        print_func(msg, end='\r')
+        print_func(msg, end="\r")
     else:
         print_func(msg)
 
@@ -184,7 +185,7 @@ def log_calls(
     logger: Callable[[str], None] = print,
     ingress_msg: Callable[[str, Tuple, dict], str] = _calling_name,
     egress_msg: Callable[[str, Tuple, dict, Any], str] = _done_calling_name,
-    func_name: Callable[[Callable], str] = attrgetter('__name__'),
+    func_name: Callable[[Callable], str] = attrgetter("__name__"),
     log_condition: Callable[[Callable, Tuple, dict], bool] = _always_log,
 ) -> Callable:
     """
@@ -296,7 +297,7 @@ def log_calls(
     return wrapper
 
 
-def instance_flag_is_set(func, args, kwargs, flag_attr: str = 'verbose'):
+def instance_flag_is_set(func, args, kwargs, flag_attr: str = "verbose"):
     """Check if the log flag is set to True in the instance."""
     # get the first argument if any, assuming it's the instance
     if flag_attr:
@@ -353,7 +354,7 @@ class ErrorInfo:
 
 
 def _dflt_msg_func(error_info: ErrorInfo) -> str:
-    func_name = getattr(error_info.func, '__name__', 'unknown')
+    func_name = getattr(error_info.func, "__name__", "unknown")
     error_obj = error_info.error
     return f"Exiting from {func_name} with error: {error_obj}"
 

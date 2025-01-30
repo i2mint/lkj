@@ -16,8 +16,8 @@ from typing import (
     T,
 )
 
-KT = TypeVar('KT')  # there's a typing.KT, but pylance won't allow me to use it!
-VT = TypeVar('VT')  # there's a typing.VT, but pylance won't allow me to use it!
+KT = TypeVar("KT")  # there's a typing.KT, but pylance won't allow me to use it!
+VT = TypeVar("VT")  # there's a typing.VT, but pylance won't allow me to use it!
 
 
 def chunk_iterable(
@@ -77,10 +77,7 @@ def chunk_iterable(
 
 
 def chunker(
-    a: Iterable[T],
-    chk_size: int,
-    *,
-    include_tail: bool = True
+    a: Iterable[T], chk_size: int, *, include_tail: bool = True
 ) -> Iterator[Tuple[T, ...]]:
     """
     Chunks an iterable into non-overlapping chunks of size `chk_size`.

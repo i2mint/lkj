@@ -3,7 +3,7 @@
 import re
 
 
-def indent_lines(string: str, indent: str, *, line_sep='\n') -> str:
+def indent_lines(string: str, indent: str, *, line_sep="\n") -> str:
     r"""
     Indent each line of a string.
 
@@ -79,7 +79,7 @@ def fields_of_string_formats(templates, *, aggregator=set):
 import re
 
 # Compiled regex to handle camel case to snake case conversions, including acronyms
-_camel_to_snake_re = re.compile(r'((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
+_camel_to_snake_re = re.compile(r"((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))")
 
 
 def camel_to_snake(camel_string):
@@ -106,7 +106,7 @@ def camel_to_snake(camel_string):
         >>> camel_to_snake('XMLHttpRequestTest')
         'xml_http_request_test'
     """
-    return _camel_to_snake_re.sub(r'_\1', camel_string).lower()
+    return _camel_to_snake_re.sub(r"_\1", camel_string).lower()
 
 
 def snake_to_camel(snake_string):
@@ -132,11 +132,11 @@ def snake_to_camel(snake_string):
         >>> snake_to_camel('xml_http_request_test')
         'XmlHttpRequestTest'
     """
-    return ''.join(word.capitalize() or '_' for word in snake_string.split('_'))
+    return "".join(word.capitalize() or "_" for word in snake_string.split("_"))
 
 
 # Note: Vendored in i2.multi_objects and dol.util
-def truncate_string(s: str, *, left_limit=15, right_limit=15, middle_marker='...'):
+def truncate_string(s: str, *, left_limit=15, right_limit=15, middle_marker="..."):
     """
     Truncate a string to a maximum length, inserting a marker in the middle.
 
@@ -183,7 +183,7 @@ truncate_string_with_marker = truncate_string  # backwards compatibility alias
 
 
 def truncate_lines(
-    s: str, top_limit: int = None, bottom_limit: int = None, middle_marker: str = '...'
+    s: str, top_limit: int = None, bottom_limit: int = None, middle_marker: str = "..."
 ) -> str:
     """
     Truncates a string by limiting the number of lines from the top and bottom.
@@ -223,8 +223,8 @@ def truncate_lines(
 
     # Otherwise, keep the top lines, keep the bottom lines,
     # and insert a single marker line in the middle
-    truncated = lines[:top] + [middle_marker + '\n'] + lines[-bottom:]
-    return ''.join(truncated)
+    truncated = lines[:top] + [middle_marker + "\n"] + lines[-bottom:]
+    return "".join(truncated)
 
 
 # TODO: Generalize so that it can be used with regex keys (not escaped)
@@ -267,7 +267,7 @@ def regex_based_substitution(replacements: dict, regex=None, s: str = None):
         # Create regex pattern from sorted keys (without escaping to allow regex)
         sorted_keys = [pair[0] for pair in sorted_replacements]
         sorted_values = [pair[1] for pair in sorted_replacements]
-        regex = re.compile('|'.join(sorted_keys))
+        regex = re.compile("|".join(sorted_keys))
 
         # Prepare the substitution function with aligned replacements
         aligned_replacements = dict(zip(sorted_keys, sorted_values))
@@ -360,7 +360,7 @@ def unique_affixes(
         if all(isinstance(item, str) for item in items):
             # Items are strings; affixes are lists of characters
             def egress(affix):
-                return ''.join(affix)
+                return "".join(affix)
 
         else:
             # Items are sequences (e.g., lists); affixes are lists

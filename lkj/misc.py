@@ -38,7 +38,7 @@ def value_in_interval(
     """
     if x is None:
         kwargs = locals()
-        kwargs.pop('x')
+        kwargs.pop("x")
         return partial(value_in_interval, **kwargs)
     else:
         val = get_val(x)

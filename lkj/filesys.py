@@ -9,9 +9,9 @@ from functools import wraps, partial
 # TODO: General pattern Consider generalizing to different conditions and actions
 def enable_sourcing_from_file(func=None, *, write_output=False):
     """
-    Decorator for functions enables the decorated function to source from a file. 
+    Decorator for functions enables the decorated function to source from a file.
 
-    It is to be applied to functions that take a string or bytes as their first 
+    It is to be applied to functions that take a string or bytes as their first
     argument. Decorating the function will enable it to detect if the first argument
     is a file path, read the file content, call the function with the file content
     as the first argument. Optionally, the decorated function can write the result
@@ -25,14 +25,14 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
     """
     if func is None:
         return partial(enable_sourcing_from_file, write_output=write_output)
-    
+
     @wraps(func)
     def wrapper(*args, write_output=write_output, **kwargs):
         # Check if the first argument is a string and a valid file path
         if args and isinstance(args[0], str) and os.path.isfile(args[0]):
             file_path = args[0]
             # Read the file content
-            with open(file_path, 'r') as file:
+            with open(file_path, "r") as file:
                 file_content = file.read()
             # Call the function with the file content and other arguments
             new_args = (file_content,) + args[1:]
@@ -42,9 +42,11 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
                 if write_output is True:
                     write_output = file_path
                 else:
-                    assert isinstance(write_output, str), 'write_output must be a string'
+                    assert isinstance(
+                        write_output, str
+                    ), "write_output must be a string"
                 # Write the result back to the file
-                with open(write_output, 'w') as file:
+                with open(write_output, "w") as file:
                     file.write(result)
             return result
         else:
@@ -72,27 +74,27 @@ def _app_data_rootdir():
 
     See https://github.com/i2mint/i2mint/issues/1.
     """
-    if os.name == 'nt':
+    if os.name == "nt":
         # Windows
-        APP_DATA_ROOTDIR = os.getenv('APPDATA')
+        APP_DATA_ROOTDIR = os.getenv("APPDATA")
         if not APP_DATA_ROOTDIR:
-            raise RuntimeError('APPDATA environment variable is not set')
+            raise RuntimeError("APPDATA environment variable is not set")
     else:
         # macOS and Linux/Unix
-        APP_DATA_ROOTDIR = os.path.expanduser('~/.config')
+        APP_DATA_ROOTDIR = os.path.expanduser("~/.config")
 
     if not os.path.isdir(APP_DATA_ROOTDIR):
         os.mkdir(APP_DATA_ROOTDIR)
 
     # Note: Joining to '' to be consistent with get_app_data_dir()
-    return os.path.join(APP_DATA_ROOTDIR, '')
+    return os.path.join(APP_DATA_ROOTDIR, "")
 
 
 APP_DATA_ROOTDIR = _app_data_rootdir()
 
 
 def get_app_data_dir(
-    dirname='',
+    dirname="",
     *,
     if_exists: Callable[[str], Any] = do_nothing,
     if_does_not_exist: Callable[[str], Any] = os.mkdir,
@@ -161,7 +163,7 @@ def get_app_data_dir(
     return dirpath
 
 
-DFLT_WATERMARK = '.lkj'
+DFLT_WATERMARK = ".lkj"
 
 
 def watermark_dir(dirpath: str, watermark: str = DFLT_WATERMARK):
@@ -176,9 +178,9 @@ def has_watermark(dirpath: str, watermark: str = DFLT_WATERMARK):
 
 def _raise_watermark_error(dirpath, watermark):
     raise ValueError(
-        f'Directory {dirpath} is not watermarked with {watermark}. '
-        f'Perhaps you deleted the watermark file? If so, create the file and all will '
-        f'be good. For example, you could do:\n'
+        f"Directory {dirpath} is not watermarked with {watermark}. "
+        f"Perhaps you deleted the watermark file? If so, create the file and all will "
+        f"be good. For example, you could do:\n"
         f"    import pathlib; (pathlib.Path('{dirpath}') / '{watermark}').touch()"
     )
 
@@ -247,6 +249,6 @@ def rename_file(
 
     new_name = renamer_function(file)
     if verbose:
-        print(f'Renaming {file} to {new_name}')
+        print(f"Renaming {file} to {new_name}")
     if not dry_run:
         os.rename(file, new_name)

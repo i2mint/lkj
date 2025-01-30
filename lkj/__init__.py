@@ -41,12 +41,12 @@ from lkj.importing import import_object, register_namespace_forwarding
 from lkj.chunking import chunk_iterable, chunker
 from lkj.misc import identity, value_in_interval
 
-ddir = lambda obj: list(filter(lambda x: not x.startswith('_'), dir(obj)))
+ddir = lambda obj: list(filter(lambda x: not x.startswith("_"), dir(obj)))
 
 
 def user_machine_id():
     """Get an ID for the current computer/user that calls this function."""
-    return __import__('platform').node()
+    return __import__("platform").node()
 
 
 def add_attr(attr_name: str, attr_val: str = None, obj=None):
@@ -160,7 +160,7 @@ def add_as_attribute_of(obj, name=None):
 
     def _decorator(f):
         attrname = name or f.__name__
-        if not name and attrname.startswith('_'):
+        if not name and attrname.startswith("_"):
             attrname = attrname[1:]  # remove leading underscore
         setattr(obj, attrname, f)
         return f
@@ -178,6 +178,6 @@ def get_caller_package_name(default=None):
     try:
         stack = inspect.stack()
         caller_frame = stack[1][0]
-        return inspect.getmodule(caller_frame).__name__.split('.')[0]
+        return inspect.getmodule(caller_frame).__name__.split(".")[0]
     except Exception as error:
         return default
