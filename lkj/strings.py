@@ -136,9 +136,7 @@ def snake_to_camel(snake_string):
 
 
 # Note: Vendored in i2.multi_objects and dol.util
-def truncate_string_with_marker(
-    s, *, left_limit=15, right_limit=15, middle_marker='...'
-):
+def truncate_string(s: str, *, left_limit=15, right_limit=15, middle_marker='...'):
     """
     Truncate a string to a maximum length, inserting a marker in the middle.
 
@@ -148,23 +146,23 @@ def truncate_string_with_marker(
     If the string is shorter than the sum of the left_limit and right_limit,
     the string is returned as is.
 
-    >>> truncate_string_with_marker('1234567890')
+    >>> truncate_string('1234567890')
     '1234567890'
 
     But if the string is longer than the sum of the limits, it is truncated:
 
-    >>> truncate_string_with_marker('1234567890', left_limit=3, right_limit=3)
+    >>> truncate_string('1234567890', left_limit=3, right_limit=3)
     '123...890'
-    >>> truncate_string_with_marker('1234567890', left_limit=3, right_limit=0)
+    >>> truncate_string('1234567890', left_limit=3, right_limit=0)
     '123...'
-    >>> truncate_string_with_marker('1234567890', left_limit=0, right_limit=3)
+    >>> truncate_string('1234567890', left_limit=0, right_limit=3)
     '...890'
 
     If you're using a specific parametrization of the function often, you can
     create a partial function with the desired parameters:
 
     >>> from functools import partial
-    >>> truncate_string = partial(truncate_string_with_marker, left_limit=2, right_limit=2, middle_marker='---')
+    >>> truncate_string = partial(truncate_string, left_limit=2, right_limit=2, middle_marker='---')
     >>> truncate_string('1234567890')
     '12---90'
     >>> truncate_string('supercalifragilisticexpialidocious')
@@ -179,6 +177,54 @@ def truncate_string_with_marker(
         return middle_marker + s[-right_limit:]
     else:
         return s[:left_limit] + middle_marker + s[-right_limit:]
+
+
+truncate_string_with_marker = truncate_string  # backwards compatibility alias
+
+
+def truncate_lines(
+    s: str, top_limit: int = None, bottom_limit: int = None, middle_marker: str = '...'
+) -> str:
+    """
+    Truncates a string by limiting the number of lines from the top and bottom.
+    If the total number of lines is greater than top_limit + bottom_limit,
+    it keeps the first `top_limit` lines, keeps the last `bottom_limit` lines,
+    and replaces the omitted middle portion with a single line containing
+    `middle_marker`.
+
+    If top_limit or bottom_limit is None, it is treated as 0.
+
+    Example:
+        >>> text = '''Line1
+        ... Line2
+        ... Line3
+        ... Line4
+        ... Line5
+        ... Line6'''
+
+        >>> print(truncate_lines(text, top_limit=2, bottom_limit=2))
+        Line1
+        Line2
+        ...
+        Line5
+        Line6
+    """
+    # Interpret None as zero for convenience
+    top = top_limit if top_limit is not None else 0
+    bottom = bottom_limit if bottom_limit is not None else 0
+
+    # Split on line boundaries (retaining any trailing newlines in each piece)
+    lines = s.splitlines(True)
+    total_lines = len(lines)
+
+    # If no need to truncate, return as is
+    if total_lines <= top + bottom:
+        return s
+
+    # Otherwise, keep the top lines, keep the bottom lines,
+    # and insert a single marker line in the middle
+    truncated = lines[:top] + [middle_marker + '\n'] + lines[-bottom:]
+    return ''.join(truncated)
 
 
 # TODO: Generalize so that it can be used with regex keys (not escaped)

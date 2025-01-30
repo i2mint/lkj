@@ -19,12 +19,14 @@ from lkj.strings import (
     indent_lines,  # Indent all lines of a string
     most_common_indent,  # Get the most common indent of a multiline string
     regex_based_substitution,
-    truncate_string_with_marker,  # Truncate a string to a maximum length, inserting a marker in the middle.
+    truncate_string,  # Truncate a string to a maximum length, inserting a marker in the middle.
+    truncate_lines,  # Truncate a multiline string to a maximum number of lines
     unique_affixes,  # Get unique prefixes or suffixes of a list of strings
     camel_to_snake,  # Convert CamelCase to snake_case
     snake_to_camel,  # Convert snake_case to CamelCase
     fields_of_string_format,  # Extract field names from a string format
-    fields_of_string_formats,  # Extract field names from an iterable of string formats
+    fields_of_string_formats,  # Extract field names from an iterable of string formats,
+    truncate_string_with_marker,  # Deprecated: Backcompatibility alias
 )
 from lkj.loggers import (
     print_with_timestamp,
