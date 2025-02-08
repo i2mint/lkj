@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.10 documentation</title>
+  <title>lkj.strings &mdash; lkj 0.1.35 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=bafade30"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/documentation_options.js?v=2b6ce006"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -91,7 +91,7 @@
 
 <div class="viewcode-block" id="indent_lines">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.indent_lines">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Indent each line of a string.</span>
 
@@ -174,7 +174,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># Compiled regex to handle camel case to snake case conversions, including acronyms</span>
-<span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))&#39;</span><span class="p">)</span>
+<span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="camel_to_snake">
@@ -203,7 +203,7 @@
 <span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;XMLHttpRequestTest&#39;)</span>
 <span class="sd">        &#39;xml_http_request_test&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_camel_to_snake_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_\1&#39;</span><span class="p">,</span> <span class="n">camel_string</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_camel_to_snake_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_\1&quot;</span><span class="p">,</span> <span class="n">camel_string</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
 
 
 
@@ -232,14 +232,14 @@
 <span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;xml_http_request_test&#39;)</span>
 <span class="sd">        &#39;XmlHttpRequestTest&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;_&#39;</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">snake_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;_&quot;</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">snake_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span></div>
 
 
 
 <span class="c1"># Note: Vendored in i2.multi_objects and dol.util</span>
 <div class="viewcode-block" id="truncate_string">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_string">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Truncate a string to a maximum length, inserting a marker in the middle.</span>
 
@@ -289,7 +289,7 @@
 <div class="viewcode-block" id="truncate_lines">
 <a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_lines">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">truncate_lines</span><span class="p">(</span>
-    <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+    <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Truncates a string by limiting the number of lines from the top and bottom.</span>
@@ -329,8 +329,8 @@
 
     <span class="c1"># Otherwise, keep the top lines, keep the bottom lines,</span>
     <span class="c1"># and insert a single marker line in the middle</span>
-    <span class="n">truncated</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">middle_marker</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span></div>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">middle_marker</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span></div>
 
 
 
@@ -376,7 +376,7 @@
         <span class="c1"># Create regex pattern from sorted keys (without escaping to allow regex)</span>
         <span class="n">sorted_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
         <span class="n">sorted_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
-        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">))</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">))</span>
 
         <span class="c1"># Prepare the substitution function with aligned replacements</span>
         <span class="n">aligned_replacements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">,</span> <span class="n">sorted_values</span><span class="p">))</span>
@@ -472,7 +472,7 @@
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">):</span>
             <span class="c1"># Items are strings; affixes are lists of characters</span>
             <span class="k">def</span><span class="w"> </span><span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
-                <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Items are sequences (e.g., lists); affixes are lists</span>
@@ -520,6 +520,314 @@
     <span class="c1"># Postprocess affixes using egress</span>
     <span class="n">affixes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">egress</span><span class="p">,</span> <span class="n">affixes</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">affixes</span></div>
+
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="c1"># A match is represented as a dictionary (keys like &quot;start&quot;, &quot;end&quot;, etc.)</span>
+<span class="c1"># and the replacement is either a static string or a callable that takes that</span>
+<span class="c1"># dictionary and returns a string.</span>
+<span class="n">Replacement</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]]</span>
+
+
+<div class="viewcode-block" id="FindReplaceTool">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindReplaceTool</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A general-purpose find-and-replace tool that can treat the input text</span>
+<span class="sd">    as a continuous sequence of characters, even if operations such as viewing</span>
+<span class="sd">    context are performed line by line. The tool can analyze matches based on</span>
+<span class="sd">    a user-supplied regular expression, navigate through the matches with context,</span>
+<span class="sd">    and perform replacements either interactively or in bulk. Replacements can be</span>
+<span class="sd">    provided as either a static string or via a callback function that receives details</span>
+<span class="sd">    of the match.</span>
+
+<span class="sd">    Instead of keeping a single modified text, this version maintains a history of</span>
+<span class="sd">    text versions in self._text_versions, where self._text_versions[0] is the original</span>
+<span class="sd">    text and self._text_versions[-1] is the current text. Each edit is performed on the</span>
+<span class="sd">    current version and appended to the history. Additional methods allow reverting changes.</span>
+
+<span class="sd">    1: Basic usage</span>
+<span class="sd">    -----------------------------------------------------</span>
+<span class="sd">    &gt;&gt;&gt; FindReplaceTool(&quot;apple banana apple&quot;).find_and_print_matches(r&#39;apple&#39;)</span>
+<span class="sd">    Match 0 (around line 1):</span>
+<span class="sd">    apple banana apple</span>
+<span class="sd">    ^^^^^</span>
+<span class="sd">    ----------------------------------------</span>
+<span class="sd">    Match 1 (around line 1):</span>
+<span class="sd">    apple banana apple</span>
+<span class="sd">                 ^^^^^</span>
+<span class="sd">    ----------------------------------------</span>
+<span class="sd">    &gt;&gt;&gt; FindReplaceTool(&quot;apple banana apple&quot;).find_and_replace(r&#39;apple&#39;, &quot;orange&quot;)</span>
+<span class="sd">    &#39;orange banana orange&#39;</span>
+
+
+<span class="sd">    2: Using line_mode=True with a static replacement.</span>
+<span class="sd">    --------------------------------------------------------</span>
+<span class="sd">    &gt;&gt;&gt; text1 = &quot;apple\nbanana apple\ncherry&quot;</span>
+<span class="sd">    &gt;&gt;&gt; tool = FindReplaceTool(text1, line_mode=True, flags=re.MULTILINE)</span>
+<span class="sd">    &gt;&gt;&gt; import re</span>
+<span class="sd">    &gt;&gt;&gt; # Find all occurrences of &quot;apple&quot; (two in total).</span>
+<span class="sd">    &gt;&gt;&gt; _ = tool.analyze(r&#39;apple&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; len(tool._matches)</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; # Replace the first occurrence (&quot;apple&quot; on the first line) with &quot;orange&quot;.</span>
+<span class="sd">    &gt;&gt;&gt; tool.replace_one(0, &quot;orange&quot;).get_modified_text()</span>
+<span class="sd">    &#39;orange\nbanana apple\ncherry&#39;</span>
+
+<span class="sd">    3: Using line_mode=False with a callback replacement.</span>
+<span class="sd">    -----------------------------------------------------------</span>
+<span class="sd">    &gt;&gt;&gt; text2 = &quot;apple banana apple&quot;</span>
+<span class="sd">    &gt;&gt;&gt; tool2 = FindReplaceTool(text2, line_mode=False)</span>
+<span class="sd">    &gt;&gt;&gt; # Find all occurrences of &quot;apple&quot; in the continuous text.</span>
+<span class="sd">    &gt;&gt;&gt; len(tool2.analyze(r&#39;apple&#39;)._matches)</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; # Define a callback that converts each matched text to uppercase.</span>
+<span class="sd">    &gt;&gt;&gt; def to_upper(match):</span>
+<span class="sd">    ...     return match[&quot;matched_text&quot;].upper()</span>
+<span class="sd">    &gt;&gt;&gt; tool2.replace_all(to_upper).get_modified_text()</span>
+<span class="sd">    &#39;APPLE banana APPLE&#39;</span>
+
+<span class="sd">    4: Reverting changes.</span>
+<span class="sd">    ---------------------------</span>
+<span class="sd">    &gt;&gt;&gt; text3 = &quot;one two three&quot;</span>
+<span class="sd">    &gt;&gt;&gt; tool3 = FindReplaceTool(text3)</span>
+<span class="sd">    &gt;&gt;&gt; import re</span>
+<span class="sd">    &gt;&gt;&gt; # Analyze to match the first word &quot;one&quot; (at the start of the text).</span>
+<span class="sd">    &gt;&gt;&gt; tool3.analyze(r&#39;^one&#39;).replace_one(0, &quot;ONE&quot;).get_modified_text()</span>
+<span class="sd">    &#39;ONE two three&#39;</span>
+<span class="sd">    &gt;&gt;&gt; # Revert the edit.</span>
+<span class="sd">    &gt;&gt;&gt; tool3.revert()</span>
+<span class="sd">    &#39;one two three&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">line_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">flags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">show_line_numbers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">context_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">highlight_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># Maintain a list of text versions; the first element is the original text.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_mode</span> <span class="o">=</span> <span class="n">line_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_line_numbers</span> <span class="o">=</span> <span class="n">show_line_numbers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context_size</span> <span class="o">=</span> <span class="n">context_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">=</span> <span class="n">highlight_char</span>
+
+        <span class="c1"># Internal storage for matches; each entry is a dict with:</span>
+        <span class="c1">#   &quot;start&quot;: start offset in the current text,</span>
+        <span class="c1">#   &quot;end&quot;: end offset in the current text,</span>
+        <span class="c1">#   &quot;matched_text&quot;: the text that was matched,</span>
+        <span class="c1">#   &quot;groups&quot;: any named groups from the regex,</span>
+        <span class="c1">#   &quot;line_number&quot;: the line number where the match occurs.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># ----------------------------------------------------------------------------------</span>
+    <span class="c1"># Main methods</span>
+
+    <span class="c1"># TODO: Would like to have these functions be stateless</span>
+<div class="viewcode-block" id="FindReplaceTool.find_and_print_matches">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.find_and_print_matches">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_and_print_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
+<span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">view_matches</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.find_and_replace">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.find_and_replace">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_and_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
+<span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="n">replacement</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ----------------------------------------------------------------------------------</span>
+    <span class="c1"># Advanced methods</span>
+
+<div class="viewcode-block" id="FindReplaceTool.analyze">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.analyze">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
+<span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">current_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">):</span>
+            <span class="n">match_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>
+                <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span>
+                <span class="s2">&quot;matched_text&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">(),</span>
+                <span class="s2">&quot;line_number&quot;</span><span class="p">:</span> <span class="n">current_text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()),</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match_data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.view_matches">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.view_matches">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">view_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Displays all stored matches along with surrounding context. When line_mode</span>
+<span class="sd">        is enabled, the context is provided in full lines with (optionally) line numbers,</span>
+<span class="sd">        and a line is added below the matched line to indicate the matched portion.</span>
+<span class="sd">        In non-line mode, a snippet of characters around the match is shown.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No matches found.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_mode</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
+                <span class="n">line_num</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;line_number&quot;</span><span class="p">]</span>
+                <span class="n">start_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
+                <span class="n">end_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+                <span class="n">start_context</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line_num</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_size</span><span class="p">)</span>
+                <span class="n">end_context</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span> <span class="n">line_num</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> at line </span><span class="si">{</span><span class="n">line_num</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ln</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_context</span><span class="p">,</span> <span class="n">end_context</span><span class="p">):</span>
+                    <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ln</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  &quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_line_numbers</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="n">ln</span><span class="p">])</span>
+                    <span class="c1"># For the match line, mark the position of the match.</span>
+                    <span class="k">if</span> <span class="n">ln</span> <span class="o">==</span> <span class="n">line_num</span><span class="p">:</span>
+                        <span class="n">pos_in_line</span> <span class="o">=</span> <span class="n">start_pos</span> <span class="o">-</span> <span class="p">(</span>
+                            <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[:</span><span class="n">ln</span><span class="p">]))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">ln</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="p">)</span>
+                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="n">pos_in_line</span>
+                        <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span><span class="n">end_pos</span> <span class="o">-</span> <span class="n">start_pos</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">snippet_radius</span> <span class="o">=</span> <span class="mi">20</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_mode</span><span class="p">:</span>
+                    <span class="n">snippet_start</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">snippet_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span> <span class="o">-</span> <span class="n">snippet_radius</span><span class="p">)</span>
+                <span class="n">snippet_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">current_text</span><span class="p">),</span> <span class="n">end</span> <span class="o">+</span> <span class="n">snippet_radius</span><span class="p">)</span>
+                <span class="n">snippet</span> <span class="o">=</span> <span class="n">current_text</span><span class="p">[</span><span class="n">snippet_start</span><span class="p">:</span><span class="n">snippet_end</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> (around line </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;line_number&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">snippet</span><span class="p">)</span>
+                <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">snippet_start</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span>
+                    <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.replace_one">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.replace_one">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces a single match, identified by match_index, with a new string.</span>
+<span class="sd">        The &#39;replacement&#39; argument may be either a static string or a callable.</span>
+<span class="sd">        When it is a callable, it is called with a dictionary containing the match data</span>
+<span class="sd">        (including any captured groups) and should return the replacement string.</span>
+<span class="sd">        The replacement is performed on the current text version, and the new text is</span>
+<span class="sd">        appended as a new version in the history.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">match_index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">match_index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid match index: </span><span class="si">{</span><span class="n">match_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">match_index</span><span class="p">]</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Determine the replacement string.</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">replacement</span><span class="p">):</span>
+            <span class="n">new_replacement</span> <span class="o">=</span> <span class="n">replacement</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_replacement</span> <span class="o">=</span> <span class="n">replacement</span>
+
+        <span class="c1"># Create the new text version.</span>
+        <span class="n">new_text</span> <span class="o">=</span> <span class="n">current_text</span><span class="p">[:</span><span class="n">start</span><span class="p">]</span> <span class="o">+</span> <span class="n">new_replacement</span> <span class="o">+</span> <span class="n">current_text</span><span class="p">[</span><span class="n">end</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+        <span class="n">offset_diff</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_replacement</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+
+        <span class="c1"># Update offsets for subsequent matches (so they refer to the new text version).</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">match_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
+
+        <span class="c1"># Update the current match record.</span>
+        <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_replacement</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">[</span><span class="s2">&quot;matched_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_replacement</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.replace_all">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.replace_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces all stored matches in the current text version. The &#39;replacement&#39; argument may</span>
+<span class="sd">        be a static string or a callable (see replace_one for details). Replacements are performed</span>
+<span class="sd">        from the last match to the first, so that earlier offsets are not affected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">))):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replace_one</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.get_original_text">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.get_original_text">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_original_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the original text (first version).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.get_modified_text">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.get_modified_text">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_modified_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the current (latest) text version.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="FindReplaceTool.revert">
+<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.revert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reverts the current text version by removing the last &#39;steps&#39; versions</span>
+<span class="sd">        from the history. The original text (version 0) is never removed.</span>
+<span class="sd">        Returns the new current text.</span>
+
+<span class="sd">        &gt;&gt;&gt; text = &quot;one two three&quot;</span>
+<span class="sd">        &gt;&gt;&gt; tool = FindReplaceTool(text)</span>
+<span class="sd">        &gt;&gt;&gt; import re</span>
+<span class="sd">        &gt;&gt;&gt; tool.analyze(r&#39;^one&#39;).replace_one(0, &quot;ONE&quot;).get_modified_text()</span>
+<span class="sd">        &#39;ONE two three&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tool.revert()</span>
+<span class="sd">        &#39;one two three&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">steps</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">steps</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">steps</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span></div>
+</div>
 
 </pre></div>
 

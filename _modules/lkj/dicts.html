@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.dicts &mdash; lkj 0.1.10 documentation</title>
+  <title>lkj.dicts &mdash; lkj 0.1.35 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=bafade30"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/documentation_options.js?v=2b6ce006"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -87,7 +87,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Tools for working with dictionaries (and other Mappings).</span>
 
-<span class="sd">If you are looking for more, check out the `lkj.iterables` module too </span>
+<span class="sd">If you are looking for more, check out the `lkj.iterables` module too</span>
 <span class="sd">(after all, dicts are iterables).</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -106,8 +106,8 @@
 <span class="sd">    include (set): The set of keys to include in the new dictionary.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">    &gt;&gt;&gt; inclusive_subdict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}, {&#39;a&#39;, &#39;c&#39;})</span>
-<span class="sd">    {&#39;a&#39;: 1, &#39;c&#39;: 3}</span>
+
+<span class="sd">    &gt;&gt;&gt; assert inclusive_subdict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}, {&#39;a&#39;, &#39;c&#39;}) == {&#39;a&#39;: 1, &#39;c&#39;: 3}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">include</span><span class="p">}</span></div>

@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.filesys &mdash; lkj 0.1.10 documentation</title>
+  <title>lkj.filesys &mdash; lkj 0.1.35 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=bafade30"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/documentation_options.js?v=2b6ce006"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -97,9 +97,9 @@
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.enable_sourcing_from_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">enable_sourcing_from_file</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decorator for functions enables the decorated function to source from a file. </span>
+<span class="sd">    Decorator for functions enables the decorated function to source from a file.</span>
 
-<span class="sd">    It is to be applied to functions that take a string or bytes as their first </span>
+<span class="sd">    It is to be applied to functions that take a string or bytes as their first</span>
 <span class="sd">    argument. Decorating the function will enable it to detect if the first argument</span>
 <span class="sd">    is a file path, read the file content, call the function with the file content</span>
 <span class="sd">    as the first argument. Optionally, the decorated function can write the result</span>
@@ -113,14 +113,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">enable_sourcing_from_file</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">)</span>
-    
+
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Check if the first argument is a string and a valid file path</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">file_path</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="c1"># Read the file content</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
                 <span class="n">file_content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="c1"># Call the function with the file content and other arguments</span>
             <span class="n">new_args</span> <span class="o">=</span> <span class="p">(</span><span class="n">file_content</span><span class="p">,)</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -130,9 +130,11 @@
                 <span class="k">if</span> <span class="n">write_output</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                     <span class="n">write_output</span> <span class="o">=</span> <span class="n">file_path</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">write_output</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="s1">&#39;write_output must be a string&#39;</span>
+                    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+                        <span class="n">write_output</span><span class="p">,</span> <span class="nb">str</span>
+                    <span class="p">),</span> <span class="s2">&quot;write_output must be a string&quot;</span>
                 <span class="c1"># Write the result back to the file</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">write_output</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">write_output</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
                     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">else</span><span class="p">:</span>
@@ -164,20 +166,20 @@
 
 <span class="sd">    See https://github.com/i2mint/i2mint/issues/1.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;nt&quot;</span><span class="p">:</span>
         <span class="c1"># Windows</span>
-        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;APPDATA&#39;</span><span class="p">)</span>
+        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;APPDATA&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">APP_DATA_ROOTDIR</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;APPDATA environment variable is not set&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;APPDATA environment variable is not set&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># macOS and Linux/Unix</span>
-        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.config&#39;</span><span class="p">)</span>
+        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">)</span>
 
     <span class="c1"># Note: Joining to &#39;&#39; to be consistent with get_app_data_dir()</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 
 <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">_app_data_rootdir</span><span class="p">()</span>
@@ -186,7 +188,7 @@
 <div class="viewcode-block" id="get_app_data_dir">
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.get_app_data_dir">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_app_data_dir</span><span class="p">(</span>
-    <span class="n">dirname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">dirname</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">if_exists</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_nothing</span><span class="p">,</span>
     <span class="n">if_does_not_exist</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">,</span>
@@ -256,7 +258,7 @@
 
 
 
-<span class="n">DFLT_WATERMARK</span> <span class="o">=</span> <span class="s1">&#39;.lkj&#39;</span>
+<span class="n">DFLT_WATERMARK</span> <span class="o">=</span> <span class="s2">&quot;.lkj&quot;</span>
 
 
 <div class="viewcode-block" id="watermark_dir">
@@ -277,9 +279,9 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_raise_watermark_error</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;Directory </span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s1"> is not watermarked with </span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s1">. &#39;</span>
-        <span class="sa">f</span><span class="s1">&#39;Perhaps you deleted the watermark file? If so, create the file and all will &#39;</span>
-        <span class="sa">f</span><span class="s1">&#39;be good. For example, you could do:</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="sa">f</span><span class="s2">&quot;Directory </span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2"> is not watermarked with </span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">. &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Perhaps you deleted the watermark file? If so, create the file and all will &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;be good. For example, you could do:</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="sa">f</span><span class="s2">&quot;    import pathlib; (pathlib.Path(&#39;</span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2">&#39;) / &#39;</span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">&#39;).touch()&quot;</span>
     <span class="p">)</span>
 
@@ -353,7 +355,7 @@
 
     <span class="n">new_name</span> <span class="o">=</span> <span class="n">renamer_function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Renaming </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Renaming </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dry_run</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span></div>
 

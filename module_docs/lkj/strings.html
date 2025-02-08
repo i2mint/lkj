@@ -6,17 +6,17 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.10 documentation</title>
+  <title>lkj.strings &mdash; lkj 0.1.35 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=bafade30"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/documentation_options.js?v=2b6ce006"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -58,6 +58,18 @@
 <li class="toctree-l1"><a class="reference internal" href="loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">lkj.misc</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.strings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.FindReplaceTool"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.analyze"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.analyze()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.find_and_print_matches"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.find_and_print_matches()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.find_and_replace"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.find_and_replace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.get_modified_text"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.get_modified_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.get_original_text"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.get_original_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.replace_all"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.replace_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.replace_one"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.replace_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.revert"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.revert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.view_matches"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.view_matches()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.camel_to_snake"><code class="docutils literal notranslate"><span class="pre">camel_to_snake()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.fields_of_string_formats"><code class="docutils literal notranslate"><span class="pre">fields_of_string_formats()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.indent_lines"><code class="docutils literal notranslate"><span class="pre">indent_lines()</span></code></a></li>
@@ -99,6 +111,160 @@
   <section id="module-lkj.strings">
 <span id="lkj-strings"></span><h1>lkj.strings<a class="headerlink" href="#module-lkj.strings" title="Link to this heading"></a></h1>
 <p>Utils for strings</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">FindReplaceTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_line_numbers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highlight_char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'^'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool" title="Link to this definition"></a></dt>
+<dd><p>A general-purpose find-and-replace tool that can treat the input text
+as a continuous sequence of characters, even if operations such as viewing
+context are performed line by line. The tool can analyze matches based on
+a user-supplied regular expression, navigate through the matches with context,
+and perform replacements either interactively or in bulk. Replacements can be
+provided as either a static string or via a callback function that receives details
+of the match.</p>
+<p>Instead of keeping a single modified text, this version maintains a history of
+text versions in self._text_versions, where self._text_versions[0] is the original
+text and self._text_versions[-1] is the current text. Each edit is performed on the
+current version and appended to the history. Additional methods allow reverting changes.</p>
+<section id="basic-usage">
+<h2>1: Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">&quot;apple banana apple&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_print_matches</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;apple&#39;</span><span class="p">)</span>
+<span class="go">Match 0 (around line 1):</span>
+<span class="go">apple banana apple</span>
+<span class="go">^^^^^</span>
+<span class="go">----------------------------------------</span>
+<span class="go">Match 1 (around line 1):</span>
+<span class="go">apple banana apple</span>
+<span class="go">             ^^^^^</span>
+<span class="go">----------------------------------------</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">&quot;apple banana apple&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="go">&#39;orange banana orange&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="using-line-mode-true-with-a-static-replacement">
+<h2>2: Using line_mode=True with a static replacement.<a class="headerlink" href="#using-line-mode-true-with-a-static-replacement" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text1</span> <span class="o">=</span> <span class="s2">&quot;apple</span><span class="se">\n</span><span class="s2">banana apple</span><span class="se">\n</span><span class="s2">cherry&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span> <span class="o">=</span> <span class="n">FindReplaceTool</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">line_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all occurrences of &quot;apple&quot; (two in total).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;apple&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">tool</span><span class="o">.</span><span class="n">_matches</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Replace the first occurrence (&quot;apple&quot; on the first line) with &quot;orange&quot;.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span><span class="o">.</span><span class="n">replace_one</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
+<span class="go">&#39;orange\nbanana apple\ncherry&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="using-line-mode-false-with-a-callback-replacement">
+<h2>3: Using line_mode=False with a callback replacement.<a class="headerlink" href="#using-line-mode-false-with-a-callback-replacement" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text2</span> <span class="o">=</span> <span class="s2">&quot;apple banana apple&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool2</span> <span class="o">=</span> <span class="n">FindReplaceTool</span><span class="p">(</span><span class="n">text2</span><span class="p">,</span> <span class="n">line_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all occurrences of &quot;apple&quot; in the continuous text.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">tool2</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;apple&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">_matches</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a callback that converts each matched text to uppercase.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">to_upper</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">match</span><span class="p">[</span><span class="s2">&quot;matched_text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool2</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="n">to_upper</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
+<span class="go">&#39;APPLE banana APPLE&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="reverting-changes">
+<h2>4: Reverting changes.<a class="headerlink" href="#reverting-changes" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text3</span> <span class="o">=</span> <span class="s2">&quot;one two three&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool3</span> <span class="o">=</span> <span class="n">FindReplaceTool</span><span class="p">(</span><span class="n">text3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Analyze to match the first word &quot;one&quot; (at the start of the text).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool3</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^one&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace_one</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ONE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
+<span class="go">&#39;ONE two three&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Revert the edit.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool3</span><span class="o">.</span><span class="n">revert</span><span class="p">()</span>
+<span class="go">&#39;one two three&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.analyze">
+<span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.analyze" title="Link to this definition"></a></dt>
+<dd><p>Searches the current text (the last version) for occurrences matching the given
+regular expression. Any match data (including group captures) is stored internally.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.find_and_print_matches">
+<span class="sig-name descname"><span class="pre">find_and_print_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.find_and_print_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.find_and_print_matches" title="Link to this definition"></a></dt>
+<dd><p>Searches the current text (the last version) for occurrences matching the given
+regular expression. Any match data (including group captures) is stored internally.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.find_and_replace">
+<span class="sig-name descname"><span class="pre">find_and_replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.find_and_replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.find_and_replace" title="Link to this definition"></a></dt>
+<dd><p>Searches the current text (the last version) for occurrences matching the given
+regular expression. Any match data (including group captures) is stored internally.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.get_modified_text">
+<span class="sig-name descname"><span class="pre">get_modified_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.get_modified_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.get_modified_text" title="Link to this definition"></a></dt>
+<dd><p>Returns the current (latest) text version.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.get_original_text">
+<span class="sig-name descname"><span class="pre">get_original_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.get_original_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.get_original_text" title="Link to this definition"></a></dt>
+<dd><p>Returns the original text (first version).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.replace_all">
+<span class="sig-name descname"><span class="pre">replace_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.replace_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.replace_all" title="Link to this definition"></a></dt>
+<dd><p>Replaces all stored matches in the current text version. The ‘replacement’ argument may
+be a static string or a callable (see replace_one for details). Replacements are performed
+from the last match to the first, so that earlier offsets are not affected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.replace_one">
+<span class="sig-name descname"><span class="pre">replace_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.replace_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.replace_one" title="Link to this definition"></a></dt>
+<dd><p>Replaces a single match, identified by match_index, with a new string.
+The ‘replacement’ argument may be either a static string or a callable.
+When it is a callable, it is called with a dictionary containing the match data
+(including any captured groups) and should return the replacement string.
+The replacement is performed on the current text version, and the new text is
+appended as a new version in the history.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.revert">
+<span class="sig-name descname"><span class="pre">revert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.revert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.revert" title="Link to this definition"></a></dt>
+<dd><p>Reverts the current text version by removing the last ‘steps’ versions
+from the history. The original text (version 0) is never removed.
+Returns the new current text.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;one two three&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span> <span class="o">=</span> <span class="n">FindReplaceTool</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^one&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace_one</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ONE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
+<span class="go">&#39;ONE two three&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span><span class="o">.</span><span class="n">revert</span><span class="p">()</span>
+<span class="go">&#39;one two three&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.FindReplaceTool.view_matches">
+<span class="sig-name descname"><span class="pre">view_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool.view_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool.view_matches" title="Link to this definition"></a></dt>
+<dd><p>Displays all stored matches along with surrounding context. When line_mode
+is enabled, the context is provided in full lines with (optionally) line numbers,
+and a line is added below the matched line to indicate the matched portion.
+In non-line mode, a snippet of characters around the match is shown.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.camel_to_snake">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">camel_to_snake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camel_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#camel_to_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.camel_to_snake" title="Link to this definition"></a></dt>
