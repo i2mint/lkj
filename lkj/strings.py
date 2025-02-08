@@ -433,44 +433,54 @@ class FindReplaceTool:
     text and self._text_versions[-1] is the current text. Each edit is performed on the
     current version and appended to the history. Additional methods allow reverting changes.
 
-    Test 1: Using line_mode=True with a static replacement.
+    1: Basic usage
+    -----------------------------------------------------
+    >>> FindReplaceTool("apple banana apple").find_and_print_matches(r'apple')
+    Match 0 (around line 1):
+    apple banana apple
+    ^^^^^
+    ----------------------------------------
+    Match 1 (around line 1):
+    apple banana apple
+                 ^^^^^
+    ----------------------------------------
+    >>> FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")
+    'orange banana orange'
+
+
+    2: Using line_mode=True with a static replacement.
     --------------------------------------------------------
-    >>> text = "apple\nbanana apple\ncherry"
-    >>> tool = FindReplaceTool(text, line_mode=True)
+    >>> text1 = "apple\nbanana apple\ncherry"
+    >>> tool = FindReplaceTool(text1, line_mode=True)
     >>> import re
     >>> # Find all occurrences of "apple" (two in total).
-    >>> tool.analyze(r'apple', flags=re.MULTILINE)
+    >>> _ = tool.analyze(r'apple', flags=re.MULTILINE)
     >>> len(tool._matches)
     2
     >>> # Replace the first occurrence ("apple" on the first line) with "orange".
-    >>> tool.replace_one(0, "orange")
-    >>> tool.get_modified_text()
+    >>> tool.replace_one(0, "orange").get_modified_text()
     'orange\nbanana apple\ncherry'
 
-    Test 2: Using line_mode=False with a callback replacement.
+    3: Using line_mode=False with a callback replacement.
     -----------------------------------------------------------
     >>> text2 = "apple banana apple"
     >>> tool2 = FindReplaceTool(text2, line_mode=False)
     >>> # Find all occurrences of "apple" in the continuous text.
-    >>> tool2.analyze(r'apple')
-    >>> len(tool2._matches)
+    >>> len(tool2.analyze(r'apple')._matches)
     2
     >>> # Define a callback that converts each matched text to uppercase.
     >>> def to_upper(match):
     ...     return match["matched_text"].upper()
-    >>> tool2.replace_all(to_upper)
-    >>> tool2.get_modified_text()
+    >>> tool2.replace_all(to_upper).get_modified_text()
     'APPLE banana APPLE'
 
-    Test 3: Reverting changes.
+    4: Reverting changes.
     ---------------------------
     >>> text3 = "one two three"
     >>> tool3 = FindReplaceTool(text3)
     >>> import re
     >>> # Analyze to match the first word "one" (at the start of the text).
-    >>> tool3.analyze(r'^one')
-    >>> tool3.replace_one(0, "ONE")
-    >>> tool3.get_modified_text()
+    >>> tool3.analyze(r'^one').replace_one(0, "ONE").get_modified_text()
     'ONE two three'
     >>> # Revert the edit.
     >>> tool3.revert()
@@ -501,6 +511,29 @@ class FindReplaceTool:
         #   "line_number": the line number where the match occurs.
         self._matches = []
 
+    # ----------------------------------------------------------------------------------
+    # Main methods
+
+    # TODO: Would like to have these functions be stateless
+    def find_and_print_matches(self, pattern: str, *, flags: int = 0) -> None:
+        """
+        Searches the current text (the last version) for occurrences matching the given
+        regular expression. Any match data (including group captures) is stored internally.
+        """
+        return self.analyze(pattern, flags).view_matches()
+
+    def find_and_replace(
+        self, pattern: str, replacement: Replacement, *, flags: int = 0
+    ) -> None:
+        """
+        Searches the current text (the last version) for occurrences matching the given
+        regular expression. Any match data (including group captures) is stored internally.
+        """
+        return self.analyze(pattern, flags).replace_all(replacement).get_modified_text()
+
+    # ----------------------------------------------------------------------------------
+    # Advanced methods
+
     def analyze(self, pattern: str, flags: int = 0) -> None:
         """
         Searches the current text (the last version) for occurrences matching the given
@@ -519,6 +552,8 @@ class FindReplaceTool:
                 "line_number": current_text.count("\n", 0, match.start()),
             }
             self._matches.append(match_data)
+
+        return self
 
     def view_matches(self) -> None:
         """
@@ -578,6 +613,7 @@ class FindReplaceTool:
         The replacement is performed on the current text version, and the new text is
         appended as a new version in the history.
         """
+
         if match_index < 0 or match_index >= len(self._matches):
             print(f"Invalid match index: {match_index}")
             return
@@ -606,6 +642,8 @@ class FindReplaceTool:
         m["end"] = start + len(new_replacement)
         m["matched_text"] = new_replacement
 
+        return self
+
     def replace_all(self, replacement: Replacement) -> None:
         """
         Replaces all stored matches in the current text version. The 'replacement' argument may
@@ -614,6 +652,8 @@ class FindReplaceTool:
         """
         for idx in reversed(range(len(self._matches))):
             self.replace_one(idx, replacement)
+
+        return self
 
     def get_original_text(self) -> str:
         """Returns the original text (first version)."""
@@ -632,9 +672,7 @@ class FindReplaceTool:
         >>> text = "one two three"
         >>> tool = FindReplaceTool(text)
         >>> import re
-        >>> tool.analyze(r'^one')
-        >>> tool.replace_one(0, "ONE")
-        >>> tool.get_modified_text()
+        >>> tool.analyze(r'^one').replace_one(0, "ONE").get_modified_text()
         'ONE two three'
         >>> tool.revert()
         'one two three'
