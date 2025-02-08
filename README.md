@@ -14,8 +14,37 @@ That is, modules are all self contained (so can easily be copy-paste-vendored
 Further, many functions will contain their own imports: Those functions can even be 
 copy-paste-vendored by just copying the function body.
 
-
 # Examples of utils
+
+## Find and replace
+
+`FindReplaceTool` is a general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters, 
+even if operations such as viewing context are performed line by line.
+
+The basic usage is 
+
+```python
+FindReplaceTool("apple banana apple").find_and_print_matches(r'apple')
+```
+    
+    Match 0 (around line 1):
+    apple banana apple
+    ^^^^^
+    ----------------------------------------
+    Match 1 (around line 1):
+    apple banana apple
+                 ^^^^^
+    ----------------------------------------
+
+```python
+FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")
+```
+
+    'orange banana orange'
+
+[See more examples in documentation](https://i2mint.github.io/lkj/module_docs/lkj/strings.html#lkj.strings.FindReplaceTool)
+
+[See here a example of how I used this to edit my CI yamls](https://github.com/i2mint/lkj/discussions/4#discussioncomment-12104547)
 
 ## loggers
 
