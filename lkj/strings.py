@@ -408,3 +408,240 @@ def unique_affixes(
     # Postprocess affixes using egress
     affixes = list(map(egress, affixes))
     return affixes
+
+
+from typing import Union, Callable, Dict, Any
+
+# A match is represented as a dictionary (keys like "start", "end", etc.)
+# and the replacement is either a static string or a callable that takes that
+# dictionary and returns a string.
+Replacement = Union[str, Callable[[Dict[str, Any]], str]]
+
+
+class FindReplaceTool:
+    r"""
+    A general-purpose find-and-replace tool that can treat the input text
+    as a continuous sequence of characters, even if operations such as viewing
+    context are performed line by line. The tool can analyze matches based on
+    a user-supplied regular expression, navigate through the matches with context,
+    and perform replacements either interactively or in bulk. Replacements can be
+    provided as either a static string or via a callback function that receives details
+    of the match.
+
+    Instead of keeping a single modified text, this version maintains a history of
+    text versions in self._text_versions, where self._text_versions[0] is the original
+    text and self._text_versions[-1] is the current text. Each edit is performed on the
+    current version and appended to the history. Additional methods allow reverting changes.
+
+    Test 1: Using line_mode=True with a static replacement.
+    --------------------------------------------------------
+    >>> text = "apple\nbanana apple\ncherry"
+    >>> tool = FindReplaceTool(text, line_mode=True)
+    >>> import re
+    >>> # Find all occurrences of "apple" (two in total).
+    >>> tool.analyze(r'apple', flags=re.MULTILINE)
+    >>> len(tool._matches)
+    2
+    >>> # Replace the first occurrence ("apple" on the first line) with "orange".
+    >>> tool.replace_one(0, "orange")
+    >>> tool.get_modified_text()
+    'orange\nbanana apple\ncherry'
+
+    Test 2: Using line_mode=False with a callback replacement.
+    -----------------------------------------------------------
+    >>> text2 = "apple banana apple"
+    >>> tool2 = FindReplaceTool(text2, line_mode=False)
+    >>> # Find all occurrences of "apple" in the continuous text.
+    >>> tool2.analyze(r'apple')
+    >>> len(tool2._matches)
+    2
+    >>> # Define a callback that converts each matched text to uppercase.
+    >>> def to_upper(match):
+    ...     return match["matched_text"].upper()
+    >>> tool2.replace_all(to_upper)
+    >>> tool2.get_modified_text()
+    'APPLE banana APPLE'
+
+    Test 3: Reverting changes.
+    ---------------------------
+    >>> text3 = "one two three"
+    >>> tool3 = FindReplaceTool(text3)
+    >>> import re
+    >>> # Analyze to match the first word "one" (at the start of the text).
+    >>> tool3.analyze(r'^one')
+    >>> tool3.replace_one(0, "ONE")
+    >>> tool3.get_modified_text()
+    'ONE two three'
+    >>> # Revert the edit.
+    >>> tool3.revert()
+    'one two three'
+    """
+
+    def __init__(
+        self,
+        text: str,
+        *,
+        line_mode: bool = False,
+        show_line_numbers: bool = True,
+        context_size: int = 2,
+        highlight_char: str = "^",
+    ):
+        # Maintain a list of text versions; the first element is the original text.
+        self._text_versions = [text]
+        self.line_mode = line_mode
+        self.show_line_numbers = show_line_numbers
+        self.context_size = context_size
+        self.highlight_char = highlight_char
+
+        # Internal storage for matches; each entry is a dict with:
+        #   "start": start offset in the current text,
+        #   "end": end offset in the current text,
+        #   "matched_text": the text that was matched,
+        #   "groups": any named groups from the regex,
+        #   "line_number": the line number where the match occurs.
+        self._matches = []
+
+    def analyze(self, pattern: str, flags: int = 0) -> None:
+        """
+        Searches the current text (the last version) for occurrences matching the given
+        regular expression. Any match data (including group captures) is stored internally.
+        """
+        import re
+
+        self._matches.clear()
+        current_text = self._text_versions[-1]
+        for match in re.finditer(pattern, current_text, flags):
+            match_data = {
+                "start": match.start(),
+                "end": match.end(),
+                "matched_text": match.group(0),
+                "groups": match.groupdict(),
+                "line_number": current_text.count("\n", 0, match.start()),
+            }
+            self._matches.append(match_data)
+
+    def view_matches(self) -> None:
+        """
+        Displays all stored matches along with surrounding context. When line_mode
+        is enabled, the context is provided in full lines with (optionally) line numbers,
+        and a line is added below the matched line to indicate the matched portion.
+        In non-line mode, a snippet of characters around the match is shown.
+        """
+        current_text = self._text_versions[-1]
+        if not self._matches:
+            print("No matches found.")
+            return
+
+        if self.line_mode:
+            lines = current_text.splitlines()
+            for idx, m in enumerate(self._matches):
+                line_num = m["line_number"]
+                start_pos = m["start"]
+                end_pos = m["end"]
+                start_context = max(0, line_num - self.context_size)
+                end_context = min(len(lines), line_num + self.context_size + 1)
+                print(f"Match {idx} at line {line_num+1}:")
+                for ln in range(start_context, end_context):
+                    prefix = f"{ln+1:>4}  " if self.show_line_numbers else ""
+                    print(prefix + lines[ln])
+                    # For the match line, mark the position of the match.
+                    if ln == line_num:
+                        pos_in_line = start_pos - (
+                            len("\n".join(lines[:ln])) + (1 if ln > 0 else 0)
+                        )
+                        highlight = " " * (
+                            len(prefix) + pos_in_line
+                        ) + self.highlight_char * (end_pos - start_pos)
+                        print(highlight)
+                print("-" * 40)
+        else:
+            snippet_radius = 20
+            for idx, m in enumerate(self._matches):
+                start, end = m["start"], m["end"]
+                snippet_start = max(0, start - snippet_radius)
+                snippet_end = min(len(current_text), end + snippet_radius)
+                snippet = current_text[snippet_start:snippet_end]
+                print(f"Match {idx} (around line {m['line_number']+1}):")
+                print(snippet)
+                highlight = " " * (start - snippet_start) + self.highlight_char * (
+                    end - start
+                )
+                print(highlight)
+                print("-" * 40)
+
+    def replace_one(self, match_index: int, replacement: Replacement) -> None:
+        """
+        Replaces a single match, identified by match_index, with a new string.
+        The 'replacement' argument may be either a static string or a callable.
+        When it is a callable, it is called with a dictionary containing the match data
+        (including any captured groups) and should return the replacement string.
+        The replacement is performed on the current text version, and the new text is
+        appended as a new version in the history.
+        """
+        if match_index < 0 or match_index >= len(self._matches):
+            print(f"Invalid match index: {match_index}")
+            return
+
+        m = self._matches[match_index]
+        start, end = m["start"], m["end"]
+        current_text = self._text_versions[-1]
+
+        # Determine the replacement string.
+        if callable(replacement):
+            new_replacement = replacement(m)
+        else:
+            new_replacement = replacement
+
+        # Create the new text version.
+        new_text = current_text[:start] + new_replacement + current_text[end:]
+        self._text_versions.append(new_text)
+        offset_diff = len(new_replacement) - (end - start)
+
+        # Update offsets for subsequent matches (so they refer to the new text version).
+        for i in range(match_index + 1, len(self._matches)):
+            self._matches[i]["start"] += offset_diff
+            self._matches[i]["end"] += offset_diff
+
+        # Update the current match record.
+        m["end"] = start + len(new_replacement)
+        m["matched_text"] = new_replacement
+
+    def replace_all(self, replacement: Replacement) -> None:
+        """
+        Replaces all stored matches in the current text version. The 'replacement' argument may
+        be a static string or a callable (see replace_one for details). Replacements are performed
+        from the last match to the first, so that earlier offsets are not affected.
+        """
+        for idx in reversed(range(len(self._matches))):
+            self.replace_one(idx, replacement)
+
+    def get_original_text(self) -> str:
+        """Returns the original text (first version)."""
+        return self._text_versions[0]
+
+    def get_modified_text(self) -> str:
+        """Returns the current (latest) text version."""
+        return self._text_versions[-1]
+
+    def revert(self, steps: int = 1):
+        """
+        Reverts the current text version by removing the last 'steps' versions
+        from the history. The original text (version 0) is never removed.
+        Returns the new current text.
+
+        >>> text = "one two three"
+        >>> tool = FindReplaceTool(text)
+        >>> import re
+        >>> tool.analyze(r'^one')
+        >>> tool.replace_one(0, "ONE")
+        >>> tool.get_modified_text()
+        'ONE two three'
+        >>> tool.revert()
+        'one two three'
+        """
+        if steps < 1:
+            return self.get_modified_text()
+        while steps > 0 and len(self._text_versions) > 1:
+            self._text_versions.pop()
+            steps -= 1
+        return self.get_modified_text()
