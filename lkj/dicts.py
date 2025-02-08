@@ -18,8 +18,8 @@ def inclusive_subdict(d, include):
     include (set): The set of keys to include in the new dictionary.
 
     Example:
-    >>> inclusive_subdict({'a': 1, 'b': 2, 'c': 3}, {'a', 'c'})
-    {'a': 1, 'c': 3}
+
+    >>> assert inclusive_subdict({'a': 1, 'b': 2, 'c': 3}, {'a', 'c'}) == {'a': 1, 'c': 3}
 
     """
     return {k: d[k] for k in d.keys() & include}

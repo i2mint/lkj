@@ -451,10 +451,10 @@ class FindReplaceTool:
     2: Using line_mode=True with a static replacement.
     --------------------------------------------------------
     >>> text1 = "apple\nbanana apple\ncherry"
-    >>> tool = FindReplaceTool(text1, line_mode=True)
+    >>> tool = FindReplaceTool(text1, line_mode=True, flags=re.MULTILINE)
     >>> import re
     >>> # Find all occurrences of "apple" (two in total).
-    >>> _ = tool.analyze(r'apple', flags=re.MULTILINE)
+    >>> _ = tool.analyze(r'apple')
     >>> len(tool._matches)
     2
     >>> # Replace the first occurrence ("apple" on the first line) with "orange".
@@ -492,6 +492,7 @@ class FindReplaceTool:
         text: str,
         *,
         line_mode: bool = False,
+        flags: int = 0,
         show_line_numbers: bool = True,
         context_size: int = 2,
         highlight_char: str = "^",
@@ -499,6 +500,7 @@ class FindReplaceTool:
         # Maintain a list of text versions; the first element is the original text.
         self._text_versions = [text]
         self.line_mode = line_mode
+        self.flags = flags
         self.show_line_numbers = show_line_numbers
         self.context_size = context_size
         self.highlight_char = highlight_char
@@ -515,26 +517,24 @@ class FindReplaceTool:
     # Main methods
 
     # TODO: Would like to have these functions be stateless
-    def find_and_print_matches(self, pattern: str, *, flags: int = 0) -> None:
+    def find_and_print_matches(self, pattern: str) -> None:
         """
         Searches the current text (the last version) for occurrences matching the given
         regular expression. Any match data (including group captures) is stored internally.
         """
-        return self.analyze(pattern, flags).view_matches()
+        return self.analyze(pattern).view_matches()
 
-    def find_and_replace(
-        self, pattern: str, replacement: Replacement, *, flags: int = 0
-    ) -> None:
+    def find_and_replace(self, pattern: str, replacement: Replacement) -> None:
         """
         Searches the current text (the last version) for occurrences matching the given
         regular expression. Any match data (including group captures) is stored internally.
         """
-        return self.analyze(pattern, flags).replace_all(replacement).get_modified_text()
+        return self.analyze(pattern).replace_all(replacement).get_modified_text()
 
     # ----------------------------------------------------------------------------------
     # Advanced methods
 
-    def analyze(self, pattern: str, flags: int = 0) -> None:
+    def analyze(self, pattern: str) -> None:
         """
         Searches the current text (the last version) for occurrences matching the given
         regular expression. Any match data (including group captures) is stored internally.
@@ -543,7 +543,7 @@ class FindReplaceTool:
 
         self._matches.clear()
         current_text = self._text_versions[-1]
-        for match in re.finditer(pattern, current_text, flags):
+        for match in re.finditer(pattern, current_text, self.flags):
             match_data = {
                 "start": match.start(),
                 "end": match.end(),
@@ -593,7 +593,10 @@ class FindReplaceTool:
             snippet_radius = 20
             for idx, m in enumerate(self._matches):
                 start, end = m["start"], m["end"]
-                snippet_start = max(0, start - snippet_radius)
+                if self.line_mode:
+                    snippet_start = current_text.rfind('\n', 0, start) + 1
+                else:
+                    snippet_start = max(0, start - snippet_radius)
                 snippet_end = min(len(current_text), end + snippet_radius)
                 snippet = current_text[snippet_start:snippet_end]
                 print(f"Match {idx} (around line {m['line_number']+1}):")
