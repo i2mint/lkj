@@ -594,7 +594,7 @@ class FindReplaceTool:
             for idx, m in enumerate(self._matches):
                 start, end = m["start"], m["end"]
                 if self.line_mode:
-                    snippet_start = current_text.rfind('\n', 0, start) + 1
+                    snippet_start = current_text.rfind("\n", 0, start) + 1
                 else:
                     snippet_start = max(0, start - snippet_radius)
                 snippet_end = min(len(current_text), end + snippet_radius)
