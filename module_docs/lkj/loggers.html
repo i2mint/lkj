@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.loggers &mdash; lkj 0.1.36 documentation</title>
+  <title>lkj.loggers &mdash; lkj 0.1.37 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=1c946a6c"></script>
+      <script src="../../_static/documentation_options.js?v=b8ecee75"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -57,6 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="importing.html">lkj.importing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterables.html">lkj.iterables</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.loggers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.CallOnError"><code class="docutils literal notranslate"><span class="pre">CallOnError</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.loggers.instance_flag_is_set"><code class="docutils literal notranslate"><span class="pre">instance_flag_is_set()</span></code></a></li>
@@ -99,6 +100,22 @@
   <section id="module-lkj.loggers">
 <span id="lkj-loggers"></span><h1>lkj.loggers<a class="headerlink" href="#module-lkj.loggers" title="Link to this heading"></a></h1>
 <p>Utils for logging.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lkj.loggers.CallOnError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">CallOnError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*exceptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_error:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#CallOnError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.CallOnError" title="Link to this definition"></a></dt>
+<dd><p>An extension of the suppress context manager that enables the user to issue a warning
+message when an import error occurs.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">warn_about_import_errors</span> <span class="o">=</span> <span class="n">CallOnError</span><span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="k">lambda</span> <span class="n">err</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">warn_about_import_errors</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="kn">import</span><span class="w"> </span><span class="nn">this_package_surely_does_not_exist</span>
+<span class="go">Warning: No module named &#39;this_package_surely_does_not_exist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">warn_about_import_errors</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="kn">from</span><span class="w"> </span><span class="nn">os.this_module_does_not_exist</span><span class="w"> </span><span class="kn">import</span> <span class="n">this_function_does_not_exist</span>
+<span class="go">Warning: No module named &#39;os.this_module_does_not_exist&#39;; &#39;os&#39; is not a package</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="lkj.loggers.ErrorInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">ErrorInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traceback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/loggers.html#ErrorInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.ErrorInfo" title="Link to this definition"></a></dt>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.loggers &mdash; lkj 0.1.36 documentation</title>
+  <title>lkj.loggers &mdash; lkj 0.1.37 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=1c946a6c"></script>
+      <script src="../../_static/documentation_options.js?v=b8ecee75"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -523,6 +523,40 @@
             <span class="k">return</span> <span class="n">error_info_processor</span><span class="p">(</span><span class="n">error_info</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
+
+
+<div class="viewcode-block" id="CallOnError">
+<a class="viewcode-back" href="../../module_docs/lkj/loggers.html#lkj.loggers.CallOnError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CallOnError</span><span class="p">(</span><span class="n">suppress</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An extension of the suppress context manager that enables the user to issue a warning</span>
+<span class="sd">    message when an import error occurs.</span>
+
+<span class="sd">    &gt;&gt;&gt; warn_about_import_errors = CallOnError(ImportError, on_error=lambda err: print(f&quot;Warning: {err}&quot;))</span>
+<span class="sd">    &gt;&gt;&gt; with warn_about_import_errors:</span>
+<span class="sd">    ...     import this_package_surely_does_not_exist</span>
+<span class="sd">    Warning: No module named &#39;this_package_surely_does_not_exist&#39;</span>
+<span class="sd">    &gt;&gt;&gt; with warn_about_import_errors:</span>
+<span class="sd">    ...     from os.this_module_does_not_exist import this_function_does_not_exist</span>
+<span class="sd">    Warning: No module named &#39;os.this_module_does_not_exist&#39;; &#39;os&#39; is not a package</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="nb">print</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">=</span> <span class="n">on_error</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">exceptions</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exctype</span><span class="p">,</span> <span class="n">excinst</span><span class="p">,</span> <span class="n">exctb</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">exctype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span><span class="p">(</span><span class="n">excinst</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="n">exctype</span><span class="p">,</span> <span class="n">excinst</span><span class="p">,</span> <span class="n">exctb</span><span class="p">)</span></div>
 
 </pre></div>
 
