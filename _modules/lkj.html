@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj &mdash; lkj 0.1.37 documentation</title>
+  <title>lkj &mdash; lkj 0.1.38 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b8ecee75"></script>
+      <script src="../_static/documentation_options.js?v=50f64db7"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -115,13 +115,14 @@
     <span class="n">truncate_string_with_marker</span><span class="p">,</span>  <span class="c1"># Deprecated: Backcompatibility alias</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">lkj.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">print_with_timestamp</span><span class="p">,</span>
-    <span class="n">print_progress</span><span class="p">,</span>
-    <span class="n">log_calls</span><span class="p">,</span>
-    <span class="n">clog</span><span class="p">,</span>
+    <span class="n">print_with_timestamp</span><span class="p">,</span>  <span class="c1"># Prints with a timestamp and optional refresh.</span>
+    <span class="n">print_progress</span><span class="p">,</span>  <span class="c1"># an alias often used for print_with_timestamp</span>
+    <span class="n">log_calls</span><span class="p">,</span>  <span class="c1"># Decorator that adds logging before and after the function&#39;s call.</span>
+    <span class="n">clog</span><span class="p">,</span>  <span class="c1"># Conditional logger</span>
     <span class="n">ErrorInfo</span><span class="p">,</span>
-    <span class="n">return_error_info_on_error</span><span class="p">,</span>
-    <span class="n">wrapped_print</span><span class="p">,</span>
+    <span class="n">return_error_info_on_error</span><span class="p">,</span>  <span class="c1"># Decorator that returns traceback and local variables on error.</span>
+    <span class="n">wrapped_print</span><span class="p">,</span>  <span class="c1"># Prints a string or list ensuring the total line width does not exceed `max_width`.</span>
+    <span class="n">CallOnError</span><span class="p">,</span>  <span class="c1"># Context manager that calls a function on error (subclass of suppress)</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">lkj.importing</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_object</span><span class="p">,</span> <span class="n">register_namespace_forwarding</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">lkj.chunking</span><span class="w"> </span><span class="kn">import</span> <span class="n">chunk_iterable</span><span class="p">,</span> <span class="n">chunker</span>
