@@ -30,13 +30,14 @@ from lkj.strings import (
     truncate_string_with_marker,  # Deprecated: Backcompatibility alias
 )
 from lkj.loggers import (
-    print_with_timestamp,
-    print_progress,
-    log_calls,
-    clog,
+    print_with_timestamp,  # Prints with a timestamp and optional refresh.
+    print_progress,  # an alias often used for print_with_timestamp
+    log_calls,  # Decorator that adds logging before and after the function's call.
+    clog,  # Conditional logger
     ErrorInfo,
-    return_error_info_on_error,
-    wrapped_print,
+    return_error_info_on_error,  # Decorator that returns traceback and local variables on error.
+    wrapped_print,  # Prints a string or list ensuring the total line width does not exceed `max_width`.
+    CallOnError,  # Context manager that calls a function on error (subclass of suppress)
 )
 from lkj.importing import import_object, register_namespace_forwarding
 from lkj.chunking import chunk_iterable, chunker
