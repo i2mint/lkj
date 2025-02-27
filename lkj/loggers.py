@@ -414,3 +414,34 @@ def return_error_info_on_error(
             return error_info_processor(error_info)
 
     return wrapper
+
+
+from contextlib import suppress
+
+
+class CallOnError(suppress):
+    """
+    An extension of the suppress context manager that enables the user to issue a warning
+    message when an import error occurs.
+
+    >>> warn_about_import_errors = CallOnError(ImportError, on_error=lambda err: print(f"Warning: {err}"))
+    >>> with warn_about_import_errors:
+    ...     import this_package_surely_does_not_exist
+    Warning: No module named 'this_package_surely_does_not_exist'
+    >>> with warn_about_import_errors:
+    ...     from os.this_module_does_not_exist import this_function_does_not_exist
+    Warning: No module named 'os.this_module_does_not_exist'; 'os' is not a package
+    """
+
+    def __init__(
+        self,
+        *exceptions,
+        on_error: Callable = print,
+    ):
+        self.on_error = on_error
+        super().__init__(*exceptions)
+
+    def __exit__(self, exctype, excinst, exctb):
+        if exctype is not None:
+            self.on_error(excinst)
+        return super().__exit__(exctype, excinst, exctb)
