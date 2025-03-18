@@ -111,6 +111,7 @@ from typing import Mapping, Callable, TypeVar, Iterable, Tuple
 KT = TypeVar("KT")  # Key type
 VT = TypeVar("VT")  # Value type
 
+
 # Note: Could have all function parameters (recursive_condition, etc.) also take the
 #       enumerated index of the mapping as an argument. That would give us even more
 #       flexibility, but it might be overkill and make the interface more complex.
@@ -215,6 +216,7 @@ def merge_dicts(
 
     return merged
 
+
 import operator
 from typing import Callable, Dict, Any
 
@@ -228,7 +230,9 @@ def compare_field_values(
     *,
     field_comparators: Dict[KT, Comparator] = {},
     default_comparator: Comparator = operator.eq,
-    aggregator: Callable[[Dict[KT, Comparison]], Any] = lambda d: d, #lambda d: np.mean(list(d.values()))
+    aggregator: Callable[
+        [Dict[KT, Comparison]], Any
+    ] = lambda d: d,  # lambda d: np.mean(list(d.values()))
 ):
     """
     Compare two dictionaries' values field by field
