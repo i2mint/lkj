@@ -114,13 +114,6 @@ VT = TypeVar("VT")  # Value type
 # Note: Could have all function parameters (recursive_condition, etc.) also take the
 #       enumerated index of the mapping as an argument. That would give us even more
 #       flexibility, but it might be overkill and make the interface more complex.
-from typing import Mapping, Callable, TypeVar, Iterable, Tuple
-from collections import defaultdict
-
-KT = TypeVar("KT")  # Key type
-VT = TypeVar("VT")  # Value type
-
-
 def merge_dicts(
     *mappings: Mapping[KT, VT],
     recursive_condition: Callable[[VT], bool] = lambda v: isinstance(v, Mapping),
@@ -221,3 +214,59 @@ def merge_dicts(
                 merged[key] = value
 
     return merged
+
+import operator
+from typing import Callable, Dict, Any
+
+Comparison = Any
+Comparator = Callable[[dict, dict], Comparison]
+
+
+def compare_dicts(
+    dict1,
+    dict2,
+    *,
+    field_comparators: Dict[KT, Comparator] = {},
+    default_comparator: Comparator = operator.eq,
+    aggregator: Callable[[Dict[KT, Comparison]], Any] = lambda d: d, #lambda d: np.mean(list(d.values()))
+):
+    """
+    Compare two dictionaries field by field using specified comparators or a default comparator.
+
+    :param dict1: The first dictionary.
+    :param dict2: The second dictionary.
+    :param field_comparators: A dictionary where keys are field names and values are comparator functions.
+    :param default_comparator: A default comparator function to use if no specific comparator is provided for a field.
+    :param aggregator: A function to aggregate the comparison results into a final score.
+    :return: A final score based on the comparison results.
+
+    >>> dict1 = {"color": "brown", "animal": "dog"}
+    >>> dict2 = {"color": "brown", "animal": "cat"}
+    >>> dict3 = {"color": "brown", "animal": "bird"}
+    >>> field_comparators = {
+    ...     "color": lambda x, y: 1 if x == y else 0,
+    ...     "animal": lambda x, y: 1 if len(x) == len(y) else 0
+    ... }
+    >>> compare_dicts(dict1, dict2, field_comparators=field_comparators)
+    {'color': 1, 'animal': 1}
+    >>> compare_dicts(dict1, dict3, field_comparators=field_comparators)
+    {'color': 1, 'animal': 0}
+    >>> import functools, statistics
+    >>> aggregator = lambda d: statistics.mean(d.values())
+    >>> my_compare_dicts = functools.partial(
+    ...     compare_dicts, field_comparators=field_comparators, aggregator=aggregator
+    ... )
+    >>> my_compare_dicts(dict1, dict2)
+    1
+    >>> my_compare_dicts(dict1, dict3)
+    0.5
+
+    """
+    common_keys = [k for k in dict1.keys() if k in dict2.keys()]
+
+    comparisons = {}
+    for key in common_keys:
+        comparator = field_comparators.get(key, default_comparator)
+        comparisons[key] = comparator(dict1[key], dict2[key])
+
+    return aggregator(comparisons)
