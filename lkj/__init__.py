@@ -13,6 +13,7 @@ from lkj.dicts import (
     inclusive_subdict,  # new dictionary with only the keys in `include`
     exclusive_subdict,  # new dictionary with only the keys not in `exclude`.
     merge_dicts,  # Merge multiple dictionaries recursively
+    compare_field_values,  # Compare two dictionaries' values
 )
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (

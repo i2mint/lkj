@@ -222,7 +222,7 @@ Comparison = Any
 Comparator = Callable[[dict, dict], Comparison]
 
 
-def compare_dicts(
+def compare_field_values(
     dict1,
     dict2,
     *,
@@ -231,13 +231,13 @@ def compare_dicts(
     aggregator: Callable[[Dict[KT, Comparison]], Any] = lambda d: d, #lambda d: np.mean(list(d.values()))
 ):
     """
-    Compare two dictionaries field by field using specified comparators or a default comparator.
+    Compare two dictionaries' values field by field
 
     :param dict1: The first dictionary.
     :param dict2: The second dictionary.
     :param field_comparators: A dictionary where keys are field names and values are comparator functions.
     :param default_comparator: A default comparator function to use if no specific comparator is provided for a field.
-    :param aggregator: A function to aggregate the comparison results into a final score.
+    :param aggregator: A function to aggregate the comparison results into a final comparison object.
     :return: A final score based on the comparison results.
 
     >>> dict1 = {"color": "brown", "animal": "dog"}
@@ -247,18 +247,18 @@ def compare_dicts(
     ...     "color": lambda x, y: 1 if x == y else 0,
     ...     "animal": lambda x, y: 1 if len(x) == len(y) else 0
     ... }
-    >>> compare_dicts(dict1, dict2, field_comparators=field_comparators)
+    >>> compare_field_values(dict1, dict2, field_comparators=field_comparators)
     {'color': 1, 'animal': 1}
-    >>> compare_dicts(dict1, dict3, field_comparators=field_comparators)
+    >>> compare_field_values(dict1, dict3, field_comparators=field_comparators)
     {'color': 1, 'animal': 0}
     >>> import functools, statistics
     >>> aggregator = lambda d: statistics.mean(d.values())
-    >>> my_compare_dicts = functools.partial(
-    ...     compare_dicts, field_comparators=field_comparators, aggregator=aggregator
+    >>> mean_of_values = functools.partial(
+    ...     compare_field_values, field_comparators=field_comparators, aggregator=aggregator
     ... )
-    >>> my_compare_dicts(dict1, dict2)
+    >>> mean_of_values(dict1, dict2)
     1
-    >>> my_compare_dicts(dict1, dict3)
+    >>> mean_of_values(dict1, dict3)
     0.5
 
     """
