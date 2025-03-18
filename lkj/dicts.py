@@ -224,6 +224,10 @@ Comparison = Any
 Comparator = Callable[[dict, dict], Comparison]
 
 
+def _common_keys_list(dict1, dict2):
+    return [k for k in dict1.keys() if k in dict2.keys()]
+
+
 def compare_field_values(
     dict1,
     dict2,
@@ -232,7 +236,8 @@ def compare_field_values(
     default_comparator: Comparator = operator.eq,
     aggregator: Callable[
         [Dict[KT, Comparison]], Any
-    ] = lambda d: d,  # lambda d: np.mean(list(d.values()))
+    ] = lambda d: d,  # lambda d: np.mean(list(d.values())),
+    get_comparison_fields: Callable[[dict], Iterable[KT]] = _common_keys_list,
 ):
     """
     Compare two dictionaries' values field by field
@@ -266,7 +271,7 @@ def compare_field_values(
     0.5
 
     """
-    common_keys = [k for k in dict1.keys() if k in dict2.keys()]
+    common_keys = get_comparison_fields(dict1, dict2)
 
     comparisons = {}
     for key in common_keys:
