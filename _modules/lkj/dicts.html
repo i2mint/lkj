@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.dicts &mdash; lkj 0.1.39 documentation</title>
+  <title>lkj.dicts &mdash; lkj 0.1.40 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f48ec9ae"></script>
+      <script src="../../_static/documentation_options.js?v=967b4925"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -206,6 +206,7 @@
 <span class="n">KT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;KT&quot;</span><span class="p">)</span>  <span class="c1"># Key type</span>
 <span class="n">VT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;VT&quot;</span><span class="p">)</span>  <span class="c1"># Value type</span>
 
+
 <span class="c1"># Note: Could have all function parameters (recursive_condition, etc.) also take the</span>
 <span class="c1">#       enumerated index of the mapping as an argument. That would give us even more</span>
 <span class="c1">#       flexibility, but it might be overkill and make the interface more complex.</span>
@@ -313,6 +314,7 @@
     <span class="k">return</span> <span class="n">merged</span></div>
 
 
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
@@ -320,24 +322,26 @@
 <span class="n">Comparator</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="n">Comparison</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="compare_dicts">
-<a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.compare_dicts">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compare_dicts</span><span class="p">(</span>
+<div class="viewcode-block" id="compare_field_values">
+<a class="viewcode-back" href="../../module_docs/lkj/dicts.html#lkj.dicts.compare_field_values">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_field_values</span><span class="p">(</span>
     <span class="n">dict1</span><span class="p">,</span>
     <span class="n">dict2</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">field_comparators</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">Comparator</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">default_comparator</span><span class="p">:</span> <span class="n">Comparator</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">eq</span><span class="p">,</span>
-    <span class="n">aggregator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Dict</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">Comparison</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">,</span> <span class="c1">#lambda d: np.mean(list(d.values()))</span>
+    <span class="n">aggregator</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span>
+        <span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">KT</span><span class="p">,</span> <span class="n">Comparison</span><span class="p">]],</span> <span class="n">Any</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">,</span>  <span class="c1"># lambda d: np.mean(list(d.values()))</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare two dictionaries field by field using specified comparators or a default comparator.</span>
+<span class="sd">    Compare two dictionaries&#39; values field by field</span>
 
 <span class="sd">    :param dict1: The first dictionary.</span>
 <span class="sd">    :param dict2: The second dictionary.</span>
 <span class="sd">    :param field_comparators: A dictionary where keys are field names and values are comparator functions.</span>
 <span class="sd">    :param default_comparator: A default comparator function to use if no specific comparator is provided for a field.</span>
-<span class="sd">    :param aggregator: A function to aggregate the comparison results into a final score.</span>
+<span class="sd">    :param aggregator: A function to aggregate the comparison results into a final comparison object.</span>
 <span class="sd">    :return: A final score based on the comparison results.</span>
 
 <span class="sd">    &gt;&gt;&gt; dict1 = {&quot;color&quot;: &quot;brown&quot;, &quot;animal&quot;: &quot;dog&quot;}</span>
@@ -347,18 +351,18 @@
 <span class="sd">    ...     &quot;color&quot;: lambda x, y: 1 if x == y else 0,</span>
 <span class="sd">    ...     &quot;animal&quot;: lambda x, y: 1 if len(x) == len(y) else 0</span>
 <span class="sd">    ... }</span>
-<span class="sd">    &gt;&gt;&gt; compare_dicts(dict1, dict2, field_comparators=field_comparators)</span>
+<span class="sd">    &gt;&gt;&gt; compare_field_values(dict1, dict2, field_comparators=field_comparators)</span>
 <span class="sd">    {&#39;color&#39;: 1, &#39;animal&#39;: 1}</span>
-<span class="sd">    &gt;&gt;&gt; compare_dicts(dict1, dict3, field_comparators=field_comparators)</span>
+<span class="sd">    &gt;&gt;&gt; compare_field_values(dict1, dict3, field_comparators=field_comparators)</span>
 <span class="sd">    {&#39;color&#39;: 1, &#39;animal&#39;: 0}</span>
 <span class="sd">    &gt;&gt;&gt; import functools, statistics</span>
 <span class="sd">    &gt;&gt;&gt; aggregator = lambda d: statistics.mean(d.values())</span>
-<span class="sd">    &gt;&gt;&gt; my_compare_dicts = functools.partial(</span>
-<span class="sd">    ...     compare_dicts, field_comparators=field_comparators, aggregator=aggregator</span>
+<span class="sd">    &gt;&gt;&gt; mean_of_values = functools.partial(</span>
+<span class="sd">    ...     compare_field_values, field_comparators=field_comparators, aggregator=aggregator</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &gt;&gt;&gt; my_compare_dicts(dict1, dict2)</span>
+<span class="sd">    &gt;&gt;&gt; mean_of_values(dict1, dict2)</span>
 <span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; my_compare_dicts(dict1, dict3)</span>
+<span class="sd">    &gt;&gt;&gt; mean_of_values(dict1, dict3)</span>
 <span class="sd">    0.5</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
