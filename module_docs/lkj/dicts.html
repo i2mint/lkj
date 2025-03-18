@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.dicts &mdash; lkj 0.1.38 documentation</title>
+  <title>lkj.dicts &mdash; lkj 0.1.39 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=50f64db7"></script>
+      <script src="../../_static/documentation_options.js?v=f48ec9ae"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -52,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lkj.html">lkj</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chunking.html">lkj.chunking</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">lkj.dicts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.compare_dicts"><code class="docutils literal notranslate"><span class="pre">compare_dicts()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.exclusive_subdict"><code class="docutils literal notranslate"><span class="pre">exclusive_subdict()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.inclusive_subdict"><code class="docutils literal notranslate"><span class="pre">inclusive_subdict()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.dicts.merge_dicts"><code class="docutils literal notranslate"><span class="pre">merge_dicts()</span></code></a></li>
@@ -96,6 +97,48 @@
 <p>Tools for working with dictionaries (and other Mappings).</p>
 <p>If you are looking for more, check out the <cite>lkj.iterables</cite> module too
 (after all, dicts are iterables).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.dicts.compare_dicts">
+<span class="sig-prename descclassname"><span class="pre">lkj.dicts.</span></span><span class="sig-name descname"><span class="pre">compare_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dict1,</span> <span class="pre">dict2,</span> <span class="pre">*,</span> <span class="pre">field_comparators:</span> <span class="pre">~typing.Dict[~lkj.dicts.KT,</span> <span class="pre">~typing.Callable[[dict,</span> <span class="pre">dict],</span> <span class="pre">~typing.Any]]</span> <span class="pre">=</span> <span class="pre">{},</span> <span class="pre">default_comparator:</span> <span class="pre">~typing.Callable[[dict,</span> <span class="pre">dict],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">eq&gt;,</span> <span class="pre">aggregator:</span> <span class="pre">~typing.Callable[[~typing.Dict[~lkj.dicts.KT,</span> <span class="pre">~typing.Any]],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/dicts.html#compare_dicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.dicts.compare_dicts" title="Link to this definition"></a></dt>
+<dd><p>Compare two dictionaries field by field using specified comparators or a default comparator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict1</strong> – The first dictionary.</p></li>
+<li><p><strong>dict2</strong> – The second dictionary.</p></li>
+<li><p><strong>field_comparators</strong> – A dictionary where keys are field names and values are comparator functions.</p></li>
+<li><p><strong>default_comparator</strong> – A default comparator function to use if no specific comparator is provided for a field.</p></li>
+<li><p><strong>aggregator</strong> – A function to aggregate the comparison results into a final score.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A final score based on the comparison results.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;brown&quot;</span><span class="p">,</span> <span class="s2">&quot;animal&quot;</span><span class="p">:</span> <span class="s2">&quot;dog&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;brown&quot;</span><span class="p">,</span> <span class="s2">&quot;animal&quot;</span><span class="p">:</span> <span class="s2">&quot;cat&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict3</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;brown&quot;</span><span class="p">,</span> <span class="s2">&quot;animal&quot;</span><span class="p">:</span> <span class="s2">&quot;bird&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field_comparators</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;animal&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">,</span> <span class="n">field_comparators</span><span class="o">=</span><span class="n">field_comparators</span><span class="p">)</span>
+<span class="go">{&#39;color&#39;: 1, &#39;animal&#39;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict3</span><span class="p">,</span> <span class="n">field_comparators</span><span class="o">=</span><span class="n">field_comparators</span><span class="p">)</span>
+<span class="go">{&#39;color&#39;: 1, &#39;animal&#39;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span><span class="o">,</span><span class="w"> </span><span class="nn">statistics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aggregator</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_compare_dicts</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">compare_dicts</span><span class="p">,</span> <span class="n">field_comparators</span><span class="o">=</span><span class="n">field_comparators</span><span class="p">,</span> <span class="n">aggregator</span><span class="o">=</span><span class="n">aggregator</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_compare_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_compare_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict3</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.dicts.exclusive_subdict">
 <span class="sig-prename descclassname"><span class="pre">lkj.dicts.</span></span><span class="sig-name descname"><span class="pre">exclusive_subdict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/dicts.html#exclusive_subdict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.dicts.exclusive_subdict" title="Link to this definition"></a></dt>
