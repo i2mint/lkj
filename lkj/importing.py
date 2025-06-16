@@ -31,7 +31,7 @@ def parent_dir_of_module(module_obj, *, parent_levels: int = 0):
 
 
 def import_from_path(
-    pkg_path: str = None, *, rootdir: str = '', insert_in_globals: bool = False
+    pkg_path: str = None, *, rootdir: str = "", insert_in_globals: bool = False
 ):
     """
     Import a package from a specified path.
