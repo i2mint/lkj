@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.importing &mdash; lkj 0.1.41 documentation</title>
+  <title>lkj.importing &mdash; lkj 0.1.42 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=3203cd3c"></script>
+      <script src="../../_static/documentation_options.js?v=05fb4756"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -69,7 +69,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">NamespaceForwardingLoader.load_module()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.importing.import_from_path"><code class="docutils literal notranslate"><span class="pre">import_from_path()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.importing.import_object"><code class="docutils literal notranslate"><span class="pre">import_object()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.importing.parent_dir_of_module"><code class="docutils literal notranslate"><span class="pre">parent_dir_of_module()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.importing.register_namespace_forwarding"><code class="docutils literal notranslate"><span class="pre">register_namespace_forwarding()</span></code></a></li>
 </ul>
 </li>
@@ -199,6 +201,49 @@ functionality for this method.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.importing.import_from_path">
+<span class="sig-prename descclassname"><span class="pre">lkj.importing.</span></span><span class="sig-name descname"><span class="pre">import_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_in_globals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/importing.html#import_from_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.importing.import_from_path" title="Link to this definition"></a></dt>
+<dd><p>Import a package from a specified path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkg_path</strong> – The path to the package to import. If None, returns a partial function.</p></li>
+<li><p><strong>rootdir</strong> – The root directory from which to resolve the package path.</p></li>
+<li><p><strong>insert_in_globals</strong> – If True, insert the imported package into the global namespace.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The imported package or a partial function for deferred import.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>module or functools.partial</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ImportError</strong> – If the package cannot be found or imported.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">inspect</span>  <span class="c1"># standard library modules (that are surely installed)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rootdir</span> <span class="o">=</span> <span class="n">parent_dir_of_module</span><span class="p">(</span><span class="n">os</span><span class="p">)</span>  <span class="c1"># get the parent directory of os module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os_module</span> <span class="o">=</span> <span class="n">import_from_path</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">,</span> <span class="n">rootdir</span><span class="o">=</span><span class="n">rootdir</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os_module</span> <span class="o">==</span> <span class="n">os</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">lkj</span>  <span class="c1"># a third-party module (that is surely installed)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parent_dir_of_lkj</span> <span class="o">=</span> <span class="n">parent_dir_of_module</span><span class="p">(</span><span class="n">lkj</span><span class="p">,</span> <span class="n">parent_levels</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># get the great-grandma directory of lkj module</span>
+</pre></div>
+</div>
+<p>Make a partial function to import lkj from its parent directory:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_import_from_path</span> <span class="o">=</span> <span class="n">import_from_path</span><span class="p">(</span><span class="n">rootdir</span><span class="o">=</span><span class="n">parent_dir_of_lkj</span><span class="p">,</span> <span class="n">insert_in_globals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lkj_module</span> <span class="o">=</span> <span class="n">my_import_from_path</span><span class="p">(</span><span class="s1">&#39;lkj&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="s1">&#39;lkj&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">(),</span> <span class="s2">&quot;Module &#39;lkj&#39; should be imported into globals&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lkj_module</span> <span class="o">==</span> <span class="n">lkj</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.importing.import_object">
 <span class="sig-prename descclassname"><span class="pre">lkj.importing.</span></span><span class="sig-name descname"><span class="pre">import_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dot_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/importing.html#import_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.importing.import_object" title="Link to this definition"></a></dt>
 <dd><p>Imports and returns an object from a dot string path.</p>
@@ -206,6 +251,22 @@ functionality for this method.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="ow">is</span> <span class="n">join</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.importing.parent_dir_of_module">
+<span class="sig-prename descclassname"><span class="pre">lkj.importing.</span></span><span class="sig-name descname"><span class="pre">parent_dir_of_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/importing.html#parent_dir_of_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.importing.parent_dir_of_module" title="Link to this definition"></a></dt>
+<dd><p>Get the parent directory of a given module object.
+:param module_obj: The module object for which to find the parent directory.
+:return: The parent directory of the module as a string.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># a standard library module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parent_dir_of_module</span><span class="p">(</span><span class="n">os</span><span class="p">)</span>  
+<span class="go">&#39;...python...&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">lkj</span> <span class="c1"># a third-party module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parent_dir_of_module</span><span class="p">(</span><span class="n">lkj</span><span class="p">)</span>  
+<span class="go">&#39;.../lkj&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -224,9 +285,11 @@ functionality for this method.</p>
 </dl>
 <p>Usage:</p>
 <blockquote>
-<div><p># if you put this code in the imbed.mdat package (say, containing a hcp module),
-&gt;&gt;&gt; register_namespace_forwarding(‘imbed.mdat’, ‘imbed_data_prep’)  # doctest: +SKIP</p>
-<p># Then when you do</p>
+<div><p>If you put this code in the imbed.mdat package (say, containing a hcp module),</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">register_namespace_forwarding</span><span class="p">(</span><span class="s1">&#39;imbed.mdat&#39;</span><span class="p">,</span> <span class="s1">&#39;imbed_data_prep&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>Then when you do</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">imbed.mdat.hcp</span>  
 </pre></div>
 </div>

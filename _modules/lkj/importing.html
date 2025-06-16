@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.importing &mdash; lkj 0.1.41 documentation</title>
+  <title>lkj.importing &mdash; lkj 0.1.42 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=3203cd3c"></script>
+      <script src="../../_static/documentation_options.js?v=05fb4756"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -85,6 +85,94 @@
              
   <h1>Source code for lkj.importing</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Tools for importing&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="parent_dir_of_module">
+<a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.parent_dir_of_module">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parent_dir_of_module</span><span class="p">(</span><span class="n">module_obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_levels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the parent directory of a given module object.</span>
+<span class="sd">    :param module_obj: The module object for which to find the parent directory.</span>
+<span class="sd">    :return: The parent directory of the module as a string.</span>
+
+<span class="sd">    &gt;&gt;&gt; import os  # a standard library module</span>
+<span class="sd">    &gt;&gt;&gt; parent_dir_of_module(os)  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;...python...&#39;</span>
+<span class="sd">    &gt;&gt;&gt; import lkj # a third-party module</span>
+<span class="sd">    &gt;&gt;&gt; parent_dir_of_module(lkj)  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;.../lkj&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+
+    <span class="c1"># Get the file path of the module</span>
+    <span class="n">module_file</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">module_obj</span><span class="p">)</span>
+
+    <span class="c1"># Get the parent directory</span>
+    <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">module_file</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">parent_levels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">parent_levels</span><span class="p">):</span>
+            <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">parent_dir</span></div>
+
+
+
+<div class="viewcode-block" id="import_from_path">
+<a class="viewcode-back" href="../../module_docs/lkj/importing.html#lkj.importing.import_from_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_from_path</span><span class="p">(</span>
+    <span class="n">pkg_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">insert_in_globals</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import a package from a specified path.</span>
+
+<span class="sd">    :param pkg_path: The path to the package to import. If None, returns a partial function.</span>
+<span class="sd">    :param rootdir: The root directory from which to resolve the package path.</span>
+<span class="sd">    :param insert_in_globals: If True, insert the imported package into the global namespace.</span>
+<span class="sd">    :return: The imported package or a partial function for deferred import.</span>
+<span class="sd">    :rtype: module or functools.partial</span>
+<span class="sd">    :raises ImportError: If the package cannot be found or imported.</span>
+
+<span class="sd">    &gt;&gt;&gt; import os, inspect  # standard library modules (that are surely installed)</span>
+<span class="sd">    &gt;&gt;&gt; rootdir = parent_dir_of_module(os)  # get the parent directory of os module</span>
+<span class="sd">    &gt;&gt;&gt; os_module = import_from_path(&#39;os&#39;, rootdir=rootdir)  # doctest: +ELLIPSIS</span>
+<span class="sd">    &gt;&gt;&gt; os_module == os</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &gt;&gt;&gt; import lkj  # a third-party module (that is surely installed)</span>
+<span class="sd">    &gt;&gt;&gt; parent_dir_of_lkj = parent_dir_of_module(lkj, parent_levels=2)  # get the great-grandma directory of lkj module</span>
+
+<span class="sd">    Make a partial function to import lkj from its parent directory:</span>
+
+<span class="sd">    &gt;&gt;&gt; my_import_from_path = import_from_path(rootdir=parent_dir_of_lkj, insert_in_globals=True)</span>
+<span class="sd">    &gt;&gt;&gt; lkj_module = my_import_from_path(&#39;lkj&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; assert &#39;lkj&#39; in globals(), &quot;Module &#39;lkj&#39; should be imported into globals&quot;</span>
+<span class="sd">    &gt;&gt;&gt; lkj_module == lkj</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+
+    <span class="k">if</span> <span class="n">pkg_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+            <span class="n">import_from_path</span><span class="p">,</span> <span class="n">rootdir</span><span class="o">=</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">insert_in_globals</span><span class="o">=</span><span class="n">insert_in_globals</span>
+        <span class="p">)</span>
+
+    <span class="n">pkg_rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">pkg_path</span><span class="p">)</span>
+    <span class="n">pkg_rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">pkg_rootdir</span><span class="p">)</span>
+
+    <span class="c1"># Add the directory to sys.path</span>
+    <span class="k">if</span> <span class="n">pkg_rootdir</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pkg_rootdir</span><span class="p">)</span>  <span class="c1"># Use insert(0, ...) to give it high priority</span>
+
+    <span class="n">pkg</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">pkg_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">insert_in_globals</span><span class="p">:</span>
+        <span class="nb">globals</span><span class="p">()[</span><span class="n">pkg_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">pkg</span>
+    <span class="k">return</span> <span class="n">pkg</span></div>
+
 
 
 <div class="viewcode-block" id="import_object">
@@ -205,10 +293,11 @@
 
 <span class="sd">    Usage:</span>
 
-<span class="sd">        # if you put this code in the imbed.mdat package (say, containing a hcp module),</span>
+<span class="sd">        If you put this code in the imbed.mdat package (say, containing a hcp module),</span>
+
 <span class="sd">        &gt;&gt;&gt; register_namespace_forwarding(&#39;imbed.mdat&#39;, &#39;imbed_data_prep&#39;)  # doctest: +SKIP</span>
 
-<span class="sd">        # Then when you do</span>
+<span class="sd">        Then when you do</span>
 
 <span class="sd">        &gt;&gt;&gt; import imbed.mdat.hcp  # doctest: +SKIP</span>
 
