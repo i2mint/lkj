@@ -1,6 +1,88 @@
 """Tools for importing"""
 
 
+def parent_dir_of_module(module_obj, *, parent_levels: int = 0):
+    """
+    Get the parent directory of a given module object.
+    :param module_obj: The module object for which to find the parent directory.
+    :return: The parent directory of the module as a string.
+
+    >>> import os  # a standard library module
+    >>> parent_dir_of_module(os)  # doctest: +ELLIPSIS
+    '...python...'
+    >>> import lkj # a third-party module
+    >>> parent_dir_of_module(lkj)  # doctest: +ELLIPSIS
+    '.../lkj'
+    """
+    import os
+    import inspect
+
+    # Get the file path of the module
+    module_file = inspect.getfile(module_obj)
+
+    # Get the parent directory
+    parent_dir = os.path.dirname(module_file)
+
+    if parent_levels > 0:
+        for _ in range(parent_levels):
+            parent_dir = os.path.dirname(parent_dir)
+
+    return parent_dir
+
+
+def import_from_path(
+    pkg_path: str = None, *, rootdir: str = '', insert_in_globals: bool = False
+):
+    """
+    Import a package from a specified path.
+
+    :param pkg_path: The path to the package to import. If None, returns a partial function.
+    :param rootdir: The root directory from which to resolve the package path.
+    :param insert_in_globals: If True, insert the imported package into the global namespace.
+    :return: The imported package or a partial function for deferred import.
+    :rtype: module or functools.partial
+    :raises ImportError: If the package cannot be found or imported.
+
+    >>> import os, inspect  # standard library modules (that are surely installed)
+    >>> rootdir = parent_dir_of_module(os)  # get the parent directory of os module
+    >>> os_module = import_from_path('os', rootdir=rootdir)  # doctest: +ELLIPSIS
+    >>> os_module == os
+    True
+
+    >>> import lkj  # a third-party module (that is surely installed)
+    >>> parent_dir_of_lkj = parent_dir_of_module(lkj, parent_levels=2)  # get the great-grandma directory of lkj module
+
+    Make a partial function to import lkj from its parent directory:
+
+    >>> my_import_from_path = import_from_path(rootdir=parent_dir_of_lkj, insert_in_globals=True)
+    >>> lkj_module = my_import_from_path('lkj')
+    >>> assert 'lkj' in globals(), "Module 'lkj' should be imported into globals"
+    >>> lkj_module == lkj
+    True
+    """
+    import sys
+    import os
+    from functools import partial
+
+    if pkg_path is None:
+        return partial(
+            import_from_path, rootdir=rootdir, insert_in_globals=insert_in_globals
+        )
+
+    pkg_rootdir = os.path.join(rootdir, pkg_path)
+    pkg_rootdir = os.path.abspath(pkg_rootdir)
+
+    # Add the directory to sys.path
+    if pkg_rootdir not in sys.path:
+        sys.path.insert(0, pkg_rootdir)  # Use insert(0, ...) to give it high priority
+
+    pkg = __import__(pkg_path)
+
+    if insert_in_globals:
+        globals()[pkg_path] = pkg
+    return pkg
+
+
 def import_object(dot_path: str):
     """Imports and returns an object from a dot string path.
 
@@ -102,10 +184,11 @@ def register_namespace_forwarding(source_base, target_base):
 
     Usage:
 
-        # if you put this code in the imbed.mdat package (say, containing a hcp module),
+        If you put this code in the imbed.mdat package (say, containing a hcp module),
+
         >>> register_namespace_forwarding('imbed.mdat', 'imbed_data_prep')  # doctest: +SKIP
 
-        # Then when you do
+        Then when you do
 
         >>> import imbed.mdat.hcp  # doctest: +SKIP
 

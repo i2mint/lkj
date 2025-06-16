@@ -40,7 +40,12 @@ from lkj.loggers import (
     wrapped_print,  # Prints a string or list ensuring the total line width does not exceed `max_width`.
     CallOnError,  # Context manager that calls a function on error (subclass of suppress)
 )
-from lkj.importing import import_object, register_namespace_forwarding
+from lkj.importing import (
+    parent_dir_of_module,  # Get the parent directory of a module
+    import_from_path,  # Import a module from a specified path
+    import_object,  # Import an object from a module by its name
+    register_namespace_forwarding,  # Register a namespace forwarding for a module
+)
 from lkj.chunking import chunk_iterable, chunker
 from lkj.misc import identity, value_in_interval
 
