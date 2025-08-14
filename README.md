@@ -156,3 +156,103 @@ import_object(dot_path: str)
 >>> f is join
 True
 ```
+
+## Pretty Printing Lists
+
+The `print_list` function provides flexible, human-friendly ways to display lists and collections. It supports multiple display styles and can be used in several ways.
+
+### Basic Usage
+
+```python
+from lkj.strings import print_list
+
+items = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']
+
+# Different display styles
+print_list(items, style='wrapped')      # Automatic line wrapping
+print_list(items, style='columns')      # Column format
+print_list(items, style='numbered')     # Numbered list
+print_list(items, style='bullet')       # Bullet points
+print_list(items, style='compact')      # All on one line
+print_list(items, style='table')        # Table format
+```
+
+### Direct Usage with Customization
+
+```python
+# Customize width, separators, and formatting
+print_list(items, style='wrapped', max_width=40, sep=' | ')
+print_list(items, style='columns', items_per_line=3)
+print_list(items, style='numbered', line_prefix='  ')
+print_list(items, style='bullet', show_count=False)
+
+# Return string instead of printing
+result = print_list(items, style='numbered', print_func=None)
+print(result)
+```
+
+### Partial Function Factory
+
+When you don't specify the `items` parameter, `print_list` returns a partial function that you can reuse:
+
+```python
+# Create specialized printers
+numbered_printer = print_list(style='numbered', show_count=False)
+bullet_printer = print_list(style='bullet', print_func=None)
+compact_printer = print_list(style='compact', max_width=60)
+
+# Reuse with different data
+numbered_printer(['a', 'b', 'c'])        # Prints: 1. a\n2. b\n3. c
+result = bullet_printer(['x', 'y', 'z']) # Returns: '• x\n• y\n• z'
+compact_printer(['item1', 'item2'])      # Prints: item1, item2
+```
+
+### Convenience Methods
+
+The `print_list` object provides convenient pre-configured methods:
+
+```python
+# Quick access to common styles
+print_list.compact(items)    # Compact format, no count
+print_list.wrapped(items)    # Wrapped format, no count  
+print_list.columns(items)    # Column format, no count
+print_list.numbered(items)   # Numbered format, no count
+print_list.bullets(items)    # Bullet format, no count
+
+# Specialized methods
+print_list.as_table(data)    # Table with headers
+print_list.summary(items)    # Summary for long lists
+```
+
+### Advanced Examples
+
+```python
+# Table with custom data
+data = [['Name', 'Age', 'City'], ['Alice', 25, 'NYC'], ['Bob', 30, 'LA']]
+print_list.as_table(data)
+
+# Summary for long lists
+long_list = list(range(100))
+print_list.summary(long_list, max_items=6)  # Shows: [0, 1, 2, ..., 97, 98, 99]
+
+# Custom print function (e.g., for logging)
+def my_logger(msg):
+    print(f"[LOG] {msg}")
+
+print_list(items, style='bullet', print_func=my_logger)
+
+# Combine partial with custom parameters
+custom_compact = print_list(style='compact', sep=' | ')
+custom_compact(items)  # Prints: apple | banana | cherry | date | elderberry | fig
+```
+
+### Key Features
+
+- **Multiple Styles**: `wrapped`, `columns`, `numbered`, `bullet`, `compact`, `table`
+- **Flexible Output**: Print directly or return strings with `print_func=None`
+- **Partial Functions**: Create reusable printers with pre-configured settings
+- **Customizable**: Control width, separators, line prefixes, and more
+- **Type Safe**: Uses `Literal` types for style validation
+- **Self-Contained**: No external dependencies beyond Python standard library
+
+The `print_list` function is perfect for debugging, logging, user interfaces, and any situation where you need to display lists in a readable format.
