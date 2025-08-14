@@ -741,7 +741,7 @@ def print_list(
     sep: str = ", ",
     line_prefix: str = "",
     items_per_line=None,
-    show_count=True,
+    show_count: Union[bool, Callable[[int], str]] = False,
     title=None,
     print_func=print,
 ):
@@ -755,7 +755,7 @@ def print_list(
         sep: Separator for items
         line_prefix: Prefix for each line
         items_per_line: For columns style, how many items per line
-        show_count: Whether to show the count of items
+        show_count: Whether to prefix with the count of items
         title: Optional title to display before the list
         print_func: Function to use for printing. Defaults to print.
                    If None, returns the string instead of printing.
@@ -765,19 +765,16 @@ def print_list(
 
         # Wrapped style (default)
         >>> print_list(items, max_width=30)
-        List (6 items):
         apple, banana, cherry, date,
         elderberry, fig
 
         # Columns style
         >>> print_list(items, style="columns", items_per_line=3)
-        List (6 items):
         apple banana     cherry
         date  elderberry fig
 
         # Numbered style
         >>> print_list(items, style="numbered")
-        List (6 items):
         1. apple
         2. banana
         3. cherry
@@ -787,7 +784,6 @@ def print_list(
 
         # Bullet style
         >>> print_list(items, style="bullet")
-        List (6 items):
         • apple
         • banana
         • cherry
@@ -796,7 +792,7 @@ def print_list(
         • fig
 
         # Return string instead of printing
-        >>> result = print_list(items, style="numbered", print_func=None)
+        >>> result = print_list(items, style="numbered", print_func=None, show_count=True)
         >>> print(result)
         List (6 items):
         1. apple
@@ -847,6 +843,8 @@ def print_list(
             print_func=print_func,
         )
     items = list(items)  # Convert to list if it's an iterable
+    if show_count is True:
+        show_count = lambda n_items: f"List ({n_items} items):"
 
     # Handle print_func=None by using StringAppender
     if print_func is None:
@@ -860,7 +858,7 @@ def print_list(
     if title:
         print_func(title)
     elif show_count:
-        print_func(f"List ({len(items)} items):")
+        print_func(show_count(len(items)))
 
     if not items:
         print_func(f"{line_prefix}(empty list)")
