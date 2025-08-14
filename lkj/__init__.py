@@ -17,6 +17,7 @@ from lkj.dicts import (
 )
 from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
 from lkj.strings import (
+    print_list,  # Print a list in a nice format (or get a string to process yourself)
     FindReplaceTool,  # Tool for finding and replacing substrings in a string
     indent_lines,  # Indent all lines of a string
     most_common_indent,  # Get the most common indent of a multiline string

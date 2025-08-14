@@ -1,6 +1,49 @@
-"""Utils for strings"""
+"""
+String Utilities Module
+
+This module provides a comprehensive set of utility functions and classes for working with strings in Python.
+It includes tools for string manipulation, formatting, pretty-printing, and find/replace operations.
+
+Core Components:
+
+- StringAppender: A helper class for collecting strings, useful for capturing output that would otherwise be printed.
+- indent_lines: Indents each line of a string by a specified prefix.
+- most_common_indent: Determines the most common indentation used in a multi-line string.
+- FindReplaceTool: A class for advanced find-and-replace operations on strings, supporting regular expressions, match history, and undo functionality.
+
+Pretty-Printing Functions:
+
+- print_list: Prints lists in various human-friendly formats (wrapped, columns, numbered, bullet, table, compact), with options for width, separators, and custom print functions.
+- print_list.as_table: Formats and prints a list (or list of lists) as a table, with optional headers and alignment.
+- print_list.summary: Prints a summary of a list, showing first few and last few items if the list is long.
+- print_list.compact, print_list.wrapped, print_list.columns, print_list.numbered, print_list.bullets: Convenience methods using print_list's partial functionality for common display styles.
+
+These utilities are designed to make it easier to display, format, and manipulate strings and collections of strings in a readable and flexible way.
+"""
 
 import re
+from typing import Iterable, Sequence, Callable, Optional, Any, Literal
+from functools import partial
+
+
+class StringAppender:
+    """Helper class to collect strings instead of printing them directly."""
+
+    def __init__(self, separator="\n"):
+        self.lines = []
+        self.separator = separator
+
+    def __call__(self, text):
+        """Append text to the internal list."""
+        self.lines.append(str(text))
+
+    def __str__(self):
+        """Return the collected string."""
+        return self.separator.join(self.lines)
+
+    def get_string(self):
+        """Alternative way to get the string."""
+        return str(self)
 
 
 def indent_lines(string: str, indent: str, *, line_sep="\n") -> str:
@@ -686,3 +729,446 @@ class FindReplaceTool:
             self._text_versions.pop()
             steps -= 1
         return self.get_modified_text()
+
+
+def print_list(
+    items: Optional[Iterable[Any]] = None,
+    *,
+    style: Literal[
+        "wrapped", "columns", "numbered", "bullet", "table", "compact"
+    ] = "wrapped",
+    max_width: int = 80,
+    sep: str = ", ",
+    line_prefix: str = "",
+    items_per_line=None,
+    show_count=True,
+    title=None,
+    print_func=print,
+):
+    """
+    Print a list in a nice, readable format with multiple style options.
+
+    Args:
+        items: The list or iterable to print. If None, returns a partial function.
+        style: One of "wrapped", "columns", "numbered", "bullet", "table", "compact"
+        max_width: Maximum width for wrapped style
+        sep: Separator for items
+        line_prefix: Prefix for each line
+        items_per_line: For columns style, how many items per line
+        show_count: Whether to show the count of items
+        title: Optional title to display before the list
+        print_func: Function to use for printing. Defaults to print.
+                   If None, returns the string instead of printing.
+
+    Examples:
+        >>> items = ["apple", "banana", "cherry", "date", "elderberry", "fig"]
+
+        # Wrapped style (default)
+        >>> print_list(items, max_width=30)
+        List (6 items):
+        apple, banana, cherry, date,
+        elderberry, fig
+
+        # Columns style
+        >>> print_list(items, style="columns", items_per_line=3)
+        List (6 items):
+        apple banana     cherry
+        date  elderberry fig
+
+        # Numbered style
+        >>> print_list(items, style="numbered")
+        List (6 items):
+        1. apple
+        2. banana
+        3. cherry
+        4. date
+        5. elderberry
+        6. fig
+
+        # Bullet style
+        >>> print_list(items, style="bullet")
+        List (6 items):
+        • apple
+        • banana
+        • cherry
+        • date
+        • elderberry
+        • fig
+
+        # Return string instead of printing
+        >>> result = print_list(items, style="numbered", print_func=None)
+        >>> print(result)
+        List (6 items):
+        1. apple
+        2. banana
+        3. cherry
+        4. date
+        5. elderberry
+        6. fig
+
+        Partial function functionality: If you don't specify the items (or items=None),
+        the function returns a partial function that can be called with the items later.
+        That is, the print_list acts as a factory function for different
+        printing styles.
+
+        >>> numbered_printer = print_list(style="numbered", show_count=False)
+        >>> numbered_printer(items)
+        1. apple
+        2. banana
+        3. cherry
+        4. date
+        5. elderberry
+        6. fig
+
+        >>> compact_printer = print_list(style="compact", max_width=60, show_count=False)
+        >>> compact_printer(items)
+        apple, banana, cherry, date, elderberry, fig
+
+        >>> bullet_printer = print_list(style="bullet", print_func=None, show_count=False)
+        >>> result = bullet_printer(items)
+        >>> print(result)
+        • apple
+        • banana
+        • cherry
+        • date
+        • elderberry
+        • fig
+    """
+    if items is None:
+        return partial(
+            print_list,
+            style=style,
+            max_width=max_width,
+            sep=sep,
+            line_prefix=line_prefix,
+            items_per_line=items_per_line,
+            show_count=show_count,
+            title=title,
+            print_func=print_func,
+        )
+    items = list(items)  # Convert to list if it's an iterable
+
+    # Handle print_func=None by using StringAppender
+    if print_func is None:
+        string_appender = StringAppender()
+        print_func = string_appender
+        return_string = True
+    else:
+        return_string = False
+
+    # Show title and count
+    if title:
+        print_func(title)
+    elif show_count:
+        print_func(f"List ({len(items)} items):")
+
+    if not items:
+        print_func(f"{line_prefix}(empty list)")
+        return str(string_appender) if return_string else None
+
+    if style == "wrapped":
+        # Use the existing wrapped_print function with a safe fallback for doctest context
+        try:
+            from .loggers import wrapped_print  # type: ignore
+        except Exception:  # pragma: no cover - fallback when relative import fails
+            import textwrap
+
+            def wrapped_print(
+                items, sep=", ", max_width=80, line_prefix="", print_func=print
+            ):
+                text = sep.join(map(str, items))
+                return print_func(
+                    line_prefix
+                    + textwrap.fill(
+                        text, width=max_width, subsequent_indent=line_prefix
+                    )
+                )
+
+        wrapped_print(
+            items,
+            sep=sep,
+            max_width=max_width,
+            line_prefix=line_prefix,
+            print_func=print_func,
+        )
+
+    elif style == "columns":
+        if items_per_line is None:
+            # Auto-calculate based on max_width and average item length
+            avg_length = sum(len(str(item)) for item in items) / len(items)
+            items_per_line = max(1, int(max_width / (avg_length + len(sep))))
+
+        for i in range(0, len(items), items_per_line):
+            line_items = items[i : i + items_per_line]
+            # Calculate column widths across all rows for each column position
+            col_widths = []
+            for col in range(items_per_line):
+                col_items = items[col::items_per_line]
+                if col_items:
+                    col_widths.append(max(len(str(item)) for item in col_items))
+                else:
+                    col_widths.append(0)
+
+            # Print the line; pad all but the last column to avoid trailing spaces
+            parts = []
+            for j, item in enumerate(line_items):
+                text = str(item)
+                if j < len(line_items) - 1:
+                    parts.append(text.ljust(col_widths[j]))
+                else:
+                    parts.append(text)
+            print_func(f"{line_prefix}{' '.join(parts)}")
+
+    elif style == "numbered":
+        max_num_width = len(str(len(items)))
+        for i, item in enumerate(items, 1):
+            print_func(f"{line_prefix}{i:>{max_num_width}}. {item}")
+
+    elif style == "bullet":
+        for item in items:
+            print_func(f"{line_prefix}• {item}")
+
+    elif style == "table":
+        # Simple table format
+        if items and hasattr(items[0], '__iter__') and not isinstance(items[0], str):
+            # List of lists/tuples - treat as table data
+            if not items:
+                return str(string_appender) if return_string else None
+
+            # Find column widths
+            num_cols = len(items[0])
+            col_widths = [0] * num_cols
+            for row in items:
+                for j, cell in enumerate(row):
+                    col_widths[j] = max(col_widths[j], len(str(cell)))
+
+            # Print table
+            for row in items:
+                formatted_row = []
+                for j, cell in enumerate(row):
+                    formatted_row.append(str(cell).ljust(col_widths[j]))
+                print_func(f"{line_prefix}{' | '.join(formatted_row)}")
+        else:
+            # Single column table
+            max_width = max(len(str(item)) for item in items)
+            for item in items:
+                print_func(f"{line_prefix}{str(item).ljust(max_width)}")
+
+    elif style == "compact":
+        # Most compact form - all on one line if possible
+        items_str = sep.join(str(item) for item in items)
+        if len(items_str) <= max_width:
+            print_func(f"{line_prefix}{items_str}")
+        else:
+            # Fall back to wrapped style
+            try:
+                from .loggers import wrapped_print  # type: ignore
+            except Exception:  # pragma: no cover - fallback when relative import fails
+                import textwrap
+
+                def wrapped_print(
+                    items, sep=", ", max_width=80, line_prefix="", print_func=print
+                ):
+                    text = sep.join(map(str, items))
+                    return print_func(
+                        line_prefix
+                        + textwrap.fill(
+                            text, width=max_width, subsequent_indent=line_prefix
+                        )
+                    )
+
+            wrapped_print(
+                items,
+                sep=sep,
+                max_width=max_width,
+                line_prefix=line_prefix,
+                print_func=print_func,
+            )
+
+    else:
+        raise ValueError(
+            f"Unknown style: {style}. Use one of: wrapped, columns, numbered, bullet, table, compact"
+        )
+
+    return str(string_appender) if return_string else None
+
+
+def print_list_as_table(
+    items, headers=None, *, max_width=80, align="left", print_func=print
+):
+    """
+    Print a list as a nicely formatted table.
+
+    Args:
+        items: List of items (strings, numbers, or objects with __str__)
+        headers: Optional list of column headers
+        max_width: Maximum width of the table
+        align: Alignment for columns ("left", "right", "center")
+        print_func: Function to use for printing. Defaults to print.
+                   If None, returns the string instead of printing.
+
+    Examples:
+        >>> data = [["Name", "Age", "City"], ["Alice", 25, "NYC"], ["Bob", 30, "LA"]]
+        >>> print_list_as_table(data)
+        Name  | Age | City
+        -----|---|----
+        Alice | 25  | NYC
+        Bob   | 30  | LA
+
+        # Return string instead of printing
+        >>> result = print_list_as_table(data, print_func=None)
+        >>> print(result)
+        Name  | Age | City
+        -----|---|----
+        Alice | 25  | NYC
+        Bob   | 30  | LA
+    """
+    # Handle print_func=None by using StringAppender
+    if print_func is None:
+        string_appender = StringAppender()
+        print_func = string_appender
+        return_string = True
+    else:
+        return_string = False
+
+    if not items:
+        print_func("(empty table)")
+        return str(string_appender) if return_string else None
+
+    # Convert items to list of lists if needed
+    if not hasattr(items[0], '__iter__') or isinstance(items[0], str):
+        # Single column
+        table_data = [[str(item)] for item in items]
+        if headers:
+            headers = [headers] if isinstance(headers, str) else headers
+        else:
+            headers = ["Value"]
+    else:
+        # Multi-column
+        table_data = [[str(cell) for cell in row] for row in items]
+
+    if headers:
+        table_data.insert(0, headers)
+
+    # Calculate column widths
+    num_cols = len(table_data[0])
+    col_widths = [0] * num_cols
+
+    for row in table_data:
+        for j, cell in enumerate(row):
+            col_widths[j] = max(col_widths[j], len(cell))
+
+    # Adjust column widths to fit max_width
+    total_width = sum(col_widths) + (num_cols - 1) * 3  # 3 for " | "
+    if total_width > max_width:
+        # Reduce column widths proportionally
+        excess = total_width - max_width
+        for j in range(num_cols):
+            reduction = min(excess // num_cols, col_widths[j] // 2)
+            col_widths[j] -= reduction
+            excess -= reduction
+
+    # Determine if the first row should be treated as header
+    header_present = bool(headers) or all(isinstance(c, str) for c in table_data[0])
+
+    # Helper to format a row without padding the last column
+    def format_row(row):
+        formatted = []
+        for j, cell in enumerate(row):
+            if j < num_cols - 1:
+                formatted.append(cell.ljust(col_widths[j]))
+            else:
+                formatted.append(cell)
+        return " | ".join(formatted)
+
+    for i, row in enumerate(table_data):
+        print_func(format_row(row))
+        if header_present and i == 0:
+            # Print separator line without spaces around the pipes
+            print_func("|".join("-" * w for w in col_widths))
+
+    return str(string_appender) if return_string else None
+
+
+def print_list_summary(
+    items, *, max_items=10, show_total=True, title=None, print_func=print
+):
+    """
+    Print a summary of a list, showing first few and last few items if the list is long.
+
+    Args:
+        items: The list to summarize
+        max_items: Maximum number of items to show (first + last)
+        show_total: Whether to show the total count
+        title: Optional title
+        print_func: Function to use for printing. Defaults to print.
+                   If None, returns the string instead of printing.
+
+    Examples:
+        >>> long_list = list(range(100))
+        >>> print_list_summary(long_list, max_items=6)
+        List (100 items):
+        [0, 1, 2, ..., 97, 98, 99]
+
+        >>> print_list_summary(long_list, max_items=10)
+        List (100 items):
+        [0, 1, 2, 3, 4, ..., 95, 96, 97, 98, 99]
+
+        # Return string instead of printing
+        >>> result = print_list_summary(long_list, max_items=6, print_func=None)
+        >>> print(result)
+        List (100 items):
+        [0, 1, 2, ..., 97, 98, 99]
+    """
+    items = list(items)
+
+    # Handle print_func=None by using StringAppender
+    if print_func is None:
+        string_appender = StringAppender()
+        print_func = string_appender
+        return_string = True
+    else:
+        return_string = False
+
+    if title:
+        print_func(title)
+    elif show_total:
+        print_func(f"List ({len(items)} items):")
+
+    if not items:
+        print_func("(empty list)")
+        return str(string_appender) if return_string else None
+
+    if len(items) <= max_items:
+        print_func(items)
+    else:
+        # Show first and last items with ellipsis
+        first_count = max_items // 2
+        last_count = max_items - first_count
+
+        first_items = items[:first_count]
+        last_items = items[-last_count:]
+
+        print_func(
+            f"[{', '.join(map(str, first_items))}, ..., {', '.join(map(str, last_items))}]"
+        )
+
+    return str(string_appender) if return_string else None
+
+
+# Convenience functions are now available as attributes of print_list
+# using the partial functionality:
+# - print_list.compact
+# - print_list.wrapped
+# - print_list.columns
+# - print_list.numbered
+# - print_list.bullets
+
+
+print_list.as_table = print_list_as_table
+print_list.summary = print_list_summary
+print_list.compact = print_list(style="compact", show_count=False)
+print_list.wrapped = print_list(style="wrapped", show_count=False)
+print_list.columns = print_list(style="columns", show_count=False)
+print_list.numbered = print_list(style="numbered", show_count=False)
+print_list.bullets = print_list(style="bullet", show_count=False)
