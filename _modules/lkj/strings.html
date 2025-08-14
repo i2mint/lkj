@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.44 documentation</title>
+  <title>lkj.strings &mdash; lkj 0.1.45 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=6a0a5382"></script>
+      <script src="../../_static/documentation_options.js?v=ce72d79b"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -892,7 +892,7 @@
     <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="p">,</span>
     <span class="n">line_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">items_per_line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">show_count</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_count</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
 <span class="p">):</span>
@@ -906,7 +906,7 @@
 <span class="sd">        sep: Separator for items</span>
 <span class="sd">        line_prefix: Prefix for each line</span>
 <span class="sd">        items_per_line: For columns style, how many items per line</span>
-<span class="sd">        show_count: Whether to show the count of items</span>
+<span class="sd">        show_count: Whether to prefix with the count of items</span>
 <span class="sd">        title: Optional title to display before the list</span>
 <span class="sd">        print_func: Function to use for printing. Defaults to print.</span>
 <span class="sd">                   If None, returns the string instead of printing.</span>
@@ -916,19 +916,16 @@
 
 <span class="sd">        # Wrapped style (default)</span>
 <span class="sd">        &gt;&gt;&gt; print_list(items, max_width=30)</span>
-<span class="sd">        List (6 items):</span>
 <span class="sd">        apple, banana, cherry, date,</span>
 <span class="sd">        elderberry, fig</span>
 
 <span class="sd">        # Columns style</span>
 <span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;columns&quot;, items_per_line=3)</span>
-<span class="sd">        List (6 items):</span>
 <span class="sd">        apple banana     cherry</span>
 <span class="sd">        date  elderberry fig</span>
 
 <span class="sd">        # Numbered style</span>
 <span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;numbered&quot;)</span>
-<span class="sd">        List (6 items):</span>
 <span class="sd">        1. apple</span>
 <span class="sd">        2. banana</span>
 <span class="sd">        3. cherry</span>
@@ -938,7 +935,6 @@
 
 <span class="sd">        # Bullet style</span>
 <span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;bullet&quot;)</span>
-<span class="sd">        List (6 items):</span>
 <span class="sd">        • apple</span>
 <span class="sd">        • banana</span>
 <span class="sd">        • cherry</span>
@@ -947,7 +943,7 @@
 <span class="sd">        • fig</span>
 
 <span class="sd">        # Return string instead of printing</span>
-<span class="sd">        &gt;&gt;&gt; result = print_list(items, style=&quot;numbered&quot;, print_func=None)</span>
+<span class="sd">        &gt;&gt;&gt; result = print_list(items, style=&quot;numbered&quot;, print_func=None, show_count=True)</span>
 <span class="sd">        &gt;&gt;&gt; print(result)</span>
 <span class="sd">        List (6 items):</span>
 <span class="sd">        1. apple</span>
@@ -998,6 +994,8 @@
             <span class="n">print_func</span><span class="o">=</span><span class="n">print_func</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Convert to list if it&#39;s an iterable</span>
+    <span class="k">if</span> <span class="n">show_count</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">show_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n_items</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;List (</span><span class="si">{</span><span class="n">n_items</span><span class="si">}</span><span class="s2"> items):&quot;</span>
 
     <span class="c1"># Handle print_func=None by using StringAppender</span>
     <span class="k">if</span> <span class="n">print_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1011,7 +1009,7 @@
     <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
         <span class="n">print_func</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">show_count</span><span class="p">:</span>
-        <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> items):&quot;</span><span class="p">)</span>
+        <span class="n">print_func</span><span class="p">(</span><span class="n">show_count</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
         <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}</span><span class="s2">(empty list)&quot;</span><span class="p">)</span>
