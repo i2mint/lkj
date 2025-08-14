@@ -930,7 +930,7 @@ def print_list(
 
     elif style == "table":
         # Simple table format
-        if items and hasattr(items[0], '__iter__') and not isinstance(items[0], str):
+        if items and hasattr(items[0], "__iter__") and not isinstance(items[0], str):
             # List of lists/tuples - treat as table data
             if not items:
                 return str(string_appender) if return_string else None
@@ -1036,7 +1036,7 @@ def print_list_as_table(
         return str(string_appender) if return_string else None
 
     # Convert items to list of lists if needed
-    if not hasattr(items[0], '__iter__') or isinstance(items[0], str):
+    if not hasattr(items[0], "__iter__") or isinstance(items[0], str):
         # Single column
         table_data = [[str(item)] for item in items]
         if headers:
