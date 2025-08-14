@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.42 documentation</title>
+  <title>lkj.strings &mdash; lkj 0.1.43 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=05fb4756"></script>
+      <script src="../../_static/documentation_options.js?v=a183c34f"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -70,10 +70,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#lkj.strings.FindReplaceTool.view_matches"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool.view_matches()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.StringAppender"><code class="docutils literal notranslate"><span class="pre">StringAppender</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lkj.strings.StringAppender.get_string"><code class="docutils literal notranslate"><span class="pre">StringAppender.get_string()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.camel_to_snake"><code class="docutils literal notranslate"><span class="pre">camel_to_snake()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.fields_of_string_formats"><code class="docutils literal notranslate"><span class="pre">fields_of_string_formats()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.indent_lines"><code class="docutils literal notranslate"><span class="pre">indent_lines()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.most_common_indent"><code class="docutils literal notranslate"><span class="pre">most_common_indent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.print_list"><code class="docutils literal notranslate"><span class="pre">print_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.print_list_as_table"><code class="docutils literal notranslate"><span class="pre">print_list_as_table()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.strings.print_list_summary"><code class="docutils literal notranslate"><span class="pre">print_list_summary()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.regex_based_substitution"><code class="docutils literal notranslate"><span class="pre">regex_based_substitution()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.snake_to_camel"><code class="docutils literal notranslate"><span class="pre">snake_to_camel()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.strings.truncate_lines"><code class="docutils literal notranslate"><span class="pre">truncate_lines()</span></code></a></li>
@@ -110,7 +117,24 @@
              
   <section id="module-lkj.strings">
 <span id="lkj-strings"></span><h1>lkj.strings<a class="headerlink" href="#module-lkj.strings" title="Link to this heading"></a></h1>
-<p>Utils for strings</p>
+<p>String Utilities Module</p>
+<p>This module provides a comprehensive set of utility functions and classes for working with strings in Python.
+It includes tools for string manipulation, formatting, pretty-printing, and find/replace operations.</p>
+<p>Core Components:</p>
+<ul class="simple">
+<li><p>StringAppender: A helper class for collecting strings, useful for capturing output that would otherwise be printed.</p></li>
+<li><p>indent_lines: Indents each line of a string by a specified prefix.</p></li>
+<li><p>most_common_indent: Determines the most common indentation used in a multi-line string.</p></li>
+<li><p>FindReplaceTool: A class for advanced find-and-replace operations on strings, supporting regular expressions, match history, and undo functionality.</p></li>
+</ul>
+<p>Pretty-Printing Functions:</p>
+<ul class="simple">
+<li><p>print_list: Prints lists in various human-friendly formats (wrapped, columns, numbered, bullet, table, compact), with options for width, separators, and custom print functions.</p></li>
+<li><p>print_list.as_table: Formats and prints a list (or list of lists) as a table, with optional headers and alignment.</p></li>
+<li><p>print_list.summary: Prints a summary of a list, showing first few and last few items if the list is long.</p></li>
+<li><p>print_list.compact, print_list.wrapped, print_list.columns, print_list.numbered, print_list.bullets: Convenience methods using print_list’s partial functionality for common display styles.</p></li>
+</ul>
+<p>These utilities are designed to make it easier to display, format, and manipulate strings and collections of strings in a readable and flexible way.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="lkj.strings.FindReplaceTool">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">FindReplaceTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_line_numbers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highlight_char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'^'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#FindReplaceTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.FindReplaceTool" title="Link to this definition"></a></dt>
@@ -265,6 +289,18 @@ In non-line mode, a snippet of characters around the match is shown.</p>
 </section>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="lkj.strings.StringAppender">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">StringAppender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#StringAppender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.StringAppender" title="Link to this definition"></a></dt>
+<dd><p>Helper class to collect strings instead of printing them directly.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lkj.strings.StringAppender.get_string">
+<span class="sig-name descname"><span class="pre">get_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#StringAppender.get_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.StringAppender.get_string" title="Link to this definition"></a></dt>
+<dd><p>Alternative way to get the string.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.camel_to_snake">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">camel_to_snake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camel_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#camel_to_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.camel_to_snake" title="Link to this definition"></a></dt>
@@ -365,6 +401,169 @@ no indentation (from the point of view of the string, in this case.</p></li>
 <span class="go">&#39;    &#39;</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.print_list">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">print_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items:</span> <span class="pre">~typing.Iterable[~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style:</span> <span class="pre">~typing.Literal['wrapped'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'columns'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'numbered'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bullet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'table'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'compact']</span> <span class="pre">=</span> <span class="pre">'wrapped'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_prefix:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items_per_line=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_count=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#print_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.print_list" title="Link to this definition"></a></dt>
+<dd><p>Print a list in a nice, readable format with multiple style options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> – The list or iterable to print. If None, returns a partial function.</p></li>
+<li><p><strong>style</strong> – One of “wrapped”, “columns”, “numbered”, “bullet”, “table”, “compact”</p></li>
+<li><p><strong>max_width</strong> – Maximum width for wrapped style</p></li>
+<li><p><strong>sep</strong> – Separator for items</p></li>
+<li><p><strong>line_prefix</strong> – Prefix for each line</p></li>
+<li><p><strong>items_per_line</strong> – For columns style, how many items per line</p></li>
+<li><p><strong>show_count</strong> – Whether to show the count of items</p></li>
+<li><p><strong>title</strong> – Optional title to display before the list</p></li>
+<li><p><strong>print_func</strong> – Function to use for printing. Defaults to print.
+If None, returns the string instead of printing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;elderberry&quot;</span><span class="p">,</span> <span class="s2">&quot;fig&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p># Wrapped style (default)
+&gt;&gt;&gt; print_list(items, max_width=30)
+List (6 items):
+apple, banana, cherry, date,
+elderberry, fig</p>
+<p># Columns style
+&gt;&gt;&gt; print_list(items, style=”columns”, items_per_line=3)
+List (6 items):
+apple banana     cherry
+date  elderberry fig</p>
+<p># Numbered style
+&gt;&gt;&gt; print_list(items, style=”numbered”)
+List (6 items):
+1. apple
+2. banana
+3. cherry
+4. date
+5. elderberry
+6. fig</p>
+<p># Bullet style
+&gt;&gt;&gt; print_list(items, style=”bullet”)
+List (6 items):
+• apple
+• banana
+• cherry
+• date
+• elderberry
+• fig</p>
+<p># Return string instead of printing
+&gt;&gt;&gt; result = print_list(items, style=”numbered”, print_func=None)
+&gt;&gt;&gt; print(result)
+List (6 items):
+1. apple
+2. banana
+3. cherry
+4. date
+5. elderberry
+6. fig</p>
+<p>Partial function functionality: If you don’t specify the items (or items=None),
+the function returns a partial function that can be called with the items later.
+That is, the print_list acts as a factory function for different
+printing styles.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numbered_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;numbered&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numbered_printer</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="go">1. apple</span>
+<span class="go">2. banana</span>
+<span class="go">3. cherry</span>
+<span class="go">4. date</span>
+<span class="go">5. elderberry</span>
+<span class="go">6. fig</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compact_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;compact&quot;</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compact_printer</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="go">apple, banana, cherry, date, elderberry, fig</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bullet_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;bullet&quot;</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">bullet_printer</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">• apple</span>
+<span class="go">• banana</span>
+<span class="go">• cherry</span>
+<span class="go">• date</span>
+<span class="go">• elderberry</span>
+<span class="go">• fig</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.print_list_as_table">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">print_list_as_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width=80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align='left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#print_list_as_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.print_list_as_table" title="Link to this definition"></a></dt>
+<dd><p>Print a list as a nicely formatted table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> – List of items (strings, numbers, or objects with __str__)</p></li>
+<li><p><strong>headers</strong> – Optional list of column headers</p></li>
+<li><p><strong>max_width</strong> – Maximum width of the table</p></li>
+<li><p><strong>align</strong> – Alignment for columns (“left”, “right”, “center”)</p></li>
+<li><p><strong>print_func</strong> – Function to use for printing. Defaults to print.
+If None, returns the string instead of printing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;City&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;NYC&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;LA&quot;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_list_as_table</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">Name  | Age | City</span>
+<span class="go">-----|---|----</span>
+<span class="go">Alice | 25  | NYC</span>
+<span class="go">Bob   | 30  | LA</span>
+</pre></div>
+</div>
+<p># Return string instead of printing
+&gt;&gt;&gt; result = print_list_as_table(data, print_func=None)
+&gt;&gt;&gt; print(result)
+Name  | Age | City
+—–<a href="#id1"><span class="problematic" id="id2">|---|</span></a>—-
+Alice | 25  | NYC
+Bob   | 30  | LA</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.print_list_summary">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">print_list_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_items=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_total=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/strings.html#print_list_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.print_list_summary" title="Link to this definition"></a></dt>
+<dd><p>Print a summary of a list, showing first few and last few items if the list is long.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> – The list to summarize</p></li>
+<li><p><strong>max_items</strong> – Maximum number of items to show (first + last)</p></li>
+<li><p><strong>show_total</strong> – Whether to show the total count</p></li>
+<li><p><strong>title</strong> – Optional title</p></li>
+<li><p><strong>print_func</strong> – Function to use for printing. Defaults to print.
+If None, returns the string instead of printing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">long_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_list_summary</span><span class="p">(</span><span class="n">long_list</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">List (100 items):</span>
+<span class="go">[0, 1, 2, ..., 97, 98, 99]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">print_list_summary</span><span class="p">(</span><span class="n">long_list</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">List (100 items):</span>
+<span class="go">[0, 1, 2, 3, 4, ..., 95, 96, 97, 98, 99]</span>
+</pre></div>
+</div>
+<p># Return string instead of printing
+&gt;&gt;&gt; result = print_list_summary(long_list, max_items=6, print_func=None)
+&gt;&gt;&gt; print(result)
+List (100 items):
+[0, 1, 2, …, 97, 98, 99]</p>
 </dd></dl>
 
 <dl class="py function">
