@@ -18,7 +18,7 @@ def capture_print(func, *args, **kwargs):
 def test_find_and_print_matches_highlight_under_match():
     text = "apple banana apple\nsome other line\n"
     tool = FindReplaceTool(text, line_mode=False)
-    out = capture_print(tool.find_and_print_matches, r'apple')
+    out = capture_print(tool.find_and_print_matches, r"apple")
 
     # We expect for the first match that the matched line appears, then the
     # highlight line directly under it, then following context lines. Ensure the
@@ -30,7 +30,7 @@ def test_find_and_print_matches_highlight_under_match():
     # It should contain 'apple banana apple'
     match0_idx = None
     for i, line in enumerate(lines):
-        if 'apple banana apple' in line:
+        if "apple banana apple" in line:
             # Ensure the next non-empty line is the highlight
             match0_idx = i
             break
@@ -39,10 +39,10 @@ def test_find_and_print_matches_highlight_under_match():
 
     # The next line should be the caret highlight (contains at least one '^')
     assert any(
-        c == '^' for c in lines[match0_idx + 1]
+        c == "^" for c in lines[match0_idx + 1]
     ), "Highlight not directly under matched line"
 
     # For completeness, ensure that the text 'some other line' appears after the caret
-    assert 'some other line' in '\n'.join(
+    assert "some other line" in "\n".join(
         lines[match0_idx + 2 :]
     ), "Following context not printed after highlight"
