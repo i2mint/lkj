@@ -1,0 +1,4 @@
+lkj.tests.test_strings
+======================
+.. automodule:: lkj.tests.test_strings
+   :members:

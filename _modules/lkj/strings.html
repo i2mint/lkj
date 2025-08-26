@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.45 documentation</title>
+  <title>lkj.strings &mdash; lkj 0.1.46 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=ce72d79b"></script>
+      <script src="../../_static/documentation_options.js?v=f98a5df1"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -56,6 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests.html">lkj.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests/test_strings.html">lkj.tests.test_strings</a></li>
 </ul>
 
         </div>
@@ -765,21 +767,59 @@
                         <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># In non-line mode, a naive snippet (characters around the match) can</span>
+            <span class="c1"># include newlines. If we simply print that snippet and then print the</span>
+            <span class="c1"># highlight line relative to the snippet start, the visual caret</span>
+            <span class="c1"># markers may appear under a different printed line. To avoid this,</span>
+            <span class="c1"># find the full line that contains the match and print the context as</span>
+            <span class="c1"># lines: preceding context lines, the matched line, then the highlight</span>
+            <span class="c1"># directly under the matched line, then the following context lines.</span>
             <span class="n">snippet_radius</span> <span class="o">=</span> <span class="mi">20</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
                 <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_mode</span><span class="p">:</span>
-                    <span class="n">snippet_start</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">snippet_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span> <span class="o">-</span> <span class="n">snippet_radius</span><span class="p">)</span>
-                <span class="n">snippet_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">current_text</span><span class="p">),</span> <span class="n">end</span> <span class="o">+</span> <span class="n">snippet_radius</span><span class="p">)</span>
-                <span class="n">snippet</span> <span class="o">=</span> <span class="n">current_text</span><span class="p">[</span><span class="n">snippet_start</span><span class="p">:</span><span class="n">snippet_end</span><span class="p">]</span>
+                <span class="c1"># Find the boundaries of the line containing the match</span>
+                <span class="n">line_start</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">line_end</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">line_end</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">line_end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_text</span><span class="p">)</span>
+
+                <span class="c1"># Context window (characters) around the matched line</span>
+                <span class="n">context_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line_start</span> <span class="o">-</span> <span class="n">snippet_radius</span><span class="p">)</span>
+                <span class="n">context_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">current_text</span><span class="p">),</span> <span class="n">line_end</span> <span class="o">+</span> <span class="n">snippet_radius</span><span class="p">)</span>
+                <span class="n">context_text</span> <span class="o">=</span> <span class="n">current_text</span><span class="p">[</span><span class="n">context_start</span><span class="p">:</span><span class="n">context_end</span><span class="p">]</span>
+
+                <span class="c1"># Split into lines while preserving newlines so output looks natural</span>
+                <span class="n">context_lines</span> <span class="o">=</span> <span class="n">context_text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="c1"># Determine which line in context_lines contains the match</span>
+                <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">match_line_idx</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">rel_pos_in_context</span> <span class="o">=</span> <span class="n">line_start</span> <span class="o">-</span> <span class="n">context_start</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">context_lines</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">acc</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">rel_pos_in_context</span><span class="p">:</span>
+                        <span class="n">match_line_idx</span> <span class="o">=</span> <span class="n">i</span>
+                        <span class="k">break</span>
+                    <span class="n">acc</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> (around line </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;line_number&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">snippet</span><span class="p">)</span>
-                <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">snippet_start</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span>
-                    <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-                <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
+                <span class="c1"># Print each context line. For the match line, print a highlight</span>
+                <span class="c1"># line immediately after it so the caret markers line up under</span>
+                <span class="c1"># the matched text.</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">context_lines</span><span class="p">):</span>
+                    <span class="c1"># Print the context line as-is (it may or may not contain a newline)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">match_line_idx</span><span class="p">:</span>
+                        <span class="c1"># If the printed line did not end with a newline, ensure the</span>
+                        <span class="c1"># caret highlight appears on the next line so it lines up</span>
+                        <span class="c1"># visually beneath the matched characters.</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                            <span class="nb">print</span><span class="p">()</span>
+                        <span class="c1"># position of match within the printed line</span>
+                        <span class="n">pos_in_line</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="n">line_start</span>
+                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">pos_in_line</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+                        <span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span></div>
 
 

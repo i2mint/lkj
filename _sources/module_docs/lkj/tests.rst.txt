@@ -1,0 +1,4 @@
+lkj.tests
+=========
+.. automodule:: lkj.tests
+   :members:

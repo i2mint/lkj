@@ -12,3 +12,5 @@
    module_docs/lkj/loggers
    module_docs/lkj/misc
    module_docs/lkj/strings
+   module_docs/lkj/tests
+   module_docs/lkj/tests/test_strings
