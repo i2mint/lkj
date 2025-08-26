@@ -633,21 +633,59 @@ class FindReplaceTool:
                         print(highlight)
                 print("-" * 40)
         else:
+            # In non-line mode, a naive snippet (characters around the match) can
+            # include newlines. If we simply print that snippet and then print the
+            # highlight line relative to the snippet start, the visual caret
+            # markers may appear under a different printed line. To avoid this,
+            # find the full line that contains the match and print the context as
+            # lines: preceding context lines, the matched line, then the highlight
+            # directly under the matched line, then the following context lines.
             snippet_radius = 20
             for idx, m in enumerate(self._matches):
                 start, end = m["start"], m["end"]
-                if self.line_mode:
-                    snippet_start = current_text.rfind("\n", 0, start) + 1
-                else:
-                    snippet_start = max(0, start - snippet_radius)
-                snippet_end = min(len(current_text), end + snippet_radius)
-                snippet = current_text[snippet_start:snippet_end]
+                # Find the boundaries of the line containing the match
+                line_start = current_text.rfind("\n", 0, start) + 1
+                line_end = current_text.find("\n", end)
+                if line_end == -1:
+                    line_end = len(current_text)
+
+                # Context window (characters) around the matched line
+                context_start = max(0, line_start - snippet_radius)
+                context_end = min(len(current_text), line_end + snippet_radius)
+                context_text = current_text[context_start:context_end]
+
+                # Split into lines while preserving newlines so output looks natural
+                context_lines = context_text.splitlines(True)
+
+                # Determine which line in context_lines contains the match
+                acc = 0
+                match_line_idx = 0
+                rel_pos_in_context = line_start - context_start
+                for i, line in enumerate(context_lines):
+                    if acc + len(line) > rel_pos_in_context:
+                        match_line_idx = i
+                        break
+                    acc += len(line)
+
                 print(f"Match {idx} (around line {m['line_number']+1}):")
-                print(snippet)
-                highlight = " " * (start - snippet_start) + self.highlight_char * (
-                    end - start
-                )
-                print(highlight)
+                # Print each context line. For the match line, print a highlight
+                # line immediately after it so the caret markers line up under
+                # the matched text.
+                for i, line in enumerate(context_lines):
+                    # Print the context line as-is (it may or may not contain a newline)
+                    print(line, end="")
+                    if i == match_line_idx:
+                        # If the printed line did not end with a newline, ensure the
+                        # caret highlight appears on the next line so it lines up
+                        # visually beneath the matched characters.
+                        if not line.endswith("\n"):
+                            print()
+                        # position of match within the printed line
+                        pos_in_line = start - line_start
+                        highlight = " " * pos_in_line + self.highlight_char * (
+                            end - start
+                        )
+                        print(highlight)
                 print("-" * 40)
 
     def replace_one(self, match_index: int, replacement: Replacement) -> None:
