@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.filesys &mdash; lkj 0.1.46 documentation</title>
+  <title>lkj.filesys &mdash; lkj 0.1.47 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f98a5df1"></script>
+      <script src="../../_static/documentation_options.js?v=5df2d9e8"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -59,6 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.get_watermarked_dir"><code class="docutils literal notranslate"><span class="pre">get_watermarked_dir()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.has_watermark"><code class="docutils literal notranslate"><span class="pre">has_watermark()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.search_folder_fast"><code class="docutils literal notranslate"><span class="pre">search_folder_fast()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lkj.filesys.watermark_dir"><code class="docutils literal notranslate"><span class="pre">watermark_dir()</span></code></a></li>
 </ul>
 </li>
@@ -124,7 +125,7 @@ string, write the output to the specified file path. Default is False.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.filesys.get_app_data_dir">
-<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">get_app_data_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dirname='',</span> <span class="pre">*,</span> <span class="pre">if_exists:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">do_nothing&gt;,</span> <span class="pre">if_does_not_exist:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mkdir&gt;,</span> <span class="pre">rootdir:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'/home/runner/.config/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#get_app_data_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.get_app_data_dir" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">get_app_data_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dirname='',</span> <span class="pre">*,</span> <span class="pre">if_exists:</span> <span class="pre">~collections.abc.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">do_nothing&gt;,</span> <span class="pre">if_does_not_exist:</span> <span class="pre">~collections.abc.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mkdir&gt;,</span> <span class="pre">rootdir:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'/home/runner/.config/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#get_app_data_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.get_app_data_dir" title="Link to this definition"></a></dt>
 <dd><p>Returns the full path of a directory suitable for storing application-specific data.</p>
 <p>It’s a mini-framework for creating a directories: It allows us to specify what to do
 if the directory already exists, and what to do if it doesn’t exist.</p>
@@ -183,7 +184,7 @@ factories, see <a class="reference internal" href="#lkj.filesys.get_watermarked_
 
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.filesys.get_watermarked_dir">
-<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">get_watermarked_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dirname:</span> <span class="pre">str,</span> <span class="pre">watermark:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'.lkj',</span> <span class="pre">*,</span> <span class="pre">if_watermark_validation_fails:</span> <span class="pre">~typing.Callable[[str,</span> <span class="pre">str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_raise_watermark_error&gt;,</span> <span class="pre">make_dir:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mkdir&gt;,</span> <span class="pre">rootdir:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'/home/runner/.config/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#get_watermarked_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.get_watermarked_dir" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">get_watermarked_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dirname:</span> <span class="pre">str,</span> <span class="pre">watermark:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'.lkj',</span> <span class="pre">*,</span> <span class="pre">if_watermark_validation_fails:</span> <span class="pre">~collections.abc.Callable[[str,</span> <span class="pre">str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_raise_watermark_error&gt;,</span> <span class="pre">make_dir:</span> <span class="pre">~collections.abc.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mkdir&gt;,</span> <span class="pre">rootdir:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'/home/runner/.config/'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#get_watermarked_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.get_watermarked_dir" title="Link to this definition"></a></dt>
 <dd><p>Get a watermarked directory.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span>
@@ -214,6 +215,35 @@ factories, see <a class="reference internal" href="#lkj.filesys.get_watermarked_
 <dt class="sig sig-object py" id="lkj.filesys.rename_file">
 <span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">rename_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renamer_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/lkj/filesys.html#rename_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.rename_file" title="Link to this definition"></a></dt>
 <dd><p>This function takes a list of files and renames them using the provided renamer function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.filesys.search_folder_fast">
+<span class="sig-prename descclassname"><span class="pre">lkj.filesys.</span></span><span class="sig-name descname"><span class="pre">search_folder_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">search_term:</span> <span class="pre">str,</span> <span class="pre">path_to_search:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'.',</span> <span class="pre">*,</span> <span class="pre">egress:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">~typing.Any]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_ripgrep_json_parser&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/lkj/filesys.html#search_folder_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.filesys.search_folder_fast" title="Link to this definition"></a></dt>
+<dd><p>Executes a fast, recursive search using ripgrep and processes the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> – The regex pattern or text string to search for.</p></li>
+<li><p><strong>path_to_search</strong> – The folder path to start searching from. Defaults to current directory.</p></li>
+<li><p><strong>egress</strong> – A callable function to process the raw ripgrep output string.
+Defaults to a parser that returns a list of dictionaries for matches.
+If set to None, it defaults to a lambda returning the raw output (string).
+You can also give it simple_jsonl_parser to get a list of all JSON objects in the output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The output of the ‘egress’ function.</p>
+</dd>
+</dl>
+<section id="example-usage">
+<h2>Example usage:<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">search_folder_fast</span><span class="p">(</span><span class="s2">&quot;my_function_name&quot;</span><span class="p">,</span> <span class="n">path_to_search</span><span class="o">=</span><span class="s1">&#39;/path/to/project&#39;</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found in </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> at line </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;line_number&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">match</span><span class="p">[</span><span class="s1">&#39;line_text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</section>
 </dd></dl>
 
 <dl class="py function">
