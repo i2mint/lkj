@@ -23,7 +23,7 @@ def _ripgrep_json_parser(rg_output: str) -> list[dict]:
     results = []
 
     # ripgrep outputs one JSON object per line, so we iterate line by line
-    for line in rg_output.strip().split('\n'):
+    for line in rg_output.strip().split("\n"):
         if not line:
             continue
 
@@ -33,22 +33,22 @@ def _ripgrep_json_parser(rg_output: str) -> list[dict]:
             # Skip any lines that aren't valid JSON (shouldn't happen with --json)
             continue
 
-        if data.get('type') == 'match':
-            match_data = data.get('data', {})
+        if data.get("type") == "match":
+            match_data = data.get("data", {})
 
             # Extract key information from the match
             result = {
-                'path': match_data.get('path', {}).get('text'),
-                'line_number': match_data.get('line_number'),
+                "path": match_data.get("path", {}).get("text"),
+                "line_number": match_data.get("line_number"),
                 # The text of the matched line, decoded
-                'line_text': match_data.get('lines', {}).get('text'),
-                'submatches': [
+                "line_text": match_data.get("lines", {}).get("text"),
+                "submatches": [
                     {
-                        'match_text': sub.get('match', {}).get('text'),
-                        'start': sub.get('start'),
-                        'end': sub.get('end'),
+                        "match_text": sub.get("match", {}).get("text"),
+                        "start": sub.get("start"),
+                        "end": sub.get("end"),
                     }
-                    for sub in match_data.get('submatches', [])
+                    for sub in match_data.get("submatches", [])
                 ],
             }
             results.append(result)
@@ -58,7 +58,7 @@ def _ripgrep_json_parser(rg_output: str) -> list[dict]:
 
 def search_folder_fast(
     search_term: str,
-    path_to_search: str = '.',
+    path_to_search: str = ".",
     *,  # Enforce 'egress' as a keyword-only argument
     egress: Optional[Callable[[str], Any]] = _ripgrep_json_parser,
 ) -> Any:
@@ -82,7 +82,7 @@ def search_folder_fast(
 
     """
 
-    if shutil.which('rg') is None:
+    if shutil.which("rg") is None:
         print("=" * 60)
         print(
             "🚨 Error: The 'rg' (ripgrep) command was not found in your system's PATH."
@@ -100,13 +100,13 @@ def search_folder_fast(
     # --json: outputs machine-readable JSON format
     # --color never: ensures no ANSI color codes in the output stream
     command = [
-        'rg',
-        '-i',
-        '-r',
-        '-n',
-        '--json',
-        '--color',
-        'never',
+        "rg",
+        "-i",
+        "-r",
+        "-n",
+        "--json",
+        "--color",
+        "never",
         search_term,
         path_to_search,
     ]
