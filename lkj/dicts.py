@@ -45,8 +45,8 @@ def exclusive_subdict(d, exclude):
 def truncate_dict_values(
     d: dict,
     *,
-    max_list_size: Optional[int] = 2,
-    max_string_size: Optional[int] = 66,
+    max_list_size: int | None = 2,
+    max_string_size: int | None = 66,
     middle_marker: str = "...",
 ) -> dict:
     """
@@ -106,7 +106,8 @@ def truncate_dict_values(
         return d
 
 
-from typing import Mapping, Callable, TypeVar, Iterable, Tuple
+from typing import TypeVar, Tuple
+from collections.abc import Mapping, Callable, Iterable
 
 KT = TypeVar("KT")  # Key type
 VT = TypeVar("VT")  # Value type
@@ -119,7 +120,7 @@ def merge_dicts(
     *mappings: Mapping[KT, VT],
     recursive_condition: Callable[[VT], bool] = lambda v: isinstance(v, Mapping),
     conflict_resolver: Callable[[VT, VT], VT] = lambda x, y: y,
-    mapping_constructor: Callable[[Iterable[Tuple[KT, VT]]], Mapping[KT, VT]] = dict,
+    mapping_constructor: Callable[[Iterable[tuple[KT, VT]]], Mapping[KT, VT]] = dict,
 ) -> Mapping[KT, VT]:
     """
     Merge multiple mappings into a single mapping, recursively if needed,
@@ -218,7 +219,8 @@ def merge_dicts(
 
 
 import operator
-from typing import Callable, Dict, Any
+from typing import Dict, Any
+from collections.abc import Callable
 
 Comparison = Any
 Comparator = Callable[[dict, dict], Comparison]
@@ -232,10 +234,10 @@ def compare_field_values(
     dict1,
     dict2,
     *,
-    field_comparators: Dict[KT, Comparator] = {},
+    field_comparators: dict[KT, Comparator] = {},
     default_comparator: Comparator = operator.eq,
     aggregator: Callable[
-        [Dict[KT, Comparison]], Any
+        [dict[KT, Comparison]], Any
     ] = lambda d: d,  # lambda d: np.mean(list(d.values())),
     get_comparison_fields: Callable[[dict], Iterable[KT]] = _common_keys_list,
 ):

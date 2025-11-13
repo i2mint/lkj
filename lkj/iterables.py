@@ -1,6 +1,7 @@
 """Tools with iterables (dicts, lists, tuples, sets, etc.)."""
 
-from typing import Sequence, Mapping, KT, VT, Iterable, Iterable, NamedTuple
+from typing import KT, VT, NamedTuple
+from collections.abc import Sequence, Mapping, Iterable, Iterable
 
 
 class SetsComparisonResult(NamedTuple):

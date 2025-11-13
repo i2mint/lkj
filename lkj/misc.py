@@ -2,7 +2,8 @@
 
 from operator import attrgetter, ge, gt, le, lt
 from functools import partial
-from typing import Callable, T, Optional, Any
+from typing import T, Optional, Any
+from collections.abc import Callable
 
 
 def identity(x):
@@ -14,8 +15,8 @@ def value_in_interval(
     /,
     *,
     get_val: Callable[[Any], T] = identity,
-    min_val: Optional[T] = None,
-    max_val: Optional[T] = None,
+    min_val: T | None = None,
+    max_val: T | None = None,
     is_minimum: Callable[[T, T], bool] = ge,
     is_maximum: Callable[[T, T], bool] = lt,
 ):

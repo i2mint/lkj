@@ -3,29 +3,26 @@
 from itertools import zip_longest, chain, islice
 
 from typing import (
-    Iterable,
     Union,
     Dict,
     List,
     Tuple,
-    Mapping,
     TypeVar,
-    Iterator,
-    Callable,
     Optional,
     T,
 )
+from collections.abc import Iterable, Mapping, Iterator, Callable
 
 KT = TypeVar("KT")  # there's a typing.KT, but pylance won't allow me to use it!
 VT = TypeVar("VT")  # there's a typing.VT, but pylance won't allow me to use it!
 
 
 def chunk_iterable(
-    iterable: Union[Iterable[T], Mapping[KT, VT]],
+    iterable: Iterable[T] | Mapping[KT, VT],
     chk_size: int,
     *,
-    chunk_type: Optional[Callable[..., Union[Iterable[T], Mapping[KT, VT]]]] = None,
-) -> Iterator[Union[List[T], Tuple[T, ...], Dict[KT, VT]]]:
+    chunk_type: Callable[..., Iterable[T] | Mapping[KT, VT]] | None = None,
+) -> Iterator[list[T] | tuple[T, ...] | dict[KT, VT]]:
     """
     Divide an iterable into chunks/batches of a specific size.
 
@@ -78,7 +75,7 @@ def chunk_iterable(
 
 def chunker(
     a: Iterable[T], chk_size: int, *, include_tail: bool = True
-) -> Iterator[Tuple[T, ...]]:
+) -> Iterator[tuple[T, ...]]:
     """
     Chunks an iterable into non-overlapping chunks of size `chk_size`.
 

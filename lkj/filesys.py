@@ -1,7 +1,160 @@
 """File system utils"""
 
+# -------------------------------------------------------------------------------------
+# Search (on linux and macOS) using rg (ripgrep)
+import subprocess
+import json
+import shutil
+from typing import Callable, Any, Optional
+
+# simple parser that returns list of dicts objects from a JSONL string
+simple_jsonl_parser = lambda string: list(map(json.loads, string.splitlines()))
+
+# --- Default Egress Function ---
+
+
+def _ripgrep_json_parser(rg_output: str) -> list[dict]:
+    """
+    Parses the line-by-line JSON stream output from ripgrep (rg --json).
+
+    This output is NOT a single valid JSON object, but a stream of JSON lines.
+    We only care about 'match' entries for the results.
+    """
+    results = []
+
+    # ripgrep outputs one JSON object per line, so we iterate line by line
+    for line in rg_output.strip().split('\n'):
+        if not line:
+            continue
+
+        try:
+            data = json.loads(line)
+        except json.JSONDecodeError:
+            # Skip any lines that aren't valid JSON (shouldn't happen with --json)
+            continue
+
+        if data.get('type') == 'match':
+            match_data = data.get('data', {})
+
+            # Extract key information from the match
+            result = {
+                'path': match_data.get('path', {}).get('text'),
+                'line_number': match_data.get('line_number'),
+                # The text of the matched line, decoded
+                'line_text': match_data.get('lines', {}).get('text'),
+                'submatches': [
+                    {
+                        'match_text': sub.get('match', {}).get('text'),
+                        'start': sub.get('start'),
+                        'end': sub.get('end'),
+                    }
+                    for sub in match_data.get('submatches', [])
+                ],
+            }
+            results.append(result)
+
+    return results
+
+
+def search_folder_fast(
+    search_term: str,
+    path_to_search: str = '.',
+    *,  # Enforce 'egress' as a keyword-only argument
+    egress: Optional[Callable[[str], Any]] = _ripgrep_json_parser,
+) -> Any:
+    """
+    Executes a fast, recursive search using ripgrep and processes the results.
+
+    :param search_term: The regex pattern or text string to search for.
+    :param path_to_search: The folder path to start searching from. Defaults to current directory.
+    :param egress: A callable function to process the raw ripgrep output string.
+                   Defaults to a parser that returns a list of dictionaries for matches.
+                   If set to None, it defaults to a lambda returning the raw output (string).
+                   You can also give it simple_jsonl_parser to get a list of all JSON objects in the output.
+    :return: The output of the 'egress' function.
+
+    Example usage:
+    -------------
+    >>> results = search_folder_fast("my_function_name", path_to_search='/path/to/project')  # doctest: +SKIP
+    >>> for match in results:  # doctest: +SKIP
+    ...     print(f"Found in {match['path']} at line {match['line_number']}: {match['line_text']}")  # doctest: +SKIP
+
+
+    """
+
+    if shutil.which('rg') is None:
+        print("=" * 60)
+        print(
+            "🚨 Error: The 'rg' (ripgrep) command was not found in your system's PATH."
+        )
+        print("\nTo install ripgrep:")
+        print("  - Linux (Debian/Ubuntu): sudo apt install ripgrep")
+        print("  - macOS (Homebrew):      brew install ripgrep")
+        print("  - Windows (Chocolatey):  choco install ripgrep")
+        print(f"\nMore details: https://github.com/BurntSushi/ripgrep#installation")
+        print("=" * 60)
+        return None
+
+    # Standard ripgrep command with JSON output
+    # -i: case-insensitive, -r: recursive, -n: show line numbers
+    # --json: outputs machine-readable JSON format
+    # --color never: ensures no ANSI color codes in the output stream
+    command = [
+        'rg',
+        '-i',
+        '-r',
+        '-n',
+        '--json',
+        '--color',
+        'never',
+        search_term,
+        path_to_search,
+    ]
+
+    # Handle the default None case for egress (return raw string)
+    if egress is None:
+        egress = lambda x: x
+
+    try:
+        # Use text=True and capture_output=True for string output and capturing stdout/stderr
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+
+        # Call the egress function on the raw standard output
+        return egress(result.stdout)
+
+    except subprocess.CalledProcessError as e:
+        # ripgrep returns a non-zero code if no matches are found.
+        # This is expected behavior and should not be treated as an error
+        # unless stderr indicates a true issue.
+        # Check stderr for real errors
+        if e.stderr:
+            # Handle genuine errors like permissions or file issues
+            print(f"A genuine ripgrep error occurred: {e.stderr.strip()}")
+            return None
+
+        # If check=True and return code is 1, it usually means "no matches found."
+        # If there's no stderr, return the egress of an empty string (or handle as no results)
+        return egress("")
+
+    except FileNotFoundError:
+        print(
+            "Error: ripgrep ('rg') command not found. Please ensure it is installed and in your PATH."
+        )
+        return None
+
+
+# Example usage will require 'rg' installed and a file system to search
+# For demonstration purposes, assume 'rg' is installed and you are searching for 'wrap_kvs'
+# search_results = search_folder_fast("wrap_kvs", path_to_search='/path/to/your/project')
+#
+# print(search_results)
+
+# -------------------------------------------------------------------------------------
+# General utils for file system operations
+
 import os
-from typing import Callable, Any
+from typing import Any
+from collections.abc import Callable
 from pathlib import Path
 from functools import wraps, partial
 
@@ -32,7 +185,7 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
         if args and isinstance(args[0], str) and os.path.isfile(args[0]):
             file_path = args[0]
             # Read the file content
-            with open(file_path, "r") as file:
+            with open(file_path) as file:
                 file_content = file.read()
             # Call the function with the file content and other arguments
             new_args = (file_content,) + args[1:]

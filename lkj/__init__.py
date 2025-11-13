@@ -15,7 +15,12 @@ from lkj.dicts import (
     merge_dicts,  # Merge multiple dictionaries recursively
     compare_field_values,  # Compare two dictionaries' values
 )
-from lkj.filesys import get_app_data_dir, get_watermarked_dir, enable_sourcing_from_file
+from lkj.filesys import (
+    get_app_data_dir,
+    get_watermarked_dir,
+    enable_sourcing_from_file,
+    search_folder_fast,  # Fast search for a term in files under a folder (uses rg command)
+)
 from lkj.strings import (
     print_list,  # Print a list in a nice format (or get a string to process yourself)
     FindReplaceTool,  # Tool for finding and replacing substrings in a string

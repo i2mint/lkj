@@ -1,6 +1,7 @@
 """Utils for logging."""
 
-from typing import Callable, Tuple, Any, Optional, Union, Iterable
+from typing import Tuple, Any, Optional, Union
+from collections.abc import Callable, Iterable
 from functools import partial, wraps
 from operator import attrgetter
 
@@ -9,7 +10,7 @@ from operator import attrgetter
 # TODO: Merge with wrap_text_with_exact_spacing
 # TODO: Add doctests for string
 def wrapped_print(
-    items: Union[str, Iterable],
+    items: str | Iterable,
     sep=", ",
     max_width=80,
     *,
@@ -166,15 +167,15 @@ def clog(condition, *args, log_func=print, **kwargs):
         return log_func(*args, **kwargs)
 
 
-def _calling_name(func_name: str, args: Tuple, kwargs: dict) -> str:
+def _calling_name(func_name: str, args: tuple, kwargs: dict) -> str:
     return f"Calling {func_name}..."
 
 
-def _done_calling_name(func_name: str, args: Tuple, kwargs: dict, result: Any) -> str:
+def _done_calling_name(func_name: str, args: tuple, kwargs: dict, result: Any) -> str:
     return f".... Done calling {func_name}"
 
 
-def _always_log(func: Callable, args: Tuple, kwargs: dict) -> bool:
+def _always_log(func: Callable, args: tuple, kwargs: dict) -> bool:
     """Return True no matter what"""
     return True
 
@@ -183,10 +184,10 @@ def log_calls(
     func: Callable = None,
     *,
     logger: Callable[[str], None] = print,
-    ingress_msg: Callable[[str, Tuple, dict], str] = _calling_name,
-    egress_msg: Callable[[str, Tuple, dict, Any], str] = _done_calling_name,
+    ingress_msg: Callable[[str, tuple, dict], str] = _calling_name,
+    egress_msg: Callable[[str, tuple, dict, Any], str] = _done_calling_name,
     func_name: Callable[[Callable], str] = attrgetter("__name__"),
-    log_condition: Callable[[Callable, Tuple, dict], bool] = _always_log,
+    log_condition: Callable[[Callable, tuple, dict], bool] = _always_log,
 ) -> Callable:
     """
     Decorator that adds logging before and after the function's call.
@@ -337,10 +338,12 @@ log_calls.instance_flag_is_set = instance_flag_is_set
 # Error handling
 
 
-from typing import Callable, Tuple, Any
+from typing import Tuple, Any
+from collections.abc import Callable
 from dataclasses import dataclass
 import traceback
-from typing import Callable, Any, Tuple
+from typing import Any, Tuple
+from collections.abc import Callable
 from functools import partial, wraps
 from operator import attrgetter
 
@@ -371,7 +374,7 @@ def dflt_error_info_processor(
 def return_error_info_on_error(
     func,
     *,
-    caught_error_types: Tuple[Exception] = (Exception,),
+    caught_error_types: tuple[Exception] = (Exception,),
     error_info_processor: Callable[[ErrorInfo], Any] = dflt_error_info_processor,
 ):
     """Decorator that returns traceback and local variables on error.

@@ -22,7 +22,8 @@ These utilities are designed to make it easier to display, format, and manipulat
 """
 
 import re
-from typing import Iterable, Sequence, Callable, Optional, Any, Literal
+from typing import Optional, Any, Literal
+from collections.abc import Iterable, Sequence, Callable
 from functools import partial
 
 
@@ -327,7 +328,7 @@ def regex_based_substitution(replacements: dict, regex=None, s: str = None):
         )
 
 
-from typing import Callable, Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 
 
 class TrieNode:
@@ -453,12 +454,13 @@ def unique_affixes(
     return affixes
 
 
-from typing import Union, Callable, Dict, Any
+from typing import Union, Dict, Any
+from collections.abc import Callable
 
 # A match is represented as a dictionary (keys like "start", "end", etc.)
 # and the replacement is either a static string or a callable that takes that
 # dictionary and returns a string.
-Replacement = Union[str, Callable[[Dict[str, Any]], str]]
+Replacement = Union[str, Callable[[dict[str, Any]], str]]
 
 
 class FindReplaceTool:
@@ -770,7 +772,7 @@ class FindReplaceTool:
 
 
 def print_list(
-    items: Optional[Iterable[Any]] = None,
+    items: Iterable[Any] | None = None,
     *,
     style: Literal[
         "wrapped", "columns", "numbered", "bullet", "table", "compact"
@@ -779,7 +781,7 @@ def print_list(
     sep: str = ", ",
     line_prefix: str = "",
     items_per_line=None,
-    show_count: Union[bool, Callable[[int], str]] = False,
+    show_count: bool | Callable[[int], str] = False,
     title=None,
     print_func=print,
 ):
