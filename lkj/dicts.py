@@ -48,17 +48,21 @@ def truncate_dict_values(
     max_list_size: int | None = 2,
     max_string_size: int | None = 66,
     middle_marker: str = "...",
+    d_ingress: callable = lambda d: d,
 ) -> dict:
     """
     Returns a new dictionary with the same nested keys structure, where:
     - List values are reduced to a maximum size of max_list_size.
     - String values longer than max_string_size are truncated in the middle.
+    - Values are preprocessed with d_ingress before type checking.
 
     Parameters:
     d (dict): The input dictionary.
     max_list_size (int, optional): Maximum size for lists. Defaults to 2.
     max_string_size (int, optional): Maximum length for strings. Defaults to None (no truncation).
     middle_marker (str, optional): String to insert in the middle of truncated strings. Defaults to '...'.
+    d_ingress (callable, optional): Function applied to each value before type checking.
+        Defaults to identity function. Useful for handling special types like pandas Series.
 
     Returns:
     dict: A new dictionary with truncated lists and strings.
@@ -79,6 +83,14 @@ def truncate_dict_values(
     ...     == large_dict
     ... )
 
+    For handling special types like pandas Series:
+
+    >>> def handle_pandas(obj):
+    ...     if hasattr(obj, 'head'):  # pandas Series/DataFrame
+    ...         return f"<{type(obj).__name__}: {len(obj)} items>"
+    ...     return obj
+    >>> # truncate_dict_values(data_with_pandas, d_ingress=handle_pandas)
+
     """
 
     def truncate_string(value, max_len, marker):
@@ -87,19 +99,26 @@ def truncate_dict_values(
         half_len = (max_len - len(marker)) // 2
         return value[:half_len] + marker + value[-half_len:]
 
+    # Apply d_ingress to preprocess the value
+    d = d_ingress(d)
+
     kwargs = dict(
         max_list_size=max_list_size,
         max_string_size=max_string_size,
         middle_marker=middle_marker,
+        d_ingress=d_ingress,
     )
     if isinstance(d, dict):
         return {k: truncate_dict_values(v, **kwargs) for k, v in d.items()}
-    elif isinstance(d, list):
-        return (
-            [truncate_dict_values(v, **kwargs) for v in d[:max_list_size]]
-            if max_list_size is not None
-            else d
-        )
+    elif isinstance(d, (list, tuple)):
+        container_type = type(d)
+        if max_list_size is not None:
+            truncated_items = [
+                truncate_dict_values(v, **kwargs) for v in d[:max_list_size]
+            ]
+        else:
+            truncated_items = [truncate_dict_values(v, **kwargs) for v in d]
+        return container_type(truncated_items)
     elif isinstance(d, str):
         return truncate_string(d, max_string_size, middle_marker)
     else:
