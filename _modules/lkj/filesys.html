@@ -5,16 +5,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.filesys &mdash; lkj 0.1.47 documentation</title>
+  <title>lkj.filesys &mdash; lkj 0.1.48 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=5df2d9e8"></script>
+      <script src="../../_static/documentation_options.js?v=b5e87a2a"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -111,7 +111,7 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># ripgrep outputs one JSON object per line, so we iterate line by line</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">rg_output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">rg_output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
             <span class="k">continue</span>
 
@@ -121,22 +121,22 @@
             <span class="c1"># Skip any lines that aren&#39;t valid JSON (shouldn&#39;t happen with --json)</span>
             <span class="k">continue</span>
 
-        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;match&#39;</span><span class="p">:</span>
-            <span class="n">match_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;match&quot;</span><span class="p">:</span>
+            <span class="n">match_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
             <span class="c1"># Extract key information from the match</span>
             <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">),</span>
-                <span class="s1">&#39;line_number&#39;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;line_number&#39;</span><span class="p">),</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;line_number&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line_number&quot;</span><span class="p">),</span>
                 <span class="c1"># The text of the matched line, decoded</span>
-                <span class="s1">&#39;line_text&#39;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">),</span>
-                <span class="s1">&#39;submatches&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;line_text&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;submatches&quot;</span><span class="p">:</span> <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s1">&#39;match_text&#39;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">),</span>
-                        <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">),</span>
-                        <span class="s1">&#39;end&#39;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">),</span>
+                        <span class="s2">&quot;match_text&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;match&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">),</span>
                     <span class="p">}</span>
-                    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submatches&#39;</span><span class="p">,</span> <span class="p">[])</span>
+                    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;submatches&quot;</span><span class="p">,</span> <span class="p">[])</span>
                 <span class="p">],</span>
             <span class="p">}</span>
             <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -148,7 +148,7 @@
 <a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.search_folder_fast">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">search_folder_fast</span><span class="p">(</span>
     <span class="n">search_term</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">path_to_search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="n">path_to_search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>  <span class="c1"># Enforce &#39;egress&#39; as a keyword-only argument</span>
     <span class="n">egress</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">_ripgrep_json_parser</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -172,7 +172,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s1">&#39;rg&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;rg&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;🚨 Error: The &#39;rg&#39; (ripgrep) command was not found in your system&#39;s PATH.&quot;</span>
@@ -190,13 +190,13 @@
     <span class="c1"># --json: outputs machine-readable JSON format</span>
     <span class="c1"># --color never: ensures no ANSI color codes in the output stream</span>
     <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;rg&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;-i&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;-r&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;-n&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;--json&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;--color&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;never&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;rg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-r&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--color&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;never&quot;</span><span class="p">,</span>
         <span class="n">search_term</span><span class="p">,</span>
         <span class="n">path_to_search</span><span class="p">,</span>
     <span class="p">]</span>

@@ -5,16 +5,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.dicts &mdash; lkj 0.1.47 documentation</title>
+  <title>lkj.dicts &mdash; lkj 0.1.48 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=5df2d9e8"></script>
+      <script src="../../_static/documentation_options.js?v=b5e87a2a"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,17 +144,21 @@
     <span class="n">max_list_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="n">max_string_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span>
     <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+    <span class="n">d_ingress</span><span class="p">:</span> <span class="nb">callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a new dictionary with the same nested keys structure, where:</span>
 <span class="sd">    - List values are reduced to a maximum size of max_list_size.</span>
 <span class="sd">    - String values longer than max_string_size are truncated in the middle.</span>
+<span class="sd">    - Values are preprocessed with d_ingress before type checking.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    d (dict): The input dictionary.</span>
 <span class="sd">    max_list_size (int, optional): Maximum size for lists. Defaults to 2.</span>
 <span class="sd">    max_string_size (int, optional): Maximum length for strings. Defaults to None (no truncation).</span>
 <span class="sd">    middle_marker (str, optional): String to insert in the middle of truncated strings. Defaults to &#39;...&#39;.</span>
+<span class="sd">    d_ingress (callable, optional): Function applied to each value before type checking.</span>
+<span class="sd">        Defaults to identity function. Useful for handling special types like pandas Series.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">    dict: A new dictionary with truncated lists and strings.</span>
@@ -175,6 +179,14 @@
 <span class="sd">    ...     == large_dict</span>
 <span class="sd">    ... )</span>
 
+<span class="sd">    For handling special types like pandas Series:</span>
+
+<span class="sd">    &gt;&gt;&gt; def handle_pandas(obj):</span>
+<span class="sd">    ...     if hasattr(obj, &#39;head&#39;):  # pandas Series/DataFrame</span>
+<span class="sd">    ...         return f&quot;&lt;{type(obj).__name__}: {len(obj)} items&gt;&quot;</span>
+<span class="sd">    ...     return obj</span>
+<span class="sd">    &gt;&gt;&gt; # truncate_dict_values(data_with_pandas, d_ingress=handle_pandas)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">marker</span><span class="p">):</span>
@@ -183,19 +195,26 @@
         <span class="n">half_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">marker</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="n">value</span><span class="p">[:</span><span class="n">half_len</span><span class="p">]</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="o">-</span><span class="n">half_len</span><span class="p">:]</span>
 
+    <span class="c1"># Apply d_ingress to preprocess the value</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d_ingress</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
     <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">max_list_size</span><span class="o">=</span><span class="n">max_list_size</span><span class="p">,</span>
         <span class="n">max_string_size</span><span class="o">=</span><span class="n">max_string_size</span><span class="p">,</span>
         <span class="n">middle_marker</span><span class="o">=</span><span class="n">middle_marker</span><span class="p">,</span>
+        <span class="n">d_ingress</span><span class="o">=</span><span class="n">d_ingress</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">truncate_dict_values</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="p">[</span><span class="n">truncate_dict_values</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[:</span><span class="n">max_list_size</span><span class="p">]]</span>
-            <span class="k">if</span> <span class="n">max_list_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">d</span>
-        <span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">container_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_list_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">truncated_items</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">truncate_dict_values</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[:</span><span class="n">max_list_size</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">truncated_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">truncate_dict_values</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">truncated_items</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">truncate_string</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">max_string_size</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
