@@ -1,92 +1,706 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.strings &mdash; lkj 0.1.48 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="alternate" type="text/markdown" href="strings.html.md">
+<link rel="describedby" href="../../llms.txt" type="text/markdown">
+    <title>lkj.strings &#8212; lkj</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/epythet.css?v=e4528f85" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../_static/documentation_options.js?v=1190fe33"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/lkj/strings';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.49" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
   
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=b5e87a2a"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
-</head>
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            lkj
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/chunking.html">lkj.chunking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/dicts.html">lkj.dicts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/funcs.html">lkj.funcs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/iterables.html">lkj.iterables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests.html">lkj.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests/test_strings.html">lkj.tests.test_strings</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">lkj</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../lkj.html">lkj</a></li>
-      <li class="breadcrumb-item active">lkj.strings</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">lkj</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API reference
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../lkj.html" class="nav-link">lkj</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">lkj.strings</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <h1>Source code for lkj.strings</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">String Utilities Module</span>
 
 <span class="sd">This module provides a comprehensive set of utility functions and classes for working with strings in Python.</span>
@@ -104,10 +718,10 @@
 <span class="sd">- print_list: Prints lists in various human-friendly formats (wrapped, columns, numbered, bullet, table, compact), with options for width, separators, and custom print functions.</span>
 <span class="sd">- print_list.as_table: Formats and prints a list (or list of lists) as a table, with optional headers and alignment.</span>
 <span class="sd">- print_list.summary: Prints a summary of a list, showing first few and last few items if the list is long.</span>
-<span class="sd">- print_list.compact, print_list.wrapped, print_list.columns, print_list.numbered, print_list.bullets: Convenience methods using print_list&#39;s partial functionality for common display styles.</span>
+<span class="sd">- print_list.compact, print_list.wrapped, print_list.columns, print_list.numbered, print_list.bullets: Convenience methods using print_list's partial functionality for common display styles.</span>
 
 <span class="sd">These utilities are designed to make it easier to display, format, and manipulate strings and collections of strings in a readable and flexible way.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
@@ -116,53 +730,53 @@
 
 
 <div class="viewcode-block" id="StringAppender">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.StringAppender">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.StringAppender">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StringAppender</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class to collect strings instead of printing them directly.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Helper class to collect strings instead of printing them directly."""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Append text to the internal list.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Append text to the internal list."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the collected string.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the collected string."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
 
 <div class="viewcode-block" id="StringAppender.get_string">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.StringAppender.get_string">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.StringAppender.get_string">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alternative way to get the string.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alternative way to get the string."""</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 </div>
 
 
 
 <div class="viewcode-block" id="indent_lines">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.indent_lines">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.indent_lines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">indent_lines</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Indent each line of a string.</span>
 
 <span class="sd">    :param string: The string to indent.</span>
 <span class="sd">    :param indent: The string to use for indentation.</span>
 <span class="sd">    :return: The indented string.</span>
 
-<span class="sd">    &gt;&gt;&gt; print(indent_lines(&#39;This is a test.\nAnother line.&#39;, &#39; &#39; * 8))</span>
+<span class="sd">    &gt;&gt;&gt; print(indent_lines('This is a test.\nAnother line.', ' ' * 8))</span>
 <span class="sd">            This is a test.</span>
 <span class="sd">            Another line.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">line_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">line_sep</span><span class="p">))</span></div>
 
 
 
 <div class="viewcode-block" id="most_common_indent">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.most_common_indent">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.most_common_indent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">most_common_indent</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ignore_first_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Find the most common indentation in a string.</span>
 
 <span class="sd">    :param string: The string to analyze.</span>
@@ -174,13 +788,13 @@
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">    &gt;&gt;&gt; most_common_indent(&#39;    This is a test.\n    Another line.&#39;)</span>
-<span class="sd">    &#39;    &#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">indents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^( *)\S&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="sd">    &gt;&gt;&gt; most_common_indent('    This is a test.\n    Another line.')</span>
+<span class="sd">    '    '</span>
+<span class="sd">    """</span>
+    <span class="n">indents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^( *)\S"</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
     <span class="n">n_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indents</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ignore_first_line</span> <span class="ow">and</span> <span class="n">n_lines</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="c1"># if there&#39;s more than one line, ignore the indent of the first</span>
+        <span class="c1"># if there's more than one line, ignore the indent of the first</span>
         <span class="n">indents</span> <span class="o">=</span> <span class="n">indents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">indents</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">indents</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div>
 
@@ -198,22 +812,22 @@
 
 
 <div class="viewcode-block" id="fields_of_string_formats">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.fields_of_string_formats">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.fields_of_string_formats">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fields_of_string_formats</span><span class="p">(</span><span class="n">templates</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">aggregator</span><span class="o">=</span><span class="nb">set</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract all unique field names from the templates in _github_url_templates using string.Formatter.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        templates (list): A list of dictionaries containing &#39;template&#39; keys.</span>
+<span class="sd">        templates (list): A list of dictionaries containing 'template' keys.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list: A sorted list of unique field names found in the templates.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; templates = [&#39;{this}/and/{that}&#39;, &#39;and/{that}/is/an/{other}&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; templates = ['{this}/and/{that}', 'and/{that}/is/an/{other}']</span>
 <span class="sd">        &gt;&gt;&gt; sorted(fields_of_string_formats(templates))</span>
-<span class="sd">        [&#39;other&#39;, &#39;that&#39;, &#39;this&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ['other', 'that', 'this']</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">field_names</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="n">templates</span><span class="p">:</span>
@@ -226,13 +840,13 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># Compiled regex to handle camel case to snake case conversions, including acronyms</span>
-<span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))&quot;</span><span class="p">)</span>
+<span class="n">_camel_to_snake_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"((?&lt;=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="camel_to_snake">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.camel_to_snake">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.camel_to_snake">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">camel_to_snake</span><span class="p">(</span><span class="n">camel_string</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert a CamelCase string to snake_case. Useful for converting class</span>
 <span class="sd">    names to variable names.</span>
 
@@ -243,26 +857,26 @@
 <span class="sd">        str: The converted snake_case string.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;BasicParseTest&#39;)</span>
-<span class="sd">        &#39;basic_parse_test&#39;</span>
-<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;HTMLParser&#39;)</span>
-<span class="sd">        &#39;html_parser&#39;</span>
-<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;CamelCaseExample&#39;)</span>
-<span class="sd">        &#39;camel_case_example&#39;</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake('BasicParseTest')</span>
+<span class="sd">        'basic_parse_test'</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake('HTMLParser')</span>
+<span class="sd">        'html_parser'</span>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake('CamelCaseExample')</span>
+<span class="sd">        'camel_case_example'</span>
 
 <span class="sd">        Note that acronyms are handled correctly:</span>
 
-<span class="sd">        &gt;&gt;&gt; camel_to_snake(&#39;XMLHttpRequestTest&#39;)</span>
-<span class="sd">        &#39;xml_http_request_test&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_camel_to_snake_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_\1&quot;</span><span class="p">,</span> <span class="n">camel_string</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+<span class="sd">        &gt;&gt;&gt; camel_to_snake('XMLHttpRequestTest')</span>
+<span class="sd">        'xml_http_request_test'</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">_camel_to_snake_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"_\1"</span><span class="p">,</span> <span class="n">camel_string</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
 
 
 
 <div class="viewcode-block" id="snake_to_camel">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.snake_to_camel">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.snake_to_camel">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">snake_to_camel</span><span class="p">(</span><span class="n">snake_string</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert a snake_case string to CamelCase. Useful for converting variable</span>
 <span class="sd">    names to class names.</span>
 
@@ -274,25 +888,25 @@
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;complex_tokenizer&#39;)</span>
-<span class="sd">        &#39;ComplexTokenizer&#39;</span>
-<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;simple_example_test&#39;)</span>
-<span class="sd">        &#39;SimpleExampleTest&#39;</span>
+<span class="sd">        &gt;&gt;&gt; snake_to_camel('complex_tokenizer')</span>
+<span class="sd">        'ComplexTokenizer'</span>
+<span class="sd">        &gt;&gt;&gt; snake_to_camel('simple_example_test')</span>
+<span class="sd">        'SimpleExampleTest'</span>
 
 <span class="sd">        Note that acronyms are capitalized correctly:</span>
 
-<span class="sd">        &gt;&gt;&gt; snake_to_camel(&#39;xml_http_request_test&#39;)</span>
-<span class="sd">        &#39;XmlHttpRequestTest&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;_&quot;</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">snake_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span></div>
+<span class="sd">        &gt;&gt;&gt; snake_to_camel('xml_http_request_test')</span>
+<span class="sd">        'XmlHttpRequestTest'</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">"_"</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">snake_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">))</span></div>
 
 
 
 <span class="c1"># Note: Vendored in i2.multi_objects and dol.util</span>
 <div class="viewcode-block" id="truncate_string">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_string">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.truncate_string">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncate_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">left_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">right_limit</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">middle_marker</span><span class="o">=</span><span class="s2">"..."</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Truncate a string to a maximum length, inserting a marker in the middle.</span>
 
 <span class="sd">    If the string is longer than the sum of the left_limit and right_limit,</span>
@@ -301,29 +915,29 @@
 <span class="sd">    If the string is shorter than the sum of the left_limit and right_limit,</span>
 <span class="sd">    the string is returned as is.</span>
 
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;)</span>
-<span class="sd">    &#39;1234567890&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('1234567890')</span>
+<span class="sd">    '1234567890'</span>
 
 <span class="sd">    But if the string is longer than the sum of the limits, it is truncated:</span>
 
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=3, right_limit=3)</span>
-<span class="sd">    &#39;123...890&#39;</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=3, right_limit=0)</span>
-<span class="sd">    &#39;123...&#39;</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;, left_limit=0, right_limit=3)</span>
-<span class="sd">    &#39;...890&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('1234567890', left_limit=3, right_limit=3)</span>
+<span class="sd">    '123...890'</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('1234567890', left_limit=3, right_limit=0)</span>
+<span class="sd">    '123...'</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('1234567890', left_limit=0, right_limit=3)</span>
+<span class="sd">    '...890'</span>
 
-<span class="sd">    If you&#39;re using a specific parametrization of the function often, you can</span>
+<span class="sd">    If you're using a specific parametrization of the function often, you can</span>
 <span class="sd">    create a partial function with the desired parameters:</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string = partial(truncate_string, left_limit=2, right_limit=2, middle_marker=&#39;---&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;1234567890&#39;)</span>
-<span class="sd">    &#39;12---90&#39;</span>
-<span class="sd">    &gt;&gt;&gt; truncate_string(&#39;supercalifragilisticexpialidocious&#39;)</span>
-<span class="sd">    &#39;su---us&#39;</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string = partial(truncate_string, left_limit=2, right_limit=2, middle_marker='---')</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('1234567890')</span>
+<span class="sd">    '12---90'</span>
+<span class="sd">    &gt;&gt;&gt; truncate_string('supercalifragilisticexpialidocious')</span>
+<span class="sd">    'su---us'</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">left_limit</span> <span class="o">+</span> <span class="n">right_limit</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">s</span>
     <span class="k">elif</span> <span class="n">right_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -339,11 +953,11 @@
 
 
 <div class="viewcode-block" id="truncate_lines">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.truncate_lines">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.truncate_lines">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">truncate_lines</span><span class="p">(</span>
-    <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
+    <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bottom_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">middle_marker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"..."</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Truncates a string by limiting the number of lines from the top and bottom.</span>
 <span class="sd">    If the total number of lines is greater than top_limit + bottom_limit,</span>
 <span class="sd">    it keeps the first `top_limit` lines, keeps the last `bottom_limit` lines,</span>
@@ -353,12 +967,12 @@
 <span class="sd">    If top_limit or bottom_limit is None, it is treated as 0.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; text = &#39;&#39;&#39;Line1</span>
+<span class="sd">        &gt;&gt;&gt; text = '''Line1</span>
 <span class="sd">        ... Line2</span>
 <span class="sd">        ... Line3</span>
 <span class="sd">        ... Line4</span>
 <span class="sd">        ... Line5</span>
-<span class="sd">        ... Line6&#39;&#39;&#39;</span>
+<span class="sd">        ... Line6'''</span>
 
 <span class="sd">        &gt;&gt;&gt; print(truncate_lines(text, top_limit=2, bottom_limit=2))</span>
 <span class="sd">        Line1</span>
@@ -366,7 +980,7 @@
 <span class="sd">        ...</span>
 <span class="sd">        Line5</span>
 <span class="sd">        Line6</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Interpret None as zero for convenience</span>
     <span class="n">top</span> <span class="o">=</span> <span class="n">top_limit</span> <span class="k">if</span> <span class="n">top_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
     <span class="n">bottom</span> <span class="o">=</span> <span class="n">bottom_limit</span> <span class="k">if</span> <span class="n">bottom_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
@@ -381,16 +995,16 @@
 
     <span class="c1"># Otherwise, keep the top lines, keep the bottom lines,</span>
     <span class="c1"># and insert a single marker line in the middle</span>
-    <span class="n">truncated</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">middle_marker</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span></div>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">middle_marker</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">]</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span></div>
 
 
 
 <span class="c1"># TODO: Generalize so that it can be used with regex keys (not escaped)</span>
 <div class="viewcode-block" id="regex_based_substitution">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.regex_based_substitution">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.regex_based_substitution">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">regex_based_substitution</span><span class="p">(</span><span class="n">replacements</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct a substitution function based on an iterable of replacement pairs.</span>
 
 <span class="sd">    :param replacements: An iterable of (replace_this, with_that) pairs.</span>
@@ -402,10 +1016,10 @@
 <span class="sd">    returning a ``substitute`` function that will carry out the substitutions</span>
 <span class="sd">    on an input string.</span>
 
-<span class="sd">    &gt;&gt;&gt; replacements = {&#39;apple&#39;: &#39;orange&#39;, &#39;banana&#39;: &#39;grape&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; replacements = {'apple': 'orange', 'banana': 'grape'}</span>
 <span class="sd">    &gt;&gt;&gt; substitute = regex_based_substitution(replacements)</span>
-<span class="sd">    &gt;&gt;&gt; substitute(&quot;I like apple and bananas.&quot;)</span>
-<span class="sd">    &#39;I like orange and grapes.&#39;</span>
+<span class="sd">    &gt;&gt;&gt; substitute("I like apple and bananas.")</span>
+<span class="sd">    'I like orange and grapes.'</span>
 
 <span class="sd">    You have access to the ``replacements`` and ``regex`` attributes of the</span>
 <span class="sd">    ``substitute`` function. See how the replacements dict has been ordered by</span>
@@ -413,9 +1027,9 @@
 <span class="sd">    before shorter keys, avoiding partial replacements.</span>
 
 <span class="sd">    &gt;&gt;&gt; substitute.replacements</span>
-<span class="sd">    {&#39;banana&#39;: &#39;grape&#39;, &#39;apple&#39;: &#39;orange&#39;}</span>
+<span class="sd">    {'banana': 'grape', 'apple': 'orange'}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
@@ -428,7 +1042,7 @@
         <span class="c1"># Create regex pattern from sorted keys (without escaping to allow regex)</span>
         <span class="n">sorted_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
         <span class="n">sorted_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">sorted_replacements</span><span class="p">]</span>
-        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">))</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"|"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">))</span>
 
         <span class="c1"># Prepare the substitution function with aligned replacements</span>
         <span class="n">aligned_replacements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sorted_keys</span><span class="p">,</span> <span class="n">sorted_values</span><span class="p">))</span>
@@ -441,7 +1055,7 @@
         <span class="k">return</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">replacements</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">s</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Invalid usage: provide either `s` or let the function construct itself.&quot;</span>
+            <span class="s2">"Invalid usage: provide either `s` or let the function construct itself."</span>
         <span class="p">)</span></div>
 
 
@@ -461,7 +1075,7 @@
 
 
 <div class="viewcode-block" id="unique_affixes">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.unique_affixes">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.unique_affixes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unique_affixes</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Sequence</span><span class="p">],</span>
     <span class="n">suffix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -469,7 +1083,7 @@
     <span class="n">egress</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ingress</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">identity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns a list of unique prefixes (or suffixes) for the given iterable of sequences.</span>
 <span class="sd">    Raises a ValueError if duplicates are found.</span>
 
@@ -480,43 +1094,43 @@
 <span class="sd">    - egress: Callable to postprocess each affix. Default is appropriate function based on item type.</span>
 <span class="sd">      Usually, ingress and egress are inverses of each other.</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;apple&#39;, &#39;ape&#39;, &#39;apricot&#39;, &#39;banana&#39;, &#39;band&#39;, &#39;bandana&#39;])</span>
-<span class="sd">    [&#39;app&#39;, &#39;ape&#39;, &#39;apr&#39;, &#39;bana&#39;, &#39;band&#39;, &#39;banda&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['apple', 'ape', 'apricot', 'banana', 'band', 'bandana'])</span>
+<span class="sd">    ['app', 'ape', 'apr', 'bana', 'band', 'banda']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;test&#39;, &#39;testing&#39;, &#39;tester&#39;])</span>
-<span class="sd">    [&#39;test&#39;, &#39;testi&#39;, &#39;teste&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['test', 'testing', 'tester'])</span>
+<span class="sd">    ['test', 'testi', 'teste']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;test&#39;, &#39;test&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['test', 'test'])</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">    ...</span>
 <span class="sd">    ValueError: Duplicate item detected: test</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;])</span>
-<span class="sd">    [&#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['abc', 'abcd', 'abcde'])</span>
+<span class="sd">    ['abc', 'abcd', 'abcde']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span>
-<span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['a', 'b', 'c'])</span>
+<span class="sd">    ['a', 'b', 'c']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;x&#39;, &#39;xy&#39;, &#39;xyz&#39;])</span>
-<span class="sd">    [&#39;x&#39;, &#39;xy&#39;, &#39;xyz&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['x', 'xy', 'xyz'])</span>
+<span class="sd">    ['x', 'xy', 'xyz']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;can&#39;, &#39;candy&#39;, &#39;candle&#39;])</span>
-<span class="sd">    [&#39;can&#39;, &#39;candy&#39;, &#39;candl&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['can', 'candy', 'candle'])</span>
+<span class="sd">    ['can', 'candy', 'candl']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;flow&#39;, &#39;flower&#39;, &#39;flight&#39;])</span>
-<span class="sd">    [&#39;flow&#39;, &#39;flowe&#39;, &#39;fli&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['flow', 'flower', 'flight'])</span>
+<span class="sd">    ['flow', 'flowe', 'fli']</span>
 
-<span class="sd">    &gt;&gt;&gt; unique_affixes([&#39;ation&#39;, &#39;termination&#39;, &#39;examination&#39;], suffix=True)</span>
-<span class="sd">    [&#39;ation&#39;, &#39;rmination&#39;, &#39;amination&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; unique_affixes(['ation', 'termination', 'examination'], suffix=True)</span>
+<span class="sd">    ['ation', 'rmination', 'amination']</span>
 
 <span class="sd">    &gt;&gt;&gt; import functools</span>
-<span class="sd">    &gt;&gt;&gt; ingress = functools.partial(str.split, sep=&#39;.&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; egress = &#39;.&#39;.join</span>
-<span class="sd">    &gt;&gt;&gt; items = [&#39;here.and.there&#39;, &#39;here.or.there&#39;, &#39;here&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; ingress = functools.partial(str.split, sep='.')</span>
+<span class="sd">    &gt;&gt;&gt; egress = '.'.join</span>
+<span class="sd">    &gt;&gt;&gt; items = ['here.and.there', 'here.or.there', 'here']</span>
 <span class="sd">    &gt;&gt;&gt; unique_affixes(items, ingress=ingress, egress=egress)</span>
-<span class="sd">    [&#39;here.and&#39;, &#39;here.or&#39;, &#39;here&#39;]</span>
+<span class="sd">    ['here.and', 'here.or', 'here']</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">ingress</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
 
     <span class="c1"># Determine the default egress function based on item type</span>
@@ -524,7 +1138,7 @@
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">):</span>
             <span class="c1"># Items are strings; affixes are lists of characters</span>
             <span class="k">def</span><span class="w"> </span><span class="nf">egress</span><span class="p">(</span><span class="n">affix</span><span class="p">):</span>
-                <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">affix</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Items are sequences (e.g., lists); affixes are lists</span>
@@ -552,7 +1166,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">original_item</span> <span class="o">=</span> <span class="n">item</span>
             <span class="n">original_item</span> <span class="o">=</span> <span class="n">egress</span><span class="p">(</span><span class="n">original_item</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate item detected: </span><span class="si">{</span><span class="n">original_item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplicate item detected: </span><span class="si">{</span><span class="n">original_item</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="n">node</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="c1"># Find the minimal unique prefixes/suffixes</span>
@@ -578,16 +1192,16 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
-<span class="c1"># A match is represented as a dictionary (keys like &quot;start&quot;, &quot;end&quot;, etc.)</span>
+<span class="c1"># A match is represented as a dictionary (keys like "start", "end", etc.)</span>
 <span class="c1"># and the replacement is either a static string or a callable that takes that</span>
 <span class="c1"># dictionary and returns a string.</span>
 <span class="n">Replacement</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]]</span>
 
 
 <div class="viewcode-block" id="FindReplaceTool">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FindReplaceTool</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    A general-purpose find-and-replace tool that can treat the input text</span>
 <span class="sd">    as a continuous sequence of characters, even if operations such as viewing</span>
 <span class="sd">    context are performed line by line. The tool can analyze matches based on</span>
@@ -603,7 +1217,7 @@
 
 <span class="sd">    1: Basic usage</span>
 <span class="sd">    -----------------------------------------------------</span>
-<span class="sd">    &gt;&gt;&gt; FindReplaceTool(&quot;apple banana apple&quot;).find_and_print_matches(r&#39;apple&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; FindReplaceTool("apple banana apple").find_and_print_matches(r'apple')</span>
 <span class="sd">    Match 0 (around line 1):</span>
 <span class="sd">    apple banana apple</span>
 <span class="sd">    ^^^^^</span>
@@ -612,48 +1226,48 @@
 <span class="sd">    apple banana apple</span>
 <span class="sd">                 ^^^^^</span>
 <span class="sd">    ----------------------------------------</span>
-<span class="sd">    &gt;&gt;&gt; FindReplaceTool(&quot;apple banana apple&quot;).find_and_replace(r&#39;apple&#39;, &quot;orange&quot;)</span>
-<span class="sd">    &#39;orange banana orange&#39;</span>
+<span class="sd">    &gt;&gt;&gt; FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")</span>
+<span class="sd">    'orange banana orange'</span>
 
 
 <span class="sd">    2: Using line_mode=True with a static replacement.</span>
 <span class="sd">    --------------------------------------------------------</span>
-<span class="sd">    &gt;&gt;&gt; text1 = &quot;apple\nbanana apple\ncherry&quot;</span>
+<span class="sd">    &gt;&gt;&gt; text1 = "apple\nbanana apple\ncherry"</span>
 <span class="sd">    &gt;&gt;&gt; tool = FindReplaceTool(text1, line_mode=True, flags=re.MULTILINE)</span>
 <span class="sd">    &gt;&gt;&gt; import re</span>
-<span class="sd">    &gt;&gt;&gt; # Find all occurrences of &quot;apple&quot; (two in total).</span>
-<span class="sd">    &gt;&gt;&gt; _ = tool.analyze(r&#39;apple&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # Find all occurrences of "apple" (two in total).</span>
+<span class="sd">    &gt;&gt;&gt; _ = tool.analyze(r'apple')</span>
 <span class="sd">    &gt;&gt;&gt; len(tool._matches)</span>
 <span class="sd">    2</span>
-<span class="sd">    &gt;&gt;&gt; # Replace the first occurrence (&quot;apple&quot; on the first line) with &quot;orange&quot;.</span>
-<span class="sd">    &gt;&gt;&gt; tool.replace_one(0, &quot;orange&quot;).get_modified_text()</span>
-<span class="sd">    &#39;orange\nbanana apple\ncherry&#39;</span>
+<span class="sd">    &gt;&gt;&gt; # Replace the first occurrence ("apple" on the first line) with "orange".</span>
+<span class="sd">    &gt;&gt;&gt; tool.replace_one(0, "orange").get_modified_text()</span>
+<span class="sd">    'orange\nbanana apple\ncherry'</span>
 
 <span class="sd">    3: Using line_mode=False with a callback replacement.</span>
 <span class="sd">    -----------------------------------------------------------</span>
-<span class="sd">    &gt;&gt;&gt; text2 = &quot;apple banana apple&quot;</span>
+<span class="sd">    &gt;&gt;&gt; text2 = "apple banana apple"</span>
 <span class="sd">    &gt;&gt;&gt; tool2 = FindReplaceTool(text2, line_mode=False)</span>
-<span class="sd">    &gt;&gt;&gt; # Find all occurrences of &quot;apple&quot; in the continuous text.</span>
-<span class="sd">    &gt;&gt;&gt; len(tool2.analyze(r&#39;apple&#39;)._matches)</span>
+<span class="sd">    &gt;&gt;&gt; # Find all occurrences of "apple" in the continuous text.</span>
+<span class="sd">    &gt;&gt;&gt; len(tool2.analyze(r'apple')._matches)</span>
 <span class="sd">    2</span>
 <span class="sd">    &gt;&gt;&gt; # Define a callback that converts each matched text to uppercase.</span>
 <span class="sd">    &gt;&gt;&gt; def to_upper(match):</span>
-<span class="sd">    ...     return match[&quot;matched_text&quot;].upper()</span>
+<span class="sd">    ...     return match["matched_text"].upper()</span>
 <span class="sd">    &gt;&gt;&gt; tool2.replace_all(to_upper).get_modified_text()</span>
-<span class="sd">    &#39;APPLE banana APPLE&#39;</span>
+<span class="sd">    'APPLE banana APPLE'</span>
 
 <span class="sd">    4: Reverting changes.</span>
 <span class="sd">    ---------------------------</span>
-<span class="sd">    &gt;&gt;&gt; text3 = &quot;one two three&quot;</span>
+<span class="sd">    &gt;&gt;&gt; text3 = "one two three"</span>
 <span class="sd">    &gt;&gt;&gt; tool3 = FindReplaceTool(text3)</span>
 <span class="sd">    &gt;&gt;&gt; import re</span>
-<span class="sd">    &gt;&gt;&gt; # Analyze to match the first word &quot;one&quot; (at the start of the text).</span>
-<span class="sd">    &gt;&gt;&gt; tool3.analyze(r&#39;^one&#39;).replace_one(0, &quot;ONE&quot;).get_modified_text()</span>
-<span class="sd">    &#39;ONE two three&#39;</span>
+<span class="sd">    &gt;&gt;&gt; # Analyze to match the first word "one" (at the start of the text).</span>
+<span class="sd">    &gt;&gt;&gt; tool3.analyze(r'^one').replace_one(0, "ONE").get_modified_text()</span>
+<span class="sd">    'ONE two three'</span>
 <span class="sd">    &gt;&gt;&gt; # Revert the edit.</span>
 <span class="sd">    &gt;&gt;&gt; tool3.revert()</span>
-<span class="sd">    &#39;one two three&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    'one two three'</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -663,7 +1277,7 @@
         <span class="n">flags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">show_line_numbers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">context_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">highlight_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span>
+        <span class="n">highlight_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"^"</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="c1"># Maintain a list of text versions; the first element is the original text.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span>
@@ -674,11 +1288,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">=</span> <span class="n">highlight_char</span>
 
         <span class="c1"># Internal storage for matches; each entry is a dict with:</span>
-        <span class="c1">#   &quot;start&quot;: start offset in the current text,</span>
-        <span class="c1">#   &quot;end&quot;: end offset in the current text,</span>
-        <span class="c1">#   &quot;matched_text&quot;: the text that was matched,</span>
-        <span class="c1">#   &quot;groups&quot;: any named groups from the regex,</span>
-        <span class="c1">#   &quot;line_number&quot;: the line number where the match occurs.</span>
+        <span class="c1">#   "start": start offset in the current text,</span>
+        <span class="c1">#   "end": end offset in the current text,</span>
+        <span class="c1">#   "matched_text": the text that was matched,</span>
+        <span class="c1">#   "groups": any named groups from the regex,</span>
+        <span class="c1">#   "line_number": the line number where the match occurs.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># ----------------------------------------------------------------------------------</span>
@@ -686,22 +1300,22 @@
 
     <span class="c1"># TODO: Would like to have these functions be stateless</span>
 <div class="viewcode-block" id="FindReplaceTool.find_and_print_matches">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.find_and_print_matches">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.find_and_print_matches">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_and_print_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
 <span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">view_matches</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="FindReplaceTool.find_and_replace">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.find_and_replace">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.find_and_replace">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_and_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
 <span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">replace_all</span><span class="p">(</span><span class="n">replacement</span><span class="p">)</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span></div>
 
 
@@ -709,23 +1323,23 @@
     <span class="c1"># Advanced methods</span>
 
 <div class="viewcode-block" id="FindReplaceTool.analyze">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.analyze">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.analyze">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Searches the current text (the last version) for occurrences matching the given</span>
 <span class="sd">        regular expression. Any match data (including group captures) is stored internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">current_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">):</span>
             <span class="n">match_data</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>
-                <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span>
-                <span class="s2">&quot;matched_text&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-                <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">(),</span>
-                <span class="s2">&quot;line_number&quot;</span><span class="p">:</span> <span class="n">current_text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()),</span>
+                <span class="s2">"start"</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>
+                <span class="s2">"end"</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span>
+                <span class="s2">"matched_text"</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="s2">"groups"</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">(),</span>
+                <span class="s2">"line_number"</span><span class="p">:</span> <span class="n">current_text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()),</span>
             <span class="p">}</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match_data</span><span class="p">)</span>
 
@@ -733,41 +1347,41 @@
 
 
 <div class="viewcode-block" id="FindReplaceTool.view_matches">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.view_matches">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.view_matches">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">view_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Displays all stored matches along with surrounding context. When line_mode</span>
 <span class="sd">        is enabled, the context is provided in full lines with (optionally) line numbers,</span>
 <span class="sd">        and a line is added below the matched line to indicate the matched portion.</span>
 <span class="sd">        In non-line mode, a snippet of characters around the match is shown.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No matches found.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"No matches found."</span><span class="p">)</span>
             <span class="k">return</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_mode</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
-                <span class="n">line_num</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;line_number&quot;</span><span class="p">]</span>
-                <span class="n">start_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
-                <span class="n">end_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+                <span class="n">line_num</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">"line_number"</span><span class="p">]</span>
+                <span class="n">start_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">"start"</span><span class="p">]</span>
+                <span class="n">end_pos</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">"end"</span><span class="p">]</span>
                 <span class="n">start_context</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line_num</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_size</span><span class="p">)</span>
                 <span class="n">end_context</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span> <span class="n">line_num</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> at line </span><span class="si">{</span><span class="n">line_num</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> at line </span><span class="si">{</span><span class="n">line_num</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">ln</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_context</span><span class="p">,</span> <span class="n">end_context</span><span class="p">):</span>
-                    <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ln</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  &quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_line_numbers</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+                    <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ln</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  "</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_line_numbers</span> <span class="k">else</span> <span class="s2">""</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="n">ln</span><span class="p">])</span>
                     <span class="c1"># For the match line, mark the position of the match.</span>
                     <span class="k">if</span> <span class="n">ln</span> <span class="o">==</span> <span class="n">line_num</span><span class="p">:</span>
                         <span class="n">pos_in_line</span> <span class="o">=</span> <span class="n">start_pos</span> <span class="o">-</span> <span class="p">(</span>
-                            <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[:</span><span class="n">ln</span><span class="p">]))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">ln</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+                            <span class="nb">len</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[:</span><span class="n">ln</span><span class="p">]))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">ln</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
                         <span class="p">)</span>
-                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">" "</span> <span class="o">*</span> <span class="p">(</span>
                             <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="n">pos_in_line</span>
                         <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span><span class="n">end_pos</span> <span class="o">-</span> <span class="n">start_pos</span><span class="p">)</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># In non-line mode, a naive snippet (characters around the match) can</span>
             <span class="c1"># include newlines. If we simply print that snippet and then print the</span>
@@ -778,10 +1392,10 @@
             <span class="c1"># directly under the matched line, then the following context lines.</span>
             <span class="n">snippet_radius</span> <span class="o">=</span> <span class="mi">20</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
-                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">"start"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"end"</span><span class="p">]</span>
                 <span class="c1"># Find the boundaries of the line containing the match</span>
-                <span class="n">line_start</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-                <span class="n">line_end</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+                <span class="n">line_start</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">line_end</span> <span class="o">=</span> <span class="n">current_text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">line_end</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                     <span class="n">line_end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_text</span><span class="p">)</span>
 
@@ -803,46 +1417,46 @@
                         <span class="k">break</span>
                     <span class="n">acc</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> (around line </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;line_number&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Match </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> (around line </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">'line_number'</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">):"</span><span class="p">)</span>
                 <span class="c1"># Print each context line. For the match line, print a highlight</span>
                 <span class="c1"># line immediately after it so the caret markers line up under</span>
                 <span class="c1"># the matched text.</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">context_lines</span><span class="p">):</span>
                     <span class="c1"># Print the context line as-is (it may or may not contain a newline)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">match_line_idx</span><span class="p">:</span>
                         <span class="c1"># If the printed line did not end with a newline, ensure the</span>
                         <span class="c1"># caret highlight appears on the next line so it lines up</span>
                         <span class="c1"># visually beneath the matched characters.</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">):</span>
                             <span class="nb">print</span><span class="p">()</span>
                         <span class="c1"># position of match within the printed line</span>
                         <span class="n">pos_in_line</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="n">line_start</span>
-                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">pos_in_line</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="n">highlight</span> <span class="o">=</span> <span class="s2">" "</span> <span class="o">*</span> <span class="n">pos_in_line</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_char</span> <span class="o">*</span> <span class="p">(</span>
                             <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
                         <span class="p">)</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">highlight</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FindReplaceTool.replace_one">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.replace_one">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.replace_one">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">replace_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Replaces a single match, identified by match_index, with a new string.</span>
-<span class="sd">        The &#39;replacement&#39; argument may be either a static string or a callable.</span>
+<span class="sd">        The 'replacement' argument may be either a static string or a callable.</span>
 <span class="sd">        When it is a callable, it is called with a dictionary containing the match data</span>
 <span class="sd">        (including any captured groups) and should return the replacement string.</span>
 <span class="sd">        The replacement is performed on the current text version, and the new text is</span>
 <span class="sd">        appended as a new version in the history.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">match_index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">match_index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid match index: </span><span class="si">{</span><span class="n">match_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid match index: </span><span class="si">{</span><span class="n">match_index</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">return</span>
 
         <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">match_index</span><span class="p">]</span>
-        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="s2">"start"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"end"</span><span class="p">]</span>
         <span class="n">current_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="c1"># Determine the replacement string.</span>
@@ -858,24 +1472,24 @@
 
         <span class="c1"># Update offsets for subsequent matches (so they refer to the new text version).</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">match_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">)):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">"start"</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">"end"</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_diff</span>
 
         <span class="c1"># Update the current match record.</span>
-        <span class="n">m</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_replacement</span><span class="p">)</span>
-        <span class="n">m</span><span class="p">[</span><span class="s2">&quot;matched_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_replacement</span>
+        <span class="n">m</span><span class="p">[</span><span class="s2">"end"</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_replacement</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">[</span><span class="s2">"matched_text"</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_replacement</span>
 
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
 <div class="viewcode-block" id="FindReplaceTool.replace_all">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.replace_all">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.replace_all">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">replace_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">replacement</span><span class="p">:</span> <span class="n">Replacement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Replaces all stored matches in the current text version. The &#39;replacement&#39; argument may</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Replaces all stored matches in the current text version. The 'replacement' argument may</span>
 <span class="sd">        be a static string or a callable (see replace_one for details). Replacements are performed</span>
 <span class="sd">        from the last match to the first, so that earlier offsets are not affected.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matches</span><span class="p">))):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">replace_one</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span>
 
@@ -883,35 +1497,35 @@
 
 
 <div class="viewcode-block" id="FindReplaceTool.get_original_text">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.get_original_text">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.get_original_text">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_original_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the original text (first version).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns the original text (first version)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FindReplaceTool.get_modified_text">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.get_modified_text">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.get_modified_text">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_modified_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the current (latest) text version.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Returns the current (latest) text version."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FindReplaceTool.revert">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.FindReplaceTool.revert">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.FindReplaceTool.revert">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reverts the current text version by removing the last &#39;steps&#39; versions</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Reverts the current text version by removing the last 'steps' versions</span>
 <span class="sd">        from the history. The original text (version 0) is never removed.</span>
 <span class="sd">        Returns the new current text.</span>
 
-<span class="sd">        &gt;&gt;&gt; text = &quot;one two three&quot;</span>
+<span class="sd">        &gt;&gt;&gt; text = "one two three"</span>
 <span class="sd">        &gt;&gt;&gt; tool = FindReplaceTool(text)</span>
 <span class="sd">        &gt;&gt;&gt; import re</span>
-<span class="sd">        &gt;&gt;&gt; tool.analyze(r&#39;^one&#39;).replace_one(0, &quot;ONE&quot;).get_modified_text()</span>
-<span class="sd">        &#39;ONE two three&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tool.analyze(r'^one').replace_one(0, "ONE").get_modified_text()</span>
+<span class="sd">        'ONE two three'</span>
 <span class="sd">        &gt;&gt;&gt; tool.revert()</span>
-<span class="sd">        &#39;one two three&#39;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        'one two three'</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">steps</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modified_text</span><span class="p">()</span>
         <span class="k">while</span> <span class="n">steps</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_versions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -923,27 +1537,27 @@
 
 
 <div class="viewcode-block" id="print_list">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.print_list">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.print_list">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_list</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span>
-        <span class="s2">&quot;wrapped&quot;</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="s2">&quot;numbered&quot;</span><span class="p">,</span> <span class="s2">&quot;bullet&quot;</span><span class="p">,</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="s2">&quot;compact&quot;</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;wrapped&quot;</span><span class="p">,</span>
+        <span class="s2">"wrapped"</span><span class="p">,</span> <span class="s2">"columns"</span><span class="p">,</span> <span class="s2">"numbered"</span><span class="p">,</span> <span class="s2">"bullet"</span><span class="p">,</span> <span class="s2">"table"</span><span class="p">,</span> <span class="s2">"compact"</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">"wrapped"</span><span class="p">,</span>
     <span class="n">max_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="p">,</span>
-    <span class="n">line_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">", "</span><span class="p">,</span>
+    <span class="n">line_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="n">items_per_line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">show_count</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Print a list in a nice, readable format with multiple style options.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        items: The list or iterable to print. If None, returns a partial function.</span>
-<span class="sd">        style: One of &quot;wrapped&quot;, &quot;columns&quot;, &quot;numbered&quot;, &quot;bullet&quot;, &quot;table&quot;, &quot;compact&quot;</span>
+<span class="sd">        style: One of "wrapped", "columns", "numbered", "bullet", "table", "compact"</span>
 <span class="sd">        max_width: Maximum width for wrapped style</span>
 <span class="sd">        sep: Separator for items</span>
 <span class="sd">        line_prefix: Prefix for each line</span>
@@ -954,7 +1568,7 @@
 <span class="sd">                   If None, returns the string instead of printing.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; items = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;date&quot;, &quot;elderberry&quot;, &quot;fig&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; items = ["apple", "banana", "cherry", "date", "elderberry", "fig"]</span>
 
 <span class="sd">        # Wrapped style (default)</span>
 <span class="sd">        &gt;&gt;&gt; print_list(items, max_width=30)</span>
@@ -962,12 +1576,12 @@
 <span class="sd">        elderberry, fig</span>
 
 <span class="sd">        # Columns style</span>
-<span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;columns&quot;, items_per_line=3)</span>
+<span class="sd">        &gt;&gt;&gt; print_list(items, style="columns", items_per_line=3)</span>
 <span class="sd">        apple banana     cherry</span>
 <span class="sd">        date  elderberry fig</span>
 
 <span class="sd">        # Numbered style</span>
-<span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;numbered&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print_list(items, style="numbered")</span>
 <span class="sd">        1. apple</span>
 <span class="sd">        2. banana</span>
 <span class="sd">        3. cherry</span>
@@ -976,7 +1590,7 @@
 <span class="sd">        6. fig</span>
 
 <span class="sd">        # Bullet style</span>
-<span class="sd">        &gt;&gt;&gt; print_list(items, style=&quot;bullet&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print_list(items, style="bullet")</span>
 <span class="sd">        • apple</span>
 <span class="sd">        • banana</span>
 <span class="sd">        • cherry</span>
@@ -985,7 +1599,7 @@
 <span class="sd">        • fig</span>
 
 <span class="sd">        # Return string instead of printing</span>
-<span class="sd">        &gt;&gt;&gt; result = print_list(items, style=&quot;numbered&quot;, print_func=None, show_count=True)</span>
+<span class="sd">        &gt;&gt;&gt; result = print_list(items, style="numbered", print_func=None, show_count=True)</span>
 <span class="sd">        &gt;&gt;&gt; print(result)</span>
 <span class="sd">        List (6 items):</span>
 <span class="sd">        1. apple</span>
@@ -995,12 +1609,12 @@
 <span class="sd">        5. elderberry</span>
 <span class="sd">        6. fig</span>
 
-<span class="sd">        Partial function functionality: If you don&#39;t specify the items (or items=None),</span>
+<span class="sd">        Partial function functionality: If you don't specify the items (or items=None),</span>
 <span class="sd">        the function returns a partial function that can be called with the items later.</span>
 <span class="sd">        That is, the print_list acts as a factory function for different</span>
 <span class="sd">        printing styles.</span>
 
-<span class="sd">        &gt;&gt;&gt; numbered_printer = print_list(style=&quot;numbered&quot;, show_count=False)</span>
+<span class="sd">        &gt;&gt;&gt; numbered_printer = print_list(style="numbered", show_count=False)</span>
 <span class="sd">        &gt;&gt;&gt; numbered_printer(items)</span>
 <span class="sd">        1. apple</span>
 <span class="sd">        2. banana</span>
@@ -1009,11 +1623,11 @@
 <span class="sd">        5. elderberry</span>
 <span class="sd">        6. fig</span>
 
-<span class="sd">        &gt;&gt;&gt; compact_printer = print_list(style=&quot;compact&quot;, max_width=60, show_count=False)</span>
+<span class="sd">        &gt;&gt;&gt; compact_printer = print_list(style="compact", max_width=60, show_count=False)</span>
 <span class="sd">        &gt;&gt;&gt; compact_printer(items)</span>
 <span class="sd">        apple, banana, cherry, date, elderberry, fig</span>
 
-<span class="sd">        &gt;&gt;&gt; bullet_printer = print_list(style=&quot;bullet&quot;, print_func=None, show_count=False)</span>
+<span class="sd">        &gt;&gt;&gt; bullet_printer = print_list(style="bullet", print_func=None, show_count=False)</span>
 <span class="sd">        &gt;&gt;&gt; result = bullet_printer(items)</span>
 <span class="sd">        &gt;&gt;&gt; print(result)</span>
 <span class="sd">        • apple</span>
@@ -1022,7 +1636,7 @@
 <span class="sd">        • date</span>
 <span class="sd">        • elderberry</span>
 <span class="sd">        • fig</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
             <span class="n">print_list</span><span class="p">,</span>
@@ -1035,9 +1649,9 @@
             <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
             <span class="n">print_func</span><span class="o">=</span><span class="n">print_func</span><span class="p">,</span>
         <span class="p">)</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Convert to list if it&#39;s an iterable</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Convert to list if it's an iterable</span>
     <span class="k">if</span> <span class="n">show_count</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">show_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n_items</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;List (</span><span class="si">{</span><span class="n">n_items</span><span class="si">}</span><span class="s2"> items):&quot;</span>
+        <span class="n">show_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n_items</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"List (</span><span class="si">{</span><span class="n">n_items</span><span class="si">}</span><span class="s2"> items):"</span>
 
     <span class="c1"># Handle print_func=None by using StringAppender</span>
     <span class="k">if</span> <span class="n">print_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1054,10 +1668,10 @@
         <span class="n">print_func</span><span class="p">(</span><span class="n">show_count</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
-        <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}</span><span class="s2">(empty list)&quot;</span><span class="p">)</span>
+        <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}</span><span class="s2">(empty list)"</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;wrapped&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"wrapped"</span><span class="p">:</span>
         <span class="c1"># Use the existing wrapped_print function with a safe fallback for doctest context</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrapped_print</span>  <span class="c1"># type: ignore</span>
@@ -1065,7 +1679,7 @@
             <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
 
             <span class="k">def</span><span class="w"> </span><span class="nf">wrapped_print</span><span class="p">(</span>
-                <span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
+                <span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">", "</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
             <span class="p">):</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
                 <span class="k">return</span> <span class="n">print_func</span><span class="p">(</span>
@@ -1083,7 +1697,7 @@
             <span class="n">print_func</span><span class="o">=</span><span class="n">print_func</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;columns&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"columns"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">items_per_line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Auto-calculate based on max_width and average item length</span>
             <span class="n">avg_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
@@ -1108,20 +1722,20 @@
                     <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">col_widths</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;numbered&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"numbered"</span><span class="p">:</span>
         <span class="n">max_num_width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)))</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="n">i</span><span class="si">:</span><span class="s2">&gt;</span><span class="si">{</span><span class="n">max_num_width</span><span class="si">}}</span><span class="s2">. </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="n">i</span><span class="si">:</span><span class="s2">&gt;</span><span class="si">{</span><span class="n">max_num_width</span><span class="si">}}</span><span class="s2">. </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;bullet&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"bullet"</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}</span><span class="s2">• </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}</span><span class="s2">• </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;table&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"table"</span><span class="p">:</span>
         <span class="c1"># Simple table format</span>
-        <span class="k">if</span> <span class="n">items</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">items</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"__iter__"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
             <span class="c1"># List of lists/tuples - treat as table data</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span>
@@ -1138,18 +1752,18 @@
                 <span class="n">formatted_row</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
                     <span class="n">formatted_row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">col_widths</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-                <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="s1">&#39; | &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_row</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="s1">' | '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_row</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Single column table</span>
             <span class="n">max_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-                <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">max_width</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">max_width</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;compact&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s2">"compact"</span><span class="p">:</span>
         <span class="c1"># Most compact form - all on one line if possible</span>
         <span class="n">items_str</span> <span class="o">=</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items_str</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_width</span><span class="p">:</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="n">items_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line_prefix</span><span class="si">}{</span><span class="n">items_str</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Fall back to wrapped style</span>
             <span class="k">try</span><span class="p">:</span>
@@ -1158,7 +1772,7 @@
                 <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
 
                 <span class="k">def</span><span class="w"> </span><span class="nf">wrapped_print</span><span class="p">(</span>
-                    <span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
+                    <span class="n">items</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">", "</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
                 <span class="p">):</span>
                     <span class="n">text</span> <span class="o">=</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
                     <span class="k">return</span> <span class="n">print_func</span><span class="p">(</span>
@@ -1178,7 +1792,7 @@
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Unknown style: </span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">. Use one of: wrapped, columns, numbered, bullet, table, compact&quot;</span>
+            <span class="sa">f</span><span class="s2">"Unknown style: </span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">. Use one of: wrapped, columns, numbered, bullet, table, compact"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span></div>
@@ -1186,23 +1800,23 @@
 
 
 <div class="viewcode-block" id="print_list_as_table">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.print_list_as_table">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.print_list_as_table">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_list_as_table</span><span class="p">(</span>
-    <span class="n">items</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
+    <span class="n">items</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Print a list as a nicely formatted table.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        items: List of items (strings, numbers, or objects with __str__)</span>
 <span class="sd">        headers: Optional list of column headers</span>
 <span class="sd">        max_width: Maximum width of the table</span>
-<span class="sd">        align: Alignment for columns (&quot;left&quot;, &quot;right&quot;, &quot;center&quot;)</span>
+<span class="sd">        align: Alignment for columns ("left", "right", "center")</span>
 <span class="sd">        print_func: Function to use for printing. Defaults to print.</span>
 <span class="sd">                   If None, returns the string instead of printing.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; data = [[&quot;Name&quot;, &quot;Age&quot;, &quot;City&quot;], [&quot;Alice&quot;, 25, &quot;NYC&quot;], [&quot;Bob&quot;, 30, &quot;LA&quot;]]</span>
+<span class="sd">        &gt;&gt;&gt; data = [["Name", "Age", "City"], ["Alice", 25, "NYC"], ["Bob", 30, "LA"]]</span>
 <span class="sd">        &gt;&gt;&gt; print_list_as_table(data)</span>
 <span class="sd">        Name  | Age | City</span>
 <span class="sd">        -----|---|----</span>
@@ -1216,7 +1830,7 @@
 <span class="sd">        -----|---|----</span>
 <span class="sd">        Alice | 25  | NYC</span>
 <span class="sd">        Bob   | 30  | LA</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Handle print_func=None by using StringAppender</span>
     <span class="k">if</span> <span class="n">print_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">string_appender</span> <span class="o">=</span> <span class="n">StringAppender</span><span class="p">()</span>
@@ -1226,17 +1840,17 @@
         <span class="n">return_string</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
-        <span class="n">print_func</span><span class="p">(</span><span class="s2">&quot;(empty table)&quot;</span><span class="p">)</span>
+        <span class="n">print_func</span><span class="p">(</span><span class="s2">"(empty table)"</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="c1"># Convert items to list of lists if needed</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"__iter__"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
         <span class="c1"># Single column</span>
         <span class="n">table_data</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
             <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">headers</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">headers</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">]</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Value"</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Multi-column</span>
         <span class="n">table_data</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
@@ -1253,7 +1867,7 @@
             <span class="n">col_widths</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">col_widths</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
 
     <span class="c1"># Adjust column widths to fit max_width</span>
-    <span class="n">total_width</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">col_widths</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>  <span class="c1"># 3 for &quot; | &quot;</span>
+    <span class="n">total_width</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">col_widths</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>  <span class="c1"># 3 for " | "</span>
     <span class="k">if</span> <span class="n">total_width</span> <span class="o">&gt;</span> <span class="n">max_width</span><span class="p">:</span>
         <span class="c1"># Reduce column widths proportionally</span>
         <span class="n">excess</span> <span class="o">=</span> <span class="n">total_width</span> <span class="o">-</span> <span class="n">max_width</span>
@@ -1273,24 +1887,24 @@
                 <span class="n">formatted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">col_widths</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">formatted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">" | "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">table_data</span><span class="p">):</span>
         <span class="n">print_func</span><span class="p">(</span><span class="n">format_row</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">header_present</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># Print separator line without spaces around the pipes</span>
-            <span class="n">print_func</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">col_widths</span><span class="p">))</span>
+            <span class="n">print_func</span><span class="p">(</span><span class="s2">"|"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">col_widths</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span></div>
 
 
 
 <div class="viewcode-block" id="print_list_summary">
-<a class="viewcode-back" href="../../module_docs/lkj/strings.html#lkj.strings.print_list_summary">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.print_list_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_list_summary</span><span class="p">(</span>
     <span class="n">items</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_total</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="nb">print</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Print a summary of a list, showing first few and last few items if the list is long.</span>
 
 <span class="sd">    Args:</span>
@@ -1316,7 +1930,7 @@
 <span class="sd">        &gt;&gt;&gt; print(result)</span>
 <span class="sd">        List (100 items):</span>
 <span class="sd">        [0, 1, 2, ..., 97, 98, 99]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
 
     <span class="c1"># Handle print_func=None by using StringAppender</span>
@@ -1330,10 +1944,10 @@
     <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
         <span class="n">print_func</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">show_total</span><span class="p">:</span>
-        <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> items):&quot;</span><span class="p">)</span>
+        <span class="n">print_func</span><span class="p">(</span><span class="sa">f</span><span class="s2">"List (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> items):"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
-        <span class="n">print_func</span><span class="p">(</span><span class="s2">&quot;(empty list)&quot;</span><span class="p">)</span>
+        <span class="n">print_func</span><span class="p">(</span><span class="s2">"(empty list)"</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_items</span><span class="p">:</span>
@@ -1347,7 +1961,7 @@
         <span class="n">last_items</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="n">last_count</span><span class="p">:]</span>
 
         <span class="n">print_func</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">first_items</span><span class="p">))</span><span class="si">}</span><span class="s2">, ..., </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">last_items</span><span class="p">))</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">first_items</span><span class="p">))</span><span class="si">}</span><span class="s2">, ..., </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">last_items</span><span class="p">))</span><span class="si">}</span><span class="s2">]"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string_appender</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_string</span> <span class="k">else</span> <span class="kc">None</span></div>
@@ -1365,38 +1979,60 @@
 
 <span class="n">print_list</span><span class="o">.</span><span class="n">as_table</span> <span class="o">=</span> <span class="n">print_list_as_table</span>
 <span class="n">print_list</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">print_list_summary</span>
-<span class="n">print_list</span><span class="o">.</span><span class="n">compact</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;compact&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">print_list</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;wrapped&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">print_list</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">print_list</span><span class="o">.</span><span class="n">numbered</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;numbered&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">print_list</span><span class="o">.</span><span class="n">bullets</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;bullet&quot;</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">compact</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"compact"</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"wrapped"</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"columns"</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">numbered</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"numbered"</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">bullets</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"bullet"</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
-           </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
           </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
   </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
 
-</footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+  </footer>
+  </body>
 </html>

@@ -1,228 +1,681 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to lkj’s documentation! &mdash; lkj 0.1.48 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
 
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt" type="text/markdown">
+    <title>lkj &#8212; lkj</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=b5e87a2a"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/epythet.css?v=e4528f85" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="_static/documentation_options.js?v=1190fe33"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=fd10adb8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lkj" href="module_docs/lkj.html" /> 
-</head>
+    <link rel="next" title="API reference" href="api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.49" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-          
-          
-          <a href="#" class="icon icon-home">
-            lkj
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj.html">lkj</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/chunking.html">lkj.chunking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/dicts.html">lkj.dicts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/filesys.html">lkj.filesys</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/funcs.html">lkj.funcs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/importing.html">lkj.importing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/iterables.html">lkj.iterables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/loggers.html">lkj.loggers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/misc.html">lkj.misc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/strings.html">lkj.strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/tests.html">lkj.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/tests/test_strings.html">lkj.tests.test_strings</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">lkj</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to lkj’s documentation!</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">lkj</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
   </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="welcome-to-lkj-s-documentation">
-<h1>Welcome to lkj’s documentation!<a class="headerlink" href="#welcome-to-lkj-s-documentation" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj.html">lkj</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj.html#lkj.add_as_attribute_of"><code class="docutils literal notranslate"><span class="pre">add_as_attribute_of()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj.html#lkj.add_attr"><code class="docutils literal notranslate"><span class="pre">add_attr()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj.html#lkj.get_caller_package_name"><code class="docutils literal notranslate"><span class="pre">get_caller_package_name()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj.html#lkj.user_machine_id"><code class="docutils literal notranslate"><span class="pre">user_machine_id()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/chunking.html">lkj.chunking</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/chunking.html#lkj.chunking.chunk_iterable"><code class="docutils literal notranslate"><span class="pre">chunk_iterable()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/chunking.html#lkj.chunking.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/dicts.html">lkj.dicts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/dicts.html#lkj.dicts.compare_field_values"><code class="docutils literal notranslate"><span class="pre">compare_field_values()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/dicts.html#lkj.dicts.exclusive_subdict"><code class="docutils literal notranslate"><span class="pre">exclusive_subdict()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/dicts.html#lkj.dicts.inclusive_subdict"><code class="docutils literal notranslate"><span class="pre">inclusive_subdict()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/dicts.html#lkj.dicts.merge_dicts"><code class="docutils literal notranslate"><span class="pre">merge_dicts()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/dicts.html#lkj.dicts.truncate_dict_values"><code class="docutils literal notranslate"><span class="pre">truncate_dict_values()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/filesys.html">lkj.filesys</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.do_nothing"><code class="docutils literal notranslate"><span class="pre">do_nothing()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.enable_sourcing_from_file"><code class="docutils literal notranslate"><span class="pre">enable_sourcing_from_file()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.get_app_data_dir"><code class="docutils literal notranslate"><span class="pre">get_app_data_dir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.get_watermarked_dir"><code class="docutils literal notranslate"><span class="pre">get_watermarked_dir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.has_watermark"><code class="docutils literal notranslate"><span class="pre">has_watermark()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.search_folder_fast"><code class="docutils literal notranslate"><span class="pre">search_folder_fast()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/filesys.html#lkj.filesys.watermark_dir"><code class="docutils literal notranslate"><span class="pre">watermark_dir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/funcs.html">lkj.funcs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/funcs.html#lkj.funcs.filter_greater_than"><code class="docutils literal notranslate"><span class="pre">filter_greater_than()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/funcs.html#lkj.funcs.full_path_maker"><code class="docutils literal notranslate"><span class="pre">full_path_maker()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/funcs.html#lkj.funcs.zip_with_filenames"><code class="docutils literal notranslate"><span class="pre">zip_with_filenames()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/importing.html">lkj.importing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingFinder"><code class="docutils literal notranslate"><span class="pre">NamespaceForwardingFinder</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.NamespaceForwardingLoader"><code class="docutils literal notranslate"><span class="pre">NamespaceForwardingLoader</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.import_from_path"><code class="docutils literal notranslate"><span class="pre">import_from_path()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.import_object"><code class="docutils literal notranslate"><span class="pre">import_object()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.parent_dir_of_module"><code class="docutils literal notranslate"><span class="pre">parent_dir_of_module()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/importing.html#lkj.importing.register_namespace_forwarding"><code class="docutils literal notranslate"><span class="pre">register_namespace_forwarding()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/iterables.html">lkj.iterables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/iterables.html#lkj.iterables.SetsComparisonResult"><code class="docutils literal notranslate"><span class="pre">SetsComparisonResult</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/iterables.html#lkj.iterables.compare_sets"><code class="docutils literal notranslate"><span class="pre">compare_sets()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/iterables.html#lkj.iterables.get_by_value"><code class="docutils literal notranslate"><span class="pre">get_by_value()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/iterables.html#lkj.iterables.index_of"><code class="docutils literal notranslate"><span class="pre">index_of()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/loggers.html">lkj.loggers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.CallOnError"><code class="docutils literal notranslate"><span class="pre">CallOnError</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.instance_flag_is_set"><code class="docutils literal notranslate"><span class="pre">instance_flag_is_set()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.log_calls"><code class="docutils literal notranslate"><span class="pre">log_calls()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.print_with_timestamp"><code class="docutils literal notranslate"><span class="pre">print_with_timestamp()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.return_error_info_on_error"><code class="docutils literal notranslate"><span class="pre">return_error_info_on_error()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.wrap_text_with_exact_spacing"><code class="docutils literal notranslate"><span class="pre">wrap_text_with_exact_spacing()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/loggers.html#lkj.loggers.wrapped_print"><code class="docutils literal notranslate"><span class="pre">wrapped_print()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/misc.html">lkj.misc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/misc.html#lkj.misc.value_in_interval"><code class="docutils literal notranslate"><span class="pre">value_in_interval()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/strings.html">lkj.strings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.FindReplaceTool"><code class="docutils literal notranslate"><span class="pre">FindReplaceTool</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.StringAppender"><code class="docutils literal notranslate"><span class="pre">StringAppender</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.camel_to_snake"><code class="docutils literal notranslate"><span class="pre">camel_to_snake()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.fields_of_string_formats"><code class="docutils literal notranslate"><span class="pre">fields_of_string_formats()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.indent_lines"><code class="docutils literal notranslate"><span class="pre">indent_lines()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.most_common_indent"><code class="docutils literal notranslate"><span class="pre">most_common_indent()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.print_list"><code class="docutils literal notranslate"><span class="pre">print_list()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.print_list_as_table"><code class="docutils literal notranslate"><span class="pre">print_list_as_table()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.print_list_summary"><code class="docutils literal notranslate"><span class="pre">print_list_summary()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.regex_based_substitution"><code class="docutils literal notranslate"><span class="pre">regex_based_substitution()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.snake_to_camel"><code class="docutils literal notranslate"><span class="pre">snake_to_camel()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.truncate_lines"><code class="docutils literal notranslate"><span class="pre">truncate_lines()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.truncate_string"><code class="docutils literal notranslate"><span class="pre">truncate_string()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.truncate_string_with_marker"><code class="docutils literal notranslate"><span class="pre">truncate_string_with_marker()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/lkj/strings.html#lkj.strings.unique_affixes"><code class="docutils literal notranslate"><span class="pre">unique_affixes()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/tests.html">lkj.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/lkj/tests/test_strings.html">lkj.tests.test_strings</a></li>
-</ul>
-</div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-<p>Release: 0.1.48</p>
-<p>Last change: Feb 05, 2026</p>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="module_docs/lkj.html" class="btn btn-neutral float-right" title="lkj" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+</nav></div>
+      
     </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      
+      
+        <div class="navbar-item">
 
-</body>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <!-- generated by epythet -->
+<section id="lkj">
+<h1>lkj<a class="headerlink" href="#lkj" title="Link to this heading">#</a></h1>
+<p>Lightweight Kit Jumpstart. A place for useful python utils built only with pure python.</p>
+<p>To install:	<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lkj</span></code></p>
+<p><a class="reference external" href="https://i2mint.github.io/lkj">Documentation</a></p>
+<p>Note: None of the tools here require anything else but pure python.
+Additionally, things are organized in such a way that these can be
+easily copy-pasted into other projects.
+That is, modules are all self contained (so can easily be copy-paste-vendored
+(do be nice and mention the source!))
+Further, many functions will contain their own imports: Those functions can even be
+copy-paste-vendored by just copying the function body.</p>
+</section>
+<section id="examples-of-utils">
+<h1>Examples of utils<a class="headerlink" href="#examples-of-utils" title="Link to this heading">#</a></h1>
+<section id="find-and-replace">
+<h2>Find and replace<a class="headerlink" href="#find-and-replace" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">FindReplaceTool</span></code> is a general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters,
+even if operations such as viewing context are performed line by line.</p>
+<p>The basic usage is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">"apple banana apple"</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_print_matches</span><span class="p">(</span><span class="sa">r</span><span class="s1">'apple'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Match 0 (around line 1):
+apple banana apple
+^^^^^
+----------------------------------------
+Match 1 (around line 1):
+apple banana apple
+             ^^^^^
+----------------------------------------
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">"apple banana apple"</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>'orange banana orange'
+</pre></div>
+</div>
+<p><a class="reference external" href="https://i2mint.github.io/lkj/module_docs/lkj/strings.html#lkj.strings.FindReplaceTool">See more examples in documentation</a></p>
+<p><a class="reference external" href="https://github.com/i2mint/lkj/discussions/4#discussioncomment-12104547">See here a example of how I used this to edit my CI yamls</a></p>
+</section>
+<section id="loggers">
+<h2>loggers<a class="headerlink" href="#loggers" title="Link to this heading">#</a></h2>
+<section id="clog">
+<h3>clog<a class="headerlink" href="#clog" title="Link to this heading">#</a></h3>
+<p>Conditional log</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">"logging this"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"logging this"</span><span class="p">)</span>
+<span class="go">logging this</span>
+</pre></div>
+</div>
+<p>One common usage is when there’s a verbose flag that allows the user to specify
+whether they want to log or not. Instead of having to litter your code with
+<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">verbose:</span></code> statements you can just do this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># say versbose is True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span> <span class="o">=</span> <span class="n">clog</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># makes a clog with a fixed condition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span><span class="p">(</span><span class="s2">"logging this"</span><span class="p">)</span>
+<span class="go">logging this</span>
+</pre></div>
+</div>
+<p>You can also choose a different log function.
+Usually you’d want to use a logger object from the logging module,
+but for this example we’ll just use <code class="docutils literal notranslate"><span class="pre">print</span></code> with some modification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span> <span class="o">=</span> <span class="n">clog</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">log_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"hello </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">"</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_clog</span><span class="p">(</span><span class="s2">"logging this"</span><span class="p">)</span>
+<span class="go">hello logging this</span>
+</pre></div>
+</div>
+</section>
+<section id="print-with-timestamp">
+<h3>print_with_timestamp<a class="headerlink" href="#print-with-timestamp" title="Link to this heading">#</a></h3>
+<p>Prints with a timestamp and optional refresh.</p>
+<ul class="simple">
+<li><p>input: message, and possibly args (to be placed in the message string, sprintf-style</p></li>
+<li><p>output: Displays the time (HH:MM:SS), and the message</p></li>
+<li><p>use: To be able to track processes (and the time they take)</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">print_with_timestamp</span><span class="p">(</span><span class="s1">'processing element X'</span><span class="p">)</span>
+<span class="go">(29)09:56:36 - processing element X</span>
+</pre></div>
+</div>
+</section>
+<section id="return-error-info-on-error">
+<h3>return_error_info_on_error<a class="headerlink" href="#return-error-info-on-error" title="Link to this heading">#</a></h3>
+<p>Decorator that returns traceback and local variables on error.</p>
+<p>This decorator is useful for debugging. It will catch any exceptions that occur
+in the decorated function, and return an ErrorInfo object with the traceback and
+local variables at the time of the error.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">func</span></code>: The function to decorate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caught_error_types</span></code>: The types of errors to catch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error_info_processor</span></code>: A function that processes the ErrorInfo object.</p></li>
+</ul>
+<p>Tip: To parametrize this decorator, you can use a functools.partial function.</p>
+<p>Tip: You can have your error_info_processor persist the error info to a file or
+database, or send it to a logging service.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">return_error_info_on_error</span><span class="p">,</span> <span class="n">ErrorInfo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@return_error_info_on_error</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">t</span> <span class="o">==</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Exiting from foo with error: division by zero</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ErrorInfo</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="ne">ZeroDivisionError</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s1">'traceback'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="n">t</span><span class="o">.</span><span class="n">locals</span><span class="p">[</span><span class="s1">'args'</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="n">t</span><span class="o">.</span><span class="n">locals</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">]</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h2>
+<section id="chunker">
+<h3>chunker<a class="headerlink" href="#chunker" title="Link to this heading">#</a></h3>
+<p>Chunk an iterable into non-overlapping chunks of size chk_size.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chunker</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">chk_size</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include_tail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">chunker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">chunker</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">[(0, 1, 2), (3, 4, 5), (6, 7)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">chunker</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">include_tail</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="go">[(0, 1, 2), (3, 4, 5)]</span>
+</pre></div>
+</div>
+</section>
+<section id="import-object">
+<h3>import_object<a class="headerlink" href="#import-object" title="Link to this heading">#</a></h3>
+<p>Import and return an object from a dot string path.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">import_object</span><span class="p">(</span><span class="n">dot_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">import_object</span><span class="p">(</span><span class="s1">'os.path.join'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="ow">is</span> <span class="n">join</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pretty-printing-lists">
+<h2>Pretty Printing Lists<a class="headerlink" href="#pretty-printing-lists" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_list</span></code> function provides flexible, human-friendly ways to display lists and collections. It supports multiple display styles and can be used in several ways.</p>
+<section id="basic-usage">
+<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj.strings</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_list</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'cherry'</span><span class="p">,</span> <span class="s1">'date'</span><span class="p">,</span> <span class="s1">'elderberry'</span><span class="p">,</span> <span class="s1">'fig'</span><span class="p">]</span>
+
+<span class="c1"># Different display styles</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'wrapped'</span><span class="p">)</span>      <span class="c1"># Automatic line wrapping</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'columns'</span><span class="p">)</span>      <span class="c1"># Column format</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'numbered'</span><span class="p">)</span>     <span class="c1"># Numbered list</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'bullet'</span><span class="p">)</span>       <span class="c1"># Bullet points</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'compact'</span><span class="p">)</span>      <span class="c1"># All on one line</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'table'</span><span class="p">)</span>        <span class="c1"># Table format</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-usage-with-customization">
+<h3>Direct Usage with Customization<a class="headerlink" href="#direct-usage-with-customization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Customize width, separators, and formatting</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'wrapped'</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">' | '</span><span class="p">)</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'columns'</span><span class="p">,</span> <span class="n">items_per_line</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'numbered'</span><span class="p">,</span> <span class="n">line_prefix</span><span class="o">=</span><span class="s1">'  '</span><span class="p">)</span>
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'bullet'</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Return string instead of printing</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'numbered'</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="partial-function-factory">
+<h3>Partial Function Factory<a class="headerlink" href="#partial-function-factory" title="Link to this heading">#</a></h3>
+<p>When you don’t specify the <code class="docutils literal notranslate"><span class="pre">items</span></code> parameter, <code class="docutils literal notranslate"><span class="pre">print_list</span></code> returns a partial function that you can reuse:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create specialized printers</span>
+<span class="n">numbered_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'numbered'</span><span class="p">,</span> <span class="n">show_count</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bullet_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'bullet'</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">compact_printer</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'compact'</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Reuse with different data</span>
+<span class="n">numbered_printer</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>        <span class="c1"># Prints: 1. a\n2. b\n3. c</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">bullet_printer</span><span class="p">([</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">])</span> <span class="c1"># Returns: '• x\n• y\n• z'</span>
+<span class="n">compact_printer</span><span class="p">([</span><span class="s1">'item1'</span><span class="p">,</span> <span class="s1">'item2'</span><span class="p">])</span>      <span class="c1"># Prints: item1, item2</span>
+</pre></div>
+</div>
+</section>
+<section id="convenience-methods">
+<h3>Convenience Methods<a class="headerlink" href="#convenience-methods" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_list</span></code> object provides convenient pre-configured methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quick access to common styles</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">compact</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Compact format, no count</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">wrapped</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Wrapped format, no count  </span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Column format, no count</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">numbered</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>   <span class="c1"># Numbered format, no count</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">bullets</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Bullet format, no count</span>
+
+<span class="c1"># Specialized methods</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">as_table</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1"># Table with headers</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Summary for long lists</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-examples">
+<h3>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Table with custom data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'Age'</span><span class="p">,</span> <span class="s1">'City'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'NYC'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'LA'</span><span class="p">]]</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">as_table</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Summary for long lists</span>
+<span class="n">long_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">print_list</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">long_list</span><span class="p">,</span> <span class="n">max_items</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># Shows: [0, 1, 2, ..., 97, 98, 99]</span>
+
+<span class="c1"># Custom print function (e.g., for logging)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_logger</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[LOG] </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">print_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'bullet'</span><span class="p">,</span> <span class="n">print_func</span><span class="o">=</span><span class="n">my_logger</span><span class="p">)</span>
+
+<span class="c1"># Combine partial with custom parameters</span>
+<span class="n">custom_compact</span> <span class="o">=</span> <span class="n">print_list</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'compact'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">' | '</span><span class="p">)</span>
+<span class="n">custom_compact</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Prints: apple | banana | cherry | date | elderberry | fig</span>
+</pre></div>
+</div>
+</section>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Multiple Styles</strong>: <code class="docutils literal notranslate"><span class="pre">wrapped</span></code>, <code class="docutils literal notranslate"><span class="pre">columns</span></code>, <code class="docutils literal notranslate"><span class="pre">numbered</span></code>, <code class="docutils literal notranslate"><span class="pre">bullet</span></code>, <code class="docutils literal notranslate"><span class="pre">compact</span></code>, <code class="docutils literal notranslate"><span class="pre">table</span></code></p></li>
+<li><p><strong>Flexible Output</strong>: Print directly or return strings with <code class="docutils literal notranslate"><span class="pre">print_func=None</span></code></p></li>
+<li><p><strong>Partial Functions</strong>: Create reusable printers with pre-configured settings</p></li>
+<li><p><strong>Customizable</strong>: Control width, separators, line prefixes, and more</p></li>
+<li><p><strong>Type Safe</strong>: Uses <code class="docutils literal notranslate"><span class="pre">Literal</span></code> types for style validation</p></li>
+<li><p><strong>Self-Contained</strong>: No external dependencies beyond Python standard library</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_list</span></code> function is perfect for debugging, logging, user interfaces, and any situation where you need to display lists in a readable format.</p>
+<p class="epythet-aggregates">This documentation as a single file: <a href="lkj.md">lkj.md</a> (Markdown, for agents).</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">lkj</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-utils">Examples of utils</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-replace">Find and replace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loggers">loggers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clog">clog</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-with-timestamp">print_with_timestamp</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-error-info-on-error">return_error_info_on_error</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">Miscellaneous</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunker">chunker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-object">import_object</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-printing-lists">Pretty Printing Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-usage-with-customization">Direct Usage with Customization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-function-factory">Partial Function Factory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convenience-methods">Convenience Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">Advanced Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

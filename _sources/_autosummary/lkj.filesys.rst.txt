@@ -1,0 +1,20 @@
+lkj.filesys
+===========
+
+.. automodule:: lkj.filesys
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      do_nothing
+      enable_sourcing_from_file
+      get_app_data_dir
+      get_watermarked_dir
+      has_watermark
+      rename_file
+      search_folder_fast
+      simple_jsonl_parser
+      watermark_dir
+   

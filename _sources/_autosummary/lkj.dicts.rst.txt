@@ -1,0 +1,16 @@
+lkj.dicts
+=========
+
+.. automodule:: lkj.dicts
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      compare_field_values
+      exclusive_subdict
+      inclusive_subdict
+      merge_dicts
+      truncate_dict_values
+   

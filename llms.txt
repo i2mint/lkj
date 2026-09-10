@@ -1,0 +1,23 @@
+# lkj
+
+> A dump of homeless useful utils
+
+
+## Pages
+
+- [lkj](index.html.md): Lightweight Kit Jumpstart. A place for useful python utils built only with pure python.
+- [API reference](api.html.md): | [`lkj`](_autosummary/lkj.html.md#module-lkj)   | Lightweight Kit Jumpstart   |
+- [lkj](_autosummary/lkj.html.md): Lightweight Kit Jumpstart
+- [lkj.chunking](_autosummary/lkj.chunking.html.md): Tools for chunking (segumentation, batching, slicing, etc.)
+- [lkj.dicts](_autosummary/lkj.dicts.html.md): Tools for working with dictionaries (and other Mappings).
+- [lkj.filesys](_autosummary/lkj.filesys.html.md): File system utils
+- [lkj.funcs](_autosummary/lkj.funcs.html.md): Tools for working with functions.
+- [lkj.importing](_autosummary/lkj.importing.html.md): Tools for importing
+- [lkj.iterables](_autosummary/lkj.iterables.html.md): Tools with iterables (dicts, lists, tuples, sets, etc.).
+- [lkj.loggers](_autosummary/lkj.loggers.html.md): Utils for logging.
+- [lkj.misc](_autosummary/lkj.misc.html.md): Miscellaneous tools.
+- [lkj.strings](_autosummary/lkj.strings.html.md): String Utilities Module
+
+---
+
+For more comprehensive documentation, see [lkj.md](lkj.md)

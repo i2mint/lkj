@@ -1,4 +1,0 @@
-lkj.chunking
-============
-.. automodule:: lkj.chunking
-   :members:

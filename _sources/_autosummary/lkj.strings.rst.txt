@@ -1,0 +1,34 @@
+lkj.strings
+===========
+
+.. automodule:: lkj.strings
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      camel_to_snake
+      fields_of_string_format
+      fields_of_string_formats
+      identity
+      indent_lines
+      most_common_indent
+      print_list
+      print_list_as_table
+      print_list_summary
+      regex_based_substitution
+      snake_to_camel
+      truncate_lines
+      truncate_string
+      truncate_string_with_marker
+      unique_affixes
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FindReplaceTool
+      StringAppender
+      TrieNode
+   

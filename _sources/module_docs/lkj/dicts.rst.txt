@@ -1,4 +1,0 @@
-lkj.dicts
-=========
-.. automodule:: lkj.dicts
-   :members:

@@ -1,0 +1,13 @@
+lkj.chunking
+============
+
+.. automodule:: lkj.chunking
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      chunk_iterable
+      chunker
+   

@@ -1,0 +1,14 @@
+lkj.funcs
+=========
+
+.. automodule:: lkj.funcs
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      filter_greater_than
+      full_path_maker
+      zip_with_filenames
+   

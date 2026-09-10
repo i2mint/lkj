@@ -1,92 +1,706 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lkj.filesys &mdash; lkj 0.1.48 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="alternate" type="text/markdown" href="filesys.html.md">
+<link rel="describedby" href="../../llms.txt" type="text/markdown">
+    <title>lkj.filesys &#8212; lkj</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/epythet.css?v=e4528f85" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../_static/documentation_options.js?v=1190fe33"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/lkj/filesys';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.49" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
   
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=b5e87a2a"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
-</head>
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            lkj
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj.html">lkj</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/chunking.html">lkj.chunking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/dicts.html">lkj.dicts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/filesys.html">lkj.filesys</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/funcs.html">lkj.funcs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/importing.html">lkj.importing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/iterables.html">lkj.iterables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/loggers.html">lkj.loggers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/misc.html">lkj.misc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/strings.html">lkj.strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests.html">lkj.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/lkj/tests/test_strings.html">lkj.tests.test_strings</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">lkj</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../lkj.html">lkj</a></li>
-      <li class="breadcrumb-item active">lkj.filesys</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">lkj</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API reference
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/lkj" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../lkj.html" class="nav-link">lkj</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">lkj.filesys</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <h1>Source code for lkj.filesys</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;File system utils&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""File system utils"""</span>
 
 <span class="c1"># -------------------------------------------------------------------------------------</span>
 <span class="c1"># Search (on linux and macOS) using rg (ripgrep)</span>
@@ -102,41 +716,41 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_ripgrep_json_parser</span><span class="p">(</span><span class="n">rg_output</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Parses the line-by-line JSON stream output from ripgrep (rg --json).</span>
 
 <span class="sd">    This output is NOT a single valid JSON object, but a stream of JSON lines.</span>
-<span class="sd">    We only care about &#39;match&#39; entries for the results.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    We only care about 'match' entries for the results.</span>
+<span class="sd">    """</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># ripgrep outputs one JSON object per line, so we iterate line by line</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">rg_output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">rg_output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
             <span class="k">continue</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
-            <span class="c1"># Skip any lines that aren&#39;t valid JSON (shouldn&#39;t happen with --json)</span>
+            <span class="c1"># Skip any lines that aren't valid JSON (shouldn't happen with --json)</span>
             <span class="k">continue</span>
 
-        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;match&quot;</span><span class="p">:</span>
-            <span class="n">match_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"match"</span><span class="p">:</span>
+            <span class="n">match_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
 
             <span class="c1"># Extract key information from the match</span>
             <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
-                <span class="s2">&quot;line_number&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line_number&quot;</span><span class="p">),</span>
+                <span class="s2">"path"</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"path"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">),</span>
+                <span class="s2">"line_number"</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"line_number"</span><span class="p">),</span>
                 <span class="c1"># The text of the matched line, decoded</span>
-                <span class="s2">&quot;line_text&quot;</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
-                <span class="s2">&quot;submatches&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"line_text"</span><span class="p">:</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lines"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">),</span>
+                <span class="s2">"submatches"</span><span class="p">:</span> <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;match_text&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;match&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">),</span>
-                        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">),</span>
-                        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">),</span>
+                        <span class="s2">"match_text"</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"match"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">),</span>
+                        <span class="s2">"start"</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start"</span><span class="p">),</span>
+                        <span class="s2">"end"</span><span class="p">:</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"end"</span><span class="p">),</span>
                     <span class="p">}</span>
-                    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;submatches&quot;</span><span class="p">,</span> <span class="p">[])</span>
+                    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">match_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"submatches"</span><span class="p">,</span> <span class="p">[])</span>
                 <span class="p">],</span>
             <span class="p">}</span>
             <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -145,14 +759,14 @@
 
 
 <div class="viewcode-block" id="search_folder_fast">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.search_folder_fast">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.search_folder_fast">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">search_folder_fast</span><span class="p">(</span>
     <span class="n">search_term</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">path_to_search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>  <span class="c1"># Enforce &#39;egress&#39; as a keyword-only argument</span>
+    <span class="n">path_to_search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>  <span class="c1"># Enforce 'egress' as a keyword-only argument</span>
     <span class="n">egress</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">_ripgrep_json_parser</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Executes a fast, recursive search using ripgrep and processes the results.</span>
 
 <span class="sd">    :param search_term: The regex pattern or text string to search for.</span>
@@ -161,28 +775,28 @@
 <span class="sd">                   Defaults to a parser that returns a list of dictionaries for matches.</span>
 <span class="sd">                   If set to None, it defaults to a lambda returning the raw output (string).</span>
 <span class="sd">                   You can also give it simple_jsonl_parser to get a list of all JSON objects in the output.</span>
-<span class="sd">    :return: The output of the &#39;egress&#39; function.</span>
+<span class="sd">    :return: The output of the 'egress' function.</span>
 
 <span class="sd">    Example usage:</span>
 <span class="sd">    -------------</span>
-<span class="sd">    &gt;&gt;&gt; results = search_folder_fast(&quot;my_function_name&quot;, path_to_search=&#39;/path/to/project&#39;)  # doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; results = search_folder_fast("my_function_name", path_to_search='/path/to/project')  # doctest: +SKIP</span>
 <span class="sd">    &gt;&gt;&gt; for match in results:  # doctest: +SKIP</span>
-<span class="sd">    ...     print(f&quot;Found in {match[&#39;path&#39;]} at line {match[&#39;line_number&#39;]}: {match[&#39;line_text&#39;]}&quot;)  # doctest: +SKIP</span>
+<span class="sd">    ...     print(f"Found in {match['path']} at line {match['line_number']}: {match['line_text']}")  # doctest: +SKIP</span>
 
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;rg&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">"rg"</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;🚨 Error: The &#39;rg&#39; (ripgrep) command was not found in your system&#39;s PATH.&quot;</span>
+            <span class="s2">"🚨 Error: The 'rg' (ripgrep) command was not found in your system's PATH."</span>
         <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">To install ripgrep:&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Linux (Debian/Ubuntu): sudo apt install ripgrep&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - macOS (Homebrew):      brew install ripgrep&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Windows (Chocolatey):  choco install ripgrep&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">More details: https://github.com/BurntSushi/ripgrep#installation&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">To install ripgrep:"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"  - Linux (Debian/Ubuntu): sudo apt install ripgrep"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"  - macOS (Homebrew):      brew install ripgrep"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"  - Windows (Chocolatey):  choco install ripgrep"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">More details: https://github.com/BurntSushi/ripgrep#installation"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="c1"># Standard ripgrep command with JSON output</span>
@@ -190,13 +804,13 @@
     <span class="c1"># --json: outputs machine-readable JSON format</span>
     <span class="c1"># --color never: ensures no ANSI color codes in the output stream</span>
     <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;rg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-r&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--color&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;never&quot;</span><span class="p">,</span>
+        <span class="s2">"rg"</span><span class="p">,</span>
+        <span class="s2">"-i"</span><span class="p">,</span>
+        <span class="s2">"-r"</span><span class="p">,</span>
+        <span class="s2">"-n"</span><span class="p">,</span>
+        <span class="s2">"--json"</span><span class="p">,</span>
+        <span class="s2">"--color"</span><span class="p">,</span>
+        <span class="s2">"never"</span><span class="p">,</span>
         <span class="n">search_term</span><span class="p">,</span>
         <span class="n">path_to_search</span><span class="p">,</span>
     <span class="p">]</span>
@@ -219,24 +833,24 @@
         <span class="c1"># Check stderr for real errors</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
             <span class="c1"># Handle genuine errors like permissions or file issues</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A genuine ripgrep error occurred: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A genuine ripgrep error occurred: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="c1"># If check=True and return code is 1, it usually means &quot;no matches found.&quot;</span>
-        <span class="c1"># If there&#39;s no stderr, return the egress of an empty string (or handle as no results)</span>
-        <span class="k">return</span> <span class="n">egress</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># If check=True and return code is 1, it usually means "no matches found."</span>
+        <span class="c1"># If there's no stderr, return the egress of an empty string (or handle as no results)</span>
+        <span class="k">return</span> <span class="n">egress</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;Error: ripgrep (&#39;rg&#39;) command not found. Please ensure it is installed and in your PATH.&quot;</span>
+            <span class="s2">"Error: ripgrep ('rg') command not found. Please ensure it is installed and in your PATH."</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
 
 
-<span class="c1"># Example usage will require &#39;rg&#39; installed and a file system to search</span>
-<span class="c1"># For demonstration purposes, assume &#39;rg&#39; is installed and you are searching for &#39;wrap_kvs&#39;</span>
-<span class="c1"># search_results = search_folder_fast(&quot;wrap_kvs&quot;, path_to_search=&#39;/path/to/your/project&#39;)</span>
+<span class="c1"># Example usage will require 'rg' installed and a file system to search</span>
+<span class="c1"># For demonstration purposes, assume 'rg' is installed and you are searching for 'wrap_kvs'</span>
+<span class="c1"># search_results = search_folder_fast("wrap_kvs", path_to_search='/path/to/your/project')</span>
 <span class="c1">#</span>
 <span class="c1"># print(search_results)</span>
 
@@ -252,9 +866,9 @@
 
 <span class="c1"># TODO: General pattern Consider generalizing to different conditions and actions</span>
 <div class="viewcode-block" id="enable_sourcing_from_file">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.enable_sourcing_from_file">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.enable_sourcing_from_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">enable_sourcing_from_file</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Decorator for functions enables the decorated function to source from a file.</span>
 
 <span class="sd">    It is to be applied to functions that take a string or bytes as their first</span>
@@ -268,7 +882,7 @@
 <span class="sd">            string, write the output to the specified file path. Default is False.</span>
 
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">enable_sourcing_from_file</span><span class="p">,</span> <span class="n">write_output</span><span class="o">=</span><span class="n">write_output</span><span class="p">)</span>
 
@@ -290,9 +904,9 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
                         <span class="n">write_output</span><span class="p">,</span> <span class="nb">str</span>
-                    <span class="p">),</span> <span class="s2">&quot;write_output must be a string&quot;</span>
+                    <span class="p">),</span> <span class="s2">"write_output must be a string"</span>
                 <span class="c1"># Write the result back to the file</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">write_output</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">write_output</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
                     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">else</span><span class="p">:</span>
@@ -304,15 +918,15 @@
 
 
 <div class="viewcode-block" id="do_nothing">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.do_nothing">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.do_nothing">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">do_nothing</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that does nothing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Function that does nothing."""</span>
     <span class="k">pass</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_app_data_rootdir</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns the full path of a directory suitable for storing application-specific data.</span>
 
 <span class="sd">    On Windows, this is typically %APPDATA%.</span>
@@ -323,44 +937,44 @@
 <span class="sd">        str: The full path of the app data folder.</span>
 
 <span class="sd">    See https://github.com/i2mint/i2mint/issues/1.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;nt&quot;</span><span class="p">:</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"nt"</span><span class="p">:</span>
         <span class="c1"># Windows</span>
-        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;APPDATA&quot;</span><span class="p">)</span>
+        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"APPDATA"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">APP_DATA_ROOTDIR</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;APPDATA environment variable is not set&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"APPDATA environment variable is not set"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># macOS and Linux/Unix</span>
-        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config&quot;</span><span class="p">)</span>
+        <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">"~/.config"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">)</span>
 
-    <span class="c1"># Note: Joining to &#39;&#39; to be consistent with get_app_data_dir()</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># Note: Joining to '' to be consistent with get_app_data_dir()</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
 
 <span class="n">APP_DATA_ROOTDIR</span> <span class="o">=</span> <span class="n">_app_data_rootdir</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="get_app_data_dir">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.get_app_data_dir">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.get_app_data_dir">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_app_data_dir</span><span class="p">(</span>
-    <span class="n">dirname</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">dirname</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">if_exists</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_nothing</span><span class="p">,</span>
     <span class="n">if_does_not_exist</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">,</span>
     <span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns the full path of a directory suitable for storing application-specific data.</span>
 
-<span class="sd">    It&#39;s a mini-framework for creating a directories: It allows us to specify what to do</span>
-<span class="sd">    if the directory already exists, and what to do if it doesn&#39;t exist.</span>
+<span class="sd">    It's a mini-framework for creating a directories: It allows us to specify what to do</span>
+<span class="sd">    if the directory already exists, and what to do if it doesn't exist.</span>
 
 <span class="sd">    Typical use case: We want to create a directory for storing application-specific</span>
-<span class="sd">    data, but we don&#39;t want to write in a directory whose name is already taken if</span>
-<span class="sd">    it&#39;s not &quot;our&quot; directory. To achieve this, we can specify ``if_exists`` to be a</span>
+<span class="sd">    data, but we don't want to write in a directory whose name is already taken if</span>
+<span class="sd">    it's not "our" directory. To achieve this, we can specify ``if_exists`` to be a</span>
 <span class="sd">    function that verifies, through some condition on the content (example, watermark</span>
 <span class="sd">    or subdirectory structure), that the directory was indeed create by our</span>
 <span class="sd">    application, and ``if_does_not_exist``to be a function that creates the directory</span>
@@ -371,7 +985,7 @@
 <span class="sd">        By default, it does nothing. The main non-default use case is to validate the</span>
 <span class="sd">        contents of the directory, and/or populate it.</span>
 <span class="sd">        If you write a custome ``if_exists`` function, it is your responsibility to</span>
-<span class="sd">        return the full path of the directory (unless your use case doesn&#39;t actually</span>
+<span class="sd">        return the full path of the directory (unless your use case doesn't actually</span>
 <span class="sd">        need that!)</span>
 <span class="sd">    :param if_does_not_exist: A function to call if the directory does not exist.</span>
 <span class="sd">        By default, it creates the directory with ``os.mkdir``. If you need to also</span>
@@ -380,31 +994,31 @@
 <span class="sd">    :param rootdir:</span>
 <span class="sd">    :return:</span>
 
-<span class="sd">    If you specify nothing else, you&#39;ll just get the system-dependent root directory for</span>
+<span class="sd">    If you specify nothing else, you'll just get the system-dependent root directory for</span>
 <span class="sd">    storing application-specific data:</span>
 
 <span class="sd">    &gt;&gt;&gt; app_data_dir = get_app_data_dir()</span>
 <span class="sd">    &gt;&gt;&gt; app_data_dir == APP_DATA_ROOTDIR</span>
 <span class="sd">    True</span>
 
-<span class="sd">    You can control what happens if the directory already exists, or if it doesn&#39;t.</span>
+<span class="sd">    You can control what happens if the directory already exists, or if it doesn't.</span>
 <span class="sd">    The callbacks take the full path of the directory as an argument, and usually return</span>
 <span class="sd">    the path after doing something with it.</span>
 
 <span class="sd">    &gt;&gt;&gt; import os</span>
 <span class="sd">    &gt;&gt;&gt; def notify_user_that_path_does_not_exist(path):</span>
-<span class="sd">    ...     print(f&quot;The &#39;{os.path.basename(path)}&#39; subdirectory doesn&#39;t exist&quot;)</span>
+<span class="sd">    ...     print(f"The '{os.path.basename(path)}' subdirectory doesn't exist")</span>
 <span class="sd">    ...     return path</span>
 <span class="sd">    &gt;&gt;&gt; dirpath = get_app_data_dir(</span>
-<span class="sd">    ...     &#39;nonexistent_dir&#39;,</span>
+<span class="sd">    ...     'nonexistent_dir',</span>
 <span class="sd">    ...     if_does_not_exist=notify_user_that_path_does_not_exist</span>
 <span class="sd">    ... )</span>
-<span class="sd">    The &#39;nonexistent_dir&#39; subdirectory doesn&#39;t exist</span>
+<span class="sd">    The 'nonexistent_dir' subdirectory doesn't exist</span>
 
 <span class="sd">    For an example of how to use this function as a framework to make custom directory</span>
 <span class="sd">    factories, see :func:`get_watermarked_dir`.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">dirpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">dirname</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">if_exists</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -416,36 +1030,36 @@
 
 
 
-<span class="n">DFLT_WATERMARK</span> <span class="o">=</span> <span class="s2">&quot;.lkj&quot;</span>
+<span class="n">DFLT_WATERMARK</span> <span class="o">=</span> <span class="s2">".lkj"</span>
 
 
 <div class="viewcode-block" id="watermark_dir">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.watermark_dir">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.watermark_dir">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">watermark_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Watermark.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Watermark."""</span>
     <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">watermark</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span></div>
 
 
 
 <div class="viewcode-block" id="has_watermark">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.has_watermark">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.has_watermark">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">has_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a directory has a watermark.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if a directory has a watermark."""</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span> <span class="o">/</span> <span class="n">watermark</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_raise_watermark_error</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">watermark</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Directory </span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2"> is not watermarked with </span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">. &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;Perhaps you deleted the watermark file? If so, create the file and all will &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;be good. For example, you could do:</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;    import pathlib; (pathlib.Path(&#39;</span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2">&#39;) / &#39;</span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">&#39;).touch()&quot;</span>
+        <span class="sa">f</span><span class="s2">"Directory </span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2"> is not watermarked with </span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">. "</span>
+        <span class="sa">f</span><span class="s2">"Perhaps you deleted the watermark file? If so, create the file and all will "</span>
+        <span class="sa">f</span><span class="s2">"be good. For example, you could do:</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"    import pathlib; (pathlib.Path('</span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2">') / '</span><span class="si">{</span><span class="n">watermark</span><span class="si">}</span><span class="s2">').touch()"</span>
     <span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_watermarked_dir">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.get_watermarked_dir">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.get_watermarked_dir">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_watermarked_dir</span><span class="p">(</span>
     <span class="n">dirname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DFLT_WATERMARK</span><span class="p">,</span>
@@ -454,25 +1068,25 @@
     <span class="n">make_dir</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">,</span>
     <span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">APP_DATA_ROOTDIR</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a watermarked directory.</span>
+<span class="w">    </span><span class="sd">"""Get a watermarked directory.</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
 <span class="sd">    &gt;&gt;&gt; import tempfile, os, shutil</span>
-<span class="sd">    &gt;&gt;&gt; testdir = os.path.join(tempfile.gettempdir(), &#39;watermark_testdir&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; testdir = os.path.join(tempfile.gettempdir(), 'watermark_testdir')</span>
 <span class="sd">    &gt;&gt;&gt; shutil.rmtree(testdir, ignore_errors=True)  # delete</span>
 <span class="sd">    &gt;&gt;&gt; os.makedirs(testdir, exist_ok=True)  # and recreate afresh</span>
 <span class="sd">    &gt;&gt;&gt; # Make a</span>
 <span class="sd">    &gt;&gt;&gt; f = partial(get_watermarked_dir, rootdir=testdir)</span>
-<span class="sd">    &gt;&gt;&gt; mytestdir = f(&#39;mytestdir&#39;, &#39;.my_watermark&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; mytestdir = f('mytestdir', '.my_watermark')</span>
 <span class="sd">    &gt;&gt;&gt; os.listdir(testdir)</span>
-<span class="sd">    [&#39;mytestdir&#39;]</span>
+<span class="sd">    ['mytestdir']</span>
 <span class="sd">    &gt;&gt;&gt; os.listdir(mytestdir)</span>
-<span class="sd">    [&#39;.my_watermark&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; another_testdir = f(&#39;another_testdir&#39;)</span>
+<span class="sd">    ['.my_watermark']</span>
+<span class="sd">    &gt;&gt;&gt; another_testdir = f('another_testdir')</span>
 <span class="sd">    &gt;&gt;&gt; os.listdir(another_testdir)</span>
-<span class="sd">    [&#39;.lkj&#39;]</span>
+<span class="sd">    ['.lkj']</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create_and_watermark</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
         <span class="n">make_dir</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
@@ -495,7 +1109,7 @@
 
 
 <div class="viewcode-block" id="rename_file">
-<a class="viewcode-back" href="../../module_docs/lkj/filesys.html#lkj.filesys.rename_file">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/lkj.filesys.html#lkj.filesys.rename_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rename_file</span><span class="p">(</span>
     <span class="n">file</span><span class="p">:</span> <span class="n">Filepath</span><span class="p">,</span>
     <span class="n">renamer_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
@@ -503,9 +1117,9 @@
     <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This function takes a list of files and renames them using the provided renamer function.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">files</span> <span class="o">=</span> <span class="n">file</span>
         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
@@ -513,37 +1127,59 @@
 
     <span class="n">new_name</span> <span class="o">=</span> <span class="n">renamer_function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Renaming </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Renaming </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dry_run</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span></div>
 
 </pre></div>
 
-           </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
           </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
   </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
 
-</footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+  </footer>
+  </body>
 </html>

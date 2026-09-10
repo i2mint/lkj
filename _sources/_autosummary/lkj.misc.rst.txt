@@ -1,0 +1,13 @@
+lkj.misc
+========
+
+.. automodule:: lkj.misc
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      identity
+      value_in_interval
+   

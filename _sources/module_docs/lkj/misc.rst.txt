@@ -1,4 +1,0 @@
-lkj.misc
-========
-.. automodule:: lkj.misc
-   :members:

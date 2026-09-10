@@ -1,4 +1,0 @@
-lkj
-===
-.. automodule:: lkj
-   :members:
