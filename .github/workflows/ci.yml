@@ -100,3 +100,5 @@ jobs:
           # IMPORTANT Note: You don't need to specify GITHUB_TOKEN in your repo secrets.
           # GITHUB_TOKEN is special & automatically provided to your workflow run.
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          # WP5 pilot: opt into epythet v2 ahead of the fleet default (i2mint/epythet#16)
+          epythet-spec: "epythet>=0.2,<0.3"
