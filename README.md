@@ -24,6 +24,8 @@ even if operations such as viewing context are performed line by line.
 The basic usage is 
 
 ```python
+from lkj import FindReplaceTool
+
 FindReplaceTool("apple banana apple").find_and_print_matches(r'apple')
 ```
     
@@ -53,6 +55,7 @@ FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")
 Conditional log
 
 ```python
+>>> from lkj import clog
 >>> clog(False, "logging this")
 >>> clog(True, "logging this")
 logging this
@@ -86,7 +89,9 @@ Prints with a timestamp and optional refresh.
 - output: Displays the time (HH:MM:SS), and the message
 - use: To be able to track processes (and the time they take)
 
+<!-- wads-docs: skip - output carries the current time -->
 ```python
+>>> from lkj import print_with_timestamp
 >>> print_with_timestamp('processing element X')
 (29)09:56:36 - processing element X
 ```
@@ -130,6 +135,7 @@ Exiting from foo with error: division by zero
 
 Chunk an iterable into non-overlapping chunks of size chk_size.
 
+<!-- wads-docs: skip - signature, not runnable code -->
 ```python
 chunker(a, chk_size, *, include_tail=True)
 ```
@@ -146,11 +152,13 @@ chunker(a, chk_size, *, include_tail=True)
 
 Import and return an object from a dot string path.
 
+<!-- wads-docs: skip - signature, not runnable code -->
 ```python
 import_object(dot_path: str)
 ```
 
 ```python 
+>>> from lkj import import_object
 >>> f = import_object('os.path.join')
 >>> from os.path import join
 >>> f is join
@@ -220,6 +228,7 @@ print_list.numbered(items)   # Numbered format, no count
 print_list.bullets(items)    # Bullet format, no count
 
 # Specialized methods
+data = [['Name', 'Age', 'City'], ['Alice', 25, 'NYC'], ['Bob', 30, 'LA']]
 print_list.as_table(data)    # Table with headers
 print_list.summary(items)    # Summary for long lists
 ```
