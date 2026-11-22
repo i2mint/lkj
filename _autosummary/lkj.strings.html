@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=56cc1d78"></script>
+    <script src="../_static/documentation_options.js?v=61349712"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -57,7 +57,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.51" />
+  <meta name="docsearch:version" content="0.1.52" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -405,14 +405,14 @@ It includes tools for string manipulation, formatting, pretty-printing, and find
 <tr class="row-odd"><td><p><a class="reference internal" href="#lkj.strings.camel_to_snake" title="lkj.strings.camel_to_snake"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camel_to_snake</span></code></a>(camel_string)</p></td>
 <td><p>Convert a CamelCase string to snake_case.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields_of_string_format</span></code>(template)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#lkj.strings.fields_of_string_format" title="lkj.strings.fields_of_string_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields_of_string_format</span></code></a>(template)</p></td>
+<td><p>List the (non-empty) replacement field names of a <code class="docutils literal notranslate"><span class="pre">str.format</span></code> template.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#lkj.strings.fields_of_string_formats" title="lkj.strings.fields_of_string_formats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields_of_string_formats</span></code></a>(templates, *[, ...])</p></td>
 <td><p>Extract all unique field names from the templates in _github_url_templates using string.Formatter.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code>(x)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#lkj.strings.identity" title="lkj.strings.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(x)</p></td>
+<td><p>Return <code class="docutils literal notranslate"><span class="pre">x</span></code> unchanged.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#lkj.strings.indent_lines" title="lkj.strings.indent_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indent_lines</span></code></a>(string, indent, *[, line_sep])</p></td>
 <td><p>Indent each line of a string.</p></td>
@@ -459,8 +459,8 @@ It includes tools for string manipulation, formatting, pretty-printing, and find
 <tr class="row-even"><td><p><a class="reference internal" href="#lkj.strings.StringAppender" title="lkj.strings.StringAppender"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StringAppender</span></code></a>([separator])</p></td>
 <td><p>Helper class to collect strings instead of printing them directly.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrieNode</span></code>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#lkj.strings.TrieNode" title="lkj.strings.TrieNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrieNode</span></code></a>()</p></td>
+<td><p>A node of the prefix tree used by <code class="docutils literal notranslate"><span class="pre">unique_affixes</span></code>: its <code class="docutils literal notranslate"><span class="pre">children</span></code>, visit <code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">is_end</span></code> flag.</p></td>
 </tr>
 </tbody>
 </table>
@@ -677,6 +677,13 @@ In non-line mode, a snippet of characters around the match is shown.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="lkj.strings.TrieNode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">TrieNode</span></span><a class="reference internal" href="../_modules/lkj/strings.html#TrieNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.TrieNode" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A node of the prefix tree used by <code class="docutils literal notranslate"><span class="pre">unique_affixes</span></code>: its <code class="docutils literal notranslate"><span class="pre">children</span></code>, visit <code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">is_end</span></code> flag.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.camel_to_snake">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">camel_to_snake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">camel_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/strings.html#camel_to_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.camel_to_snake" title="Link to this definition">#</a></dt>
@@ -710,6 +717,16 @@ names to variable names.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.fields_of_string_format">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">fields_of_string_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/strings.html#fields_of_string_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.fields_of_string_format" title="Link to this definition">#</a></dt>
+<dd><p>List the (non-empty) replacement field names of a <code class="docutils literal notranslate"><span class="pre">str.format</span></code> template.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fields_of_string_format</span><span class="p">(</span><span class="s2">"</span><span class="si">{a}</span><span class="s2"> and </span><span class="si">{b}</span><span class="s2">: </span><span class="si">{a}</span><span class="s2">"</span><span class="p">)</span>
+<span class="go">['a', 'b', 'a']</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="lkj.strings.fields_of_string_formats">
 <span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">fields_of_string_formats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">templates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggregator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'set'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/strings.html#fields_of_string_formats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.fields_of_string_formats" title="Link to this definition">#</a></dt>
 <dd><p>Extract all unique field names from the templates in _github_url_templates using string.Formatter.</p>
@@ -730,6 +747,12 @@ names to variable names.</p>
 <span class="go">['other', 'that', 'this']</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.strings.identity">
+<span class="sig-prename descclassname"><span class="pre">lkj.strings.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/strings.html#identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.strings.identity" title="Link to this definition">#</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">x</span></code> unchanged.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1247,8 +1270,11 @@ Usually, ingress and egress are inverses of each other.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.StringAppender.get_string"><code class="docutils literal notranslate"><span class="pre">StringAppender.get_string()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.TrieNode"><code class="docutils literal notranslate"><span class="pre">TrieNode</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.camel_to_snake"><code class="docutils literal notranslate"><span class="pre">camel_to_snake()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.fields_of_string_format"><code class="docutils literal notranslate"><span class="pre">fields_of_string_format()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.fields_of_string_formats"><code class="docutils literal notranslate"><span class="pre">fields_of_string_formats()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.identity"><code class="docutils literal notranslate"><span class="pre">identity()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.indent_lines"><code class="docutils literal notranslate"><span class="pre">indent_lines()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.most_common_indent"><code class="docutils literal notranslate"><span class="pre">most_common_indent()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.strings.print_list"><code class="docutils literal notranslate"><span class="pre">print_list()</span></code></a></li>

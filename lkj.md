@@ -1,4 +1,4 @@
-> built 2026-11-22 14:22 UTC from c5d807d (master) · lkj 0.1.51. Details: build_info.json
+> built 2026-11-22 14:24 UTC from 72c4c41 (master) · lkj 0.1.52. Details: build_info.json
 
 # index.html.md
 
@@ -1155,12 +1155,14 @@ Tools with iterables (dicts, lists, tuples, sets, etc.).
 
 ### Classes
 
-| [`SetsComparisonResult`](_autosummary/lkj.iterables.html.md#lkj.iterables.SetsComparisonResult)(common, left_only, ...)   |    |
-|-------------------------------------------------------------------------------------------------|----|
+| [`SetsComparisonResult`](_autosummary/lkj.iterables.html.md#lkj.iterables.SetsComparisonResult)(common, left_only, ...)   | The result of comparing two sets: their `common` elements and those only in the `left` or only in the `right`.   |
+|-------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 
 ### *class* lkj.iterables.SetsComparisonResult(common, left_only, right_only)
 
 Bases: [`NamedTuple`](https://docs.python.org/3/library/typing.html#typing.NamedTuple)
+
+The result of comparing two sets: their `common` elements and those only in the `left` or only in the `right`.
 
 #### common *: [set](https://docs.python.org/3/builtins/stdtypes.html#set)*
 
@@ -1260,22 +1262,22 @@ Utils for logging.
 
 ### Functions
 
-| [`clog`](_autosummary/lkj.loggers.html.md#lkj.loggers.clog)(condition, \*args[, log_func])             | Conditional log                                                                                                             |
-|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `dflt_error_info_processor`(error_info, \*[, ...])                                               |                                                                                                                             |
-| [`instance_flag_is_set`](_autosummary/lkj.loggers.html.md#lkj.loggers.instance_flag_is_set)(func, args, kwargs[, ...]) | Check if the log flag is set to True in the instance.                                                                       |
-| [`log_calls`](_autosummary/lkj.loggers.html.md#lkj.loggers.log_calls)([func, logger, ingress_msg, ...])     | Decorator that adds logging before and after the function's call.                                                           |
-| [`print_progress`](_autosummary/lkj.loggers.html.md#lkj.loggers.print_progress)(msg, \*[, refresh, ...])         | Prints with a timestamp and optional refresh.                                                                               |
-| [`print_with_timestamp`](_autosummary/lkj.loggers.html.md#lkj.loggers.print_with_timestamp)(msg, \*[, refresh, ...])   | Prints with a timestamp and optional refresh.                                                                               |
-| [`return_error_info_on_error`](_autosummary/lkj.loggers.html.md#lkj.loggers.return_error_info_on_error)(func, \*[, ...])     | Decorator that returns traceback and local variables on error.                                                              |
-| [`wrap_text_with_exact_spacing`](_autosummary/lkj.loggers.html.md#lkj.loggers.wrap_text_with_exact_spacing)(text, \*[, ...])   | Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines exactly as they appear. |
-| [`wrapped_print`](_autosummary/lkj.loggers.html.md#lkj.loggers.wrapped_print)(items[, sep, max_width, ...])     | Prints a string or list ensuring the total line width does not exceed `max_width`.                                          |
+| [`clog`](_autosummary/lkj.loggers.html.md#lkj.loggers.clog)(condition, \*args[, log_func])              | Conditional log                                                                                                             |
+|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| [`dflt_error_info_processor`](_autosummary/lkj.loggers.html.md#lkj.loggers.dflt_error_info_processor)(error_info, \*[, ...]) | Log a message about `error_info` (made by `msg_func`) using `log_func` (`print` by default).                                |
+| [`instance_flag_is_set`](_autosummary/lkj.loggers.html.md#lkj.loggers.instance_flag_is_set)(func, args, kwargs[, ...])  | Check if the log flag is set to True in the instance.                                                                       |
+| [`log_calls`](_autosummary/lkj.loggers.html.md#lkj.loggers.log_calls)([func, logger, ingress_msg, ...])      | Decorator that adds logging before and after the function's call.                                                           |
+| [`print_progress`](_autosummary/lkj.loggers.html.md#lkj.loggers.print_progress)(msg, \*[, refresh, ...])          | Prints with a timestamp and optional refresh.                                                                               |
+| [`print_with_timestamp`](_autosummary/lkj.loggers.html.md#lkj.loggers.print_with_timestamp)(msg, \*[, refresh, ...])    | Prints with a timestamp and optional refresh.                                                                               |
+| [`return_error_info_on_error`](_autosummary/lkj.loggers.html.md#lkj.loggers.return_error_info_on_error)(func, \*[, ...])      | Decorator that returns traceback and local variables on error.                                                              |
+| [`wrap_text_with_exact_spacing`](_autosummary/lkj.loggers.html.md#lkj.loggers.wrap_text_with_exact_spacing)(text, \*[, ...])    | Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines exactly as they appear. |
+| [`wrapped_print`](_autosummary/lkj.loggers.html.md#lkj.loggers.wrapped_print)(items[, sep, max_width, ...])      | Prints a string or list ensuring the total line width does not exceed `max_width`.                                          |
 
 ### Classes
 
 | [`CallOnError`](_autosummary/lkj.loggers.html.md#lkj.loggers.CallOnError)(\*exceptions[, on_error])     | An extension of the suppress context manager that enables the user to issue a warning message when an import error occurs.   |
 |--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| [`ErrorInfo`](_autosummary/lkj.loggers.html.md#lkj.loggers.ErrorInfo)(func, error, traceback, locals) |                                                                                                                              |
+| [`ErrorInfo`](_autosummary/lkj.loggers.html.md#lkj.loggers.ErrorInfo)(func, error, traceback, locals) | What an error handler receives: the failing `func`, the `error`, its formatted `traceback` and the `locals` at the failure.  |
 
 ### *class* lkj.loggers.CallOnError(\*exceptions, on_error=<built-in function print>)
 
@@ -1297,6 +1299,8 @@ Warning: No module named 'os.this_module_does_not_exist'; 'os' is not a package
 ### *class* lkj.loggers.ErrorInfo(func, error, traceback, locals)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
+
+What an error handler receives: the failing `func`, the `error`, its formatted `traceback` and the `locals` at the failure.
 
 ### lkj.loggers.clog(condition, \*args, log_func=<built-in function print>, \*\*kwargs)
 
@@ -1328,6 +1332,10 @@ but for this example we’ll just use `print` with some modification:
 >>> _clog("logging this")
 hello logging this
 ```
+
+### lkj.loggers.dflt_error_info_processor(error_info, \*, log_func=<built-in function print>, msg_func=<function \_dflt_msg_func>)
+
+Log a message about `error_info` (made by `msg_func`) using `log_func` (`print` by default).
 
 ### lkj.loggers.instance_flag_is_set(func, args, kwargs, flag_attr='verbose')
 
@@ -1550,9 +1558,13 @@ Miscellaneous tools.
 
 ### Functions
 
-| `identity`(x)                                                                                  |    |
-|------------------------------------------------------------------------------------------------|----|
-| [`value_in_interval`](_autosummary/lkj.misc.html.md#lkj.misc.value_in_interval)([x, get_val, min_val, ...]) |    |
+| [`identity`](_autosummary/lkj.misc.html.md#lkj.misc.identity)(x)                                   | Return `x` unchanged.   |
+|------------------------------------------------------------------------------------------------|-------------------------|
+| [`value_in_interval`](_autosummary/lkj.misc.html.md#lkj.misc.value_in_interval)([x, get_val, min_val, ...]) |                         |
+
+### lkj.misc.identity(x)
+
+Return `x` unchanged.
 
 ### lkj.misc.value_in_interval(x=None, /, \*, get_val=<function identity>, min_val=None, max_val=None, is_minimum=<built-in function ge>, is_maximum=<built-in function lt>)
 
@@ -1605,9 +1617,9 @@ These utilities are designed to make it easier to display, format, and manipulat
 
 | [`camel_to_snake`](_autosummary/lkj.strings.html.md#lkj.strings.camel_to_snake)(camel_string)                      | Convert a CamelCase string to snake_case.                                                           |
 |----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| `fields_of_string_format`(template)                                                                |                                                                                                     |
+| [`fields_of_string_format`](_autosummary/lkj.strings.html.md#lkj.strings.fields_of_string_format)(template)                 | List the (non-empty) replacement field names of a `str.format` template.                            |
 | [`fields_of_string_formats`](_autosummary/lkj.strings.html.md#lkj.strings.fields_of_string_formats)(templates, \*[, ...])    | Extract all unique field names from the templates in \_github_url_templates using string.Formatter. |
-| `identity`(x)                                                                                      |                                                                                                     |
+| [`identity`](_autosummary/lkj.strings.html.md#lkj.strings.identity)(x)                                       | Return `x` unchanged.                                                                               |
 | [`indent_lines`](_autosummary/lkj.strings.html.md#lkj.strings.indent_lines)(string, indent, \*[, line_sep])      | Indent each line of a string.                                                                       |
 | [`most_common_indent`](_autosummary/lkj.strings.html.md#lkj.strings.most_common_indent)(string[, ignore_first_line])   | Find the most common indentation in a string.                                                       |
 | [`print_list`](_autosummary/lkj.strings.html.md#lkj.strings.print_list)([items, style, max_width, sep, ...])   | Print a list in a nice, readable format with multiple style options.                                |
@@ -1625,7 +1637,7 @@ These utilities are designed to make it easier to display, format, and manipulat
 | [`FindReplaceTool`](_autosummary/lkj.strings.html.md#lkj.strings.FindReplaceTool)(text, \*[, line_mode, flags, ...])   | A general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters, even if operations such as viewing context are performed line by line.   |
 |-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [`StringAppender`](_autosummary/lkj.strings.html.md#lkj.strings.StringAppender)([separator])                          | Helper class to collect strings instead of printing them directly.                                                                                                                     |
-| `TrieNode`()                                                                                          |                                                                                                                                                                                        |
+| [`TrieNode`](_autosummary/lkj.strings.html.md#lkj.strings.TrieNode)()                                           | A node of the prefix tree used by `unique_affixes`: its `children`, visit `count` and `is_end` flag.                                                                                   |
 
 ### *class* lkj.strings.FindReplaceTool(text, , line_mode=False, flags=0, show_line_numbers=True, context_size=2, highlight_char='^')
 
@@ -1799,6 +1811,12 @@ Helper class to collect strings instead of printing them directly.
 
 Alternative way to get the string.
 
+### *class* lkj.strings.TrieNode
+
+Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
+
+A node of the prefix tree used by `unique_affixes`: its `children`, visit `count` and `is_end` flag.
+
 ### lkj.strings.camel_to_snake(camel_string)
 
 Convert a CamelCase string to snake_case. Useful for converting class
@@ -1829,6 +1847,15 @@ Note that acronyms are handled correctly:
 'xml_http_request_test'
 ```
 
+### lkj.strings.fields_of_string_format(template)
+
+List the (non-empty) replacement field names of a `str.format` template.
+
+```pycon
+>>> fields_of_string_format("{a} and {b}: {a}")
+['a', 'b', 'a']
+```
+
 ### lkj.strings.fields_of_string_formats(templates, \*, aggregator=<class 'set'>)
 
 Extract all unique field names from the templates in \_github_url_templates using string.Formatter.
@@ -1847,6 +1874,10 @@ Extract all unique field names from the templates in \_github_url_templates usin
 >>> sorted(fields_of_string_formats(templates))
 ['other', 'that', 'this']
 ```
+
+### lkj.strings.identity(x)
+
+Return `x` unchanged.
 
 ### lkj.strings.indent_lines(string, indent, , line_sep='\\n')
 
@@ -2316,7 +2347,7 @@ ValueError: Duplicate item detected: test
 
 # About this build
 
-This documentation was built on **2026-11-22 14:22 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/c5d807d811c089325cee8d52478621484de5aaa6"><code>c5d807d</code></a> on branch <code>master</code>, for **lkj 0.1.51** (from <code>setup.cfg</code>).
+This documentation was built on **2026-11-22 14:24 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41</code></a> on branch <code>master</code>, for **lkj 0.1.52** (from <code>setup.cfg</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -2325,9 +2356,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/lkj/commit/c5d807d811c089325cee8d52478621484de5aaa6"><code>c5d807d811c089325cee8d52478621484de5aaa6</code></a> |
+| Commit              | <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019</code></a> |
 | Branch              | <code>master</code>                                                                                                                               |
-| Tags at this commit | <code>0.1.51</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.52</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                             |
 | Remote              | <code>https://github.com/i2mint/lkj</code>                                                                                                        |
 
@@ -2336,9 +2367,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/lkj</code>                                                                    |
-| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45032324191">45032324191</a>           |
+| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45032500800">45032500800</a>           |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>fde03effa80c986873cc77332bce764acc7acae6</code> (in the history of the built commit) |
+| Event commit | <code>5e4929a12aabb1e2762e89d788559b4cb1929a95</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -2363,13 +2394,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/lkj/0.1.51/">0.1.51</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout c5d807d811c089325cee8d52478621484de5aaa6
+git checkout 72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=56cc1d78"></script>
+    <script src="../../_static/documentation_options.js?v=61349712"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -411,7 +411,7 @@ window.runMermaid = runMermaid;</script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.51" />
+  <meta name="docsearch:version" content="0.1.52" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -806,10 +806,18 @@ window.runMermaid = runMermaid;</script>
 <span class="n">formatter</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">()</span>
 
 
+<div class="viewcode-block" id="fields_of_string_format">
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.fields_of_string_format">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fields_of_string_format</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""List the (non-empty) replacement field names of a ``str.format`` template.</span>
+
+<span class="sd">    &gt;&gt;&gt; fields_of_string_format("{a} and {b}: {a}")</span>
+<span class="sd">    ['a', 'b', 'a']</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">[</span>
         <span class="n">field_name</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">formatter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="k">if</span> <span class="n">field_name</span>
-    <span class="p">]</span>
+    <span class="p">]</span></div>
+
 
 
 <div class="viewcode-block" id="fields_of_string_formats">
@@ -1064,15 +1072,24 @@ window.runMermaid = runMermaid;</script>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Sequence</span>
 
 
+<div class="viewcode-block" id="TrieNode">
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.TrieNode">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrieNode</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""A node of the prefix tree used by ``unique_affixes``: its ``children``, visit ``count`` and ``is_end`` flag."""</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Number of times this node is visited during insertion</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicates whether this node represents the end of an item</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_end</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Indicates whether this node represents the end of an item</span></div>
 
 
+
+<div class="viewcode-block" id="identity">
+<a class="viewcode-back" href="../../_autosummary/lkj.strings.html#lkj.strings.identity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span>
+<span class="w">    </span><span class="sd">"""Return ``x`` unchanged."""</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
 
 
 <div class="viewcode-block" id="unique_affixes">

@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=56cc1d78"></script>
+    <script src="../../_static/documentation_options.js?v=61349712"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -411,7 +411,7 @@ window.runMermaid = runMermaid;</script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.51" />
+  <meta name="docsearch:version" content="0.1.52" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -1073,6 +1073,8 @@ window.runMermaid = runMermaid;</script>
 <a class="viewcode-back" href="../../_autosummary/lkj.loggers.html#lkj.loggers.ErrorInfo">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ErrorInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""What an error handler receives: the failing ``func``, the ``error``, its formatted ``traceback`` and the ``locals`` at the failure."""</span>
+
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span>
     <span class="n">traceback</span><span class="p">:</span> <span class="nb">str</span>
@@ -1086,13 +1088,17 @@ window.runMermaid = runMermaid;</script>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">"Exiting from </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2"> with error: </span><span class="si">{</span><span class="n">error_obj</span><span class="si">}</span><span class="s2">"</span>
 
 
+<div class="viewcode-block" id="dflt_error_info_processor">
+<a class="viewcode-back" href="../../_autosummary/lkj.loggers.html#lkj.loggers.dflt_error_info_processor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dflt_error_info_processor</span><span class="p">(</span>
     <span class="n">error_info</span><span class="p">:</span> <span class="n">ErrorInfo</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_func</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
     <span class="n">msg_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ErrorInfo</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_dflt_msg_func</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="k">return</span> <span class="n">log_func</span><span class="p">(</span><span class="n">msg_func</span><span class="p">(</span><span class="n">error_info</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">"""Log a message about ``error_info`` (made by ``msg_func``) using ``log_func`` (``print`` by default)."""</span>
+    <span class="k">return</span> <span class="n">log_func</span><span class="p">(</span><span class="n">msg_func</span><span class="p">(</span><span class="n">error_info</span><span class="p">))</span></div>
+
 
 
 <div class="viewcode-block" id="return_error_info_on_error">

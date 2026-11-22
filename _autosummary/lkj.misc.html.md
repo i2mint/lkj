@@ -4,9 +4,13 @@ Miscellaneous tools.
 
 ### Functions
 
-| `identity`(x)                                                                                  |    |
-|------------------------------------------------------------------------------------------------|----|
-| [`value_in_interval`](#lkj.misc.value_in_interval)([x, get_val, min_val, ...]) |    |
+| [`identity`](#lkj.misc.identity)(x)                                   | Return `x` unchanged.   |
+|------------------------------------------------------------------------------------------------|-------------------------|
+| [`value_in_interval`](#lkj.misc.value_in_interval)([x, get_val, min_val, ...]) |                         |
+
+### lkj.misc.identity(x)
+
+Return `x` unchanged.
 
 ### lkj.misc.value_in_interval(x=None, /, \*, get_val=<function identity>, min_val=None, max_val=None, is_minimum=<built-in function ge>, is_maximum=<built-in function lt>)
 

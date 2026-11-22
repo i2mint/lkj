@@ -4,22 +4,22 @@ Utils for logging.
 
 ### Functions
 
-| [`clog`](#lkj.loggers.clog)(condition, \*args[, log_func])             | Conditional log                                                                                                             |
-|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `dflt_error_info_processor`(error_info, \*[, ...])                                               |                                                                                                                             |
-| [`instance_flag_is_set`](#lkj.loggers.instance_flag_is_set)(func, args, kwargs[, ...]) | Check if the log flag is set to True in the instance.                                                                       |
-| [`log_calls`](#lkj.loggers.log_calls)([func, logger, ingress_msg, ...])     | Decorator that adds logging before and after the function's call.                                                           |
-| [`print_progress`](#lkj.loggers.print_progress)(msg, \*[, refresh, ...])         | Prints with a timestamp and optional refresh.                                                                               |
-| [`print_with_timestamp`](#lkj.loggers.print_with_timestamp)(msg, \*[, refresh, ...])   | Prints with a timestamp and optional refresh.                                                                               |
-| [`return_error_info_on_error`](#lkj.loggers.return_error_info_on_error)(func, \*[, ...])     | Decorator that returns traceback and local variables on error.                                                              |
-| [`wrap_text_with_exact_spacing`](#lkj.loggers.wrap_text_with_exact_spacing)(text, \*[, ...])   | Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines exactly as they appear. |
-| [`wrapped_print`](#lkj.loggers.wrapped_print)(items[, sep, max_width, ...])     | Prints a string or list ensuring the total line width does not exceed `max_width`.                                          |
+| [`clog`](#lkj.loggers.clog)(condition, \*args[, log_func])              | Conditional log                                                                                                             |
+|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| [`dflt_error_info_processor`](#lkj.loggers.dflt_error_info_processor)(error_info, \*[, ...]) | Log a message about `error_info` (made by `msg_func`) using `log_func` (`print` by default).                                |
+| [`instance_flag_is_set`](#lkj.loggers.instance_flag_is_set)(func, args, kwargs[, ...])  | Check if the log flag is set to True in the instance.                                                                       |
+| [`log_calls`](#lkj.loggers.log_calls)([func, logger, ingress_msg, ...])      | Decorator that adds logging before and after the function's call.                                                           |
+| [`print_progress`](#lkj.loggers.print_progress)(msg, \*[, refresh, ...])          | Prints with a timestamp and optional refresh.                                                                               |
+| [`print_with_timestamp`](#lkj.loggers.print_with_timestamp)(msg, \*[, refresh, ...])    | Prints with a timestamp and optional refresh.                                                                               |
+| [`return_error_info_on_error`](#lkj.loggers.return_error_info_on_error)(func, \*[, ...])      | Decorator that returns traceback and local variables on error.                                                              |
+| [`wrap_text_with_exact_spacing`](#lkj.loggers.wrap_text_with_exact_spacing)(text, \*[, ...])    | Prints a string with word-wrapping to a maximum line length, while preserving all existing newlines exactly as they appear. |
+| [`wrapped_print`](#lkj.loggers.wrapped_print)(items[, sep, max_width, ...])      | Prints a string or list ensuring the total line width does not exceed `max_width`.                                          |
 
 ### Classes
 
 | [`CallOnError`](#lkj.loggers.CallOnError)(\*exceptions[, on_error])     | An extension of the suppress context manager that enables the user to issue a warning message when an import error occurs.   |
 |--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| [`ErrorInfo`](#lkj.loggers.ErrorInfo)(func, error, traceback, locals) |                                                                                                                              |
+| [`ErrorInfo`](#lkj.loggers.ErrorInfo)(func, error, traceback, locals) | What an error handler receives: the failing `func`, the `error`, its formatted `traceback` and the `locals` at the failure.  |
 
 ### *class* lkj.loggers.CallOnError(\*exceptions, on_error=<built-in function print>)
 
@@ -41,6 +41,8 @@ Warning: No module named 'os.this_module_does_not_exist'; 'os' is not a package
 ### *class* lkj.loggers.ErrorInfo(func, error, traceback, locals)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
+
+What an error handler receives: the failing `func`, the `error`, its formatted `traceback` and the `locals` at the failure.
 
 ### lkj.loggers.clog(condition, \*args, log_func=<built-in function print>, \*\*kwargs)
 
@@ -72,6 +74,10 @@ but for this example we’ll just use `print` with some modification:
 >>> _clog("logging this")
 hello logging this
 ```
+
+### lkj.loggers.dflt_error_info_processor(error_info, \*, log_func=<built-in function print>, msg_func=<function \_dflt_msg_func>)
+
+Log a message about `error_info` (made by `msg_func`) using `log_func` (`print` by default).
 
 ### lkj.loggers.instance_flag_is_set(func, args, kwargs, flag_attr='verbose')
 

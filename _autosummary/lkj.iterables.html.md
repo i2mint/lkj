@@ -11,12 +11,14 @@ Tools with iterables (dicts, lists, tuples, sets, etc.).
 
 ### Classes
 
-| [`SetsComparisonResult`](#lkj.iterables.SetsComparisonResult)(common, left_only, ...)   |    |
-|-------------------------------------------------------------------------------------------------|----|
+| [`SetsComparisonResult`](#lkj.iterables.SetsComparisonResult)(common, left_only, ...)   | The result of comparing two sets: their `common` elements and those only in the `left` or only in the `right`.   |
+|-------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 
 ### *class* lkj.iterables.SetsComparisonResult(common, left_only, right_only)
 
 Bases: [`NamedTuple`](https://docs.python.org/3/library/typing.html#typing.NamedTuple)
+
+The result of comparing two sets: their `common` elements and those only in the `left` or only in the `right`.
 
 #### common *: [set](https://docs.python.org/3/builtins/stdtypes.html#set)*
 

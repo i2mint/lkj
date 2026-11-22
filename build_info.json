@@ -1,34 +1,34 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-22T14:22:16Z",
+  "built_at": "2026-11-22T14:24:10Z",
   "package": {
     "name": "lkj",
-    "version": "0.1.51",
+    "version": "0.1.52",
     "display_name": "lkj",
     "source": "setup.cfg"
   },
   "git": {
     "available": true,
-    "commit": "c5d807d811c089325cee8d52478621484de5aaa6",
-    "short_commit": "c5d807d",
+    "commit": "72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019",
+    "short_commit": "72c4c41",
     "branch": "master",
     "tags": [
-      "0.1.51"
+      "0.1.52"
     ],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/lkj",
-    "commit_url": "https://github.com/i2mint/lkj/commit/c5d807d811c089325cee8d52478621484de5aaa6",
+    "commit_url": "https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/lkj",
-    "sha": "fde03effa80c986873cc77332bce764acc7acae6",
+    "sha": "5e4929a12aabb1e2762e89d788559b4cb1929a95",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "45032324191",
-    "run_url": "https://github.com/i2mint/lkj/actions/runs/45032324191",
+    "run_id": "45032500800",
+    "run_url": "https://github.com/i2mint/lkj/actions/runs/45032500800",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -58,15 +58,15 @@
   },
   "site": {
     "modules_documented": 10,
-    "objects_documented": 78
+    "objects_documented": 83
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.51",
+    "latest": "0.1.52",
     "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout c5d807d811c089325cee8d52478621484de5aaa6\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout 72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": true,

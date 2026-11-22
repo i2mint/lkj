@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=56cc1d78"></script>
+    <script src="../_static/documentation_options.js?v=61349712"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -58,7 +58,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.51" />
+  <meta name="docsearch:version" content="0.1.52" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -389,8 +389,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#lkj.loggers.clog" title="lkj.loggers.clog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clog</span></code></a>(condition, *args[, log_func])</p></td>
 <td><p>Conditional log</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dflt_error_info_processor</span></code>(error_info, *[, ...])</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#lkj.loggers.dflt_error_info_processor" title="lkj.loggers.dflt_error_info_processor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dflt_error_info_processor</span></code></a>(error_info, *[, ...])</p></td>
+<td><p>Log a message about <code class="docutils literal notranslate"><span class="pre">error_info</span></code> (made by <code class="docutils literal notranslate"><span class="pre">msg_func</span></code>) using <code class="docutils literal notranslate"><span class="pre">log_func</span></code> (<code class="docutils literal notranslate"><span class="pre">print</span></code> by default).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#lkj.loggers.instance_flag_is_set" title="lkj.loggers.instance_flag_is_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instance_flag_is_set</span></code></a>(func, args, kwargs[, ...])</p></td>
 <td><p>Check if the log flag is set to True in the instance.</p></td>
@@ -423,7 +423,7 @@
 <td><p>An extension of the suppress context manager that enables the user to issue a warning message when an import error occurs.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#lkj.loggers.ErrorInfo" title="lkj.loggers.ErrorInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a>(func, error, traceback, locals)</p></td>
-<td><p></p></td>
+<td><p>What an error handler receives: the failing <code class="docutils literal notranslate"><span class="pre">func</span></code>, the <code class="docutils literal notranslate"><span class="pre">error</span></code>, its formatted <code class="docutils literal notranslate"><span class="pre">traceback</span></code> and the <code class="docutils literal notranslate"><span class="pre">locals</span></code> at the failure.</p></td>
 </tr>
 </tbody>
 </table>
@@ -451,6 +451,7 @@ message when an import error occurs.</p>
 <dt class="sig sig-object py" id="lkj.loggers.ErrorInfo">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">ErrorInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traceback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/loggers.html#ErrorInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.ErrorInfo" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>What an error handler receives: the failing <code class="docutils literal notranslate"><span class="pre">func</span></code>, the <code class="docutils literal notranslate"><span class="pre">error</span></code>, its formatted <code class="docutils literal notranslate"><span class="pre">traceback</span></code> and the <code class="docutils literal notranslate"><span class="pre">locals</span></code> at the failure.</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -481,6 +482,14 @@ but for this example we’ll just use <code class="code docutils literal notrans
 <span class="go">hello logging this</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lkj.loggers.dflt_error_info_processor">
+<span class="sig-prename descclassname"><span class="pre">lkj.loggers.</span></span><span class="sig-name descname"><span class="pre">dflt_error_info_processor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">_dflt_msg_func&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/loggers.html#dflt_error_info_processor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.loggers.dflt_error_info_processor" title="Link to this definition">#</a></dt>
+<dd><p>Log a message about <code class="docutils literal notranslate"><span class="pre">error_info</span></code> (made by <code class="docutils literal notranslate"><span class="pre">msg_func</span></code>) using <code class="docutils literal notranslate"><span class="pre">log_func</span></code> (<code class="docutils literal notranslate"><span class="pre">print</span></code> by default).</p>
+<dl class="field-list simple">
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -761,6 +770,7 @@ This, for example, allows you to just return the string instead of printing it.<
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.CallOnError"><code class="docutils literal notranslate"><span class="pre">CallOnError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.ErrorInfo"><code class="docutils literal notranslate"><span class="pre">ErrorInfo</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.clog"><code class="docutils literal notranslate"><span class="pre">clog()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.dflt_error_info_processor"><code class="docutils literal notranslate"><span class="pre">dflt_error_info_processor()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.instance_flag_is_set"><code class="docutils literal notranslate"><span class="pre">instance_flag_is_set()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.log_calls"><code class="docutils literal notranslate"><span class="pre">log_calls()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lkj.loggers.print_progress"><code class="docutils literal notranslate"><span class="pre">print_progress()</span></code></a></li>

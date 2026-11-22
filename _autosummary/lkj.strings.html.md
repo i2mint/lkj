@@ -25,9 +25,9 @@ These utilities are designed to make it easier to display, format, and manipulat
 
 | [`camel_to_snake`](#lkj.strings.camel_to_snake)(camel_string)                      | Convert a CamelCase string to snake_case.                                                           |
 |----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| `fields_of_string_format`(template)                                                                |                                                                                                     |
+| [`fields_of_string_format`](#lkj.strings.fields_of_string_format)(template)                 | List the (non-empty) replacement field names of a `str.format` template.                            |
 | [`fields_of_string_formats`](#lkj.strings.fields_of_string_formats)(templates, \*[, ...])    | Extract all unique field names from the templates in \_github_url_templates using string.Formatter. |
-| `identity`(x)                                                                                      |                                                                                                     |
+| [`identity`](#lkj.strings.identity)(x)                                       | Return `x` unchanged.                                                                               |
 | [`indent_lines`](#lkj.strings.indent_lines)(string, indent, \*[, line_sep])      | Indent each line of a string.                                                                       |
 | [`most_common_indent`](#lkj.strings.most_common_indent)(string[, ignore_first_line])   | Find the most common indentation in a string.                                                       |
 | [`print_list`](#lkj.strings.print_list)([items, style, max_width, sep, ...])   | Print a list in a nice, readable format with multiple style options.                                |
@@ -45,7 +45,7 @@ These utilities are designed to make it easier to display, format, and manipulat
 | [`FindReplaceTool`](#lkj.strings.FindReplaceTool)(text, \*[, line_mode, flags, ...])   | A general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters, even if operations such as viewing context are performed line by line.   |
 |-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [`StringAppender`](#lkj.strings.StringAppender)([separator])                          | Helper class to collect strings instead of printing them directly.                                                                                                                     |
-| `TrieNode`()                                                                                          |                                                                                                                                                                                        |
+| [`TrieNode`](#lkj.strings.TrieNode)()                                           | A node of the prefix tree used by `unique_affixes`: its `children`, visit `count` and `is_end` flag.                                                                                   |
 
 ### *class* lkj.strings.FindReplaceTool(text, , line_mode=False, flags=0, show_line_numbers=True, context_size=2, highlight_char='^')
 
@@ -219,6 +219,12 @@ Helper class to collect strings instead of printing them directly.
 
 Alternative way to get the string.
 
+### *class* lkj.strings.TrieNode
+
+Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
+
+A node of the prefix tree used by `unique_affixes`: its `children`, visit `count` and `is_end` flag.
+
 ### lkj.strings.camel_to_snake(camel_string)
 
 Convert a CamelCase string to snake_case. Useful for converting class
@@ -249,6 +255,15 @@ Note that acronyms are handled correctly:
 'xml_http_request_test'
 ```
 
+### lkj.strings.fields_of_string_format(template)
+
+List the (non-empty) replacement field names of a `str.format` template.
+
+```pycon
+>>> fields_of_string_format("{a} and {b}: {a}")
+['a', 'b', 'a']
+```
+
 ### lkj.strings.fields_of_string_formats(templates, \*, aggregator=<class 'set'>)
 
 Extract all unique field names from the templates in \_github_url_templates using string.Formatter.
@@ -267,6 +282,10 @@ Extract all unique field names from the templates in \_github_url_templates usin
 >>> sorted(fields_of_string_formats(templates))
 ['other', 'that', 'this']
 ```
+
+### lkj.strings.identity(x)
+
+Return `x` unchanged.
 
 ### lkj.strings.indent_lines(string, indent, , line_sep='\\n')
 
