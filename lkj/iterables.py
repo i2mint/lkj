@@ -5,6 +5,8 @@ from collections.abc import Sequence, Mapping, Iterable, Iterable
 
 
 class SetsComparisonResult(NamedTuple):
+    """The result of comparing two sets: their ``common`` elements and those only in the ``left`` or only in the ``right``."""
+
     common: set
     left_only: set
     right_only: set

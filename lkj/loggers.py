@@ -350,6 +350,8 @@ from operator import attrgetter
 
 @dataclass
 class ErrorInfo:
+    """What an error handler receives: the failing ``func``, the ``error``, its formatted ``traceback`` and the ``locals`` at the failure."""
+
     func: Callable
     error: Exception
     traceback: str
@@ -368,6 +370,7 @@ def dflt_error_info_processor(
     log_func=print,
     msg_func: Callable[[ErrorInfo], str] = _dflt_msg_func,
 ):
+    """Log a message about ``error_info`` (made by ``msg_func``) using ``log_func`` (``print`` by default)."""
     return log_func(msg_func(error_info))
 
 
