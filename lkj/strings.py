@@ -628,9 +628,9 @@ class FindReplaceTool:
                 end_pos = m["end"]
                 start_context = max(0, line_num - self.context_size)
                 end_context = min(len(lines), line_num + self.context_size + 1)
-                print(f"Match {idx} at line {line_num+1}:")
+                print(f"Match {idx} at line {line_num + 1}:")
                 for ln in range(start_context, end_context):
-                    prefix = f"{ln+1:>4}  " if self.show_line_numbers else ""
+                    prefix = f"{ln + 1:>4}  " if self.show_line_numbers else ""
                     print(prefix + lines[ln])
                     # For the match line, mark the position of the match.
                     if ln == line_num:
@@ -677,7 +677,7 @@ class FindReplaceTool:
                         break
                     acc += len(line)
 
-                print(f"Match {idx} (around line {m['line_number']+1}):")
+                print(f"Match {idx} (around line {m['line_number'] + 1}):")
                 # Print each context line. For the match line, print a highlight
                 # line immediately after it so the caret markers line up under
                 # the matched text.

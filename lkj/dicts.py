@@ -255,9 +255,9 @@ def compare_field_values(
     *,
     field_comparators: dict[KT, Comparator] = {},
     default_comparator: Comparator = operator.eq,
-    aggregator: Callable[
-        [dict[KT, Comparison]], Any
-    ] = lambda d: d,  # lambda d: np.mean(list(d.values())),
+    aggregator: Callable[[dict[KT, Comparison]], Any] = lambda d: (
+        d
+    ),  # lambda d: np.mean(list(d.values())),
     get_comparison_fields: Callable[[dict], Iterable[KT]] = _common_keys_list,
 ):
     """

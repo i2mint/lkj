@@ -195,9 +195,9 @@ def enable_sourcing_from_file(func=None, *, write_output=False):
                 if write_output is True:
                     write_output = file_path
                 else:
-                    assert isinstance(
-                        write_output, str
-                    ), "write_output must be a string"
+                    assert isinstance(write_output, str), (
+                        "write_output must be a string"
+                    )
                 # Write the result back to the file
                 with open(write_output, "w") as file:
                     file.write(result)
