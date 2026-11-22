@@ -1,4 +1,4 @@
-> built 2026-11-22 19:06 UTC from 401f18e (master) · lkj 0.1.53. Details: build_info.json
+> built 2026-11-22 21:54 UTC from b763126 (master) · lkj 0.1.53. Details: build_info.json
 
 # index.html.md
 
@@ -2356,20 +2356,18 @@ ValueError: Duplicate item detected: test
 
 # About this build
 
-This documentation was built on **2026-11-22 19:06 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>setup.cfg</code>).
+This documentation was built on **2026-11-22 21:54 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/b763126a8721ee9cc824a5850caed75fa5c590b8"><code>b763126</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.1.53) is ahead of the latest release on PyPI (0.1.52): these docs describe unreleased code.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e64b84e718bb67f3bd62160dd9c2e84705</code></a> |
+| Commit              | <a href="https://github.com/i2mint/lkj/commit/b763126a8721ee9cc824a5850caed75fa5c590b8"><code>b763126a8721ee9cc824a5850caed75fa5c590b8</code></a> |
 | Branch              | <code>master</code>                                                                                                                               |
-| Tags at this commit | <code>0.1.53</code>                                                                                                                               |
+| Tags at this commit | none                                                                                                                                              |
 | Working tree        | clean                                                                                                                                             |
 | Remote              | <code>https://github.com/i2mint/lkj</code>                                                                                                        |
 
@@ -2378,9 +2376,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/lkj</code>                                                                    |
-| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45058677984">45058677984</a>           |
+| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45074567453">45074567453</a>           |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>fbb9645d16fc32a7ba8700df5d8b59b391de18a8</code> (in the history of the built commit) |
+| Event commit | <code>b763126a8721ee9cc824a5850caed75fa5c590b8</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -2405,13 +2403,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, older than the documented version (0.1.53).
+Latest release: <a href="https://pypi.org/project/lkj/0.1.53/">0.1.53</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout 401f18e64b84e718bb67f3bd62160dd9c2e84705
+git checkout b763126a8721ee9cc824a5850caed75fa5c590b8
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

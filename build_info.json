@@ -1,34 +1,32 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-22T19:06:09Z",
+  "built_at": "2026-11-22T21:54:30Z",
   "package": {
     "name": "lkj",
     "version": "0.1.53",
     "display_name": "lkj",
-    "source": "setup.cfg"
+    "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "401f18e64b84e718bb67f3bd62160dd9c2e84705",
-    "short_commit": "401f18e",
+    "commit": "b763126a8721ee9cc824a5850caed75fa5c590b8",
+    "short_commit": "b763126",
     "branch": "master",
-    "tags": [
-      "0.1.53"
-    ],
+    "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/lkj",
-    "commit_url": "https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705",
+    "commit_url": "https://github.com/i2mint/lkj/commit/b763126a8721ee9cc824a5850caed75fa5c590b8",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/lkj",
-    "sha": "fbb9645d16fc32a7ba8700df5d8b59b391de18a8",
+    "sha": "b763126a8721ee9cc824a5850caed75fa5c590b8",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "45058677984",
-    "run_url": "https://github.com/i2mint/lkj/actions/runs/45058677984",
+    "run_id": "45074567453",
+    "run_url": "https://github.com/i2mint/lkj/actions/runs/45074567453",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -62,16 +60,14 @@
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.52",
-    "relation": "ahead",
+    "latest": "0.1.53",
+    "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout 401f18e64b84e718bb67f3bd62160dd9c2e84705\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout b763126a8721ee9cc824a5850caed75fa5c590b8\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
-    "aligned": false,
-    "notes": [
-      "The documented version (0.1.53) is ahead of the latest release on PyPI (0.1.52): these docs describe unreleased code."
-    ]
+    "aligned": true,
+    "notes": []
   }
 }
