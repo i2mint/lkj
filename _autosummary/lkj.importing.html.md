@@ -28,22 +28,22 @@ and forwards it to the target namespace.
 The source namespace to detect and forward.
 
 * **Type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### target_base
 
 The target namespace to forward the import to.
 
 * **Type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
-### find_spec(fullname, path, target=None)::
+#### find_spec(fullname, path, target=None)
 
 Finds and returns the spec for the target module corresponding to the source module name.
 
 ### *class* lkj.importing.NamespaceForwardingLoader(fullname, source_base, target_base)
 
-Bases: `Loader`
+Bases: [`Loader`](https://docs.python.org/3/library/importlib.html#importlib.abc.Loader)
 
 A custom loader that forwards the import from a source namespace to a target namespace.
 
@@ -52,23 +52,23 @@ A custom loader that forwards the import from a source namespace to a target nam
 The full name of the module being imported.
 
 * **Type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### source_base
 
 The base namespace to detect and forward from.
 
 * **Type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### target_base
 
 The base namespace to forward the import to.
 
 * **Type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
-### load_module(fullname)::
+#### load_module(fullname)
 
 Loads and returns the target module corresponding to the source module name.
 
@@ -90,15 +90,15 @@ functionality for this method.
 Import a package from a specified path.
 
 * **Parameters:**
-  * **pkg_path** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The path to the package to import. If None, returns a partial function.
-  * **rootdir** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The root directory from which to resolve the package path.
-  * **insert_in_globals** ([`bool`](https://docs.python.org/3/library/functions.html#bool)) – If True, insert the imported package into the global namespace.
+  * **pkg_path** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The path to the package to import. If None, returns a partial function.
+  * **rootdir** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The root directory from which to resolve the package path.
+  * **insert_in_globals** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If True, insert the imported package into the global namespace.
 * **Returns:**
   The imported package or a partial function for deferred import.
 * **Return type:**
   module or functools.partial
 * **Raises:**
-  [**ImportError**](https://docs.python.org/3/library/exceptions.html#ImportError) – If the package cannot be found or imported.
+  [**ImportError**](https://docs.python.org/3/builtins/exceptions.html#ImportError) – If the package cannot be found or imported.
 
 ```pycon
 >>> import os, inspect  # standard library modules (that are surely installed)
@@ -157,8 +157,8 @@ Get the parent directory of a given module object.
 Register the namespace forwarding from source_base to target_base.
 
 * **Parameters:**
-  * **source_base** ([*str*](https://docs.python.org/3/library/stdtypes.html#str)) – The source namespace to forward.
-  * **target_base** ([*str*](https://docs.python.org/3/library/stdtypes.html#str)) – The target namespace to forward to.
+  * **source_base** ([*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – The source namespace to forward.
+  * **target_base** ([*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – The target namespace to forward to.
 
 Usage:
 

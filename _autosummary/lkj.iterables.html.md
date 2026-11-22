@@ -18,15 +18,15 @@ Tools with iterables (dicts, lists, tuples, sets, etc.).
 
 Bases: [`NamedTuple`](https://docs.python.org/3/library/typing.html#typing.NamedTuple)
 
-#### common *: [set](https://docs.python.org/3/library/stdtypes.html#set)*
+#### common *: [set](https://docs.python.org/3/builtins/stdtypes.html#set)*
 
 Alias for field number 0
 
-#### left_only *: [set](https://docs.python.org/3/library/stdtypes.html#set)*
+#### left_only *: [set](https://docs.python.org/3/builtins/stdtypes.html#set)*
 
 Alias for field number 1
 
-#### right_only *: [set](https://docs.python.org/3/library/stdtypes.html#set)*
+#### right_only *: [set](https://docs.python.org/3/builtins/stdtypes.html#set)*
 
 Alias for field number 2
 
@@ -68,9 +68,6 @@ If you want a comparison on the values, use `compare_iterables(left.values(), ri
 
 Get a dictionary from a list of dictionaries by a field value.
 
-* **Return type:**
-  [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]
-
 ```pycon
 >>> data = [{'id': 1, 'value': 'A'}, {'id': 2, 'value': 'B'}]
 >>> get_by_value(data, 2, 'id')
@@ -89,12 +86,12 @@ This function just WANTS to be `functools.partial`-ized!!
 {'id': 2, 'value': 'B'}
 ```
 
+* **Return type:**
+  [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]
+
 ### lkj.iterables.index_of(iterable, value)
 
 List list.index but for any iterable.
-
-* **Return type:**
-  [`int`](https://docs.python.org/3/library/functions.html#int)
 
 ```pycon
 >>> index_of(iter('abc'), 'b')
@@ -106,3 +103,6 @@ Traceback (most recent call last):
 ...
 ValueError: 'z' is not in iterable
 ```
+
+* **Return type:**
+  [`int`](https://docs.python.org/3/builtins/functions.html#int)

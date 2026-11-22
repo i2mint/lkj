@@ -40,7 +40,7 @@ Warning: No module named 'os.this_module_does_not_exist'; 'os' is not a package
 
 ### *class* lkj.loggers.ErrorInfo(func, error, traceback, locals)
 
-Bases: [`object`](https://docs.python.org/3/library/functions.html#object)
+Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
 ### lkj.loggers.clog(condition, \*args, log_func=<built-in function print>, \*\*kwargs)
 
@@ -82,15 +82,15 @@ Check if the log flag is set to True in the instance.
 Decorator that adds logging before and after the function’s call.
 
 * **Parameters:**
-  * **logger** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str)], [`None`](https://docs.python.org/3/library/constants.html#None)]) – The logger function to use. Default is print.
-  * **ingress_msg** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)], [`str`](https://docs.python.org/3/library/stdtypes.html#str)]) – The message to log before calling the function.
+  * **logger** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)], [`None`](https://docs.python.org/3/builtins/constants.html#None)]) – The logger function to use. Default is print.
+  * **ingress_msg** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)], [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – The message to log before calling the function.
     If it returns None, no message is logged.
     Default is “Calling {name}…” where name is the name of the function.
-  * **egress_msg** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/library/stdtypes.html#dict), [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)], [`str`](https://docs.python.org/3/library/stdtypes.html#str)]) – The message to log after the function call.
+  * **egress_msg** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict), [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)], [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – The message to log after the function call.
     If it returns None, no message is logged.
     Default is “…. Done”.
-  * **func_name** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)], [`str`](https://docs.python.org/3/library/stdtypes.html#str)]) – The function to use to get the function’s name.
-  * **log_condition** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)], [`bool`](https://docs.python.org/3/library/functions.html#bool)]) – The condition for logging.
+  * **func_name** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)], [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – The function to use to get the function’s name.
+  * **log_condition** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable), [`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple), [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)], [`bool`](https://docs.python.org/3/builtins/functions.html#bool)]) – The condition for logging.
     Should be a callable that takes a function, args, and kwargs,
     and return a bool. If log_condition returns False, no logging is done.
     Default is \_always_log.
@@ -98,12 +98,9 @@ Decorator that adds logging before and after the function’s call.
   [*Callable*](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)
 
 Tips:
-
-```default
-Use `logger=print_with_timestamp` to get timestamps in your logs.
-Use `lambda *args: None` as the ingress_msg or egress_msg to suppress logging.
-Use `logger=lambda x: None` to suppress all logging.
-```
+: Use `logger=print_with_timestamp` to get timestamps in your logs.
+  Use `lambda *args: None` as the ingress_msg or egress_msg to suppress logging.
+  Use `logger=lambda x: None` to suppress all logging.
 
 * **Return type:**
   [`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)
@@ -209,7 +206,7 @@ local variables at the time of the error.
 
 * **Parameters:**
   * **func** – The function to decorate.
-  * **caught_error_types** ([`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple)[[`Exception`](https://docs.python.org/3/library/exceptions.html#Exception)]) – The types of errors to catch.
+  * **caught_error_types** ([`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple)[[`Exception`](https://docs.python.org/3/builtins/exceptions.html#Exception)]) – The types of errors to catch.
   * **error_info_processor** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`ErrorInfo`](#lkj.loggers.ErrorInfo)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function that processes the ErrorInfo object.
 
 #### TIP
@@ -252,9 +249,9 @@ Prints a string or list ensuring the total line width does not exceed `max_width
 If adding a new item would exceed this width, it starts a new line.
 
 * **Parameters:**
-  * **items** ([`str`](https://docs.python.org/3/library/stdtypes.html#str) | [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)) – String or list of items to print.
-  * **sep** ([*str*](https://docs.python.org/3/library/stdtypes.html#str)) – The separator to use between items.
-  * **max_width** ([*int*](https://docs.python.org/3/library/functions.html#int)) – The maximum width of each line. Default is 80.
+  * **items** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str) | [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)) – String or list of items to print.
+  * **sep** ([*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – The separator to use between items.
+  * **max_width** ([*int*](https://docs.python.org/3/builtins/functions.html#int)) – The maximum width of each line. Default is 80.
 
 ### Example
 

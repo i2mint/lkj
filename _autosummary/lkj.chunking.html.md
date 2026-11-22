@@ -19,11 +19,11 @@ Thought note that you always can control the type of the chunks with the
 `chunk_type` argument.
 
 * **Parameters:**
-  * **iterable** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`)] | [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]) – The iterable or mapping to divide.
-  * **chk_size** ([`int`](https://docs.python.org/3/library/functions.html#int)) – The size of each chunk.
-  * **chunk_type** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[`...`](https://docs.python.org/3/library/constants.html#Ellipsis), [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`)] | [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]] | [`None`](https://docs.python.org/3/library/constants.html#None)) – The type of the chunks (list, tuple, set, dict…).
+  * **iterable** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[`T`] | [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]) – The iterable or mapping to divide.
+  * **chk_size** ([`int`](https://docs.python.org/3/builtins/functions.html#int)) – The size of each chunk.
+  * **chunk_type** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[`...`](https://docs.python.org/3/builtins/constants.html#Ellipsis), [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[`T`] | [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]] | [`None`](https://docs.python.org/3/builtins/constants.html#None)) – The type of the chunks (list, tuple, set, dict…).
 * **Return type:**
-  [`Iterator`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterator)[[`list`](https://docs.python.org/3/library/stdtypes.html#list)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`)] | [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`), [`...`](https://docs.python.org/3/library/constants.html#Ellipsis)] | [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]]
+  [`Iterator`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterator)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[`T`] | [`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple)[`T`, [`...`](https://docs.python.org/3/builtins/constants.html#Ellipsis)] | [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[`KT`, `VT`]]
 * **Returns:**
   An iterator of dicts if the input is a Mapping, otherwise an iterator
   of collections (list, tuple, set…).
@@ -61,12 +61,12 @@ Though note that you can get the effect of `include_tail=False` in `chunk_iterab
 by using `filter(lambda x: len(x) == chk_size, chunk_iterable(...))`.
 
 * **Parameters:**
-  * **a** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`)]) – The iterable to be chunked.
-  * **chk_size** ([`int`](https://docs.python.org/3/library/functions.html#int)) – The size of each chunk.
-  * **include_tail** ([`bool`](https://docs.python.org/3/library/functions.html#bool)) – If True, includes the remaining elements as the last chunk
+  * **a** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[`T`]) – The iterable to be chunked.
+  * **chk_size** ([`int`](https://docs.python.org/3/builtins/functions.html#int)) – The size of each chunk.
+  * **include_tail** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If True, includes the remaining elements as the last chunk
     even if they are fewer than `chk_size`. Defaults to True.
 * **Return type:**
-  [`Iterator`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterator)[[`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`T`), [`...`](https://docs.python.org/3/library/constants.html#Ellipsis)]]
+  [`Iterator`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterator)[[`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple)[`T`, [`...`](https://docs.python.org/3/builtins/constants.html#Ellipsis)]]
 * **Returns:**
   An iterator of tuples, where each tuple is a chunk of size `chk_size`
   (or fewer elements if `include_tail` is True).

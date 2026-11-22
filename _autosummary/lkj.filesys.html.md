@@ -20,7 +20,7 @@ File system utils
 Function that does nothing.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 ### lkj.filesys.enable_sourcing_from_file(func=None, , write_output=False)
 
@@ -33,7 +33,7 @@ as the first argument. Optionally, the decorated function can write the result
 back to the file, or another file if specified.
 
 * **Parameters:**
-  **write_output** ([*bool*](https://docs.python.org/3/library/functions.html#bool) *or* [*str*](https://docs.python.org/3/library/stdtypes.html#str)) – If True, write the output back to the file. If a
+  **write_output** ([*bool*](https://docs.python.org/3/builtins/functions.html#bool) *or* [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – If True, write the output back to the file. If a
   string, write the output to the specified file path. Default is False.
 
 ### lkj.filesys.get_app_data_dir(dirname='', \*, if_exists=<function do_nothing>, if_does_not_exist=<built-in function mkdir>, rootdir='/home/runner/.config/')
@@ -59,17 +59,17 @@ and populates it with a watermark or otherwise recognizable content.
 
 * **Parameters:**
   * **dirname** – The name of the directory to create.
-  * **if_exists** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to call if the directory already exists.
+  * **if_exists** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to call if the directory already exists.
     By default, it does nothing. The main non-default use case is to validate the
     contents of the directory, and/or populate it.
     If you write a custome `if_exists` function, it is your responsibility to
     return the full path of the directory (unless your use case doesn’t actually
     need that!)
-  * **if_does_not_exist** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to call if the directory does not exist.
+  * **if_does_not_exist** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to call if the directory does not exist.
     By default, it creates the directory with `os.mkdir`. If you need to also
     create subdirectories, you can use `os.makedirs`. You can also choose to
     raise an error, telling the user to create the directory manually.
-  * **rootdir** ([`str`](https://docs.python.org/3/library/stdtypes.html#str))
+  * **rootdir** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str))
 * **Returns:**
 
 If you specify nothing else, you’ll just get the system-dependent root directory for
@@ -135,9 +135,9 @@ This function takes a list of files and renames them using the provided renamer 
 Executes a fast, recursive search using ripgrep and processes the results.
 
 * **Parameters:**
-  * **search_term** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The regex pattern or text string to search for.
-  * **path_to_search** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The folder path to start searching from. Defaults to current directory.
-  * **egress** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)[[[`str`](https://docs.python.org/3/library/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]]) – A callable function to process the raw ripgrep output string.
+  * **search_term** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The regex pattern or text string to search for.
+  * **path_to_search** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The folder path to start searching from. Defaults to current directory.
+  * **egress** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)[[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]]) – A callable function to process the raw ripgrep output string.
     Defaults to a parser that returns a list of dictionaries for matches.
     If set to None, it defaults to a lambda returning the raw output (string).
     You can also give it simple_jsonl_parser to get a list of all JSON objects in the output.

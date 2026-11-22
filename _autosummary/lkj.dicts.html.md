@@ -21,9 +21,9 @@ Compare two dictionaries’ values field by field
 * **Parameters:**
   * **dict1** – The first dictionary.
   * **dict2** – The second dictionary.
-  * **field_comparators** ([`dict`](https://docs.python.org/3/library/stdtypes.html#dict)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/library/stdtypes.html#dict), [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]]) – A dictionary where keys are field names and values are comparator functions.
-  * **default_comparator** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/library/stdtypes.html#dict), [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A default comparator function to use if no specific comparator is provided for a field.
-  * **aggregator** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/library/stdtypes.html#dict)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to aggregate the comparison results into a final comparison object.
+  * **field_comparators** ([`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[`KT`, [`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict), [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]]) – A dictionary where keys are field names and values are comparator functions.
+  * **default_comparator** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict), [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A default comparator function to use if no specific comparator is provided for a field.
+  * **aggregator** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[`KT`, [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]], [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – A function to aggregate the comparison results into a final comparison object.
 * **Returns:**
   A final score based on the comparison results.
 
@@ -96,15 +96,15 @@ flexibility to handle nested mappings. With `merge_dicts`, you can:
 - Choose the type of mapping (e.g., `dict`, `defaultdict`) to use as the container.
 
 * **Parameters:**
-  * **mappings** ([`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]) – The mappings to merge.
-  * **recursive_condition** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)], [`bool`](https://docs.python.org/3/library/functions.html#bool)]) – A callable to determine if values should be merged recursively.
+  * **mappings** ([`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]) – The mappings to merge.
+  * **recursive_condition** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[`VT`], [`bool`](https://docs.python.org/3/builtins/functions.html#bool)]) – A callable to determine if values should be merged recursively.
     By default, checks if the value is a `Mapping`.
-  * **conflict_resolver** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)], [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]) – A callable that resolves conflicts between two values.
+  * **conflict_resolver** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[`VT`, `VT`], `VT`]) – A callable that resolves conflicts between two values.
     By default, overrides with the last seen value (`lambda x, y: y`).
-  * **mapping_constructor** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`tuple`](https://docs.python.org/3/library/stdtypes.html#tuple)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]]], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]]) – A callable to construct the resulting mapping.
+  * **mapping_constructor** ([`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`tuple`](https://docs.python.org/3/builtins/stdtypes.html#tuple)[`KT`, `VT`]]], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]]) – A callable to construct the resulting mapping.
     Defaults to the standard `dict` constructor.
 * **Return type:**
-  [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`KT`), [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar)(`VT`)]
+  [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[`KT`, `VT`]
 * **Returns:**
   A merged mapping that combines all the input mappings.
 
@@ -226,4 +226,4 @@ For handling special types like pandas Series:
 ```
 
 * **Return type:**
-  [`dict`](https://docs.python.org/3/library/stdtypes.html#dict)
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)

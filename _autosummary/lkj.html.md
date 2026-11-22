@@ -88,8 +88,8 @@ If all arguments are provided, add the attribute to the object and return the
 object.
 
 * **Parameters:**
-  * **attr_name** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The name of the attribute to add.
-  * **attr_val** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The value of the attribute to add.
+  * **attr_name** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The name of the attribute to add.
+  * **attr_val** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The value of the attribute to add.
   * **obj** – The object to which to add the attribute.
 * **Returns:**
   The object with the attribute added, or a partial function that takes an

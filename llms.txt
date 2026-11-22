@@ -6,7 +6,7 @@
 ## Pages
 
 - [lkj](index.html.md): Lightweight Kit Jumpstart. A place for useful python utils built only with pure python.
-- [API reference](api.html.md): | [`lkj`](_autosummary/lkj.html.md#module-lkj)   | Lightweight Kit Jumpstart   |
+- [API reference](api.html.md): | &#96;lkj&#96;   | Lightweight Kit Jumpstart   |
 - [lkj](_autosummary/lkj.html.md): Lightweight Kit Jumpstart
 - [lkj.chunking](_autosummary/lkj.chunking.html.md): Tools for chunking (segumentation, batching, slicing, etc.)
 - [lkj.dicts](_autosummary/lkj.dicts.html.md): Tools for working with dictionaries (and other Mappings).
@@ -17,7 +17,12 @@
 - [lkj.loggers](_autosummary/lkj.loggers.html.md): Utils for logging.
 - [lkj.misc](_autosummary/lkj.misc.html.md): Miscellaneous tools.
 - [lkj.strings](_autosummary/lkj.strings.html.md): String Utilities Module
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 14:22 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
 
----
+## Optional
 
-For more comprehensive documentation, see [lkj.md](lkj.md)
+- [lkj.md](lkj.md): Complete documentation in a single file.
+
+## Build
+
+- [build_info.json](build_info.json): build provenance (commit, version, tool versions, whether the docs match the package)

@@ -49,7 +49,7 @@ These utilities are designed to make it easier to display, format, and manipulat
 
 ### *class* lkj.strings.FindReplaceTool(text, , line_mode=False, flags=0, show_line_numbers=True, context_size=2, highlight_char='^')
 
-Bases: [`object`](https://docs.python.org/3/library/functions.html#object)
+Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
 A general-purpose find-and-replace tool that can treat the input text
 as a continuous sequence of characters, even if operations such as viewing
@@ -130,7 +130,7 @@ Searches the current text (the last version) for occurrences matching the given
 regular expression. Any match data (including group captures) is stored internally.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 #### find_and_print_matches(pattern)
 
@@ -138,7 +138,7 @@ Searches the current text (the last version) for occurrences matching the given
 regular expression. Any match data (including group captures) is stored internally.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 #### find_and_replace(pattern, replacement)
 
@@ -146,21 +146,21 @@ Searches the current text (the last version) for occurrences matching the given
 regular expression. Any match data (including group captures) is stored internally.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 #### get_modified_text()
 
 Returns the current (latest) text version.
 
 * **Return type:**
-  [`str`](https://docs.python.org/3/library/stdtypes.html#str)
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### get_original_text()
 
 Returns the original text (first version).
 
 * **Return type:**
-  [`str`](https://docs.python.org/3/library/stdtypes.html#str)
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### replace_all(replacement)
 
@@ -169,7 +169,7 @@ be a static string or a callable (see replace_one for details). Replacements are
 from the last match to the first, so that earlier offsets are not affected.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 #### replace_one(match_index, replacement)
 
@@ -181,7 +181,7 @@ The replacement is performed on the current text version, and the new text is
 appended as a new version in the history.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 #### revert(steps=1)
 
@@ -207,11 +207,11 @@ and a line is added below the matched line to indicate the matched portion.
 In non-line mode, a snippet of characters around the match is shown.
 
 * **Return type:**
-  [`None`](https://docs.python.org/3/library/constants.html#None)
+  [`None`](https://docs.python.org/3/builtins/constants.html#None)
 
 ### *class* lkj.strings.StringAppender(separator='\\n')
 
-Bases: [`object`](https://docs.python.org/3/library/functions.html#object)
+Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
 Helper class to collect strings instead of printing them directly.
 
@@ -225,11 +225,11 @@ Convert a CamelCase string to snake_case. Useful for converting class
 names to variable names.
 
 * **Parameters:**
-  **camel_string** ([*str*](https://docs.python.org/3/library/stdtypes.html#str)) – The CamelCase string to convert.
+  **camel_string** ([*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – The CamelCase string to convert.
 * **Returns:**
   The converted snake_case string.
 * **Return type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 ### Examples
 
@@ -254,11 +254,11 @@ Note that acronyms are handled correctly:
 Extract all unique field names from the templates in \_github_url_templates using string.Formatter.
 
 * **Parameters:**
-  **templates** ([*list*](https://docs.python.org/3/library/stdtypes.html#list)) – A list of dictionaries containing ‘template’ keys.
+  **templates** ([*list*](https://docs.python.org/3/builtins/stdtypes.html#list)) – A list of dictionaries containing ‘template’ keys.
 * **Returns:**
   A sorted list of unique field names found in the templates.
 * **Return type:**
-  [*list*](https://docs.python.org/3/library/stdtypes.html#list)
+  [*list*](https://docs.python.org/3/builtins/stdtypes.html#list)
 
 ### Example
 
@@ -268,15 +268,15 @@ Extract all unique field names from the templates in \_github_url_templates usin
 ['other', 'that', 'this']
 ```
 
-### lkj.strings.indent_lines(string, indent, , line_sep='\\\\n')
+### lkj.strings.indent_lines(string, indent, , line_sep='\\n')
 
 Indent each line of a string.
 
 * **Parameters:**
-  * **string** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The string to indent.
-  * **indent** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The string to use for indentation.
+  * **string** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The string to indent.
+  * **indent** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The string to use for indentation.
 * **Return type:**
-  [`str`](https://docs.python.org/3/library/stdtypes.html#str)
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 * **Returns:**
   The indented string.
 
@@ -291,13 +291,13 @@ Indent each line of a string.
 Find the most common indentation in a string.
 
 * **Parameters:**
-  * **string** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – The string to analyze.
+  * **string** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – The string to analyze.
   * **ignore_first_line** – Whether to ignore the first line when determining the
     indentation. Default is False. One case where you want True is when using python
     triple quotes (as in docstrings, for example), since the first line often has
     no indentation (from the point of view of the string, in this case.
 * **Return type:**
-  [`str`](https://docs.python.org/3/library/stdtypes.html#str)
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 * **Returns:**
   The most common indentation string.
 
@@ -313,13 +313,13 @@ Find the most common indentation in a string.
 Print a list in a nice, readable format with multiple style options.
 
 * **Parameters:**
-  * **items** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)] | [`None`](https://docs.python.org/3/library/constants.html#None)) – The list or iterable to print. If None, returns a partial function.
+  * **items** ([`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)] | [`None`](https://docs.python.org/3/builtins/constants.html#None)) – The list or iterable to print. If None, returns a partial function.
   * **style** ([`Literal`](https://docs.python.org/3/library/typing.html#typing.Literal)[`'wrapped'`, `'columns'`, `'numbered'`, `'bullet'`, `'table'`, `'compact'`]) – One of “wrapped”, “columns”, “numbered”, “bullet”, “table”, “compact”
-  * **max_width** ([`int`](https://docs.python.org/3/library/functions.html#int)) – Maximum width for wrapped style
-  * **sep** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – Separator for items
-  * **line_prefix** ([`str`](https://docs.python.org/3/library/stdtypes.html#str)) – Prefix for each line
+  * **max_width** ([`int`](https://docs.python.org/3/builtins/functions.html#int)) – Maximum width for wrapped style
+  * **sep** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – Separator for items
+  * **line_prefix** ([`str`](https://docs.python.org/3/builtins/stdtypes.html#str)) – Prefix for each line
   * **items_per_line** – For columns style, how many items per line
-  * **show_count** ([`bool`](https://docs.python.org/3/library/functions.html#bool) | [`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`int`](https://docs.python.org/3/library/functions.html#int)], [`str`](https://docs.python.org/3/library/stdtypes.html#str)]) – Whether to prefix with the count of items
+  * **show_count** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool) | [`Callable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable)[[[`int`](https://docs.python.org/3/builtins/functions.html#int)], [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – Whether to prefix with the count of items
   * **title** – Optional title to display before the list
   * **print_func** – Function to use for printing. Defaults to print.
     If None, returns the string instead of printing.
@@ -330,7 +330,7 @@ Print a list in a nice, readable format with multiple style options.
 >>> items = ["apple", "banana", "cherry", "date", "elderberry", "fig"]
 ```
 
-### Wrapped style (default)
+# Wrapped style (default)
 
 ```pycon
 >>> print_list(items, max_width=30)
@@ -493,11 +493,11 @@ List (100 items):
 Construct a substitution function based on an iterable of replacement pairs.
 
 * **Parameters:**
-  **replacements** ([`dict`](https://docs.python.org/3/library/stdtypes.html#dict)) – An iterable of (replace_this, with_that) pairs.
+  **replacements** ([`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)) – An iterable of (replace_this, with_that) pairs.
 * **Returns:**
   A function that, when called with a string, will perform all substitutions.
 * **Return type:**
-  *Callable*[[[*str*](https://docs.python.org/3/library/stdtypes.html#str)], [*str*](https://docs.python.org/3/library/stdtypes.html#str)]
+  *Callable*[[[*str*](https://docs.python.org/3/builtins/stdtypes.html#str)], [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 The function is meant to be used with `replacements` as its single input,
 returning a `substitute` function that will carry out the substitutions
@@ -526,11 +526,11 @@ Convert a snake_case string to CamelCase. Useful for converting variable
 names to class names.
 
 * **Parameters:**
-  **snake_string** ([*str*](https://docs.python.org/3/library/stdtypes.html#str)) – The snake_case string to convert.
+  **snake_string** ([*str*](https://docs.python.org/3/builtins/stdtypes.html#str)) – The snake_case string to convert.
 * **Returns:**
   The converted CamelCase string.
 * **Return type:**
-  [*str*](https://docs.python.org/3/library/stdtypes.html#str)
+  [*str*](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 ### Examples
 
@@ -558,9 +558,6 @@ and replaces the omitted middle portion with a single line containing
 
 If top_limit or bottom_limit is None, it is treated as 0.
 
-* **Return type:**
-  [`str`](https://docs.python.org/3/library/stdtypes.html#str)
-
 ### Example
 
 ```pycon
@@ -580,6 +577,9 @@ Line2
 Line5
 Line6
 ```
+
+* **Return type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 ### lkj.strings.truncate_string(s, , left_limit=15, right_limit=15, middle_marker='...')
 
@@ -662,9 +662,6 @@ create a partial function with the desired parameters:
 Returns a list of unique prefixes (or suffixes) for the given iterable of sequences.
 Raises a ValueError if duplicates are found.
 
-* **Return type:**
-  [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`Sequence`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence)]
-
 ### Parameters
 
 - items: Iterable of sequences (e.g., list of strings).
@@ -728,3 +725,6 @@ ValueError: Duplicate item detected: test
 >>> unique_affixes(items, ingress=ingress, egress=egress)
 ['here.and', 'here.or', 'here']
 ```
+
+* **Return type:**
+  [`Iterable`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable)[[`Sequence`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence)]

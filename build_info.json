@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "built_at": "2026-11-22T14:22:16Z",
+  "package": {
+    "name": "lkj",
+    "version": "0.1.51",
+    "display_name": "lkj",
+    "source": "setup.cfg"
+  },
+  "git": {
+    "available": true,
+    "commit": "c5d807d811c089325cee8d52478621484de5aaa6",
+    "short_commit": "c5d807d",
+    "branch": "master",
+    "tags": [
+      "0.1.51"
+    ],
+    "dirty": false,
+    "remote_url": "https://github.com/i2mint/lkj",
+    "commit_url": "https://github.com/i2mint/lkj/commit/c5d807d811c089325cee8d52478621484de5aaa6",
+    "error": null
+  },
+  "ci": {
+    "provider": "github",
+    "repository": "i2mint/lkj",
+    "sha": "fde03effa80c986873cc77332bce764acc7acae6",
+    "sha_in_history": true,
+    "ref": "refs/heads/master",
+    "ref_name": "master",
+    "run_id": "45032324191",
+    "run_url": "https://github.com/i2mint/lkj/actions/runs/45032324191",
+    "server_url": "https://github.com"
+  },
+  "tools": {
+    "epythet": "0.2.23",
+    "sphinx": "9.1.1",
+    "docutils": "0.22.4",
+    "python": "3.12.16"
+  },
+  "config": {
+    "theme": "auto",
+    "html_theme": "pydata_sphinx_theme",
+    "accent": "#694191",
+    "mode": "auto",
+    "api_generator": "autosummary",
+    "ignore": [
+      "tests/",
+      "scrap/",
+      "examples/"
+    ],
+    "agent_outputs": true,
+    "aggregates": [
+      "md"
+    ],
+    "ai_artifacts": true,
+    "provenance": true,
+    "docs_dir": "docsrc"
+  },
+  "site": {
+    "modules_documented": 10,
+    "objects_documented": 78
+  },
+  "pypi": {
+    "checked": true,
+    "latest": "0.1.51",
+    "relation": "same",
+    "error": null
+  },
+  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout c5d807d811c089325cee8d52478621484de5aaa6\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "warnings": [],
+  "alignment": {
+    "aligned": true,
+    "notes": []
+  }
+}

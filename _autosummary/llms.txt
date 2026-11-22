@@ -1,0 +1,21 @@
+# lkj
+
+> A dump of homeless useful utils
+
+
+## Pages in this subsection
+
+- [lkj](lkj.html.md): Lightweight Kit Jumpstart
+- [lkj.chunking](lkj.chunking.html.md): Tools for chunking (segumentation, batching, slicing, etc.)
+- [lkj.dicts](lkj.dicts.html.md): Tools for working with dictionaries (and other Mappings).
+- [lkj.filesys](lkj.filesys.html.md): File system utils
+- [lkj.funcs](lkj.funcs.html.md): Tools for working with functions.
+- [lkj.importing](lkj.importing.html.md): Tools for importing
+- [lkj.iterables](lkj.iterables.html.md): Tools with iterables (dicts, lists, tuples, sets, etc.).
+- [lkj.loggers](lkj.loggers.html.md): Utils for logging.
+- [lkj.misc](lkj.misc.html.md): Miscellaneous tools.
+- [lkj.strings](lkj.strings.html.md): String Utilities Module
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.
