@@ -5,19 +5,21 @@ orphan: true
 
 # About this build
 
-This documentation was built on **2026-11-22 14:24 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41</code></a> on branch <code>master</code>, for **lkj 0.1.52** (from <code>setup.cfg</code>).
+This documentation was built on **2026-11-22 19:06 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>setup.cfg</code>).
 
-:::{note}
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+:::{warning}
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.53) is ahead of the latest release on PyPI (0.1.52): these docs describe unreleased code.
 :::
 
 ## Source
 
 | | |
 |---|---|
-| Commit | <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019</code></a> |
+| Commit | <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e64b84e718bb67f3bd62160dd9c2e84705</code></a> |
 | Branch | <code>master</code> |
-| Tags at this commit | <code>0.1.52</code> |
+| Tags at this commit | <code>0.1.53</code> |
 | Working tree | clean |
 | Remote | <code>https://github.com/i2mint/lkj</code> |
 
@@ -26,9 +28,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 | | |
 |---|---|
 | Repository | <code>i2mint/lkj</code> |
-| Run | <a href="https://github.com/i2mint/lkj/actions/runs/45032500800">45032500800</a> |
+| Run | <a href="https://github.com/i2mint/lkj/actions/runs/45058677984">45058677984</a> |
 | Ref | <code>refs/heads/master</code> |
-| Event commit | <code>5e4929a12aabb1e2762e89d788559b4cb1929a95</code> (in the history of the built commit) |
+| Event commit | <code>fbb9645d16fc32a7ba8700df5d8b59b391de18a8</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -53,13 +55,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, older than the documented version (0.1.53).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout 72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019
+git checkout 401f18e64b84e718bb67f3bd62160dd9c2e84705
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

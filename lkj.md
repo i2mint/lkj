@@ -1,4 +1,4 @@
-> built 2026-11-22 14:24 UTC from 72c4c41 (master) · lkj 0.1.52. Details: build_info.json
+> built 2026-11-22 19:06 UTC from 401f18e (master) · lkj 0.1.53. Details: build_info.json
 
 # index.html.md
 
@@ -30,6 +30,8 @@ even if operations such as viewing context are performed line by line.
 The basic usage is
 
 ```python
+from lkj import FindReplaceTool
+
 FindReplaceTool("apple banana apple").find_and_print_matches(r'apple')
 ```
 
@@ -63,6 +65,7 @@ FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")
 Conditional log
 
 ```python
+>>> from lkj import clog
 >>> clog(False, "logging this")
 >>> clog(True, "logging this")
 logging this
@@ -97,7 +100,9 @@ Prints with a timestamp and optional refresh.
 - output: Displays the time (HH:MM:SS), and the message
 - use: To be able to track processes (and the time they take)
 
+<!-- wads-docs: skip - output carries the current time -->
 ```python
+>>> from lkj import print_with_timestamp
 >>> print_with_timestamp('processing element X')
 (29)09:56:36 - processing element X
 ```
@@ -142,6 +147,7 @@ Exiting from foo with error: division by zero
 
 Chunk an iterable into non-overlapping chunks of size chk_size.
 
+<!-- wads-docs: skip - signature, not runnable code -->
 ```python
 chunker(a, chk_size, *, include_tail=True)
 ```
@@ -158,11 +164,13 @@ chunker(a, chk_size, *, include_tail=True)
 
 Import and return an object from a dot string path.
 
+<!-- wads-docs: skip - signature, not runnable code -->
 ```python
 import_object(dot_path: str)
 ```
 
 ```python
+>>> from lkj import import_object
 >>> f = import_object('os.path.join')
 >>> from os.path import join
 >>> f is join
@@ -232,6 +240,7 @@ print_list.numbered(items)   # Numbered format, no count
 print_list.bullets(items)    # Bullet format, no count
 
 # Specialized methods
+data = [['Name', 'Age', 'City'], ['Alice', 25, 'NYC'], ['Bob', 30, 'LA']]
 print_list.as_table(data)    # Table with headers
 print_list.summary(items)    # Summary for long lists
 ```
@@ -2347,18 +2356,20 @@ ValueError: Duplicate item detected: test
 
 # About this build
 
-This documentation was built on **2026-11-22 14:24 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41</code></a> on branch <code>master</code>, for **lkj 0.1.52** (from <code>setup.cfg</code>).
+This documentation was built on **2026-11-22 19:06 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>setup.cfg</code>).
 
-#### NOTE
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+#### WARNING
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.53) is ahead of the latest release on PyPI (0.1.52): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019"><code>72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019</code></a> |
+| Commit              | <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705"><code>401f18e64b84e718bb67f3bd62160dd9c2e84705</code></a> |
 | Branch              | <code>master</code>                                                                                                                               |
-| Tags at this commit | <code>0.1.52</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.53</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                             |
 | Remote              | <code>https://github.com/i2mint/lkj</code>                                                                                                        |
 
@@ -2367,9 +2378,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/lkj</code>                                                                    |
-| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45032500800">45032500800</a>           |
+| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45058677984">45058677984</a>           |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>5e4929a12aabb1e2762e89d788559b4cb1929a95</code> (in the history of the built commit) |
+| Event commit | <code>fbb9645d16fc32a7ba8700df5d8b59b391de18a8</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -2394,13 +2405,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/lkj/0.1.52/">0.1.52</a>, older than the documented version (0.1.53).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout 72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019
+git checkout 401f18e64b84e718bb67f3bd62160dd9c2e84705
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

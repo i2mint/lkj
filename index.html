@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="_static/documentation_options.js?v=61349712"></script>
+    <script src="_static/documentation_options.js?v=c54c130b"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -57,7 +57,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.52" />
+  <meta name="docsearch:version" content="0.1.53" />
   
     
     <script src="_static/searchtools.js"></script>
@@ -341,7 +341,9 @@ copy-paste-vendored by just copying the function body.</p>
 <p><code class="docutils literal notranslate"><span class="pre">FindReplaceTool</span></code> is a general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters,
 even if operations such as viewing context are performed line by line.</p>
 <p>The basic usage is</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">"apple banana apple"</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_print_matches</span><span class="p">(</span><span class="sa">r</span><span class="s1">'apple'</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">FindReplaceTool</span>
+
+<span class="n">FindReplaceTool</span><span class="p">(</span><span class="s2">"apple banana apple"</span><span class="p">)</span><span class="o">.</span><span class="n">find_and_print_matches</span><span class="p">(</span><span class="sa">r</span><span class="s1">'apple'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Match 0 (around line 1):
@@ -368,7 +370,8 @@ apple banana apple
 <section id="clog">
 <h3>clog<a class="headerlink" href="#clog" title="Link to this heading">#</a></h3>
 <p>Conditional log</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">"logging this"</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">clog</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">"logging this"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clog</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"logging this"</span><span class="p">)</span>
 <span class="go">logging this</span>
 </pre></div>
@@ -399,7 +402,9 @@ but for this example we’ll just use <code class="docutils literal notranslate"
 <li><p>output: Displays the time (HH:MM:SS), and the message</p></li>
 <li><p>use: To be able to track processes (and the time they take)</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">print_with_timestamp</span><span class="p">(</span><span class="s1">'processing element X'</span><span class="p">)</span>
+<!-- wads-docs: skip - output carries the current time -->
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_with_timestamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_with_timestamp</span><span class="p">(</span><span class="s1">'processing element X'</span><span class="p">)</span>
 <span class="go">(29)09:56:36 - processing element X</span>
 </pre></div>
 </div>
@@ -441,6 +446,7 @@ database, or send it to a logging service.</p>
 <section id="chunker">
 <h3>chunker<a class="headerlink" href="#chunker" title="Link to this heading">#</a></h3>
 <p>Chunk an iterable into non-overlapping chunks of size chk_size.</p>
+<!-- wads-docs: skip - signature, not runnable code -->
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chunker</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">chk_size</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include_tail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -455,10 +461,12 @@ database, or send it to a logging service.</p>
 <section id="import-object">
 <span id="import_object"></span><h3>import_object<a class="headerlink" href="#import-object" title="Link to this heading">#</a></h3>
 <p>Import and return an object from a dot string path.</p>
+<!-- wads-docs: skip - signature, not runnable code -->
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">import_object</span><span class="p">(</span><span class="n">dot_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">import_object</span><span class="p">(</span><span class="s1">'os.path.join'</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lkj</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">import_object</span><span class="p">(</span><span class="s1">'os.path.join'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="ow">is</span> <span class="n">join</span>
 <span class="go">True</span>
@@ -525,6 +533,7 @@ database, or send it to a logging service.</p>
 <span class="n">print_list</span><span class="o">.</span><span class="n">bullets</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Bullet format, no count</span>
 
 <span class="c1"># Specialized methods</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'Age'</span><span class="p">,</span> <span class="s1">'City'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'NYC'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'LA'</span><span class="p">]]</span>
 <span class="n">print_list</span><span class="o">.</span><span class="n">as_table</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1"># Table with headers</span>
 <span class="n">print_list</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>    <span class="c1"># Summary for long lists</span>
 </pre></div>
@@ -570,7 +579,7 @@ database, or send it to a logging service.</p>
 </section>
 </section>
 
-<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-11-22 14:24 UTC from <a href="https://github.com/i2mint/lkj/commit/72c4c41b2f5bd4bd3e765fb13aaab9a2843f7019">72c4c41</a> (master) · lkj 0.1.52 · <a href="about-this-build.html">about this build</a></p>
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-11-22 19:06 UTC from <a href="https://github.com/i2mint/lkj/commit/401f18e64b84e718bb67f3bd62160dd9c2e84705">401f18e</a> (master) · lkj 0.1.53 · <a href="about-this-build.html">about this build</a></p>
 
                 </article>
               
