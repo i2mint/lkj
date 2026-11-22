@@ -2,7 +2,7 @@
 
 # About this build
 
-This documentation was built on **2026-11-22 21:54 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/b763126a8721ee9cc824a5850caed75fa5c590b8"><code>b763126</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-22 23:15 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/0f52fec6ec5b769e0e3801b756d40dea3b30ac5b"><code>0f52fec</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -11,7 +11,7 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/lkj/commit/b763126a8721ee9cc824a5850caed75fa5c590b8"><code>b763126a8721ee9cc824a5850caed75fa5c590b8</code></a> |
+| Commit              | <a href="https://github.com/i2mint/lkj/commit/0f52fec6ec5b769e0e3801b756d40dea3b30ac5b"><code>0f52fec6ec5b769e0e3801b756d40dea3b30ac5b</code></a> |
 | Branch              | <code>master</code>                                                                                                                               |
 | Tags at this commit | none                                                                                                                                              |
 | Working tree        | clean                                                                                                                                             |
@@ -22,9 +22,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/lkj</code>                                                                    |
-| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45074567453">45074567453</a>           |
+| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45082188835">45082188835</a>           |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>b763126a8721ee9cc824a5850caed75fa5c590b8</code> (in the history of the built commit) |
+| Event commit | <code>0f52fec6ec5b769e0e3801b756d40dea3b30ac5b</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -55,7 +55,7 @@ Latest release: <a href="https://pypi.org/project/lkj/0.1.53/">0.1.53</a>, the s
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout b763126a8721ee9cc824a5850caed75fa5c590b8
+git checkout 0f52fec6ec5b769e0e3801b756d40dea3b30ac5b
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

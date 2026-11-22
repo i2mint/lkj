@@ -5,7 +5,7 @@
 
 ## Pages
 
-- [lkj](index.html.md): Lightweight Kit Jumpstart. A place for useful python utils built only with pure python.
+- [lkj](index.html.md): Lightweight Kit Jumpstart: small, pure-Python utilities for strings, dicts, iterables, logging, impo...
 - [API reference](api.html.md): | &#96;lkj&#96;   | Lightweight Kit Jumpstart   |
 - [lkj](_autosummary/lkj.html.md): Lightweight Kit Jumpstart
 - [lkj.chunking](_autosummary/lkj.chunking.html.md): Tools for chunking (segumentation, batching, slicing, etc.)
@@ -17,7 +17,7 @@
 - [lkj.loggers](_autosummary/lkj.loggers.html.md): Utils for logging.
 - [lkj.misc](_autosummary/lkj.misc.html.md): Miscellaneous tools.
 - [lkj.strings](_autosummary/lkj.strings.html.md): String Utilities Module
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 21:54 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 23:15 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
 
 ## Optional
 
