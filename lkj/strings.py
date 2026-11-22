@@ -92,6 +92,11 @@ formatter = Formatter()
 
 
 def fields_of_string_format(template):
+    """List the (non-empty) replacement field names of a ``str.format`` template.
+
+    >>> fields_of_string_format("{a} and {b}: {a}")
+    ['a', 'b', 'a']
+    """
     return [
         field_name for _, field_name, _, _ in formatter.parse(template) if field_name
     ]
@@ -332,6 +337,8 @@ from collections.abc import Callable, Iterable, Sequence
 
 
 class TrieNode:
+    """A node of the prefix tree used by ``unique_affixes``: its ``children``, visit ``count`` and ``is_end`` flag."""
+
     def __init__(self):
         self.children = {}
         self.count = 0  # Number of times this node is visited during insertion
@@ -339,6 +346,7 @@ class TrieNode:
 
 
 def identity(x):
+    """Return ``x`` unchanged."""
     return x
 
 

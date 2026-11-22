@@ -7,6 +7,7 @@ from collections.abc import Callable
 
 
 def identity(x):
+    """Return ``x`` unchanged."""
     return x
 
 
