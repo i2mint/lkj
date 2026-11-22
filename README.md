@@ -1,25 +1,42 @@
 # lkj
 
-Lightweight Kit Jumpstart. A place for useful python utils built only with pure python.
+Lightweight Kit Jumpstart: small, pure-Python utilities for strings, dicts, iterables, logging, imports and files, with no Python dependencies. Where `toolz` or `more-itertools` are libraries you depend on, lkj is a kit you can also copy from: each utility stands on its own.
 
-To install:	```pip install lkj```
+```
+pip install lkj
+```
 
 [Documentation](https://i2mint.github.io/lkj)
 
-Note: None of the tools here require anything else but pure python.
-Additionally, things are organized in such a way that these can be 
-easily copy-pasted into other projects. 
-That is, modules are all self contained (so can easily be copy-paste-vendored 
-(do be nice and mention the source!))
-Further, many functions will contain their own imports: Those functions can even be 
-copy-paste-vendored by just copying the function body.
+```python
+from lkj import chunker, merge_dicts, camel_to_snake
 
-# Examples of utils
+assert list(chunker(range(7), 3)) == [(0, 1, 2), (3, 4, 5), (6,)]
+assert merge_dicts({'a': 1, 'b': {'c': 2}}, {'b': {'d': 3}}) == {'a': 1, 'b': {'c': 2, 'd': 3}}
+assert camel_to_snake('HelloWorld') == 'hello_world'
+```
+
+Most modules are self-contained (`lkj.strings` borrows `wrapped_print` from `lkj.loggers`), so you can vendor one by copying the file (do mention the source). Many functions do their own imports, so you can even copy a single function.
+
+## What is in the kit
+
+| Module | Includes |
+|---|---|
+| `lkj.strings` | `FindReplaceTool`, `print_list`, `camel_to_snake`, `snake_to_camel`, `indent_lines`, `truncate_string`, `fields_of_string_format`, `regex_based_substitution` |
+| `lkj.loggers` | `clog` (conditional log), `print_with_timestamp`, `print_progress`, `log_calls`, `return_error_info_on_error` |
+| `lkj.dicts` | `merge_dicts` (recursive), `inclusive_subdict`, `exclusive_subdict`, `truncate_dict_values` |
+| `lkj.iterables` | `compare_sets`, `get_by_value`, `index_of` |
+| `lkj.chunking` | `chunker`, `chunk_iterable` |
+| `lkj.importing` | `import_object` (from a dot path), `import_from_path`, `register_namespace_forwarding` |
+| `lkj.filesys` | `get_app_data_dir`, `search_folder_fast` (needs [ripgrep](https://github.com/BurntSushi/ripgrep)), `enable_sourcing_from_file` |
+
+Everything listed is importable from `lkj` directly.
+
+# Examples
 
 ## Find and replace
 
-`FindReplaceTool` is a general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters, 
-even if operations such as viewing context are performed line by line.
+`FindReplaceTool` is a general-purpose find-and-replace tool that can treat the input text as a continuous sequence of characters, even if operations such as viewing context are performed line by line.
 
 The basic usage is 
 
@@ -46,7 +63,7 @@ FindReplaceTool("apple banana apple").find_and_replace(r'apple', "orange")
 
 [See more examples in documentation](https://i2mint.github.io/lkj/module_docs/lkj/strings.html#lkj.strings.FindReplaceTool)
 
-[See here a example of how I used this to edit my CI yamls](https://github.com/i2mint/lkj/discussions/4#discussioncomment-12104547)
+[Here is an example of how I used this to edit my CI yamls](https://github.com/i2mint/lkj/discussions/4#discussioncomment-12104547)
 
 ## loggers
 
@@ -61,20 +78,16 @@ Conditional log
 logging this
 ```
 
-One common usage is when there's a verbose flag that allows the user to specify
-whether they want to log or not. Instead of having to litter your code with
-`if verbose:` statements you can just do this:
+One common usage is when there's a verbose flag that allows the user to specify whether they want to log or not. Instead of having to litter your code with `if verbose:` statements you can just do this:
 
 ```python
->>> verbose = True  # say versbose is True
+>>> verbose = True  # say verbose is True
 >>> _clog = clog(verbose)  # makes a clog with a fixed condition
 >>> _clog("logging this")
 logging this
 ```
 
-You can also choose a different log function.
-Usually you'd want to use a logger object from the logging module,
-but for this example we'll just use `print` with some modification:
+You can also choose a different log function. Usually you'd want to use a logger object from the logging module, but for this example we'll just use `print` with some modification:
 
 ```python
 >>> _clog = clog(verbose, log_func=lambda x: print(f"hello {x}"))
@@ -85,7 +98,7 @@ hello logging this
 ### print_with_timestamp
 
 Prints with a timestamp and optional refresh.
-- input: message, and possibly args (to be placed in the message string, sprintf-style
+- input: message, and possibly args (to be placed in the message string, sprintf-style)
 - output: Displays the time (HH:MM:SS), and the message
 - use: To be able to track processes (and the time they take)
 
@@ -100,17 +113,14 @@ Prints with a timestamp and optional refresh.
 
 Decorator that returns traceback and local variables on error.
 
-This decorator is useful for debugging. It will catch any exceptions that occur
-in the decorated function, and return an ErrorInfo object with the traceback and
-local variables at the time of the error.
+This decorator is useful for debugging. It will catch any exceptions that occur in the decorated function, and return an ErrorInfo object with the traceback and local variables at the time of the error.
 - `func`: The function to decorate.
 - `caught_error_types`: The types of errors to catch.
 - `error_info_processor`: A function that processes the ErrorInfo object.
 
 Tip: To parametrize this decorator, you can use a functools.partial function.
 
-Tip: You can have your error_info_processor persist the error info to a file or
-database, or send it to a logging service.
+Tip: You can have your error_info_processor persist the error info to a file or database, or send it to a logging service.
 
 ```python
 >>> from lkj import return_error_info_on_error, ErrorInfo
