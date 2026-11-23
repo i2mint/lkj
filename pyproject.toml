@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lkj"
-version = "0.1.54"
+version = "0.1.55"
 description = "A dump of homeless useful utils"
 readme = "README.md"
 requires-python = ">=3.10"
