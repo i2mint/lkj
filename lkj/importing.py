@@ -8,11 +8,11 @@ def parent_dir_of_module(module_obj, *, parent_levels: int = 0):
     :return: The parent directory of the module as a string.
 
     >>> import os  # a standard library module
-    >>> parent_dir_of_module(os)  # doctest: +ELLIPSIS
-    '...python...'
+    >>> os.path.isdir(parent_dir_of_module(os))
+    True
     >>> import lkj # a third-party module
-    >>> parent_dir_of_module(lkj)  # doctest: +ELLIPSIS
-    '.../lkj'
+    >>> os.path.basename(parent_dir_of_module(lkj))
+    'lkj'
     """
     import os
     import inspect
