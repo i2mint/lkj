@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=c54c130b"></script>
+    <script src="../../_static/documentation_options.js?v=0ec583c6"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -411,7 +411,7 @@ window.runMermaid = runMermaid;</script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.53" />
+  <meta name="docsearch:version" content="0.1.54" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -713,11 +713,11 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">    :return: The parent directory of the module as a string.</span>
 
 <span class="sd">    &gt;&gt;&gt; import os  # a standard library module</span>
-<span class="sd">    &gt;&gt;&gt; parent_dir_of_module(os)  # doctest: +ELLIPSIS</span>
-<span class="sd">    '...python...'</span>
+<span class="sd">    &gt;&gt;&gt; os.path.isdir(parent_dir_of_module(os))</span>
+<span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; import lkj # a third-party module</span>
-<span class="sd">    &gt;&gt;&gt; parent_dir_of_module(lkj)  # doctest: +ELLIPSIS</span>
-<span class="sd">    '.../lkj'</span>
+<span class="sd">    &gt;&gt;&gt; os.path.basename(parent_dir_of_module(lkj))</span>
+<span class="sd">    'lkj'</span>
 <span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>

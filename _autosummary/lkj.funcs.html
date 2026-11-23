@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=c54c130b"></script>
+    <script src="../_static/documentation_options.js?v=0ec583c6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -58,7 +58,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.53" />
+  <meta name="docsearch:version" content="0.1.54" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -415,9 +415,11 @@
 <span class="sig-prename descclassname"><span class="pre">lkj.funcs.</span></span><span class="sig-name descname"><span class="pre">full_path_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lkj/funcs.html#full_path_maker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lkj.funcs.full_path_maker" title="Link to this definition">#</a></dt>
 <dd><p>Create a function that generates full file paths given filenames.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">full_path</span> <span class="o">=</span> <span class="n">full_path_maker</span><span class="p">(</span><span class="s1">'/base/directory'</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">full_path</span><span class="p">([</span><span class="s1">'file1'</span><span class="p">,</span> <span class="s1">'file2'</span><span class="p">]))</span>
-<span class="go">['/base/directory/file1', '/base/directory/file2']</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">full_path</span> <span class="o">=</span> <span class="n">full_path_maker</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">'base'</span><span class="p">,</span> <span class="s1">'directory'</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">'base'</span><span class="p">,</span> <span class="s1">'directory'</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'file1'</span><span class="p">,</span> <span class="s1">'file2'</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">full_path</span><span class="p">([</span><span class="s1">'file1'</span><span class="p">,</span> <span class="s1">'file2'</span><span class="p">]))</span> <span class="o">==</span> <span class="n">expected</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>

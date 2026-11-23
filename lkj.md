@@ -1,4 +1,4 @@
-> built 2026-11-22 23:15 UTC from 0f52fec (master) · lkj 0.1.53. Details: build_info.json
+> built 2026-11-23 02:02 UTC from d3e6253 (master) · lkj 0.1.54. Details: build_info.json
 
 # index.html.md
 
@@ -804,9 +804,11 @@ Create a function that generates full file paths given filenames.
 ### Example
 
 ```pycon
->>> full_path = full_path_maker('/base/directory')
->>> list(full_path(['file1', 'file2']))
-['/base/directory/file1', '/base/directory/file2']
+>>> import os
+>>> full_path = full_path_maker(os.path.join(os.sep, 'base', 'directory'))
+>>> expected = [os.path.join(os.sep, 'base', 'directory', f) for f in ('file1', 'file2')]
+>>> list(full_path(['file1', 'file2'])) == expected
+True
 ```
 
 ### lkj.funcs.zip_with_filenames(start_idx=1)
@@ -1124,11 +1126,11 @@ Get the parent directory of a given module object.
 
 ```pycon
 >>> import os  # a standard library module
->>> parent_dir_of_module(os)
-'...python...'
+>>> os.path.isdir(parent_dir_of_module(os))
+True
 >>> import lkj # a third-party module
->>> parent_dir_of_module(lkj)
-'.../lkj'
+>>> os.path.basename(parent_dir_of_module(lkj))
+'lkj'
 ```
 
 ### lkj.importing.register_namespace_forwarding(source_base, target_base)
@@ -2366,7 +2368,7 @@ ValueError: Duplicate item detected: test
 
 # About this build
 
-This documentation was built on **2026-11-22 23:15 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/0f52fec6ec5b769e0e3801b756d40dea3b30ac5b"><code>0f52fec</code></a> on branch <code>master</code>, for **lkj 0.1.53** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-23 02:02 UTC** from commit <a href="https://github.com/i2mint/lkj/commit/d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9"><code>d3e6253</code></a> on branch <code>master</code>, for **lkj 0.1.54** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -2375,7 +2377,7 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/lkj/commit/0f52fec6ec5b769e0e3801b756d40dea3b30ac5b"><code>0f52fec6ec5b769e0e3801b756d40dea3b30ac5b</code></a> |
+| Commit              | <a href="https://github.com/i2mint/lkj/commit/d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9"><code>d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9</code></a> |
 | Branch              | <code>master</code>                                                                                                                               |
 | Tags at this commit | none                                                                                                                                              |
 | Working tree        | clean                                                                                                                                             |
@@ -2386,9 +2388,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/lkj</code>                                                                    |
-| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45082188835">45082188835</a>           |
+| Run          | <a href="https://github.com/i2mint/lkj/actions/runs/45097768049">45097768049</a>           |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>0f52fec6ec5b769e0e3801b756d40dea3b30ac5b</code> (in the history of the built commit) |
+| Event commit | <code>d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -2413,13 +2415,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/lkj/0.1.53/">0.1.53</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/lkj/0.1.54/">0.1.54</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/lkj && cd lkj
-git checkout 0f52fec6ec5b769e0e3801b756d40dea3b30ac5b
+git checkout d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

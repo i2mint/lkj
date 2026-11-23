@@ -1,32 +1,32 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-22T23:15:58Z",
+  "built_at": "2026-11-23T02:02:34Z",
   "package": {
     "name": "lkj",
-    "version": "0.1.53",
+    "version": "0.1.54",
     "display_name": "lkj",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "0f52fec6ec5b769e0e3801b756d40dea3b30ac5b",
-    "short_commit": "0f52fec",
+    "commit": "d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9",
+    "short_commit": "d3e6253",
     "branch": "master",
     "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/lkj",
-    "commit_url": "https://github.com/i2mint/lkj/commit/0f52fec6ec5b769e0e3801b756d40dea3b30ac5b",
+    "commit_url": "https://github.com/i2mint/lkj/commit/d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/lkj",
-    "sha": "0f52fec6ec5b769e0e3801b756d40dea3b30ac5b",
+    "sha": "d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "45082188835",
-    "run_url": "https://github.com/i2mint/lkj/actions/runs/45082188835",
+    "run_id": "45097768049",
+    "run_url": "https://github.com/i2mint/lkj/actions/runs/45097768049",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -60,11 +60,11 @@
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.53",
+    "latest": "0.1.54",
     "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout 0f52fec6ec5b769e0e3801b756d40dea3b30ac5b\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/lkj && cd lkj\ngit checkout d3e6253f3d002bf2b37fa18dc4eaf52078fac9c9\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": true,

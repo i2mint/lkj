@@ -145,11 +145,11 @@ Get the parent directory of a given module object.
 
 ```pycon
 >>> import os  # a standard library module
->>> parent_dir_of_module(os)
-'...python...'
+>>> os.path.isdir(parent_dir_of_module(os))
+True
 >>> import lkj # a third-party module
->>> parent_dir_of_module(lkj)
-'.../lkj'
+>>> os.path.basename(parent_dir_of_module(lkj))
+'lkj'
 ```
 
 ### lkj.importing.register_namespace_forwarding(source_base, target_base)

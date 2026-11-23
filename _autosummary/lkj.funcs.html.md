@@ -28,9 +28,11 @@ Create a function that generates full file paths given filenames.
 ### Example
 
 ```pycon
->>> full_path = full_path_maker('/base/directory')
->>> list(full_path(['file1', 'file2']))
-['/base/directory/file1', '/base/directory/file2']
+>>> import os
+>>> full_path = full_path_maker(os.path.join(os.sep, 'base', 'directory'))
+>>> expected = [os.path.join(os.sep, 'base', 'directory', f) for f in ('file1', 'file2')]
+>>> list(full_path(['file1', 'file2'])) == expected
+True
 ```
 
 ### lkj.funcs.zip_with_filenames(start_idx=1)
