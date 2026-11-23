@@ -274,9 +274,11 @@ def full_path_maker(base_directory):
 
     Example:
 
-    >>> full_path = full_path_maker('/base/directory')
-    >>> list(full_path(['file1', 'file2']))
-    ['/base/directory/file1', '/base/directory/file2']
+    >>> import os
+    >>> full_path = full_path_maker(os.path.join(os.sep, 'base', 'directory'))
+    >>> expected = [os.path.join(os.sep, 'base', 'directory', f) for f in ('file1', 'file2')]
+    >>> list(full_path(['file1', 'file2'])) == expected
+    True
     """
     abs_path = mk_abs_path_maker(base_directory)
     return iterizer(abs_path)
